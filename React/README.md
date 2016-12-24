@@ -11,14 +11,14 @@ React can react to the following events
 **** Note: 1hrs have no 'readying' - so you can only react to a 'Complete' 
  
 To create an action:
- //react add "Actor" "Action" Ready "Reaction"  -- during readies phase
- //react add "Actor" "Action" Complete "Reaction" -- After Ready phase
+* //react add "Actor" "Action" Ready "Reaction"  -- during readies phase
+* //react add "Actor" "Action" Complete "Reaction" -- After Ready phase
  
 To list actions for an Actor
- //react list "Actor"
+* //react list "Actor"
  
 To remove an action
- //react remove "Actor" "Action"
+* //react remove "Actor" "Action"
  
 Reactions are job specific and are saved in a file within the React directory called react_<JOB>.lua
  
@@ -32,28 +32,28 @@ Custom Commands:
  
 Examples:
 Warder of Courage uses an SP roughly 60 seconds after previous move wears off - so can create a timer based on that.
- //react add "Warder of Courage" "Benediction" Complete "timers create \"Next Ready Move:\" 60 down"
+* //react add "Warder of Courage" "Benediction" Complete "timers create \"Next Ready Move:\" 60 down"
  
 or Turn around from "Mortal Ray" 
- //react add "Tyrannotaur" "Mortal Ray" ready "turnaround"
- //react add "Tyrannotaur" "Mortal Ray" complete "facemob"
+* //react add "Tyrannotaur" "Mortal Ray" ready "turnaround"
+* //react add "Tyrannotaur" "Mortal Ray" complete "facemob"
  
 Add in MEVA Gear for evading status debuffs:
- //react add Quetzalcoatl "Cyclone Wing" ready "gs equip sets.meva"
+* //react add Quetzalcoatl "Cyclone Wing" ready "gs equip sets.meva"
  
 Use an item:
- //react add "Warder of Courage" "Soul Voice" complete "input /item \"Charm Buffer\" <me>"
+* //react add "Warder of Courage" "Soul Voice" complete "input /item \"Charm Buffer\" <me>"
  
 Healing or Enhancing Magic:(Remember add your own Character's name when Healing or Enhancing magic is cast on you).
- //react add Sammeh "Cure V" ready "gs equip sets.CurePotencyRecieved"
- //react add Sammeh "Protect V" ready "gs equip sets.Protect"
- //react add Sammeh "Refresh II" ready "gs equip sets.RefreshPotencyRecieved"
- //react add Sammeh "Phalanx II" ready "gs equip sets.PhalanxRecieved"
- //react add Sammeh "Cursna" ready "gs equip sets.CursnaPotencyRecieved"
+* //react add Sammeh "Cure V" ready "gs equip sets.CurePotencyRecieved"
+* //react add Sammeh "Protect V" ready "gs equip sets.Protect"
+* //react add Sammeh "Refresh II" ready "gs equip sets.RefreshPotencyRecieved"
+* //react add Sammeh "Phalanx II" ready "gs equip sets.PhalanxRecieved"
+* //react add Sammeh "Cursna" ready "gs equip sets.CursnaPotencyRecieved"
   
 Pet Reactions:
- //react add Onychophora "Psyche Suction" ready "input /pet Heel <me>" 
+* //react add Onychophora "Psyche Suction" ready "input /pet Heel <me>" 
  
 Run a Script:
- //react add MobName "Action" ready "exec foo.txt"
+* //react add MobName "Action" ready "exec foo.txt"
  

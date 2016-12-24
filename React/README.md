@@ -1,12 +1,14 @@
 React:
 
-React is a plugin to react to different situations.  
+React is an addon to react to different situations.  Think of it as the ultimate gear-swap sidekick on the reverse (Instead of you taking actions Gearswap acts on, you're watching for others to perform commands that you react to.)
 
 React can react to the following events
  * <Actor> begins casting <action>
  * <Actor> readies <action>
  * <Actor> finishes casting <action>
- * <Actor> finishes ready move.
+ * <Actor> finishes ready >move>.
+
+**** Note: 1hrs have no 'readying' - so you can only react to a 'Complete' 
  
 To create an action:
  //react add "Actor" "Action" Ready "Reaction"  -- during readies phase
@@ -24,19 +26,34 @@ Prior to version 1.4; React only worked with the actor as an NPC (trust or enemy
  
 At version 1.4.0.4 I added in a default "complete" command of "gs c update" 
  
-Custom Reactions:
+Custom Commands:
  * The special reaction verb "turnaround" will simply face same direction as the <actor>.  Useful for Gaze attacks in 'ready' phase.)
  * The special reaction verb "facemob" will simply face the same direction as the <actor>.  (Used in 'complete' phase.)
  
 Examples:
- Warder of Courage uses an SP 60 seconds after previous move wears off - so can create a timer based on that.
+Warder of Courage uses an SP roughly 60 seconds after previous move wears off - so can create a timer based on that.
  //react add "Warder of Courage" "Benediction" Complete "timers create \"Next Ready Move:\" 60 down"
  
- or Turn around from "Mortal Ray" 
+or Turn around from "Mortal Ray" 
  //react add "Tyrannotaur" "Mortal Ray" ready "turnaround"
  //react add "Tyrannotaur" "Mortal Ray" complete "facemob"
  
+Add in MEVA Gear for evading status debuffs:
+ //react add Quetzalcoatl "Cyclone Wing" ready "gs equip sets.meva"
  
+Use an item:
+ //react add "Warder of Courage" "Soul Voice" complete "input /item \"Charm Buffer\" <me>"
  
+Healing or Enhancing Magic:(Remember add your own Character's name when Healing or Enhancing magic is cast on you).
+ //react add Sammeh "Cure V" ready "gs equip sets.CurePotencyRecieved"
+ //react add Sammeh "Protect V" ready "gs equip sets.Protect"
+ //react add Sammeh "Refresh II" ready "gs equip sets.RefreshPotencyRecieved"
+ //react add Sammeh "Phalanx II" ready "gs equip sets.PhalanxRecieved"
+ //react add Sammeh "Cursna" ready "gs equip sets.CursnaPotencyRecieved"
+  
+Pet Reactions:
+ //react add Onychophora "Psyche Suction" ready "input /pet Heel <me>" 
  
+Run a Script:
+ //react add MobName "Action" ready "exec foo.txt"
  

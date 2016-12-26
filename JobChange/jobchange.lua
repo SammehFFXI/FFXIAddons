@@ -10,7 +10,7 @@ modification, are permitted provided that the following conditions are met:
     * Redistributions in binary form must reproduce the above copyright
       notice, this list of conditions and the following disclaimer in the
       documentation and/or other materials provided with the distribution.
-    * Neither the name of HomePoint nor the
+    * Neither the name of JobChange nor the
       names of its contributors may be used to endorse or promote products
       derived from this software without specific prior written permission.
 
@@ -28,8 +28,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'Job Change'
 _addon.author = 'Sammeh'
-_addon.version = '1.0.1'
+_addon.version = '1.0.2'
 _addon.command = 'jc'
+
+-- 1.0.1 first release
+-- 1.0.2 added 'reset' command to simply reset to existing job.  Changes sub job to a random starting job and back.
 
 require('tables')
 packets = require('packets')
@@ -62,16 +65,25 @@ end
 
 windower.register_event('addon command', function(command, ...)
 	local args = L{...}
+	local job = ''
+	if args[1] then 
+		job = args[1]:lower()
+	end
+	local currentjob = windower.ffxi.get_player()
 	local main_sub = ''
 	if command:lower() == 'main' then
 		main_sub = 'main'
 	elseif command:lower() == 'sub' then
 		main_sub = 'sub'
+	elseif command:lower() == 'reset' then
+		windower.add_to_chat(4,"JobChange: Resetting Job")
+		main_sub = 'sub'
+		job = windower.ffxi.get_player().sub_job:lower()
 	else
-		windower.add_to_chat(4,"JobChange Syntax: //jc main|sub JOB")
+		windower.add_to_chat(4,"JobChange Syntax: //jc main|sub JOB  -- Chnages main or sub to target JOB")
+		windower.add_to_chat(4,"JobChange Syntax: //jc reset -- Resets Current Job")
 		return
 	end
-	local job = args[1]
 	local conflict = find_conflict(job)
 	local jobid = find_job(job)
 	if jobid then 

@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'React'
 _addon.author = 'Sammeh'
-_addon.version = '1.4.0.9'
+_addon.version = '1.5.0.1'
 _addon.command = 'react'
 
 -- 1.3.0 changing map.lua to job specific
@@ -42,6 +42,8 @@ _addon.command = 'react'
 -- 1.4.0.7 Enhanced Debugging - Print to screen when in debugmode.
 -- 1.4.0.8 With help of Langly - Fixed turnaround/facemob to be based on vector of the two objects vs. where the target is facing.  So now works with all angles
 -- 1.4.0.9 Enhance the new turnaround/facemob with (actor) parameters so its not exclusively off target, but 'actor' in some instances.
+-- 1.5.0.0 Add in new commands (runto and runaway) - Auto runs to or away from mob)
+-- 1.5.0.1 Change runto and runaway to have a Yalm parameter to stop running after # of yalms.
 
 require 'tables'
 require 'sets'
@@ -55,6 +57,9 @@ res = require 'resources'
 
 -- Change default React comments.
 chatcolor = 8
+
+-- Auto Run = Off
+autorun = 0
 
 
 if windower.ffxi.get_player() then 
@@ -205,6 +210,39 @@ windower.register_event('action',function (act)
 		
 end)
 
+
+windower.register_event('prerender', function()
+    if autorun == 1 and autorun_target and autorun_distance and autorun_tofrom then 
+		local t = windower.ffxi.get_mob_by_index(autorun_target.index or 0)
+		if t then 
+			if autorun_tofrom == 2 then -- run away from
+				if t.distance:sqrt() > autorun_distance then	
+					windower.ffxi.run(false)
+					autorun = 0
+				else
+					local self_vector = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().index or 0)
+					local angle = (math.atan2((t.y - self_vector.y), (t.x - self_vector.x))*180/math.pi)*-1
+					windower.ffxi.run((angle+180):radian())
+				end
+			elseif autorun_tofrom == 1 then -- run towards
+				if t.distance:sqrt() < autorun_distance then	
+					windower.ffxi.run(false)
+					autorun = 0
+				else 
+					local self_vector = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().index or 0)
+					local angle = (math.atan2((t.y - self_vector.y), (t.x - self_vector.x))*180/math.pi)*-1
+					windower.ffxi.run((angle):radian())
+				end
+			end
+		else
+			windower.add_to_chat(chatcolor,"React: Target no longer valid. Stop running")
+			windower.ffxi.run(false)
+			autorun = 0
+		end 
+	end
+end)
+
+
 function reaction(actor,category,ability,primarytarget)
 	if custom_reactions[actor.name] then 
 		if custom_reactions[actor.name][ability.en] then
@@ -219,6 +257,20 @@ function reaction(actor,category,ability,primarytarget)
 						facemob(actor)
 						if showcmds == 1 then 
 							windower.add_to_chat(chatcolor,"----- React Action: Facing Mob")
+						end
+					elseif string.find(custom_reactions[actor.name][ability.en].ready_reaction:lower(), 'runaway') then 
+						local actionstring = custom_reactions[actor.name][ability.en].ready_reaction:lower()
+						local run_distance = string.match(actionstring,"%d+")
+						runaway(actor,math.floor(run_distance))
+						if showcmds == 1 then 
+							windower.add_to_chat(chatcolor,"----- React Action: Runaway "..run_distance.." yalms.")
+						end
+					elseif string.find(custom_reactions[actor.name][ability.en].ready_reaction:lower(), 'runto') then 
+						local actionstring = custom_reactions[actor.name][ability.en].ready_reaction:lower()
+						local run_distance = string.match(actionstring,"%d+")
+						runto(actor,math.floor(run_distance))
+						if showcmds == 1 then 
+							windower.add_to_chat(chatcolor,"----- React Action: Runto "..run_distance.." yalms.")
 						end
 					else
 						windower.send_command(custom_reactions[actor.name][ability.en].ready_reaction)
@@ -238,6 +290,20 @@ function reaction(actor,category,ability,primarytarget)
 						facemob(actor)
 						if showcmds == 1 then 
 							windower.add_to_chat(chatcolor,"----- React Action: Facing")
+						end
+					elseif string.find(custom_reactions[actor.name][ability.en].complete_reaction:lower(), 'runaway') then 
+						local actionstring = custom_reactions[actor.name][ability.en].complete_reaction:lower()
+						local run_distance = string.match(actionstring,"%d+")
+						runaway(actor,math.floor(run_distance))
+						if showcmds == 1 then 
+							windower.add_to_chat(chatcolor,"----- React Action: Runaway "..run_distance.." yalms.")
+						end
+					elseif string.find(custom_reactions[actor.name][ability.en].complete_reaction:lower(), 'runto') then 
+						local actionstring = custom_reactions[actor.name][ability.en].complete_reaction:lower()
+						local run_distance = string.match(actionstring,"%d+")
+						runto(actor,math.floor(run_distance))
+						if showcmds == 1 then 
+							windower.add_to_chat(chatcolor,"----- React Action: Runto "..run_distance.." yalms.")
 						end
 					elseif custom_reactions[actor.name][ability.en].complete_reaction == '' then
 						windower.send_command("gs c update")
@@ -349,6 +415,23 @@ windower.register_event('addon command', function(command, ...)
         facemob()
     end
 	
+	if command:lower() == 'runaway' then 
+		local rundistance = args[1] or 35 -- Setting Default run distance to 35
+		runaway(nil,math.floor(rundistance))		
+	end
+	
+	if command:lower() == 'runto'  then 
+		local rundistance = args[1] or 2 -- default will run up to 2 yalms infront of
+		runto(nil,math.floor(rundistance))
+	end
+	
+	if command:lower() == 'stoprun' then 
+		windower.ffxi.run(false)
+		autorun = 0
+	end
+	
+
+	
 
 end)
 
@@ -369,6 +452,26 @@ function turnaround(actor)
 	end
 end
 
+function runaway(actor,action_distance) 
+	local target = {}
+	if actor then 
+		target = actor
+	else 
+		target = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().target_index or 0)
+	end
+	local self_vector = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().index or 0)
+	if target then  -- Pleaes note if you target yourself you will run due West
+		local angle = (math.atan2((target.y - self_vector.y), (target.x - self_vector.x))*180/math.pi)*-1
+		windower.ffxi.run((angle+180):radian())
+		autorun = 1
+		autorun_target = target
+		autorun_distance = action_distance
+		autorun_tofrom = 2
+	else 
+		windower.add_to_chat(10,"React: You're not targeting anything to run away from")
+	end
+end
+
 function facemob(actor)
 	local target = {}
 	if actor then
@@ -384,6 +487,27 @@ function facemob(actor)
 		windower.add_to_chat(10,"React: You're not targeting anything to face")
 	end
 end
+
+function runto(actor,action_distance)
+	local target = {}
+	if actor then
+		target = actor
+	else 
+		target = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().target_index or 0)
+	end
+	local self_vector = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().index or 0)
+	if target then  -- Please note if you target yourself you will run Due East
+		local angle = (math.atan2((target.y - self_vector.y), (target.x - self_vector.x))*180/math.pi)*-1
+		windower.ffxi.run((angle):radian())
+		autorun = 1
+		autorun_target = target
+		autorun_distance = action_distance
+		autorun_tofrom = 1	
+	else
+		windower.add_to_chat(10,"React: You're not targeting anything to run to")
+	end
+end
+
 
 
 windower.register_event('job change', function()

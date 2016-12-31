@@ -29,6 +29,8 @@ At version 1.4.0.4 I added in a default "complete" command of "gs c update"
 Custom Commands:
  * The special reaction verb "turnaround" will simply face same direction as the <actor>.  Useful for Gaze attacks in 'ready' phase.)
  * The special reaction verb "facemob" will simply face the same direction as the <actor>.  (Used in 'complete' phase.)
+ * 1.5.0 React added in "runaway" and "runto" verbs.   Parameters would be the yalms to run away from or run close to.  Default is to run within 2 yalms of target (runto) and 30 yalms away if you don't specify.
+ ** Please note this will force compliance even if you change your mind.  To cancel a runaway or runto command, issue //react stoprun  Highly recommend if you use this - bind a quick key to cancel running.
  
 Examples:
 Warder of Courage uses an SP roughly 60 seconds after previous move wears off - so can create a timer based on that.

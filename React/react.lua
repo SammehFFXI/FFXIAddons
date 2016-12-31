@@ -44,6 +44,7 @@ _addon.command = 'react'
 -- 1.4.0.9 Enhance the new turnaround/facemob with (actor) parameters so its not exclusively off target, but 'actor' in some instances.
 -- 1.5.0.0 Add in new commands (runto and runaway) - Auto runs to or away from mob)
 -- 1.5.0.1 Change runto and runaway to have a Yalm parameter to stop running after # of yalms.
+------- PLEASE NOTE runto/runaway will not work if you are locked onto a target.
 
 require 'tables'
 require 'sets'

@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'React'
 _addon.author = 'Sammeh'
-_addon.version = '1.5.0.2'
+_addon.version = '1.5.0.3'
 _addon.command = 'react'
 
 -- 1.3.0 changing map.lua to job specific
@@ -46,6 +46,7 @@ _addon.command = 'react'
 -- 1.5.0.1 Change runto and runaway to have a Yalm parameter to stop running after # of yalms.
 ------- PLEASE NOTE runto/runaway will not work if you are locked onto a target.
 -- 1.5.0.2 Fix an issue with runaway/to based on target that died or was no longer aggressive etc.
+-- 1.5.0.3 Went ahead and made it where you can't run away/to  yourself ;)
 
 require 'tables'
 require 'sets'
@@ -462,7 +463,7 @@ function runaway(actor,action_distance)
 		target = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().target_index or 0)
 	end
 	local self_vector = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().index or 0)
-	if target then  -- Pleaes note if you target yourself you will run due West
+	if target and target.name ~= self_vector.name then 
 		local angle = (math.atan2((target.y - self_vector.y), (target.x - self_vector.x))*180/math.pi)*-1
 		windower.ffxi.run((angle+180):radian())
 		autorun = 1
@@ -498,7 +499,7 @@ function runto(actor,action_distance)
 		target = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().target_index or 0)
 	end
 	local self_vector = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().index or 0)
-	if target then  -- Please note if you target yourself you will run Due East
+	if target and target.name ~= self_vector.name then  -- Please note if you target yourself you will run Due East
 		local angle = (math.atan2((target.y - self_vector.y), (target.x - self_vector.x))*180/math.pi)*-1
 		windower.ffxi.run((angle):radian())
 		autorun = 1

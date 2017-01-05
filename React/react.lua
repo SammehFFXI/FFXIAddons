@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'React'
 _addon.author = 'Sammeh'
-_addon.version = '1.5.0.3'
+_addon.version = '1.5.0.4'
 _addon.command = 'react'
 
 -- 1.3.0 changing map.lua to job specific
@@ -47,6 +47,7 @@ _addon.command = 'react'
 ------- PLEASE NOTE runto/runaway will not work if you are locked onto a target.
 -- 1.5.0.2 Fix an issue with runaway/to based on target that died or was no longer aggressive etc.
 -- 1.5.0.3 Went ahead and made it where you can't run away/to  yourself ;)
+-- 1.5.0.4 Identified if 'locked on' to target.   Thx sdahlka on Windower forums.
 
 require 'tables'
 require 'sets'
@@ -456,6 +457,9 @@ function turnaround(actor)
 end
 
 function runaway(actor,action_distance) 
+	if windower.ffxi.get_player().target_locked then 
+		windower.send_command("input /lockon")
+	end
 	local target = {}
 	if actor then 
 		target = actor

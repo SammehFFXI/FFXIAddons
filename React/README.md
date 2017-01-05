@@ -31,7 +31,6 @@ Custom Commands:
  * The special reaction verb "facemob" will simply face the same direction as the <actor>.  (Used in 'complete' phase.)
  * 1.5.0 React added in "runaway" and "runto" verbs.   Parameters would be the yalms to run away from or run close to.  Default is to run within 2 yalms of target (runto) and 30 yalms away if you don't specify.
  ** Please note this will force compliance even if you change your mind.  To cancel a runaway or runto command, issue //react stoprun  Highly recommend if you use this - bind a quick key to cancel running.
- ** Please also note runaway/runto do not work if you are locked onto a target
  
 Examples:
 Warder of Courage uses an SP roughly 60 seconds after previous move wears off - so can create a timer based on that.
@@ -60,3 +59,6 @@ Pet Reactions:
 Run a Script:
 * //react add MobName "Action" ready "exec foo.txt"
  
+Runaway from a bad WS:
+//react add "Glassy Craver" "View Sync" ready "runaway 25"
+//react add "Glassy Craver" "View Sync" complete "runto 21"

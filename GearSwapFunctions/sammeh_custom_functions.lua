@@ -207,6 +207,7 @@ function checkblocking(spell)
 	if type(windower.ffxi.get_player().autorun) == 'table' and spell.action_type == 'Magic' then 
 		windower.add_to_chat(3,'Currently auto-running - stopping to cast spell')
 		windower.ffxi.run(false)
+		windower.ffxi.follow()  -- disabling Follow - turning back autorun automatically turns back on follow.
 		autorun = 1
 		cast_delay(1)
 		return

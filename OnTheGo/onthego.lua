@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'OnTheGo'
 _addon.author = 'Sammeh'
-_addon.version = '1.0'
+_addon.version = '1.1'
 _addon.command = 'otg'
 
 
@@ -47,9 +47,19 @@ windower.register_event('outgoing chunk',function(id,data)
 			windower.add_to_chat(3,'Currently auto-running - Stopping to Use Item:'..item_used)
 			windower.ffxi.run(false)
 			windower.ffxi.follow()  -- disabling Follow - turning back autorun automatically turns back on follow.
-			coroutine.sleep(2)
-			windower.ffxi.run()
+			autorun = 1
 		end
 	end
 end)
 
+
+windower.register_event('incoming chunk',function(id,data)
+	if id == 0x028 then
+		local self = windower.ffxi.get_player() 
+		local packet = packets.parse('incoming', data)
+		if packet.Category == 5 and autorun == 1 and self.id == packet.Actor then 
+			windower.ffxi.run()  -- start Running again
+			autorun = 0
+		end
+	end
+end)

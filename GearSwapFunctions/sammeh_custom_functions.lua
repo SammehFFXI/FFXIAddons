@@ -209,7 +209,7 @@ function checkblocking(spell)
 		windower.ffxi.run(false)
 		windower.ffxi.follow()  -- disabling Follow - turning back autorun automatically turns back on follow.
 		autorun = 1
-		cast_delay(1)
+		cast_delay(.4)  -- update based on your own lag/testing.  I could get it to work as low as .2 but not consistently.
 		return
 	end
 	if buffactive.sleep or buffactive.petrification or buffactive.terror then 

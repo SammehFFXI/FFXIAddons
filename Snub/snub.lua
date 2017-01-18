@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'Snub'
 _addon.author = 'Sammeh'
-_addon.version = '1.7'
+_addon.version = '1.8'
 _addon.command = 'snub'
 
 require 'tables'
@@ -58,6 +58,7 @@ debugmode = 0
 -- 1.5 Added in ROE  and EXP/CP Chain Filter     //snub roe    and  //snub exp
 -- 1.6 Changed snub import.  //snub import passlist  (Pass list)  or //snub import droplist
 -- 1.7 Bug fixes (Error on startup when no character loaded, and snub list since adding ROE/EXP snubs)
+-- 1.8 Apparently negelected to realize I put ROE/EXP snub as a local variable on startup and not global so it wasn't saving in later functions.. Fixed.
 
 
 -- Create config file
@@ -75,8 +76,8 @@ custom_snubs = require('snub_'..self.name)
 end
 
 if custom_snubs then 
-	local roeblock = custom_snubs["roeblock"] 
-	local expblock = custom_snubs["expblock"] 
+	roeblock = custom_snubs["roeblock"] 
+	expblock = custom_snubs["expblock"] 
 end
 
 -- Treasury Addon Search / Use for Import

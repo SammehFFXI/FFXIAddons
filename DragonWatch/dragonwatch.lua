@@ -52,8 +52,10 @@ windower.register_event('incoming text', function(original, modified, original_m
 	who = split_formatted[1]
 	
 	for key,value in pairs(UnityList) do
-		if string.find(who,value) and messages[value] then
-			parse_message(value,formatted)
+		if value and who then
+			if string.find(who,value) and messages[value] then
+				parse_message(value,formatted)
+			end
 		end
 	end
 	

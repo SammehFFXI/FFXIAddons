@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'PetCharges'
 _addon.author = 'Sammeh'
-_addon.version = '1.1'
+_addon.version = '1.2'
 _addon.command = 'petcharges'
 
 config = require('config')
@@ -95,8 +95,21 @@ windower.register_event('prerender', function()
 	end
 end)
 
+windower.register_event('outgoing chunk',function(id,data)
+	if id == 0x01A then
+		local packet = packets.parse('outgoing', data)
+		local ability_used = packet.Param
+		local category = packet.Category
+		if res.job_abilities[ability_used] then 
+			if res.job_abilities[ability_used].type == 'Monster' and category == 9 then
+				expect_ready_move = true
+			end
+		end
+	end
+end)
+
 windower.register_event('incoming chunk',function(id,data)
-	if id == 0x119 then
+	if id == 0x119 and expect_ready_move then
 		local gear = windower.ffxi.get_items()
 		local mainweapon = res.items[windower.ffxi.get_items(gear.equipment.main_bag, gear.equipment.main).id].en
 		local subweapon = res.items[windower.ffxi.get_items(gear.equipment.sub_bag, gear.equipment.sub).id].en
@@ -109,6 +122,8 @@ windower.register_event('incoming chunk',function(id,data)
 		if legs == "Desultor Tassets" then
 			equip_reduction = equip_reduction + 5
 		end
+		
+		expect_ready_move = false
 	end
 end)
 

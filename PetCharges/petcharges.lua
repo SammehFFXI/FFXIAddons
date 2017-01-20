@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'PetCharges'
 _addon.author = 'Sammeh'
-_addon.version = '1.0'
+_addon.version = '1.1'
 _addon.command = 'petcharges'
 
 config = require('config')
@@ -51,16 +51,17 @@ abilities_list = texts.new('${value}', abilitytxt)
 
 showabilities = true
 
-
 -- Variables for Merits and Job Points saving
 merits = 5
 jobpoints = 5
 
+equip_reduction = 0
+
+
 function displayabilities()
-  
   if pet then
 	abilitylist = windower.ffxi.get_abilities().job_abilities
-	local list = "Charges: "..charges.."\n"
+	local list = "Charges: "..charges.." - "..next_ready_recast.."\n"
   
 	for key,ability in pairs(abilitylist) do
 		ability_en = res.job_abilities[ability].en
@@ -75,36 +76,40 @@ function displayabilities()
 			end
 		end
 	end
-  
 	abilities_list.value = list
 	abilities_list:visible(true)
   else
 	abilities_list:visible(false)
   end
-  
-  
 end
 
 windower.register_event('prerender', function()
+	local self = windower.ffxi.get_player()
 	pet = windower.ffxi.get_mob_by_target('pet')
-	local gear = windower.ffxi.get_items()
-	local mainweapon = res.items[windower.ffxi.get_items(gear.equipment.main_bag, gear.equipment.main).id].en
-	local subweapon = res.items[windower.ffxi.get_items(gear.equipment.sub_bag, gear.equipment.sub).id].en
-	local legs = res.items[windower.ffxi.get_items(gear.equipment.legs_bag, gear.equipment.legs).id].en
-	
-	equip_reduction = 0
-	if mainweapon == "Charmer's Merlin" or subweapon == "Charmer's Merlin" then 
-		equip_reduction = equip_reduction + 5
+	if self.main_job == 'BST' then
+		duration = windower.ffxi.get_ability_recasts()[102]
+		chargebase = (30 - merits - jobpoints - equip_reduction)
+		charges = math.floor(((chargebase * 3) - duration) / chargebase)
+		next_ready_recast = math.fmod(duration,chargebase)
+		displayabilities()
 	end
-	if legs == "Desultor Tassets" then
-		equip_reduction = equip_reduction + 5
+end)
+
+windower.register_event('incoming chunk',function(id,data)
+	if id == 0x119 then
+		local gear = windower.ffxi.get_items()
+		local mainweapon = res.items[windower.ffxi.get_items(gear.equipment.main_bag, gear.equipment.main).id].en
+		local subweapon = res.items[windower.ffxi.get_items(gear.equipment.sub_bag, gear.equipment.sub).id].en
+		local legs = res.items[windower.ffxi.get_items(gear.equipment.legs_bag, gear.equipment.legs).id].en
+	
+		equip_reduction = 0
+		if mainweapon == "Charmer's Merlin" or subweapon == "Charmer's Merlin" then 
+			equip_reduction = equip_reduction + 5
+		end
+		if legs == "Desultor Tassets" then
+			equip_reduction = equip_reduction + 5
+		end
 	end
-	
-	duration = windower.ffxi.get_ability_recasts()[102]
-	chargebase = (30 - merits - jobpoints - equip_reduction)
-	charges = math.floor(((chargebase * 3) - duration) / chargebase)
-	
-	displayabilities()
 end)
 
 windower.register_event('addon command', function(command,...)

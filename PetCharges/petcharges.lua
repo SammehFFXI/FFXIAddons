@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'PetCharges'
 _addon.author = 'Sammeh'
-_addon.version = '1.3'
+_addon.version = '1.4'
 _addon.command = 'petcharges'
 
 config = require('config')
@@ -47,7 +47,9 @@ abilitytxt.text.size = 10
 abilitytxt.flags = {}
 abilitytxt.flags.right = true
 
-abilities_list = texts.new('${value}', abilitytxt)
+settings = config.load(abilitytxt)
+
+abilities_list = texts.new('${value}', settings)
 
 showabilities = true
 
@@ -129,7 +131,10 @@ windower.register_event('incoming chunk',function(id,data)
 	end
 end)
 
-windower.register_event('addon command', function(command,...)
+windower.register_event('addon command', function(command)
+    if command == 'save' then
+        config.save(settings, 'all')
+    end
 end)
 
 

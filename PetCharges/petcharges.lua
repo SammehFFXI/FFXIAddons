@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'PetCharges'
 _addon.author = 'Sammeh'
-_addon.version = '1.4'
+_addon.version = '1.5'
 _addon.command = 'petcharges'
 
 config = require('config')
@@ -91,10 +91,12 @@ windower.register_event('prerender', function()
 	if self then
 		if self.main_job == 'BST' then
 			duration = windower.ffxi.get_ability_recasts()[102]
-			chargebase = (30 - merits - jobpoints - equip_reduction)
-			charges = math.floor(((chargebase * 3) - duration) / chargebase)
-			next_ready_recast = math.fmod(duration,chargebase)
-			displayabilities()
+			if duration then 
+				chargebase = (30 - merits - jobpoints - equip_reduction)
+				charges = math.floor(((chargebase * 3) - duration) / chargebase)
+				next_ready_recast = math.fmod(duration,chargebase)
+				displayabilities()
+			end
 		end
 	end
 end)

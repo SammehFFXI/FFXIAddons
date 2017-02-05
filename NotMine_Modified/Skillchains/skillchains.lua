@@ -1,10 +1,12 @@
 _addon.author = 'Ivaar,Sammeh'
 _addon.command = 'sc'
 _addon.name = 'SkillChains'
-_addon.version = '1.3 - Adding Pet Ready Moves!'
+_addon.version = '1.3.2 - Adding Pet Ready Moves!'
 
 -- 1.2 Added Pet Ready Moves
 -- 1.3 Color coding Pet Moves vs WS
+-- 1.3.1 bugfix for non-pet jobs
+-- 1.3.2 Add trigger 'hidews' to Hide main/ranged WS and only show pet jobs.  //sc hidews
 
 texts = require('texts')
 packets = require('packets')
@@ -14,6 +16,7 @@ res = require('resources')
 default = {
     ws=true,
     ma=true,
+	hidews=true, -- only used to hide ws if main job == BST
     display = {
         text={size=8,font='Consolas'},
         pos={x=0,y=0},
@@ -413,26 +416,29 @@ function chain_results(reson)
                     end
                 end
                 if settings.ws then
-                    for i,t in ipairs(abilities.weapon_skills) do
-                        local ws = res.weapon_skills[t]
-                        if ws and S{ws.skillchain_a,ws.skillchain_b,ws.skillchain_c}:contains(k) and
-                        (not skills[ws.en] or skills[ws.en].lvl < lvl) then
-                            skills[ws.en] = {lvl=lvl,prop=v}
-                        end
-                    end
-					-- adding for Pet Skills (Sammeh)
-					petskills = pet_skills()
-					for index,value in pairs(petskills) do
-						for index2,value2 in pairs(pet_moves) do
-							if value == value2.en then
-								if S{value2.skillchain_a,value2.skillchain_b}:contains(k) then
-									petskills_ext[value] = {lvl=lvl,prop=v}
-								end
+					if m_job == 'BST' and not settings.hidews then	
+						for i,t in ipairs(abilities.weapon_skills) do
+							local ws = res.weapon_skills[t]
+							if ws and S{ws.skillchain_a,ws.skillchain_b,ws.skillchain_c}:contains(k) and
+							(not skills[ws.en] or skills[ws.en].lvl < lvl) then
+								skills[ws.en] = {lvl=lvl,prop=v}
 							end
-							
 						end
 					end
-					
+					-- adding for Pet Skills (Sammeh)
+					if m_job == 'BST' then
+						petskills = pet_skills()
+						for index,value in pairs(petskills) do
+							for index2,value2 in pairs(pet_moves) do
+								if value == value2.en then
+									if S{value2.skillchain_a,value2.skillchain_b}:contains(k) then
+										petskills_ext[value] = {lvl=lvl,prop=v}
+									end
+								end
+							
+							end
+						end
+					end
 					-- end Add for Pet Skills (Sammeh)
                 end
             end
@@ -574,7 +580,7 @@ windower.register_event('addon command', function(...)
             return
         end
         visible = false
-    elseif S{'ma','ws'}:contains(commands[1]) then
+    elseif S{'ma','ws','hidews'}:contains(commands[1]) then
         if not commands[2] then
             settings[commands[1]] = not settings[commands[1]]
         elseif commands[2] == 'off' then
@@ -582,7 +588,8 @@ windower.register_event('addon command', function(...)
         elseif commands[2] == 'on' then
             settings[commands[1]] = true
         end
-        windower.add_to_chat(207, '%s will %s be displayed.':format(commands[1] == 'ma' and 'Magic' or 'Weapon Skills',settings[commands[1]] and 'now' or 'NOT'))
+        --windower.add_to_chat(207, '%s will %s be displayed.':format(commands[1] == 'ma' and 'Magic' or 'Weapon Skills',settings[commands[1]] and 'now' or 'NOT'))
+		windower.add_to_chat(207, '%s: %s.':format(commands[1],settings[commands[1]] and 'TRUE' or 'FALSE'))
     elseif commands[1] == 'eval' then
         assert(loadstring(table.concat(commands, ' ',2)))()
     end

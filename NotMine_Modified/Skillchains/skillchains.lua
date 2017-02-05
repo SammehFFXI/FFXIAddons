@@ -62,10 +62,10 @@ skillchains = L{
     }
 
 colors = {
-	['Impaction'] = '\\cs(255,0,255)',
+	--['Light'] = '\\cs(255,255,255)',
+    ['Impaction'] = '\\cs(255,0,255)',
 	['Lightning'] = '\\cs(255,0,255)',
-	['Light'] = '\\cs(255,255,255)',
-    ['Darkness'] = '\\cs(0,0,204)',
+	['Darkness'] = '\\cs(0,0,204)',
     ['Gravitation'] = '\\cs(102,51,0)',
     ['Fragmentation'] = '\\cs(250,156,247)',
     ['Distortion'] = '\\cs(51,153,255)',

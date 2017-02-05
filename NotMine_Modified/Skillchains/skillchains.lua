@@ -1,13 +1,14 @@
 _addon.author = 'Ivaar,Sammeh(Mod)'
 _addon.command = 'sc'
 _addon.name = 'SkillChains'
-_addon.version = '1.4'
+_addon.version = '1.5'
 
 -- 1.2 Added Pet Ready Moves
 -- 1.3 Color coding Pet Moves vs WS
 -- 1.3.1 bugfix for non-pet jobs
 -- 1.3.2 Add trigger 'hidews' to Hide main/ranged WS and only show pet jobs.  //sc hidews
 -- 1.4 Add colors to WS properties and Magic Bursts
+-- 1.5 Fix - broke jobs other than BST when coloring bst stuff ;)
 
 texts = require('texts')
 packets = require('packets')
@@ -61,7 +62,8 @@ skillchains = L{
     }
 
 colors = {
-	['Impaction'] = '\\cs(0,255,0)',
+	['Impaction'] = '\\cs(255,0,255)',
+	['Lightning'] = '\\cs(255,0,255)',
 	['Light'] = '\\cs(255,255,255)',
     ['Darkness'] = '\\cs(0,0,204)',
     ['Gravitation'] = '\\cs(102,51,0)',
@@ -448,8 +450,15 @@ function chain_results(reson)
 								skills[ws.en] = {lvl=lvl,prop=v}
 							end
 						end
+					else
+						for i,t in ipairs(abilities.weapon_skills) do
+							local ws = res.weapon_skills[t]
+							if ws and S{ws.skillchain_a,ws.skillchain_b,ws.skillchain_c}:contains(k) and
+							(not skills[ws.en] or skills[ws.en].lvl < lvl) then
+								skills[ws.en] = {lvl=lvl,prop=v}
+							end
+						end
 					end
-					-- adding for Pet Skills (Sammeh)
 					if m_job == 'BST' then
 						petskills = pet_skills()
 						for index,value in pairs(petskills) do
@@ -463,7 +472,6 @@ function chain_results(reson)
 							end
 						end
 					end
-					-- end Add for Pet Skills (Sammeh)
                 end
             end
         end

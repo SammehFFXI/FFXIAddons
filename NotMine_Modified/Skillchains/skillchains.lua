@@ -1,12 +1,13 @@
-_addon.author = 'Ivaar,Sammeh'
+_addon.author = 'Ivaar,Sammeh(Mod)'
 _addon.command = 'sc'
 _addon.name = 'SkillChains'
-_addon.version = '1.3.2 - Adding Pet Ready Moves!'
+_addon.version = '1.4'
 
 -- 1.2 Added Pet Ready Moves
 -- 1.3 Color coding Pet Moves vs WS
 -- 1.3.1 bugfix for non-pet jobs
 -- 1.3.2 Add trigger 'hidews' to Hide main/ranged WS and only show pet jobs.  //sc hidews
+-- 1.4 Add colors to WS properties and Magic Bursts
 
 texts = require('texts')
 packets = require('packets')
@@ -58,6 +59,29 @@ skillchains = L{
     [397] = 'Detonation',
     [398] = 'Impaction',
     }
+
+colors = {
+	['Impaction'] = '\\cs(0,255,0)',
+	['Light'] = '\\cs(255,255,255)',
+    ['Darkness'] = '\\cs(0,0,204)',
+    ['Gravitation'] = '\\cs(102,51,0)',
+    ['Fragmentation'] = '\\cs(250,156,247)',
+    ['Distortion'] = '\\cs(51,153,255)',
+    ['Compression'] = '\\cs(0,0,204)',
+	['Dark'] = '\\cs(0,0,204)',
+    ['Induration'] = '\\cs(0,255,255)',
+	['Ice'] = '\\cs(0,255,255)',
+    ['Reverberation'] = '\\cs(0,0,255)',
+	['Water'] = '\\cs(0,0,255)',
+    ['Transfixion'] = '\\cs(255,255,255)',
+    ['Scission'] = '\\cs(153,76,0)',
+	['Stone'] = '\\cs(153,76,0)',
+    ['Detonation'] = '\\cs(102,255,102)',
+	['Wind'] = '\\cs(102,255,102)',
+    ['Fusion'] = '\\cs(255,102,102)',
+    ['Liquefaction'] = '\\cs(255,0,0)',
+	['Fire'] = '\\cs(255,0,0)',
+}
     
 elements = L{
     [0]={mb='Fire',sc='Liquefaction'},
@@ -481,8 +505,7 @@ function display_results(targ)
         for i,t in ipairs(results) do
             for k,v in pairs(t) do
                 if v and v.lvl == x then
-					color = search_pet_moves(k)
-					if color then 
+					if search_pet_moves(k) then 
 						str = '\n \\cs(0,255,0)%s\\cs(255,255,255)  >> Lv.%d %s ':format(k,v.lvl,v.prop)..str
 					else
 						str = '\n %s  >> Lv.%d %s ':format(k,v.lvl,v.prop)..str
@@ -512,6 +535,9 @@ windower.register_event('prerender', function()
         elseif now-resonating[targ.id].timer < 10 then
             disp_info = ' GO! %s \n':format(10-(now-resonating[targ.id].timer))..disp_info
         end
+		for i,v in pairs(colors) do
+			disp_info = string.gsub(disp_info, i, v..i..'\\cs(255,255,255)')
+		end
         skill_props:text(disp_info)
         skill_props:show()
     elseif not visible then

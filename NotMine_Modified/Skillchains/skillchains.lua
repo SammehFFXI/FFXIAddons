@@ -1,7 +1,10 @@
 _addon.author = 'Ivaar,Sammeh'
 _addon.command = 'sc'
 _addon.name = 'SkillChains'
-_addon.version = '1.2 - Adding Pet Ready Moves!'
+_addon.version = '1.3 - Adding Pet Ready Moves!'
+
+-- 1.2 Added Pet Ready Moves
+-- 1.3 Color coding Pet Moves vs WS
 
 texts = require('texts')
 packets = require('packets')
@@ -456,6 +459,14 @@ function pet_skills()
 	return petskills
 end
 
+function search_pet_moves(k)
+	for i,v in pairs(pet_moves) do
+		if v.en == k then
+			return true
+		end
+	end
+end
+
 function display_results(targ)
     local str = ''
     local results = chain_results(resonating[targ])
@@ -464,7 +475,12 @@ function display_results(targ)
         for i,t in ipairs(results) do
             for k,v in pairs(t) do
                 if v and v.lvl == x then
-                    str = '\n %s  >> Lv.%d %s ':format(k,v.lvl,v.prop)..str
+					color = search_pet_moves(k)
+					if color then 
+						str = '\n \\cs(0,255,0)%s\\cs(255,255,255)  >> Lv.%d %s ':format(k,v.lvl,v.prop)..str
+					else
+						str = '\n %s  >> Lv.%d %s ':format(k,v.lvl,v.prop)..str
+					end
                 end
             end
         end

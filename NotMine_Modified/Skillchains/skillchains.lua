@@ -1,14 +1,47 @@
+--[[
+Copyright © 2016, Ivaar
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright
+  notice, this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright
+  notice, this list of conditions and the following disclaimer in the
+  documentation and/or other materials provided with the distribution.
+* Neither the name of SkillChains nor the
+  names of its contributors may be used to endorse or promote products
+  derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL Ivaar BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+]]
+
+
 _addon.author = 'Ivaar,Sammeh(Mod)'
 _addon.command = 'sc'
 _addon.name = 'SkillChains'
-_addon.version = '1.5'
+_addon.version = '1.5.2'
 
+
+-- Sammeh(Quetz) Mods.
 -- 1.2 Added Pet Ready Moves
 -- 1.3 Color coding Pet Moves vs WS
 -- 1.3.1 bugfix for non-pet jobs
 -- 1.3.2 Add trigger 'hidews' to Hide main/ranged WS and only show pet jobs.  //sc hidews
 -- 1.4 Add colors to WS properties and Magic Bursts
 -- 1.5 Fix - broke jobs other than BST when coloring bst stuff ;)
+-- 1.5.1 Testing this thing sucks between pet jobs and not lol.  Anyway i think fixed :\
+-- 1.5.2 Updated to add some more pet WS properties
 
 texts = require('texts')
 packets = require('packets')
@@ -70,8 +103,7 @@ colors = {
     ['Fragmentation'] = '\\cs(250,156,247)',
     ['Distortion'] = '\\cs(51,153,255)',
     ['Compression'] = '\\cs(0,0,204)',
-	['Dark'] = '\\cs(0,0,204)',
-    ['Induration'] = '\\cs(0,255,255)',
+	['Induration'] = '\\cs(0,255,255)',
 	['Ice'] = '\\cs(0,255,255)',
     ['Reverberation'] = '\\cs(0,0,255)',
 	['Water'] = '\\cs(0,0,255)',
@@ -93,7 +125,7 @@ elements = L{
     [4]={mb='Lightning',sc='Impaction'},
     [5]={mb='Water',sc='Reverberation'},
     [6]={mb='Light',sc='Transfixion'},
-    [7]={mb='Dark',sc='Compression'},
+    [7]={mb='Darkness',sc='Compression'},
     }
 
 prop_info = {
@@ -116,28 +148,32 @@ prop_info = {
 blood_pacts = L{
     [513] = {id=513,avatar='Carbuncle',en='Poison Nails',skillchain_a='Transfixion'},
     [521] = {id=521,avatar='Cait Sith',en='Regal Scratch',skillchain_a='Scission'},
+	[780] = {id=780,avatar='Cait Sith',en='Regal Gash',skillchain_a='Distortion',skillchain_b='Detonation'},
     [528] = {id=528,avatar='Fenrir',en='Moonlit Charge',skillchain_a='Compression'},
     [529] = {id=529,avatar='Fenrir',en='Crescent Fang',skillchain_a='Transfixion'},
-    [534] = {id=534,avatar='Fenrir',en='Eclipse Bite',skillchain_a='Gravitation'},
+    [534] = {id=534,avatar='Fenrir',en='Eclipse Bite',skillchain_a='Gravitation',skillchain_b='Scission'},
     [544] = {id=544,avatar='Ifrit',en='Punch',skillchain_a='Liquefaction'},
     [546] = {id=546,avatar='Ifrit',en='Burning Strike',skillchain_a='Impaction'},   
     [547] = {id=547,avatar='Ifrit',en='Double Punch',skillchain_a='Compression'},
-    [550] = {id=550,avatar='Ifrit',en='Flaming Crush',skillchain_a='Fusion'},
+    [550] = {id=550,avatar='Ifrit',en='Flaming Crush',skillchain_a='Fusion',skillchain_b='Reverberation'},
     [560] = {id=560,avatar='Titan',en='Rock Throw',skillchain_a='Scission'},
     [562] = {id=562,avatar='Titan',en='Rock Buster',skillchain_a='Reverberation'},
     [563] = {id=563,avatar='Titan',en='Megalith Throw',skillchain_a='Induration'},
-    [566] = {id=566,avatar='Titan',en='Mountain Buster',skillchain_a='Gravitation'},
+    [566] = {id=566,avatar='Titan',en='Mountain Buster',skillchain_a='Gravitation',skillchain_b='Induration'},
+	[570] = {id=570,avatar='Titan',en='Crag Throw',skillchain_a='Gravitation',skillchain_b='Scission'},
     [576] = {id=576,avatar='Leviathan',en='Barracuda Dive',skillchain_a='Reverberation'},
     [578] = {id=578,avatar='Leviathan',en='Tail Whip',skillchain_a='Detonation'},
-    [582] = {id=582,avatar='Leviathan',en='Spinning Dive',skillchain_a='Distortion'},
+    [582] = {id=582,avatar='Leviathan',en='Spinning Dive',skillchain_a='Distortion',skillchain_b='Detonation'},
     [592] = {id=592,avatar='Garuda',en='Claw',skillchain_a='Detonation'},
-    [598] = {id=598,avatar='Garuda',en='Predator Claws',skillchain_a='Fragmentation'},
+    [598] = {id=598,avatar='Garuda',en='Predator Claws',skillchain_a='Fragmentation',skillchain_b='Scission'},
     [608] = {id=608,avatar='Shiva',en='Axe Kick',skillchain_a='Induration'},
     [612] = {id=612,avatar='Shiva',en='Double Slap',skillchain_a='Scission'},
-    [614] = {id=614,avatar='Shiva',en='Rush',skillchain_a='Distortion'},
+    [614] = {id=614,avatar='Shiva',en='Rush',skillchain_a='Distortion',skillchain_b='Scission'},
     [624] = {id=624,avatar='Ramuh',en='Shock Strike',skillchain_a='Impaction'}, 
-    [630] = {id=630,avatar='Ramuh',en='Chaotic Strike',skillchain_a='Fragmentation'},
+    [630] = {id=630,avatar='Ramuh',en='Chaotic Strike',skillchain_a='Fragmentation',skillchain_b='Transfixion'},
+	[634] = {id=634,avatar='Ramuh',en="Volt Strike",skillchain_a='Fragmentation',skillchain_b='Scission'},
     [656] = {id=656,avatar='Diabolos',en='Camisado',skillchain_a='Compression'},
+	[667] = {id=667,avatar='Diabolos',en='Blindside',skillchain_a='Gravitation',skillchain_b='Transfixion'},
     }
     
 blue_magic = L{
@@ -197,7 +233,7 @@ blue_magic = L{
 npc_move = L{
     -- Automaton
     [1940] = {id=1940,en='Chimera Ripper',skillchain_a='Detonation',skillchain_b='Induration'},
-    [1941] = {id=1941,en='String Clipper',skillchain_a='Scission',skillchain_b='Icon Scission'},
+    [1941] = {id=1941,en='String Clipper',skillchain_a='Scission',skillchain_b='Scission'},
     [1942] = {id=1942,en='Arcuballista',skillchain_a='Liquefaction',skillchain_b='Transfixion'},
     [1943] = {id=1943,en='Slapstick',skillchain_a='Reverberation',skillchain_b='Impaction'},
     [2065] = {id=2065,en='Cannibal Blade',skillchain_a='Compression',skillchain_b='Reverberation'},
@@ -281,14 +317,14 @@ npc_move = L{
     [3911] = {id=3911,en='Chomp Rush',skillchain_a='Darkness',skillchain_b='Gravitation'},
     [3915] = {id=3915,en='Back Heel',skillchain_a='Reverberation',skillchain_b=''},
     [3919] = {id=3919,en='Tortoise Stomp',skillchain_a='Liquefaction',skillchain_b=''},
-    [3922] = {id=3922,en='Wing Slap',skillchain_a='Liquefaction',skillchain_b='Scission'},
+    [3922] = {id=3922,en='Wing Slap',skillchain_a='Gravitation',skillchain_b='Liquefaction'},
     [3923] = {id=3923,en='Beak Lunge',skillchain_a='Scission',skillchain_b=''},
     [3925] = {id=3925,en='Recoil Dive',skillchain_a='Transfixion',skillchain_b=''},
     [3927] = {id=3927,en='Sensilla Blades',skillchain_a='Scission',skillchain_b=''},
     [3928] = {id=3928,en='Tegmina Buffet',skillchain_a='Distortion',skillchain_b='Detonation'},
     [3930] = {id=3930,en='Swooping Frenzy',skillchain_a='Fusion',skillchain_b='Reverberation'},
     [3931] = {id=3931,en='Sweeping Gouge',skillchain_a='Induration',skillchain_b=''},
-    [3933] = {id=3933,en='Pentapeck',skillchain_a='Distortion',skillchain_b=''},
+    [3933] = {id=3933,en='Pentapeck',skillchain_a='Distortion',skillchain_b='Light'},
     [3934] = {id=3934,en='Tickling Tendrils',skillchain_a='Impaction',skillchain_b=''},
     [3938] = {id=3938,en='Somersault',skillchain_a='Compression',skillchain_b=''},
     [3941] = {id=3941,en='Pecking Flurry',skillchain_a='Transfixion',skillchain_b=''},
@@ -328,14 +364,14 @@ pet_moves = T{
     [3911] = {id=3911,en='Chomp Rush',skillchain_a='Darkness',skillchain_b='Gravitation'},
     [3915] = {id=3915,en='Back Heel',skillchain_a='Reverberation',skillchain_b=''},
     [3919] = {id=3919,en='Tortoise Stomp',skillchain_a='Liquefaction',skillchain_b=''},
-    [3922] = {id=3922,en='Wing Slap',skillchain_a='Liquefaction',skillchain_b='Scission'},
+    [3922] = {id=3922,en='Wing Slap',skillchain_a='Gravitation',skillchain_b='Liquefaction'},
     [3923] = {id=3923,en='Beak Lunge',skillchain_a='Scission',skillchain_b=''},
     [3925] = {id=3925,en='Recoil Dive',skillchain_a='Transfixion',skillchain_b=''},
     [3927] = {id=3927,en='Sensilla Blades',skillchain_a='Scission',skillchain_b=''},
     [3928] = {id=3928,en='Tegmina Buffet',skillchain_a='Distortion',skillchain_b='Detonation'},
     [3930] = {id=3930,en='Swooping Frenzy',skillchain_a='Fusion',skillchain_b='Reverberation'},
     [3931] = {id=3931,en='Sweeping Gouge',skillchain_a='Induration',skillchain_b=''},
-    [3933] = {id=3933,en='Pentapeck',skillchain_a='Distortion',skillchain_b=''},
+    [3933] = {id=3933,en='Pentapeck',skillchain_a='Distortion',skillchain_b='Light'},
     [3934] = {id=3934,en='Tickling Tendrils',skillchain_a='Impaction',skillchain_b=''},
     [3938] = {id=3938,en='Somersault',skillchain_a='Compression',skillchain_b=''},
     [3941] = {id=3941,en='Pecking Flurry',skillchain_a='Transfixion',skillchain_b=''},
@@ -442,14 +478,8 @@ function chain_results(reson)
                     end
                 end
                 if settings.ws then
-					if m_job == 'BST' and not settings.hidews then	
-						for i,t in ipairs(abilities.weapon_skills) do
-							local ws = res.weapon_skills[t]
-							if ws and S{ws.skillchain_a,ws.skillchain_b,ws.skillchain_c}:contains(k) and
-							(not skills[ws.en] or skills[ws.en].lvl < lvl) then
-								skills[ws.en] = {lvl=lvl,prop=v}
-							end
-						end
+					if m_job == 'BST' and settings.hidews == true then	
+						-- Don't show any normal Melee WS :D
 					else
 						for i,t in ipairs(abilities.weapon_skills) do
 							local ws = res.weapon_skills[t]
@@ -624,6 +654,8 @@ windower.register_event('addon command', function(...)
         end
         --windower.add_to_chat(207, '%s will %s be displayed.':format(commands[1] == 'ma' and 'Magic' or 'Weapon Skills',settings[commands[1]] and 'now' or 'NOT'))
 		windower.add_to_chat(207, '%s: %s.':format(commands[1],settings[commands[1]] and 'TRUE' or 'FALSE'))
+	elseif commands[1] == 'save' then
+        config.save(settings, 'all')
     elseif commands[1] == 'eval' then
         assert(loadstring(table.concat(commands, ' ',2)))()
     end

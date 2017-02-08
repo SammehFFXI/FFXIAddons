@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 _addon.author = 'Ivaar,Sammeh(Mod)'
 _addon.command = 'sc'
 _addon.name = 'SkillChains'
-_addon.version = '1.5.2'
+_addon.version = '1.6'
 
 
 -- Sammeh(Quetz) Mods.
@@ -42,6 +42,8 @@ _addon.version = '1.5.2'
 -- 1.5 Fix - broke jobs other than BST when coloring bst stuff ;)
 -- 1.5.1 Testing this thing sucks between pet jobs and not lol.  Anyway i think fixed :\
 -- 1.5.2 Updated to add some more pet WS properties
+-- 1.6.0 Adding in Umbra/Radiance properties/skillchains. 
+
 
 texts = require('texts')
 packets = require('packets')
@@ -62,6 +64,34 @@ settings = config.load(default)
 skill_props = texts.new('',settings.display,settings)
 
 lvl3 = S{'Darkness','Light'}
+lvl4 = S{'Radiance','Umbra'}
+radiance_ws = S{'Blade: Shun','Apex Arrow','Last Stand','Exenterator','Realmrazor','Resolution','Shijin Spiral','Tachi: Shoha','Upheaval'}
+umbra_ws = S{'Shattersoul','Entropy','Requiescat','Ruinator','Stardiver'}
+aeonic_weapons = S{'Heishi Shorinken','Godhands','Aeneas','Sequence','Lionheart','Tri-edge','Chango','Anguta','Trishula','Dojikiri Yasutsuna','Tishtrya','Khatvanga','Fail-Not','Fomalhaut'}
+
+aftermath_props = T{
+	['Blade: Shun'] = {skillchain_a="Light",skillchain_b="Fusion",skillchain_c="Impaction"}, 
+	['Apex Arrow'] = {skillchain_a="Light",skillchain_b="Fragmentation",skillchain_c="Transfixion"}, 
+	['Last Stand'] = {skillchain_a="Light",skillchain_b="Fusion",skillchain_c="Reverberation"}, 
+	['Exenterator'] = {skillchain_a="Light",skillchain_b="Fragmentation",skillchain_c="Scission"}, 
+	['Realmrazor'] = {skillchain_a="Light",skillchain_b="Fusion",skillchain_c="Impaction"}, 
+	['Resolution'] = {skillchain_a="Light",skillchain_b="Fragmentation",skillchain_c="Scission"}, 
+	['Shijin Spiral'] = {skillchain_a="Light",skillchain_b="Fusion",skillchain_c="Reverberation"}, 
+	['Tachi: Shoha'] = {skillchain_a="Light",skillchain_b="Fragmentation",skillchain_c="Compression"}, 
+	['Upheaval'] = {skillchain_a="Light",skillchain_b="Fusion",skillchain_c="Compression"}, 
+	['Shattersoul'] = {skillchain_a="Darkness",skillchain_b="Gravitation",skillchain_c="Induration"}, 
+	['Entropy'] = {skillchain_a="Darkness",skillchain_b="Gravitation",skillchain_c="Reverberation"}, 
+	['Requiescat'] = {skillchain_a="Darkness",skillchain_b="Gravitation",skillchain_c="Scission"}, 
+	['Ruinator'] = {skillchain_a="Darkness",skillchain_b="Distortion",skillchain_c="Detonation"}, 
+	['Stardiver'] = {skillchain_a="Darkness",skillchain_b="Gravitation",skillchain_c="Transfixion"}, 
+}
+
+--[[
+Thought process for Aeonics:   If aeonic_weapons:contains main weapons lot and buffactive table contains 'Aftermath' 1, 2, 3 then show additional skillchain properties.
+LVL 1: Only on step 4 or greater
+LVL 2: Only on step 3 or greater
+LVL 3: Only on step 2 or later
+]]
 
 skillchains = L{
     [288] = 'Light',
@@ -92,13 +122,17 @@ skillchains = L{
     [396] = 'Scission',
     [397] = 'Detonation',
     [398] = 'Impaction',
+	[767] = 'Radiance',
+    [768] = 'Umbra',
+    [769] = 'Radiance',
+    [770] = 'Umbra',
     }
 
 colors = {
-	--['Light'] = '\\cs(255,255,255)',
     ['Impaction'] = '\\cs(255,0,255)',
 	['Lightning'] = '\\cs(255,0,255)',
 	['Darkness'] = '\\cs(0,0,204)',
+	['Umbra'] = '\\cs(0,0,204)',
     ['Gravitation'] = '\\cs(102,51,0)',
     ['Fragmentation'] = '\\cs(250,156,247)',
     ['Distortion'] = '\\cs(51,153,255)',
@@ -110,6 +144,7 @@ colors = {
     ['Transfixion'] = '\\cs(255,255,255)',
     ['Scission'] = '\\cs(153,76,0)',
 	['Stone'] = '\\cs(153,76,0)',
+	['Earth'] = '\\cs(153,76,0)',
     ['Detonation'] = '\\cs(102,255,102)',
 	['Wind'] = '\\cs(102,255,102)',
     ['Fusion'] = '\\cs(255,102,102)',
@@ -129,13 +164,15 @@ elements = L{
     }
 
 prop_info = {
+	Radiance = {elements='Fire Wind Lightning Light',properties={[1]={Light='Light'}},level=3},
+	Umbra = {elements='Earth Ice Water Darkness',properties={[1]={Darkness='Darkness'}},level=3},
     Light = {elements='Fire Wind Lightning Light',properties={[1]={Light='Light'}},level=3},
-    Darkness = {elements='Earth Ice Water Dark',properties={[1]={Darkness='Darkness'}},level=3},
-    Gravitation = {elements='Earth Dark',properties={[1]={Distortion='Darkness'},[2]={Fragmentation='Fragmentation'}},level=2},
+    Darkness = {elements='Earth Ice Water Darkness',properties={[1]={Darkness='Darkness'}},level=3},
+    Gravitation = {elements='Earth Darkness',properties={[1]={Distortion='Darkness'},[2]={Fragmentation='Fragmentation'}},level=2},
     Fragmentation = {elements='Wind Lightning',properties={[1]={Fusion='Light'},[2]={Distortion='Distortion'}},level=2},
     Distortion = {elements='Ice Water',properties={[1]={Gravitation='Darkness'},[2]={Fusion='Fusion'}},level=2},
     Fusion = {elements='Fire Light',properties={[1]={Fragmentation='Light'},[2]={Gravitation='Gravitation'}},level=2},
-    Compression = {elements='Dark',properties={[1]={Transfixion='Transfixion'},[2]={Detonation='Detonation'}},level=1},
+    Compression = {elements='Darkness',properties={[1]={Transfixion='Transfixion'},[2]={Detonation='Detonation'}},level=1},
     Liquefaction = {elements='Fire',properties={[1]={Impaction='Fusion'},[2]={Scission='Scission'}},level=1},
     Induration = {elements='Ice',properties={[1]={Reverberation='Fragmentation'},[2]={Compression='Compression'},[3]={Impaction='Impaction'}},level=1},
     Reverberation = {elements='Water',properties={[1]={Induration='Induration'},[2]={Impaction='Impaction'}},level=1},
@@ -144,6 +181,8 @@ prop_info = {
     Detonation = {elements='Wind',properties={[1]={['Compression']='Gravitation'},[2]={['Scission']='Compression'}},level=1},
     Impaction = {elements='Lightning',properties={[1]={Liquefaction='Liquefaction'},[2]={Detonation='Detonation'}},level=1},
     }
+	
+	
     
 blood_pacts = L{
     [513] = {id=513,avatar='Carbuncle',en='Poison Nails',skillchain_a='Transfixion'},
@@ -393,8 +432,24 @@ function apply_props(packet,abil,ability)
         (reson.chain or reson.ws.skillchain_a == abil.skillchain_a) then
             closed = true
         end
+		if lvl4:contains(skillchain) then
+			closed = true
+		end
         resonating[mob_id] = {active={skillchain},timer=now,ws=abil,chain=true,closed=closed,step=step}
-    elseif L{110,161,162,185,187}:contains(packet['Target 1 Action 1 Message']) then           
+    elseif L{110,161,162,185,187}:contains(packet['Target 1 Action 1 Message']) then 
+		local aeonic,aftermath_lvl = aeonicinfo()
+		local res2 = require('resources')
+		if radiance_ws:contains(abil.en) or umbra_ws:contains(abil.en) then 
+			if aeonic and aftermath_lvl then 
+				abil.skillchain_c = aftermath_props[abil.en].skillchain_c
+				abil.skillchain_b = aftermath_props[abil.en].skillchain_b
+				abil.skillchain_a = aftermath_props[abil.en].skillchain_a
+			else 
+				abil.skillchain_c = ''
+				abil.skillchain_b = aftermath_props[abil.en].skillchain_c
+				abil.skillchain_a = aftermath_props[abil.en].skillchain_b
+			end
+		end
         resonating[mob_id] = {active={abil.skillchain_a,abil.skillchain_b,abil.skillchain_c},timer=now,ws=abil,chain=false,step=1}
     elseif L{317}:contains(packet['Target 1 Action 1 Message']) then
         resonating[mob_id] = {active={abil.skillchain_a},timer=now,ws=abil,chain=false,step=1}
@@ -439,6 +494,7 @@ function chain_results(reson)
     local m_job = windower.ffxi.get_player().main_job
     local abilities = windower.ffxi.get_abilities()
     local spell_table,sch
+	local aeonic,aftermath_lvl = aeonicinfo()
     if m_job == 'SMN' then
         spell_table = blood_pacts
     elseif m_job == 'BLU' then
@@ -450,6 +506,7 @@ function chain_results(reson)
     end
     for key,element in ipairs(reson.active) do
         local props = prop_info[element].properties
+		
         for x=1,#props do
             for k,v in pairs(props[x]) do
                 local lvl = prop_info[v].level
@@ -483,6 +540,44 @@ function chain_results(reson)
 					else
 						for i,t in ipairs(abilities.weapon_skills) do
 							local ws = res.weapon_skills[t]
+							
+							--[[
+							if aeonic and aftermath_lvl == 3 and reson.step > 0 then
+								if radiance_ws:contains(ws.en) then
+									ws.skillchain_c = 'Light'
+								end
+								if umbra_ws:contains(ws.en) then
+									ws.skillchain_c = 'Darkness'
+								end
+							end
+							
+							if aeonic and aftermath_lvl == 2 and reson.step > 1 then
+								if radiance_ws:contains(ws.en) then
+									ws.skillchain_c = 'Light'
+								end
+								if umbra_ws:contains(ws.en) then
+									ws.skillchain_c = 'Darkness'
+								end
+							end
+							
+							if aeonic and aftermath_lvl == 1 and reson.step > 2 then
+								print(aftermath_lvl,reson.step)
+								if radiance_ws:contains(ws.en) then
+									ws.skillchain_c = 'Light'
+								end
+								if umbra_ws:contains(ws.en) then
+									ws.skillchain_c = 'Darkness'
+								end
+							end
+							]]
+							if radiance_ws:contains(ws.en) or umbra_ws:contains(ws.en) then		
+								if aeonic and aftermath_lvl and reson.step > 0 then
+									ws.skillchain_c = aftermath_props[ws.en].skillchain_c
+									ws.skillchain_b = aftermath_props[ws.en].skillchain_b
+									ws.skillchain_a = aftermath_props[ws.en].skillchain_a
+								end
+							end
+							
 							if ws and S{ws.skillchain_a,ws.skillchain_b,ws.skillchain_c}:contains(k) and
 							(not skills[ws.en] or skills[ws.en].lvl < lvl) then
 								skills[ws.en] = {lvl=lvl,prop=v}
@@ -534,6 +629,31 @@ function search_pet_moves(k)
 		end
 	end
 end
+
+function aeonicinfo()
+	local buffs = windower.ffxi.get_player().buffs
+	local gear = windower.ffxi.get_items()
+	local mainweapon = res.items[windower.ffxi.get_items(gear.equipment.main_bag, gear.equipment.main).id].en
+	local aftermath_lvl = nil
+	local aeonic_found = nil
+	
+	for i,v in pairs(buffs) do
+		if v == 272 then
+			aftermath_lvl = 3
+		elseif v == 271 then
+			aftermath_lvl = 2
+		elseif v == 270 then
+			aftermath_lvl = 1
+		end
+	end
+	
+	if aeonic_weapons:contains(mainweapon) then 
+		aeonic_found = true
+	end
+	
+	return aeonic_found,aftermath_lvl
+end
+
 
 function display_results(targ)
     local str = ''

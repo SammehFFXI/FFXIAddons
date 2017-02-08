@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 _addon.author = 'Ivaar,Sammeh(Mod)'
 _addon.command = 'sc'
 _addon.name = 'SkillChains'
-_addon.version = '1.6'
+_addon.version = '1.6.1'
 
 
 -- Sammeh(Quetz) Mods.
@@ -43,6 +43,7 @@ _addon.version = '1.6'
 -- 1.5.1 Testing this thing sucks between pet jobs and not lol.  Anyway i think fixed :\
 -- 1.5.2 Updated to add some more pet WS properties
 -- 1.6.0 Adding in Umbra/Radiance properties/skillchains. 
+-- 1.6.1 Fix where when you lose a pet-mid fight spammed console log with nil values.  
 
 
 texts = require('texts')
@@ -607,7 +608,11 @@ end
 function pet_skills()
 	local abilities = windower.ffxi.get_abilities()
 	local petskills = {}
-	pet = windower.ffxi.get_mob_by_index(windower.ffxi.get_mob_by_target('pet').index or 0)
+	if windower.ffxi.get_mob_by_target('pet') then 
+		pet = windower.ffxi.get_mob_by_index(windower.ffxi.get_mob_by_target('pet').index or 0)
+	else 
+		pet = nil
+	end
 	if pet then 
 		for key,ability in pairs(abilities.job_abilities) do
 			local ability_en = res.job_abilities[ability].en

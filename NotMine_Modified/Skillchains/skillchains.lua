@@ -1,5 +1,5 @@
 --[[
-Copyright © 2016, Ivaar
+Copyright © 2017, Ivaar
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 _addon.author = 'Ivaar,Sammeh(Mod)'
 _addon.command = 'sc'
 _addon.name = 'SkillChains'
-_addon.version = '1.6.1'
+_addon.version = '1.6.2'
 
 
 -- Sammeh(Quetz) Mods.
@@ -44,6 +44,7 @@ _addon.version = '1.6.1'
 -- 1.5.2 Updated to add some more pet WS properties
 -- 1.6.0 Adding in Umbra/Radiance properties/skillchains. 
 -- 1.6.1 Fix where when you lose a pet-mid fight spammed console log with nil values.  
+-- 1.6.2 Removing some unnecessary comments and loaded variables during debugs.
 
 
 texts = require('texts')
@@ -86,13 +87,6 @@ aftermath_props = T{
 	['Ruinator'] = {skillchain_a="Darkness",skillchain_b="Distortion",skillchain_c="Detonation"}, 
 	['Stardiver'] = {skillchain_a="Darkness",skillchain_b="Gravitation",skillchain_c="Transfixion"}, 
 }
-
---[[
-Thought process for Aeonics:   If aeonic_weapons:contains main weapons lot and buffactive table contains 'Aftermath' 1, 2, 3 then show additional skillchain properties.
-LVL 1: Only on step 4 or greater
-LVL 2: Only on step 3 or greater
-LVL 3: Only on step 2 or later
-]]
 
 skillchains = L{
     [288] = 'Light',
@@ -439,7 +433,6 @@ function apply_props(packet,abil,ability)
         resonating[mob_id] = {active={skillchain},timer=now,ws=abil,chain=true,closed=closed,step=step}
     elseif L{110,161,162,185,187}:contains(packet['Target 1 Action 1 Message']) then 
 		local aeonic,aftermath_lvl = aeonicinfo()
-		local res2 = require('resources')
 		if radiance_ws:contains(abil.en) or umbra_ws:contains(abil.en) then 
 			if aeonic and aftermath_lvl then 
 				abil.skillchain_c = aftermath_props[abil.en].skillchain_c
@@ -542,35 +535,6 @@ function chain_results(reson)
 						for i,t in ipairs(abilities.weapon_skills) do
 							local ws = res.weapon_skills[t]
 							
-							--[[
-							if aeonic and aftermath_lvl == 3 and reson.step > 0 then
-								if radiance_ws:contains(ws.en) then
-									ws.skillchain_c = 'Light'
-								end
-								if umbra_ws:contains(ws.en) then
-									ws.skillchain_c = 'Darkness'
-								end
-							end
-							
-							if aeonic and aftermath_lvl == 2 and reson.step > 1 then
-								if radiance_ws:contains(ws.en) then
-									ws.skillchain_c = 'Light'
-								end
-								if umbra_ws:contains(ws.en) then
-									ws.skillchain_c = 'Darkness'
-								end
-							end
-							
-							if aeonic and aftermath_lvl == 1 and reson.step > 2 then
-								print(aftermath_lvl,reson.step)
-								if radiance_ws:contains(ws.en) then
-									ws.skillchain_c = 'Light'
-								end
-								if umbra_ws:contains(ws.en) then
-									ws.skillchain_c = 'Darkness'
-								end
-							end
-							]]
 							if radiance_ws:contains(ws.en) or umbra_ws:contains(ws.en) then		
 								if aeonic and aftermath_lvl and reson.step > 0 then
 									ws.skillchain_c = aftermath_props[ws.en].skillchain_c

@@ -1,0 +1,20 @@
+-- Put at top of your file somewhere
+require 'tables'
+files = require 'files'
+lastspell = require('last_spell.lua')
+lastspell_file = files.new('data\\last_spell.lua')
+
+
+-- Insert into the last line of your mid_cast section.
+lastspell_file:write('return ' .. T(spell):tovstring())  
+
+
+-- Custom Command section creating a custom command called 'aftercast'
+function job_self_command(cmdParams, eventArgs)   
+	if cmdParams[1]:lower() == 'aftercast' then
+	    lastspell = require 'last_spell.lua'
+		job_aftercast(lastspell)
+	end
+end
+
+

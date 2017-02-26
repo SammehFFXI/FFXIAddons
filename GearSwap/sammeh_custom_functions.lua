@@ -6,8 +6,6 @@ send_command('alias spelldebug gs c cycle spelldebug')
 -- require 'pack'
 require 'tables'
 files = require 'files'
-res = require 'resources'
-packets = require('packets')
 
 --lastspell = require('last_spell.lua')   -- this was just a test - don't ask
 --lastspell_file = files.new('data\\last_spell.lua')
@@ -35,6 +33,7 @@ send_command('alias hpmist input /item "Healing Mist" <me>')
 send_command('alias megalixir input /item "Megalixir" <me>')
 send_command('alias cat input /item "Catholicon" <me>')
 send_command('alias cat1 input /item "Catholicon +1" <me>')
+send_command('alias stonic input /item "Steadfast Tonic" <me>')
 send_command('alias echodrop input /item "Echo Drops" <me>')
 send_command('alias remedy input /item "Remedy" <me>')
 send_command('alias holywater input /item "Holy Water" <me>')
@@ -139,6 +138,10 @@ function chargesremaining()
 	  charges = math.floor(((30 - ready) / 10))
 	end
 	add_to_chat(2,'Ready Recast:'..ready..'   Charges Remaining:'..charges..'')
+	windower.send_command('timers delete "Sic/Ready"')
+	windower.send_command('timers create "Sic/Ready ['..charges..']" '..ready..' down fire')
+	--windower.send_command('timers delete "'..dragon..' Pop Timer:"')
+	--windower.send_command('timers create "'..dragon..' Pop Timer:" 600 down fire')
 end
 
 -- Equip Obi based on Weather
@@ -203,13 +206,14 @@ function check_run_status()
 	end
 end
 
+
 function checkblocking(spell)
 	if type(windower.ffxi.get_player().autorun) == 'table' and spell.action_type == 'Magic' then 
 		windower.add_to_chat(3,'Currently auto-running - stopping to cast spell')
 		windower.ffxi.run(false)
 		windower.ffxi.follow()  -- disabling Follow - turning back autorun automatically turns back on follow.
 		autorun = 1
-		cast_delay(.4)  -- update based on your own lag/testing.  I could get it to work as low as .2 but not consistently.
+		cast_delay(.4)
 		return
 	end
 	if buffactive.sleep or buffactive.petrification or buffactive.terror then 

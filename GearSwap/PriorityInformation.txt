@@ -1,0 +1,69 @@
+http://www.ffxiah.com/forum/topic/46016/first-and-final-line-of-defense-v20/17/#3067025
+
+There are a few ways to mitigate this issue.
+
+Now, say your idle set has 2500 max HP, and your FC set has 2200. You're just kinda screwed there. you're gonna lose that 300 HP. (Well, you could pump in some HP+ on the spare slots in the FC set. <,<) However, it's entirely possibly that you're actually losing More HP than the difference between the fully equipped sets due to the equip order.
+
+For example,(totally random number to illustrate the point, mind you.)
+
+Idle head: 100 -> FC head 40 HP. -60 current HP loss.
+then idle hands 40 HP -> FC hands 100 max HP +60.
+
+Equipped in this order you lose 60 current HP. However if equipped in reverse there would have been no loss.
+
+Basically, during swaps, you need to increase your max HP first, then do the swaps that drop it. This is of course, a huge pain in the ***. But it can help, depending on your sets.
+
+Also, there's the option of equipping HP+ gear in the fastcast set. And sacrificing the lesser amounts of fastcast to lose less current HP. Of course, if you were already Idling in most of your HP+ gear, then this won't help much. But I've never been big on stacking HP, precisely because I'm just going to lose most it. And if I wanted to sit there and not swap gear, I'd have been playing 14. -.-;
+
+Important note. Unless you specifically code other wise, the equip order in gearswap is static. The order you list the slots inside a set means Nothing.
+
+the default equip order is described in the slots.lua located at Windower4\res\slots.lua. in the windower folder.
+return {
+    [0] = {id=0,en="Main"},
+    [1] = {id=1,en="Sub"},
+    [2] = {id=2,en="Range"},
+    [3] = {id=3,en="Ammo"},
+    [4] = {id=4,en="Head"},
+    [5] = {id=5,en="Body"},
+    [6] = {id=6,en="Hands"},
+    [7] = {id=7,en="Legs"},
+    [8] = {id=8,en="Feet"},
+    [9] = {id=9,en="Neck"},
+    [10] = {id=10,en="Waist"},
+    [11] = {id=11,en="Left Ear"},
+    [12] = {id=12,en="Right Ear"},
+    [13] = {id=13,en="Left Ring"},
+    [14] = {id=14,en="Right Ring"},
+    [15] = {id=15,en="Back"},
+}, {"id", "en"}
+
+
+Coding sets for priority is explained in the Advanced sets tables.txt found at Windower4\addons\GearSwap\beta_examples_and_information\Advanced sets tables.txt
+
+As an example, my rather out of date fast cast set.
+sets.precast = {
+        ammo="Incantor Stone", -- 0 HP
+        head={name="Chev. Armet +1",priority=9}, --    +125 HP
+        neck="Orunmila's Torque",--0 HP
+        ear1="Loquacious Earring",--0 HP
+        ear2={name="Etiolation Earring",priority=11},-- +50 HP
+        body={name="Odyssean Chestplate",priority=-1},--+66 HP
+        hands={name="Leyline Gloves",priority=7},--+25 HP
+        ring1={name="Meridian Ring",priority=15},-- +90 HP
+        ring2={name="Prolix Ring",priority=8},-- 0 HP
+        back={name="Xucau Mantle",priority=14},-- +100 HP
+        waist={name="Creed Baudrier",priority=13},-- +40 HP
+        legs={name="Enif Cosciales",priority=10},--+40HP
+        feet={ name="Odyssean Greaves", augments={'"Fast Cast"+3',priority=12}} }
+
+The weird part here, is that the swaps for priority go in descending order. so the piece with priority 15 would swap first and the piece with 0(or -1, etc) would go last.
+
+The other thing you have to consider is the hp values for gear in other sets. you can't base the priority purely of the current set alone. So what if Chevalier's head has +125 HP? If your Idle head has more than that, then it shouldn't go first. Need to swap elsewhere, then swap head when a sufficient current/max HP gap has built up.
+
+You have to consider the changes going from idle to FC, then from FC to midcast. etc.
+
+It's also useful to note, that you should Never be able to get hit in you precast set.(Provided the midcast set is a complete set that will swap you out of the precast pieces) So you can swap to whatever meets the HP/FC needs. It's the midcast phase where you have to consider the risk of being hit.
+
+All this being said, it is a huuuge pain in the *** to consider all the factors. And it can't eliminate the max HP differences of entire sets.(of course, you can always tweak the sets...) But it does help.
+
+

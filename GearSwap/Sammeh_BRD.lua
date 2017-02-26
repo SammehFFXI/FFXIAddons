@@ -176,13 +176,13 @@ function init_gear_sets()
     -- For song defbuffs (duration primary, accuracy secondary)
     sets.midcast.SongDebuff = {
 	    main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Chironic Hat",neck="Moonbow Whistle",ear1="Digni. Earring",ear2="Enchntr. Earring +1",
+        head="Brioso Roundlet +2",neck="Moonbow Whistle",ear1="Digni. Earring",ear2="Enchntr. Earring +1",
         body="Fili Hongreline +1",hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
         back="Intarabus's Cape",waist="Luminary Sash",legs="Inyanga Shalwar +1",feet="Brioso Slippers +2"}
 
     -- For song defbuffs (accuracy primary, duration secondary)
     sets.midcast.ResistantSongDebuff = {main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Chironic Hat",neck="Moonbow Whistle",ear1="Digni. Earring",ear2="Enchntr. Earring +1",
+        head="Brioso Roundlet +2",neck="Moonbow Whistle",ear1="Digni. Earring",ear2="Enchntr. Earring +1",
         body="Brioso Justau. +2",hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
         back="Intarabus's Cape",waist="Luminary Sash",legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},feet="Brioso Slippers +2"}
 		
@@ -267,13 +267,13 @@ function init_gear_sets()
 
     -- Engaged sets
 
-	sets.engaged.orig = {
+	sets.engaged = {
 	  range={ name="Linos", augments={'Accuracy+14','Sklchn.dmg.+4%','Quadruple Attack +2',}},
 	  body="Onca Suit", head="Alhazen Hat +1",waist="Grunfeld Rope",Ear1="Dignitary's Earring",ear2="Cessance Earring",
 	  ring1="Etana Ring",ring2="Hetairoi Ring",neck="Combatant's Torque"
 	}
 	
-	sets.engaged = {
+	--[[sets.engaged = {
 	    head="Alhazen Hat +1",
 		body="Ayanmo Corazza +1",
 		hands="Aya. Manopolas +1",
@@ -286,7 +286,7 @@ function init_gear_sets()
 		left_ring="Ilabrat Ring",
 		right_ring="Hetairoi Ring",
 		back="Agema Cape",
-	}
+	}]]
 	
 	sets.meva = {
 		main="Terra's Staff",

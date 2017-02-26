@@ -41,19 +41,24 @@ packets = require('packets')
 debuff_txt = {}
 debuff_txt.pos = {}
 debuff_txt.pos.x = -180
-debuff_txt.pos.y = 185
+debuff_txt.pos.y = 85
 debuff_txt.text = {}
 debuff_txt.text.font = 'Arial'
 debuff_txt.text.size = 10
 debuff_txt.flags = {}
 debuff_txt.flags.right = true
-
 debuff_box = texts.new('${value}', debuff_txt)
 
 local troubMeritGain = 0
-
 local monster_list = {}
 local boxvisible = false
+
+
+windower.register_event('addon command', function(command)
+	if command == 'reset' then reset_list() end
+	if command == 'show' then boxvisible = true end
+	if command == 'hide' then boxvisible = false end 
+end)
 
 function reset_list()
 	for i,v in pairs(monster_list) do
@@ -175,6 +180,18 @@ windower.register_event('incoming chunk', function(id,original,modified,injected
 				
 			end
 		end
+		
+		if packet['Category'] == 6 and packet.Actor == self.id then
+			if packet.Param == 164 then -- Troubadour
+				local gear = windower.ffxi.get_items()
+				local body = res.items[windower.ffxi.get_items(gear.equipment.body_bag, gear.equipment.body).id]
+				troubMeritGain = 0
+				if body.en == "Bihu Justaucorps" or body.en == "Bihu Jstcorps +1" then 
+					troubMeritGain = self.merits.troubadour * 4 
+				end
+			end
+		end
+		
 		if monster_list[packet.Actor] and ((now - monster_list[packet.Actor].start) > 5) then 
 			monster_list[packet.Actor] = {start=monster_list[packet.Actor].start,debuff_duration=0}
 		end
@@ -182,17 +199,7 @@ windower.register_event('incoming chunk', function(id,original,modified,injected
 end)
 
 windower.register_event('zone change',function()
-reset_list()
-end)
-
-
-windower.register_event('addon command', function(command)
-    if command == 'save' then
-        config.save(settings, 'all')
-    end
-	if command == 'reset' then reset_list() end
-	if command == 'show' then boxvisible = true end
-	if command == 'hide' then boxvisible = false end 
+	reset_list()
 end)
 
 
@@ -200,9 +207,10 @@ function calculate_duration_raw(spell_id)
 
 	local self = windower.ffxi.get_player()
 	
-	-- Troub = 348, ClarionCall = 499, Soul Voice = 52, Marcato = 231
-	
-	local troubadour,clarioncall,soulvoice,marcato
+	local troubadour = false
+	local clarioncall = false
+	local soulvoice = false
+	local marcato = false
 	
 	for i,v in pairs(self.buffs) do
 		if v == 348 then troubadour = true end
@@ -240,6 +248,17 @@ function calculate_duration_raw(spell_id)
 	if range.id == 18840 or range.id == 18572 then mult = mult + 0.4 end -- Gjallarhorn LVL 99 | AG LVL 99
 	if range.id == 21398 then mult = mult + 0.5 end -- Marsyas
 	
+	-- Give your own math.  Songs + each give 10% per song+.   There are several song+ instruments; Some with Augments (Linos, Nibiru Harp).
+	-- You'll need to add your own here.  I will make some assumptions anyone using a Linos has a +1 augment and anyone using a Nibiru Harp is augmented Path C.
+	if range.en == "Nibiru Harp" then mult = mult + 0.2 end
+	if range.en == "Linos" then mult = mult + 0.3 end 
+	if range.en == "Blurred Harp" then mult = mult + 0.3 end
+	if range.en == "Blurred Harp +1" then mult = mult + 0.4 end
+	if range.en == "Mary's Horn" then mult = mult + 0.1 end
+	if range.en == "Cradle Horn" then mult = mult + 0.2 end
+	if range.en == "Pan's Horn" then mult = mult + 0.3 end
+	
+	
 	if mainweapon.id == 18980 or mainweapon.id == 19000 then mult = mult + 0.1 end -- Carnwenhan LVL 75
     if mainweapon.id == 19069 then mult = mult + 0.2 end -- Carnwenhan LVL 80
 	if mainweapon.id == 19089 then mult = mult + 0.3 end -- Carnwenhan LVL 85
@@ -256,13 +275,16 @@ function calculate_duration_raw(spell_id)
 	if subweapon.en == "Legato Dagger" then mult = mult + 0.05 end
 	if mainweapon.en == "Kali" then mult = mult + 0.05 end
 	if subweapon.en == "Kali" then mult = mult + 0.05 end
-	
 	if neck.en == "Aoidos' Matinee" then mult = mult + 0.1 end
 	if neck.en == "Moonbow Whistle" then mult = mult + 0.2 end 
 	if neck.en == "Mnbw. Whistle +1" then mult = mult + 0.2 end 
     if body.en == "Fili Hongreline +1" then mult = mult + 0.12 end
-    if legs.en == "Inyanga Shalwar +1" then mult = mult + 0.15 end
-    if feet.en == "Brioso Slippers" then mult = mult + 0.1 end
+	if body.en == "Aoidos' Hngrln. +2" then mult = mult + 0.1 end
+	if body.en == "Aoidos' Hngrln. +1" then mult = mult + 0.05 end
+	if legs.en == "Inyanga Shalwar" then mult = mult + 0.12 end
+	if legs.en == "Inyanga Shalwar +1" then mult = mult + 0.15 end
+	if legs.en == "Mdk. Shalwar +1" then mult = mult + 0.1 end
+	if feet.en == "Brioso Slippers" then mult = mult + 0.1 end
     if feet.en == "Brioso Slippers +1" then mult = mult + 0.11 end
 	if feet.en == "Brioso Slippers +2" then mult = mult + 0.13 end
 	if feet.en == "Brioso Slippers +3" then mult = mult + 0.15 end
@@ -287,15 +309,14 @@ function calculate_duration_raw(spell_id)
 	
 	totalDuration = math.floor(mult*base)		
 	
-	
 	-- Job Points Buff
 	totalDuration = totalDuration + self.job_points.brd.lullaby_duration
 	
 	if clarioncall then
 		if troubadour then 
-			totalDuration = totalDuration + (self.job_points.brd.clarion_call_effect * 2)
+			totalDuration = totalDuration + (self.job_points.brd.clarion_call_effect * 2 * 2) -- Clarion Call gives 2 seconds per Job Point upgrade.  * 2 again for Troubadour
 		else
-			totalDuration = totalDuration + self.job_points.brd.clarion_call_effect
+			totalDuration = totalDuration + (self.job_points.brd.clarion_call_effect * 2)  -- Clarion Call gives 2 seconds per Job Point upgrade. 
 		end
 	end
 	
@@ -303,32 +324,10 @@ function calculate_duration_raw(spell_id)
 		totalDuration = totalDuration + self.job_points.brd.marcato_effect
 	end
 
-
 	if troubadour then 
 		totalDuration = totalDuration + troubMeritGain
 	end
+	-- print(totalDuration,'cc',clarioncall,'tr',troubadour,'troubGain',troubMeritGain,'mult',mult)
 
     return totalDuration
-	
 end
-
-
-windower.register_event('outgoing chunk',function(id,data,modified,injected,blocked)
-	if id == 0x01A then
-		--local packet = packets.parse('outgoing', data)
-		local packet = packets.parse('outgoing', modified)
-		local self = windower.ffxi.get_player()
-		local ability_used = packet.Param
-		local category = packet.Category
-		if res.job_abilities[ability_used] then 
-			if res.job_abilities[ability_used].id == 164 and category == 9 then
-				local gear = windower.ffxi.get_items()
-				local body = res.items[windower.ffxi.get_items(gear.equipment.body_bag, gear.equipment.body).id]
-				if body.en == "Bihu Justaucorps" or body.en == "Bihu Jstcorps +1" then 
-					troubMeritGain = self.merits.troubadour * 4 
-				end
-				print("Adding Buff Gain",troubMeritGain,body.en)
-			end
-		end
-	end
-end)

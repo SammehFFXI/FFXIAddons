@@ -49,7 +49,6 @@ debuff_txt.flags = {}
 debuff_txt.flags.right = true
 debuff_box = texts.new('${value}', debuff_txt)
 
-local troubMeritGain = 0
 local monster_list = {}
 local boxvisible = false
 
@@ -181,16 +180,6 @@ windower.register_event('incoming chunk', function(id,original,modified,injected
 			end
 		end
 		
-		if packet['Category'] == 6 and packet.Actor == self.id then
-			if packet.Param == 164 then -- Troubadour
-				local gear = windower.ffxi.get_items()
-				local body = res.items[windower.ffxi.get_items(gear.equipment.body_bag, gear.equipment.body).id]
-				troubMeritGain = 0
-				if body.en == "Bihu Justaucorps" or body.en == "Bihu Jstcorps +1" then 
-					troubMeritGain = self.merits.troubadour * 4 
-				end
-			end
-		end
 		
 		if monster_list[packet.Actor] and ((now - monster_list[packet.Actor].start) > 5) then 
 			monster_list[packet.Actor] = {start=monster_list[packet.Actor].start,debuff_duration=0}
@@ -311,6 +300,9 @@ function calculate_duration_raw(spell_id)
 	
 	-- Job Points Buff
 	totalDuration = totalDuration + self.job_points.brd.lullaby_duration
+	if trobadour then 
+		totalDuration = totalDuration + self.job_points.brd.lullaby_duration -- adding it a second time if Troubadour up
+	end
 	
 	if clarioncall then
 		if troubadour then 
@@ -324,9 +316,6 @@ function calculate_duration_raw(spell_id)
 		totalDuration = totalDuration + self.job_points.brd.marcato_effect
 	end
 
-	if troubadour then 
-		totalDuration = totalDuration + troubMeritGain
-	end
 	-- print(totalDuration,'cc',clarioncall,'tr',troubadour,'troubGain',troubMeritGain,'mult',mult)
 
     return totalDuration

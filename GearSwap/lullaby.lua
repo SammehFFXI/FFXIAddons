@@ -28,6 +28,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ]]
 
+--Version 1.0.1 Initial Release
+--Version 1.0.2 Fix issue with misspelling troubadour 
+
 --texts = require('texts')
 res = require 'resources'
 packets = require('packets')
@@ -302,7 +305,7 @@ function calculate_duration_raw(spell_id)
 	
 	-- Job Points Buff
 	totalDuration = totalDuration + self.job_points.brd.lullaby_duration
-	if trobadour then 
+	if troubadour then 
 		totalDuration = totalDuration + self.job_points.brd.lullaby_duration -- adding it a second time if Troubadour up
 	end
 	

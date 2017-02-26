@@ -28,9 +28,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ]]
 
+--Version 1.0.1 Initial Release
+--Version 1.0.2 Fix issue with misspelling troubadour 
+
+
 _addon.name = 'sleeper'
 _addon.author = 'Sammeh'
-_addon.version = '1.0.0.1'
+_addon.version = '1.0.2'
 _addon.command = 'sleeper'
 
 
@@ -300,7 +304,7 @@ function calculate_duration_raw(spell_id)
 	
 	-- Job Points Buff
 	totalDuration = totalDuration + self.job_points.brd.lullaby_duration
-	if trobadour then 
+	if troubadour then 
 		totalDuration = totalDuration + self.job_points.brd.lullaby_duration -- adding it a second time if Troubadour up
 	end
 	

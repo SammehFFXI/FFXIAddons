@@ -30,7 +30,7 @@ function get_sets()
     -- Load and initialize the include file.
     include('Mote-Include.lua')
 	include('sammeh_custom_functions.lua')
-	--include('lullaby.lua')
+	include('lullaby.lua')
 end
 
 
@@ -345,8 +345,9 @@ function job_precast(spell, action, spellMap, eventArgs)
 		else 
 			equip(sets.precast.FastCast.BardSong)
 		end
-		if buffactive['Nightengale'] and string.find(spell.name,'Lullaby') then
-			equip({ranged="Marsyas"})
+		if buffactive.Nightingale and string.find(spell.name,'Lullaby') then
+			equip({range="Marsyas"})
+			windower.add_to_chat(8,'Marsyas Equipped - Nigtengale / Lullaby active')
 		end
 	elseif string.find(spell.name,'Cur') and spell.name ~= 'Cursna' then
 		equip(sets.precast.FastCast.Cure)
@@ -357,7 +358,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 	end
 	
 	if spell.name == 'Honor March' then
-        equip({ranged="Marsyas"})
+        equip({range="Marsyas"})
 	end
 	
 end
@@ -377,8 +378,8 @@ function job_midcast(spell, action, spellMap, eventArgs)
 	if spell.name == 'Honor March' then
         equip(sets.midcast.HonorMarch)
 	end
-	if buffactive['Nightengale'] and string.find(spell.name,'Lullaby') then
-		equip({ranged="Marsyas"})
+	if buffactive.Nightingale and string.find(spell.name,'Lullaby') then
+		equip({range="Marsyas"})
 	end
 	weathercheck(spell.element)
 end

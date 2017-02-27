@@ -483,6 +483,7 @@ function calculate_duration(spell, spellMap)
     if player.equipment.main == "Carnwenhan" then mult = mult + 0.1 end -- 0.1 for 75, 0.4 for 95, 0.5 for 99/119
     if player.equipment.main == "Legato Dagger" then mult = mult + 0.05 end
     if player.equipment.main == "Kali" then mult = mult + 0.05 end
+    if player.equipment.sub == "Kali" then mult = mult + 0.05 end
     if player.equipment.sub == "Legato Dagger" then mult = mult + 0.05 end
     if player.equipment.neck == "Aoidos' Matinee" then mult = mult + 0.1 end
 	if player.equipment.neck == "Moonbow Whistle" then mult = mult + 0.2 end 

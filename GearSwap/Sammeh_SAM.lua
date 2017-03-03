@@ -23,7 +23,7 @@ function init_gear_sets()
 	   
 	sets.engaged = {
 		ammo="Ginsen",
-		head={ name="Ryuo Somen", augments={'HP+50','Accuracy+15','Attack+15',}},
+		head="Flam. Zucchetto +1",
 		body={ name="Valorous Mail", augments={'Accuracy+22','"Store TP"+7',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
 		legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
@@ -38,7 +38,7 @@ function init_gear_sets()
 	}
 	sets.ws = {
 		ammo="Knobkierrie",
-	    head={ name="Valorous Mask", augments={'Weapon skill damage +5%','AGI+7','Accuracy+15','Attack+10',}},
+	    head={ name="Valorous Mask", augments={'Accuracy+18 Attack+18','Weapon skill damage +3%','STR+9','Accuracy+1',}},
 		body={ name="Valorous Mail", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','DEX+6','Accuracy+1','Attack+13',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+23 Attack+23','Weapon skill damage +3%','VIT+8','Accuracy+2','Attack+12',}},
 		legs="Hiza. Hizayoroi +1",
@@ -48,7 +48,7 @@ function init_gear_sets()
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
-		right_ring="Rajas Ring",
+		right_ring="Ilabrat Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
 	}
 	
@@ -86,6 +86,7 @@ function init_gear_sets()
 	}
 	sets.Idle.Current = sets.Idle
     sets.Resting = sets.Idle
+	sets.dt = sets.Idle
 	
 	sets.WakeSleep = {head="Frenzy Sallet"}
 
@@ -113,6 +114,18 @@ function job_precast(spell)
         equip(sets.precast.FastCast)
     end
 end
+
+
+function job_post_precast(spell)
+	if player.tp < 2250 and spell.type == 'WeaponSkill' and player.equipment.main == "Dojikiri Yasutsuna" then
+		equip({left_ear="Moonshade Earring"})
+		windower.add_to_chat(10,"Adding in Moonshade Earring for more TP:"..player.tp)
+	elseif player.tp < 2750 and spell.type == 'WeaponSkill' then
+		windower.add_to_chat(10,"Adding in Moonshade Earring for more TP:"..player.tp)
+		equip({left_ear="Moonshade Earring"})
+	end
+end
+
 
 function job_post_midcast(spell)
     if spell.name == 'Utsusemi: Ichi' then

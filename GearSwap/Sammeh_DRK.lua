@@ -8,8 +8,10 @@ end
 function user_setup()
 	state.IdleMode:options('Normal','Reraise')
 	send_command('bind f10 gs c cycle IdleMode')
+	send_command('bind f7 gs c turnaround')
 	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','ACC','Reraise','DT'}
     select_default_macro_book()
+	turnmode = "turnaround"
 	
 	-- Set Common Aliases --
 	send_command("alias wsset gs equip sets.ws")
@@ -21,6 +23,16 @@ function user_setup()
 	
 end
 
+
+function turnaround()
+   add_to_chat(8,"turning around")
+   send_command('react '..turnmode)
+   if turnmode == "turnaround" then 
+      turnmode = "facemob"
+   else
+      turnmode = "turnaround"
+   end
+end
 	
 function init_gear_sets()
 	sets.dt = {
@@ -218,8 +230,30 @@ function job_buff_change(status,gain_or_loss)
    end
  end
 
- function job_self_command(command)
-
+hpsets = {}
+ 
+function job_self_command(cmdParams, eventArgs)
+	if cmdParams[1]:lower() == 'list' then
+		for set,tableset in pairs(sets) do
+			if type(tableset) == 'table' then 
+				print(set)
+				--equip(tableset)
+				send_command("gs equip sets."..set)
+				gearswap.refresh_player()
+				print(player.hp)
+				hpsets[set] = player.hp
+				--(need to sleep here)
+			end
+		end
+		--[[
+		for set,hp in pairs(hpsets) do
+			print(set,hp)
+		end
+		]]
+	end
+	if cmdParams[1]:lower() == 'turnaround' then
+		turnaround()
+	end
 end
 
 

@@ -1,0 +1,17 @@
+sets.exported={
+    main="Aeneas",
+    sub="Genmei Shield",
+    range={ name="Linos", augments={'Accuracy+14','Sklchn.dmg.+4%','Quadruple Attack +2',}},
+    head="Aya. Zucchetto +1",
+    body="Ashera Harness",
+    hands="Aya. Manopolas +1",
+    legs="Jokushu Haidate",
+    feet="Aya. Gambieras +1",
+    neck="Combatant's Torque",
+    waist="Reiki Yotai",
+    left_ear="Telos Earring",
+    right_ear="Cessance Earring",
+    left_ring="Ilabrat Ring",
+    right_ring="Hetairoi Ring",
+    back="Agema Cape",
+}

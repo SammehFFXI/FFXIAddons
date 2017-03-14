@@ -1,0 +1,17 @@
+sets.exported={
+    main="Heishi Shorinken",
+    sub={ name="Ochu", augments={'STR+10','DEX+10','Ninjutsu skill +10','DMG:+15',}},
+    ammo="Pemphredo Tathlum",
+    head={ name="Herculean Helm", augments={'Magic burst dmg.+7%','Mag. Acc.+11','"Mag.Atk.Bns."+9',}},
+    body={ name="Samnuha Coat", augments={'Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+5','"Dual Wield"+5',}},
+    hands={ name="Herculean Gloves", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic burst dmg.+5%','INT+5','Mag. Acc.+15',}},
+    legs={ name="Herculean Trousers", augments={'Mag. Acc.+23','Magic burst dmg.+6%','MND+3','"Mag.Atk.Bns."+15',}},
+    feet={ name="Herculean Boots", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','"Fast Cast"+1','MND+10','Mag. Acc.+6','"Mag.Atk.Bns."+11',}},
+    neck="Sanctity Necklace",
+    waist="Eschan Stone",
+    left_ear="Digni. Earring",
+    right_ear="Static Earring",
+    left_ring="Mujin Band",
+    right_ring="Locus Ring",
+    back={ name="Andartia's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},
+}

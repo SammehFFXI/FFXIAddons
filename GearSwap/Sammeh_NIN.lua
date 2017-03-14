@@ -173,10 +173,10 @@ function init_gear_sets()
 
 	sets.midcast.ElementalNinjutsu = {
     ammo="Pemphredo Tathlum",  -- 8macc
-    head={ name="Herculean Helm", augments={'Magic burst mdg.+7%','Mag. Acc.+11','"Mag.Atk.Bns."+9',}},  --mb7  --11 macc
+    head={ name="Herculean Helm", augments={'Magic burst dmg.+7%','Mag. Acc.+11','"Mag.Atk.Bns."+9',}}, --mb7  --11 macc
     body={ name="Samnuha Coat", augments={'Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+5','"Dual Wield"+5',}}, --mb8 (2)  -- 28 macc
-    hands={ name="Herculean Gloves", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic burst mdg.+5%','INT+5','Mag. Acc.+15',}}, --mb5 --35 macc
-    legs={ name="Herculean Trousers", augments={'Mag. Acc.+23','Magic burst mdg.+6%','MND+3','"Mag.Atk.Bns."+15',}}, --mb6  --23 macc
+    hands={ name="Herculean Gloves", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic burst dmg.+5%','INT+5','Mag. Acc.+15',}}, --mb5 --35 macc
+    legs={ name="Herculean Trousers", augments={'Mag. Acc.+23','Magic burst dmg.+6%','MND+3','"Mag.Atk.Bns."+15',}}, --mb6  --23 macc
     feet={ name="Herculean Boots", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','"Fast Cast"+1','MND+10','Mag. Acc.+6','"Mag.Atk.Bns."+11',}}, -- 36macc
     neck="Sanctity Necklace", -- 10macc
     waist="Eschan Stone", --15macc 

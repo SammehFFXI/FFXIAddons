@@ -37,11 +37,13 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
     state.ExtraSongsMode = M{['description']='Extra Songs', 'None', 'FullLength', 'Dummy'}
+	state.LullabyMode = M{['description']='Lullaby Mode','Gjallarhorn','Daurdabla'}
     state.Buff['Pianissimo'] = buffactive['pianissimo'] or false
 	state.IdleMode:options('Normal','PDT','MEVA')
 	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock'}
 	send_command('alias tp gs c cycle tpmode')
 	send_command('bind f10 gs c cycle idlemode')
+	send_command('bind f11 gs c cycle LullabyMode')
 	send_command("alias buff gs equip sets.midcast.SongEffect")
     send_command("alias debuff gs equip sets.midcast.SongDebuff")
 	send_command("alias macc gs equip sets.midcast.ResistantSongDebuff")
@@ -49,6 +51,7 @@ function job_setup()
 	send_command("alias fc gs equip sets.precast.FastCast.BardSong")
 	send_command("alias idle gs equip sets.Idle.Current")
 	send_command("alias meva gs equip sets.meva")
+	send_command("alias eng gs equip sets.engaged")
 	    -- For tracking current recast timers via the Timers plugin.
     custom_timers = {}
 end
@@ -63,7 +66,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     
     -- Adjust this if using the Terpander (new +song instrument)
-    info.ExtraSongInstrument = 'Terpander'
+    info.ExtraSongInstrument = 'Daurdabla'
     -- How many extra songs we can keep from Daurdabla/Terpander
     info.ExtraSongs = 1
 	
@@ -71,7 +74,7 @@ function user_setup()
 	MaxJobPoints = 1
     
     -- Set this to false if you don't want to use custom timers.
-    state.UseCustomTimers = M(false, 'Use Custom Timers')
+    state.UseCustomv = M(false, 'Use Custom Timers')
     
     -- Additional local binds
     send_command('bind ^` gs c cycle ExtraSongsMode')
@@ -150,9 +153,9 @@ function init_gear_sets()
 		body="Shango Robe",hands="Gende. Gages +1",ring1="Kishar Ring",ring2="Weather. Ring",
 		back="Intarabus's Cape",waist="Witful Belt",}
         
-    -- Gear to enhance certain classes of songs.  No instruments added here since Linos is being used.
+    -- Gear to enhance certain classes of songs. 
     sets.midcast.Ballad = {legs="Fili Rhingrave +1"}
-    sets.midcast.Lullaby = {hands="Brioso Cuffs +2"}
+    sets.midcast.Lullaby = {hands="Brioso Cuffs +3"}
     sets.midcast.Madrigal = {head="Fili Calot +1",back="Intarabus's Cape"}
 	sets.midcast.Prelude = {back="Intarabus's Cape"}
     sets.midcast.March = {hands="Fili Manchettes +1"}
@@ -266,7 +269,7 @@ function init_gear_sets()
     sets.latent_refresh = {waist="Fucho-no-obi"}
 
     -- Engaged sets
---[[
+	--[[
 	sets.engaged = {
 	  range={ name="Linos", augments={'Accuracy+14','Sklchn.dmg.+4%','Quadruple Attack +2',}},
 	  body="Onca Suit", head="Alhazen Hat +1",waist="Grunfeld Rope",Ear1="Dignitary's Earring",ear2="Cessance Earring",
@@ -274,10 +277,11 @@ function init_gear_sets()
 	}
 	]]
 	sets.engaged = {
-	    head="Alhazen Hat +1",
-		body="Ayanmo Corazza +1",
+		range={ name="Linos", augments={'Accuracy+14','Sklchn.dmg.+4%','Quadruple Attack +2',}},
+	    head="Ayanmo Zucchetto +1",
+		body="Ashera Harness",
 		hands="Aya. Manopolas +1",
-		legs="Inyanga Shalwar +1",
+		legs="Jokushu Haidate",
 		feet="Aya. Gambieras +1",
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",
@@ -361,6 +365,10 @@ function job_precast(spell, action, spellMap, eventArgs)
         equip({range="Marsyas"})
 	end
 	
+	if string.find(spell.name,'Horde') and state.LullabyMode == 'Daurdabla' then 
+		equip({range="Daurdabla"})
+	end
+	
 end
 
 
@@ -396,9 +404,11 @@ end
 function job_aftercast(spell, action, spellMap, eventArgs)
 	aftercast_start = os.clock()
 	
+	local generalClass = get_song_class(spell)
     if spell.type == 'BardSong' and not spell.interrupted then
         -- if spell.target and spell.target.type == 'SELF' then
-		if spell.target.type ~= 'SELF' and spell.name ~= "Magic Finale" then   -- (Only using Custom Timers for debuffs; no huge reason for buffs)
+		-- if spell.target.type ~= 'SELF' and spell.name ~= "Magic Finale" then   -- (Only using Custom Timers for debuffs; no huge reason for buffs)
+		if spell.name ~= "Magic Finale" and generalClass == "SongDebuff" then   -- (Only using Custom Timers for debuffs; no huge reason for buffs)
             --adjust_timers(spell, spellMap)
 			local dur = calculate_duration(spell, spellMap)
 			send_command('timers create "'..spell.target.name..':'..spell.name..'" '..dur..' down')
@@ -439,7 +449,6 @@ end
 -- Handle notifications of general user state change.
 function job_state_change(stateField, newValue, oldValue)
     job_handle_equipping_gear(player.status)
-	equip(sets.Idle.Current)
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -502,6 +511,7 @@ function calculate_duration(spell, spellMap)
     if spellMap == 'Ballad' and player.equipment.legs == "Fili Rhingrave +1" then mult = mult + 0.1 end
 	if spellMap == 'Lullaby' and player.equipment.hands == 'Brioso Cuffs +1' then mult = mult + 0.1 end
 	if spellMap == 'Lullaby' and player.equipment.hands == 'Brioso Cuffs +2' then mult = mult + 0.1 end
+	if spellMap == 'Lullaby' and player.equipment.hands == 'Brioso Cuffs +3' then mult = mult + 0.2 end
     if spell.name == "Sentinel's Scherzo" and player.equipment.feet == "Fili Cothurnes +1" then mult = mult + 0.1 end
 	if MaxJobPoints == 1 then
 		mult = mult + 0.05
@@ -605,6 +615,9 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	else
 		sets.Idle.Current = sets.Idle.Main
 	end
+	if playerStatus == 'Idle' then
+        equip(sets.Idle.Current)
+    end
 end
 
 -- Select default macro book on initial load or subjob change.

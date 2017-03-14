@@ -50,7 +50,7 @@ function init_gear_sets()
 	-- Precast Section
 	FC_ranged=""
 	FC_ammo="Incantor Stone"
-	FC_head={ name="Jumalik Helm", augments={'MND+7','"Mag.Atk.Bns."+12','Magic burst mdg.+7%',}}
+	FC_head={ name="Jumalik Helm", augments={'MND+7','"Mag.Atk.Bns."+12','Magic burst dmg.+7%',}}
 	FC_neck="Voltsurge Torque"
 	FC_ear1="Loquacious earring"
 	FC_ear2="Enchntr. Earring +1"

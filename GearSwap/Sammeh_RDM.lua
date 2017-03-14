@@ -206,7 +206,7 @@ function init_gear_sets()
     ---  MIDCAST SETS  ---
     sets.midcast = {}
 	sets.midcast['Elemental Magic'] = {
-		main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+		main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
 		sub="Niobid Strap",
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
@@ -224,7 +224,7 @@ function init_gear_sets()
 	}
 	sets.midcast['Elemental Magic'].MACC = set_combine(sets.midcast['Elemental Magic'], {})
 	sets.midcast['Elemental Magic'].StoreTP = {
-	    main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+	    main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
 		sub="Niobid Strap",
 		ammo="Pemphredo Tathlum",
 		head={ name="Helios Band", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','"Occult Acumen"+7','Mag. crit. hit dmg. +10%',}},
@@ -240,11 +240,11 @@ function init_gear_sets()
 		right_ring="Rajas Ring",
 	}
 	sets.midcast['Elemental Magic'].MagicBurst = {
-	    main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+	    main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
 		sub="Niobid Strap",
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
-		body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst mdg.+11%','VIT+8','Mag. Acc.+14',}},
+		body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst dmg.+11%','VIT+8','Mag. Acc.+14',}},
 		hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
 		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','CHR+2','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
@@ -277,7 +277,7 @@ function init_gear_sets()
 		waist="Luminary Sash"
 	})    
     sets.midcast['Enfeebling Magic'] = {
-		main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+		main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
@@ -294,7 +294,7 @@ function init_gear_sets()
 		--back="",
     }
 	sets.midcast['Enfeebling Magic'].MACC = {
-	    main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+	    main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
 		sub="Clerisy Strap +1",
 		ammo="Savant's Treatise",
 		head={ name="Chironic Hat", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Cure" spellcasting time -3%','INT+1','Mag. Acc.+14',}},
@@ -365,7 +365,7 @@ function init_gear_sets()
     ---  AFTERCAST SETS  ---
     sets.Idle = {}
 	sets.Idle.Main = {
-		main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+		main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
 		sub="Clerisy Strap +1",
 		ammo="Homiliary",
 		head="Befouled Crown",

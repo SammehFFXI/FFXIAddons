@@ -171,7 +171,7 @@ function init_gear_sets()
     ---  MIDCAST SETS  ---
     sets.midcast = {}
 	sets.midcast['Elemental Magic'] = {
-		main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+		main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
 		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
@@ -188,9 +188,6 @@ function init_gear_sets()
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 	}
 	sets.midcast['Elemental Magic'].MACC = set_combine(sets.midcast['Elemental Magic'], {
-		main={ name="Coeus", augments={'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
-		--sub="Clerisy Strap +1",
-		sub="Enki Strap",
 		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
 		neck="Incanter's Torque",
@@ -199,8 +196,8 @@ function init_gear_sets()
 	})
 	
 	sets.midcast['Elemental Magic'].StoreTP = {
-	    main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
-		sub="Niobid Strap",
+	    main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+		sub="Enki Strap",
 		ammo="Seraphic Ampulla",
 		head={ name="Helios Band", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','"Occult Acumen"+7','Mag. crit. hit dmg. +10%',}},
 		body="Seidr Cotehardie",
@@ -218,10 +215,10 @@ function init_gear_sets()
 	
 	sets.midcast['Elemental Magic'].MagicBurst = {
 	    main={ name="Akademos", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
-		sub="Niobid Strap",
+		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
-		body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst mdg.+11%','VIT+8','Mag. Acc.+14',}},
+		body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst dmg.+11%','VIT+8','Mag. Acc.+14',}},
 		hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
 		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','CHR+2','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
@@ -241,7 +238,7 @@ function init_gear_sets()
 	sets.midcast.Helix.MagicBurst = sets.midcast['Elemental Magic'].MagicBurst
     sets.midcast['Dark Magic'] = {
 	    main={ name="Rubicundity", augments={'Mag. Acc.+10','"Mag.Atk.Bns."+10','Dark magic skill +10','"Conserve MP"+7',}},
-		sub="Culminus",
+		sub="Ammurapi Shield",
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
 		body="Shango Robe",
@@ -339,7 +336,7 @@ function init_gear_sets()
 	
 	-- regen defaults to Duration, Can swap to potency
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
-		main={ name="Coeus", augments={'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
+		main="Oranyan",
 		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
 		back={ name="Lugh's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10',}},
@@ -452,7 +449,7 @@ function job_post_midcast(spell)
 			  equip(sets.midcast.Helix.MACC)
 			elseif state.CastingMode.value == "MagicBurst" then
 			 if player.equipment.main == 'Khatvanga' then
-			   equip(sets.midcast.Helix.MagicBurst,{feet={name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst mdg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}})
+			   equip(sets.midcast.Helix.MagicBurst,{feet={name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}})
 			 else 
 	           equip(sets.midcast.Helix.MagicBurst)
 			 end
@@ -469,7 +466,7 @@ function job_post_midcast(spell)
 	        equip(sets.midcast['Elemental Magic'].StoreTP)
 			elseif state.CastingMode.value == "MagicBurst" then
 			 if player.equipment.main == 'Khatvanga' then
-			   equip(sets.midcast['Elemental Magic'].MagicBurst,{feet={name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst mdg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}})
+			   equip(sets.midcast['Elemental Magic'].MagicBurst,{feet={name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}})
 			 else 
 	           equip(sets.midcast['Elemental Magic'].MagicBurst)
 			 end

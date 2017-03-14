@@ -41,7 +41,7 @@ end
 function init_gear_sets()
 
 	-- Weapon Locks used for TP Mode.  When WeaponLock is set - it locks in the following Main and SUB. 
-	weaponlock_main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}
+	weaponlock_main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}
 	--weaponlock_main="Khatvanga"
 	weaponlock_sub="Niobid Strap"
 
@@ -72,7 +72,7 @@ function init_gear_sets()
 
 	
 	sets.precast.FastCast = {
-	    --main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+	    --main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
 		main="Oranyan",
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
@@ -163,7 +163,7 @@ function init_gear_sets()
 		back={ name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},
 	}
 	sets.midcast['Elemental Magic'].MACC = set_combine(sets.midcast['Elemental Magic'], {
-		main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+		main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
 		sub="Enki Strap",
 		left_ear="Hermetic Earring",
 		neck="Incanter's Torque",
@@ -181,14 +181,14 @@ function init_gear_sets()
 	})
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'].Main, {head=empty,body="Twilight Cloak",ring1="K'ayres Ring",ring2="Rajas Ring",neck="Combatant's Torque"})
 	sets.midcast['Elemental Magic'].MagicBurst = set_combine(sets.midcast['Elemental Magic'].Main, {
-		main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},   -- 6
+		main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},   -- 6
 		hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},  -- 5(over cap)
-		body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst mdg.+11%','VIT+8','Mag. Acc.+14',}}, -- 11
+		body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst dmg.+11%','VIT+8','Mag. Acc.+14',}}, -- 11
 		neck="Mizu. Kubikazari", -- 10
 		left_ring="Locus Ring", -- 5 
 		right_ring="Mujin Band", -- 5 (over cap)
 		right_ear="Static Earring",  -- 5 
-		-- feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst mdg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},  -- 7
+		-- feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},  -- 7
 	}) -- Back adds 5, that gives +52
     sets.midcast['Dark Magic'] = {
 	    main={ name="Rubicundity", augments={'Mag. Acc.+10','"Mag.Atk.Bns."+10','Dark magic skill +10','"Conserve MP"+7',}},
@@ -356,7 +356,7 @@ function job_post_midcast(spell)
 	     equip(sets.midcast['Elemental Magic'].StoreTP)
 		elseif state.CastingMode.value == "MagicBurst" then
 		 if player.equipment.main == 'Khatvanga' then
-		   equip(sets.midcast['Elemental Magic'].MagicBurst,{feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst mdg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},})
+		   equip(sets.midcast['Elemental Magic'].MagicBurst,{feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},})
 		 else 
 	       equip(sets.midcast['Elemental Magic'].MagicBurst)
 		 end
@@ -550,7 +550,7 @@ end
 	-- lose 4 DT from pdt set; so combined: 16+34pdt, 16+21mdt, 16bdt
 	
 	-- Precast Section
-	FC_main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}
+	FC_main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}
 	FC_sub="Clerisy Strap +1"
 	FC_ranged=""
 	FC_ammo="Pemphredo Tathlum"
@@ -638,7 +638,7 @@ end
 	ele_legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','CHR+2','Mag. Acc.+14','"Mag.Atk.Bns."+15',}}
 	ele_feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}}
 		
-	ele_macc_main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}
+	ele_macc_main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}
 	ele_macc_sub="Clerisy Strap +1"
 	ele_macc_ear1="Hermetic Earring"
 	ele_macc_neck="Incanter's Torque"
@@ -652,15 +652,15 @@ end
 	ele_storetp_feet="Helios Boots"
 	ele_storetp_body="Seidr Cotehardie"
 			
-    ele_burst_main={ name="Grioavolr", augments={'Magic burst mdg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}    -- 6 -- 
+    ele_burst_main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}    -- 6 -- 
 	ele_burst_hands="Amalric Gages" -- 5 over cap --
 	ele_burst_neck="Mizu. Kubikazari" -- 10 --
 	ele_burst_ring1="Locus Ring"  -- 5 -- 
 	ele_burst_ring2="Mujin Band"  -- 5 -- over cap --
 	ele_burst_ear2="Static Earring" -- 5 --
-	ele_burst_body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst mdg.+11%','VIT+8','Mag. Acc.+14',}} -- 11 --
+	ele_burst_body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst dmg.+11%','VIT+8','Mag. Acc.+14',}} -- 11 --
 	ele_burst_legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','CHR+2','Mag. Acc.+14','"Mag.Atk.Bns."+15',}}
-	ele_burst_feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst mdg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}  -- 7 -- 
+	ele_burst_feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}  -- 7 -- 
 	-- 52 --   (if Khatvanga is locked on - swap burst legs and earring
 
 	dark_main="Rubicundity"

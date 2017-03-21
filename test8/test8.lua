@@ -104,8 +104,8 @@ end
 windower.register_event('incoming chunk',function(id,data,modified,injected,blocked)
 
 	if id == 0x034 or id == 0x032 then
-
-		if busy == true and pkt then
+		local p = packets.parse('incoming',data)
+		if busy and pkt and p['Menu ID'] == pkt['Menu ID'] then
 			local packet = packets.new('outgoing', 0x05B)
 			packet["Target"]=pkt['Target']
 			packet["Option Index"]=pkt['Option Index']
@@ -120,11 +120,11 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 		busy = false
 		pkt = {}
 		return true
+		else 
+			busy = false
+			pkt = {}
 		end
-
+		
 	end
-
-
-
 end)
 

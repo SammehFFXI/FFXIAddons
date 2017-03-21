@@ -1,0 +1,17 @@
+sets.exported={
+    main="Heishi Shorinken",
+    sub={ name="Ochu", augments={'STR+10','DEX+10','Ninjutsu skill +10','DMG:+15',}},
+    ammo="Pemphredo Tathlum",
+    head={ name="Ryuo Somen", augments={'HP+50','Accuracy+15','Attack+15',}},
+    body={ name="Adhemar Jacket", augments={'DEX+10','AGI+10','Accuracy+15',}},
+    hands={ name="Herculean Gloves", augments={'Attack+4','"Triple Atk."+4','DEX+1','Accuracy+14',}},
+    legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
+    feet={ name="Herculean Boots", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','STR+11','Quadruple Attack +2','Accuracy+18 Attack+18',}},
+    neck="Moonbeam Nodowa",
+    waist="Reiki Yotai",
+    left_ear="Telos Earring",
+    right_ear="Suppanomimi",
+    left_ring="Epona's Ring",
+    right_ring="Hetairoi Ring",
+    back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
+}

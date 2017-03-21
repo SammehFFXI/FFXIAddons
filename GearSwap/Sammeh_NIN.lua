@@ -23,9 +23,9 @@ function job_setup()
 	gear.MovementFeet = {name="Danzo Sune-ate"}
 	gear.DayFeet = "Danzo Sune-ate"
 	gear.NightFeet = "Hachiya Kyahan"
-	gear.AccAmmo = {name="Togakushi Shuriken"}
-	gear.AccAmmoDay = "Togakushi Shuriken"
-	gear.AccAmmoNight = "Togakushi Shuriken"
+	gear.AccAmmo = {name="Seki Shuriken"}
+	gear.AccAmmoDay = "Seki Shuriken"
+	gear.AccAmmoNight = "Seki Shuriken"
     gear.ElementalObi = {name="Hachirin-no-Obi"}
 	gear.default.obi_waist = "Eschan Stone"
 	
@@ -210,13 +210,13 @@ function init_gear_sets()
 	sets.resting = {}
 	
 	-- Idle sets
-	sets.idle = set_combine(sets.engaged, {body="Hiza. Haramaki +1",neck="Loricate Torque +1",ring1="Dark Ring",ring2="Defending Ring",waist="Flume Belt +1",back="Solemnity Cape",feet=gear.MovementFeet,ear1="Odnowa Earring +1",ear2="Genmei Earring",head="Alhazen Hat +1",ammo=gear.AccAmmo})
+	sets.idle = set_combine(sets.engaged, {head={ name="Herculean Helm", augments={'Mag. Acc.+15 "Mag.Atk.Bns."+15','Damage taken-3%','Mag. Acc.+8',}},body="Hiza. Haramaki +1",neck="Loricate Torque +1",ring1="Dark Ring",ring2="Defending Ring",waist="Flume Belt +1",back="Solemnity Cape",feet=gear.MovementFeet,ear1="Odnowa Earring +1",ear2="Genmei Earring",ammo=gear.AccAmmo})
 	sets.Idle = {}
 	sets.Idle.Current = sets.idle
 	
 	sets.dt = {
-	    head="Alhazen Hat +1",
-		body="Hiza. Haramaki +1",
+	    head={ name="Herculean Helm", augments={'Mag. Acc.+15 "Mag.Atk.Bns."+15','Damage taken-3%','Mag. Acc.+8',}},
+		body="Ashera Harness",
 		hands={ name="Herculean Gloves", augments={'Attack+4','"Triple Atk."+4','DEX+1','Accuracy+14',}},
 		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
 		feet="Ahosi Leggings",
@@ -277,10 +277,10 @@ function init_gear_sets()
       ammo=gear.AccAmmo,
 	head="Ryuo Somen",
     body={ name="Adhemar Jacket", augments={'DEX+10','AGI+10','Accuracy+15',}},
-    hands={ name="Herculean Gloves", augments={'Attack+4','"Triple Atk."+4','DEX+1','Accuracy+14',}},
+    hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},
     legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
     feet={ name="Herculean Boots", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','STR+11','Quadruple Attack +2','Accuracy+18 Attack+18',}},
-    neck="Combatant's Torque",
+    neck="Moonbeam Nodowa",
     waist="Reiki Yotai",
     left_ear="Telos Earring",
     right_ear="Suppanomimi",

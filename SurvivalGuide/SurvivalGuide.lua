@@ -31,13 +31,14 @@ _addon.name = 'SurvivalGuide'
 
 _addon.author = 'Sammeh'
 
-_addon.version = '1.0.3'
+_addon.version = '1.0.4'
 
 _addon.command = 'sg'
 
 -- 1.0.1 - Fixed issue with prematurely sending packet before validating a Survival Guide in zone.
 -- 1.0.2 - Added a reset option in case npc locked.  //sg reset
 -- 1.0.3 - Added Thrifty Transit warning / Correction (Ugly)
+-- 1.0.4 - I should have just read/validated the menu ID from incoming 0x034 instead of the whole //sg free thing.
 
 require('tables')
 require('chat')
@@ -62,7 +63,6 @@ defaults = {}
 settings = config.load(defaults)
 
 busy = false
-menu = 8500 -- default value for menus unless Kupo Fried is there.  If Kupofried do //sg reset and //sg reset1 (unlock yourself)  then //sg free  to set Menu to 8501 then //sg warp
 
 windower.register_event('addon command', function(...)
 
@@ -77,12 +77,6 @@ windower.register_event('addon command', function(...)
 		if findhp == 1 then 
 			if validatehp then
 				windower.add_to_chat(10,"Warping to: "..item)
-				if menu == 8500 then
-					windower.add_to_chat(10,"Please Note: If Thrifty Transit in Scope.  Please issue a //sg reset1; then //sg free; then //sg warp "..item.." again!")
-				end
-				if menu == 8501 then
-					windower.add_to_chat(10,"Please Note: If Thrifty Transit fell Out of Scope.  Please issue a //sg reset; then //sg paid; then //sg warp "..item.." again!")
-				end
 				if not busy then
 					pkt = validate(item)
 					if pkt then
@@ -105,14 +99,6 @@ windower.register_event('addon command', function(...)
 		else
 			windower.add_to_chat(10,"No Survival Guide found.  Are you near one?")
 		end
-	elseif cmd == 'reset' then
-		reset_me()	
-	elseif cmd == 'reset1' then
-		reset_me1()	
-	elseif cmd == 'free' then
-		menu = 8501
-	elseif cmd == 'paid' then
-		menu = 8500
 	end
 end)
 
@@ -136,7 +122,6 @@ function validate(item)
 			target_index = i
 			target_id = v['id']
 			npc_name = v['name']
-			result['Menu ID'] = menu
 			
 			distance = windower.ffxi.get_mob_by_id(target_id).distance
 			windower.add_to_chat(8,'Found :'..npc_name..' Distance:'..math.sqrt(distance))
@@ -189,87 +174,56 @@ end
 windower.register_event('incoming chunk',function(id,data,modified,injected,blocked)
 
 	if id == 0x034 or id == 0x032 then
+		local p = packets.parse('incoming',data)
+	
+		if busy == true and pkt then
+			if p['Menu ID'] == 8500 or p['Menu ID'] == 8501 then
+	    
+				local packet = packets.new('outgoing', 0x05B)
 
-	 if busy == true and pkt then
+				-- request warp
+				packet["Target"]=pkt['Target']
+				packet["Option Index"]=8
+				packet["_unknown1"]=0
+				packet["Target Index"]=pkt['Target Index']
+				packet["Automated Message"]=true
+				packet["_unknown2"]=0
+				packet["Zone"]=pkt['Zone']
+				packet["Menu ID"]=p['Menu ID']
+				packets.inject(packet)
 
-		local packet = packets.new('outgoing', 0x05B)
-
-		-- request warp
-		packet["Target"]=pkt['Target']
-		packet["Option Index"]=8
-		packet["_unknown1"]=0
-		packet["Target Index"]=pkt['Target Index']
-		packet["Automated Message"]=true
-		packet["_unknown2"]=0
-		packet["Zone"]=pkt['Zone']
-		packet["Menu ID"]=pkt['Menu ID']
-		packets.inject(packet)
-
-		packet["Target"]=pkt['Target']
-		packet["Option Index"]=pkt['Option Index']
-		packet["_unknown1"]=pkt['_unknown1']
-		packet["Target Index"]=pkt['Target Index']
-		packet["Automated Message"]=true
-		packet["_unknown2"]=0
-		packet["Zone"]=pkt['Zone']
-		packet["Menu ID"]=pkt['Menu ID']
-		packets.inject(packet)
+				packet["Target"]=pkt['Target']
+				packet["Option Index"]=pkt['Option Index']
+				packet["_unknown1"]=pkt['_unknown1']
+				packet["Target Index"]=pkt['Target Index']
+				packet["Automated Message"]=true
+				packet["_unknown2"]=0
+				packet["Zone"]=pkt['Zone']
+				packet["Menu ID"]=p['Menu ID']
+				packets.inject(packet)
 		
-		-- send exit menu
-		packet["Target"]=pkt['Target']
-		packet["Option Index"]=pkt['Option Index']
-		packet["_unknown1"]=pkt['_unknown1']
-		packet["Target Index"]=pkt['Target Index']
-		packet["Automated Message"]=false
-		packet["_unknown2"]=0
-		packet["Zone"]=pkt['Zone']
-		packet["Menu ID"]=pkt['Menu ID']
-		packets.inject(packet)
+				-- send exit menu
+				packet["Target"]=pkt['Target']
+				packet["Option Index"]=pkt['Option Index']
+				packet["_unknown1"]=pkt['_unknown1']
+				packet["Target Index"]=pkt['Target Index']
+				packet["Automated Message"]=false
+				packet["_unknown2"]=0
+				packet["Zone"]=pkt['Zone']
+				packet["Menu ID"]=p['Menu ID']
+				packets.inject(packet)
 
-		local packet = packets.new('outgoing', 0x016, {
-		["Target Index"]=pkt['me'],
-		})
-
-		packets.inject(packet)
-
-		busy = false
-		
-		lastpkt = pkt
-
-		pkt = {}
-
-		return true
-
+				busy = false
+				pkt = {}
+				return true
+			else
+				busy = false
+				windower.add_to_chat(10,"Packet Inspection for Survival Guide Did not return Proper Menu")
+			end
 		end
 	end
 
 end)
-
-function reset_me()
-		local packet = packets.new('outgoing', 0x05B)
-		packet["Target"]=lastpkt['Target']
-		packet["Option Index"]=lastpkt['Option Index']
-		packet["_unknown1"]="16384"
-		packet["Target Index"]=lastpkt['Target Index']
-		packet["Automated Message"]=false
-		packet["_unknown2"]=0
-		packet["Zone"]=lastpkt['Zone']
-		packet["Menu ID"]=8500
-		packets.inject(packet)
-end
-
-function reset_me1()
-		local packet = packets.new('outgoing', 0x05B)
-		packet["Target"]=lastpkt['Target']
-		packet["Option Index"]=lastpkt['Option Index']
-		packet["_unknown1"]="16384"
-		packet["Target Index"]=lastpkt['Target Index']
-		packet["Automated Message"]=false
-		packet["_unknown2"]=0
-		packet["Zone"]=lastpkt['Zone']
-		packet["Menu ID"]=8501
-		packets.inject(packet)
-end
 
 function poke_npc(npc,target_index)
 	if npc and target_index then

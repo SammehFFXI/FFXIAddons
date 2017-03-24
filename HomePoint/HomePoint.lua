@@ -32,7 +32,7 @@ _addon.name = 'HomePoint'
 
 _addon.author = 'Sammeh'
 
-_addon.version = '1.0.7'
+_addon.version = '1.0.8'
 
 _addon.command = 'hp'
 
@@ -43,6 +43,7 @@ _addon.command = 'hp'
 -- 1.0.5 - fix homepoint name of Marjami Ravine to "Marjami Ravine 1"
 -- 1.0.6 - Added a reset option - which will reset a locked NPC transaction.
 -- 1.0.7 - Added //hp set  to set HomePoint to closest hp.
+-- 1.0.8 - Adding some data validation to help prevent locked NPC transactions.
 
 -- Usage  //hp warp <Location> <# of HomePoint>   
 -- Examples:  //hp warp Mhaura 1
@@ -219,9 +220,12 @@ end
 windower.register_event('incoming chunk',function(id,data,modified,injected,blocked)
 
 	if id == 0x034 or id == 0x032 then
-
+	local p = packets.parse('incoming',data)
+	
 	 if busy == true and pkt then
-
+		
+		if p['Menu ID'] == 8700 or p['Menu ID'] == 8701 or p['Menu ID'] == 8702 or p['Menu ID'] == 8703 or p['Menu ID'] == 8704 then
+	    
 		local packet = packets.new('outgoing', 0x05B)
 		
 		if hpset == 1 then 
@@ -233,7 +237,7 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 			packet["Automated Message"]=true
 			packet["_unknown2"]=0
 			packet["Zone"]=pkt['Zone']
-			packet["Menu ID"]=pkt['Menu ID']
+			packet["Menu ID"]=p['Menu ID']
 			packets.inject(packet)
 			
 			packet["Target"]=pkt['Target']
@@ -243,7 +247,7 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 			packet["Automated Message"]=false
 			packet["_unknown2"]=0
 			packet["Zone"]=pkt['Zone']
-			packet["Menu ID"]=pkt['Menu ID']
+			packet["Menu ID"]=p['Menu ID']
 			packets.inject(packet)
 			
 		else 
@@ -255,7 +259,7 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 			packet["Automated Message"]=true
 			packet["_unknown2"]=0
 			packet["Zone"]=pkt['Zone']
-			packet["Menu ID"]=pkt['Menu ID']
+			packet["Menu ID"]=p['Menu ID']
 			packets.inject(packet)
 
 			packet["Target"]=pkt['Target']
@@ -265,7 +269,7 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 			packet["Automated Message"]=true
 			packet["_unknown2"]=0
 			packet["Zone"]=pkt['Zone']
-			packet["Menu ID"]=pkt['Menu ID']
+			packet["Menu ID"]=p['Menu ID']
 			packets.inject(packet)
 		
 			packet["Target"]=pkt['Target']
@@ -275,38 +279,24 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 			packet["Automated Message"]=false
 			packet["_unknown2"]=0
 			packet["Zone"]=pkt['Zone']
-			packet["Menu ID"]=pkt['Menu ID']
+			packet["Menu ID"]=p['Menu ID']
 			packets.inject(packet)
 		end
-		local packet = packets.new('outgoing', 0x016, {
-			["Target Index"]=pkt['me'],
-		})
-		packets.inject(packet)
+		
 		busy = false
 		
-		lastpkt = pkt
-
 		pkt = {}
 
 		return true
 
+		else 
+			busy = false
+			windower.add_to_chat(10,"Packet Inspection for HP Did not return Proper Menu - Exiting")
 		end
 	end
-
+	end
 end)
 
-function reset_me()
-		local packet = packets.new('outgoing', 0x05B)
-		packet["Target"]=lastpkt['Target']
-		packet["Option Index"]=lastpkt['Option Index']
-		packet["_unknown1"]="16384"
-		packet["Target Index"]=lastpkt['Target Index']
-		packet["Automated Message"]=false
-		packet["_unknown2"]=0
-		packet["Zone"]=lastpkt['Zone']
-		packet["Menu ID"]=lastpkt['Menu ID']
-		packets.inject(packet)
-end
 
 
 function poke_npc(npc,target_index)

@@ -19,8 +19,6 @@
     /console gs c set ExtraSongsMode Dummy
     /ma "Shining Fantasia" <me>
     
-    To use a Terpander rather than Daurdabla, set the info.ExtraSongInstrument variable to
-    'Terpander', and info.ExtraSongs to 1.
 --]]
 
 -- Initialization function for this job file.
@@ -52,6 +50,7 @@ function job_setup()
 	send_command("alias idle gs equip sets.Idle.Current")
 	send_command("alias meva gs equip sets.meva")
 	send_command("alias eng gs equip sets.engaged")
+	send_command("alias wsset gs equip sets.precast.WS")
 	    -- For tracking current recast timers via the Timers plugin.
     custom_timers = {}
 end
@@ -68,7 +67,8 @@ function user_setup()
     -- Adjust this if using the Terpander (new +song instrument)
     info.ExtraSongInstrument = 'Daurdabla'
     -- How many extra songs we can keep from Daurdabla/Terpander
-    info.ExtraSongs = 1
+    
+	info.MaxSongs = 4
 	
 	-- If Max Job Points - adds alot of timers to the custom timers
 	MaxJobPoints = 1
@@ -189,20 +189,20 @@ function init_gear_sets()
     sets.midcast.SongEffect = {main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
         head="Fili Calot +1",body="Fili Hongreline +1",neck="Moonbow Whistle",ear1="Aoidos' Earring",ear2="Loquac. Earring",
         hands="Gendewitha Gages +1",ring1="Stikini Ring",ring2="Weather. Ring",
-        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Inyanga Shalwar +1",feet="Brioso Slippers +2",}
+        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Inyanga Shalwar +1",feet="Brioso Slippers +3",}
 
     -- For song defbuffs (duration primary, accuracy secondary)
     sets.midcast.SongDebuff = {
 	    main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
         head="Brioso Roundlet +2",neck="Moonbow Whistle",ear1="Digni. Earring",ear2="Enchntr. Earring +1",
         body="Fili Hongreline +1",hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
-        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Inyanga Shalwar +1",feet="Brioso Slippers +2"}
+        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Inyanga Shalwar +1",feet="Brioso Slippers +3"}
 
     -- For song defbuffs (accuracy primary, duration secondary)
     sets.midcast.ResistantSongDebuff = {main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
         head="Brioso Roundlet +2",neck="Moonbow Whistle",ear1="Digni. Earring",ear2="Enchntr. Earring +1",
         body="Brioso Justau. +2",hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
-        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},feet="Brioso Slippers +2"}
+        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},feet="Brioso Slippers +3"}
 		
 	sets.midcast.LullabyFull = set_combine(sets.midcast.SongDebuff, sets.midcast.Lullaby)
 
@@ -249,7 +249,6 @@ function init_gear_sets()
 	sets.Idle.Main = {
 		main="Sangoma",
 		sub="Genmei Shield",
-		range="Marsyas",
 		head="Gende. Caubeen +1",
 		neck="Loricate Torque +1",
 		ear1="Odnowa Earring +1",
@@ -284,13 +283,7 @@ function init_gear_sets()
     sets.latent_refresh = {waist="Fucho-no-obi"}
 
     -- Engaged sets
-	--[[
-	sets.engaged = {
-	  range={ name="Linos", augments={'Accuracy+14','Sklchn.dmg.+4%','Quadruple Attack +2',}},
-	  body="Onca Suit", head="Alhazen Hat +1",waist="Grunfeld Rope",Ear1="Dignitary's Earring",ear2="Cessance Earring",
-	  ring1="Etana Ring",ring2="Hetairoi Ring",neck="Combatant's Torque"
-	}
-	]]
+
 	sets.engaged = {
 		range={ name="Linos", augments={'Accuracy+14','Sklchn.dmg.+4%','Quadruple Attack +2',}},
 	    head="Ayanmo Zucchetto +1",
@@ -352,6 +345,13 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
+--[[
+	for i,v in pairs(buff) do
+	   for i2,v2 in pairs(v) do
+	      print(i2,v2)
+		end
+	end
+    ]]
     -- handle_equipping_gear(player.status)
 	checkblocking(spell)
 	precast_start = os.clock()
@@ -377,6 +377,28 @@ function job_precast(spell, action, spellMap, eventArgs)
 	else
 		equip(sets.precast.FastCast)
 	end
+	-- Auto use Extra Song Instrument for Buffs if less than max # of songs
+	
+	-- Some thoughts:
+	-- How to watch party buffs - can take from partybuffs lua and build a table.
+	
+	local bard_buff_ids = S{195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 218, 219, 220, 221, 222}
+	
+	num_bard_songs = 0
+	local self = windower.ffxi.get_player()
+	for i,v in pairs(self.buffs) do
+		if bard_buff_ids:contains(v) then
+		   num_bard_songs = num_bard_songs +1
+		end
+	end
+	
+	local generalClass = get_song_class(spell)
+	
+	if num_bard_songs >= 2 and num_bard_songs < info.MaxSongs and spell.name ~= 'Honor March' and generalClass == 'SongEffect' then
+		windower.add_to_chat(10,"Swapping to "..info.ExtraSongInstrument.."! Number of bard buffs = "..num_bard_songs)
+		equip({range=info.ExtraSongInstrument})
+	end
+	-- end --
 	
 	if spell.name == 'Honor March' then
         equip({range="Marsyas"})
@@ -391,15 +413,21 @@ end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_midcast(spell, action, spellMap, eventArgs)
+	local generalClass = get_song_class(spell)
     if spell.action_type == 'Magic' then
         if spell.type == 'BardSong' then
             -- layer general gear on first, then let default handler add song-specific gear.
-            local generalClass = get_song_class(spell)
             if generalClass and sets.midcast[generalClass] then
                 equip(sets.midcast[generalClass])
             end
         end
     end
+	-- Auto use Extra Song Instrument for Buffs if less than max # of songs
+	
+	if num_bard_songs >= 2 and num_bard_songs < info.MaxSongs and spell.name ~= 'Honor March' and generalClass == 'SongEffect' then
+		equip({range=info.ExtraSongInstrument})
+	end
+	-- end -- 
 	if spell.name == 'Honor March' then
         equip(sets.midcast.HonorMarch)
 	end
@@ -486,17 +514,21 @@ end
 -- Determine the custom class to use for the given song.
 function get_song_class(spell)
     -- Can't use spell.targets:contains() because this is being pulled from resources
-    if set.contains(spell.targets, 'Enemy') then
-        if state.CastingMode.value == 'Resistant' then
-            return 'ResistantSongDebuff'
-        else
-            return 'SongDebuff'
-        end
-    elseif state.ExtraSongsMode.value == 'Dummy' then
-        return 'DaurdablaDummy'
-    else
-        return 'SongEffect'
-    end
+	if spell.skill == 'Singing' then 
+		if set.contains(spell.targets, 'Enemy') then
+			if state.CastingMode.value == 'Resistant' then
+				return 'ResistantSongDebuff'
+			else
+				return 'SongDebuff'
+			end
+		elseif state.ExtraSongsMode.value == 'Dummy' then
+			return 'DaurdablaDummy'
+		else
+			return 'SongEffect'
+		end
+	else
+		return spell.skill
+	end
 end
 
 
@@ -518,6 +550,7 @@ function calculate_duration(spell, spellMap)
     if player.equipment.feet == "Brioso Slippers" then mult = mult + 0.1 end
     if player.equipment.feet == "Brioso Slippers +1" then mult = mult + 0.11 end
 	if player.equipment.feet == "Brioso Slippers +2" then mult = mult + 0.13 end
+	if player.equipment.feet == "Brioso Slippers +3" then mult = mult + 0.15 end
     
     if spellMap == 'Paeon' and player.equipment.head == "Brioso Roundlet" then mult = mult + 0.1 end
 	if spellMap == 'Paeon' and player.equipment.head == "Brioso Roundlet +2" then mult = mult + 0.1 end
@@ -635,6 +668,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	if playerStatus == 'Idle' then
         equip(sets.Idle.Current)
     end
+	
 end
 
 -- Select default macro book on initial load or subjob change.

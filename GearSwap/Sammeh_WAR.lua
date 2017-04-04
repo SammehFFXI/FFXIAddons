@@ -69,12 +69,12 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ring="Niqmaddu Ring",
-		right_ring="Shukuyu Ring",
+		right_ring="Regal Ring",
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
 	--back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
 	sets.ws.vitbased = set_combine(sets.ws,{
-		right_ring="Petrov Ring",
+		right_ring="Regal Ring",
 		legs="Sulevi. Cuisses +1",
 		back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
 	})

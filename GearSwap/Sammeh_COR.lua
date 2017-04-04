@@ -52,7 +52,7 @@ function init_gear_sets()
 		hands="Alruna's Gloves +1",  -- 5 --
 		legs="Adhemar Kecks",  -- 9 -- 
 		feet="Adhemar Gamashes", -- 8 -- 
-		neck="Combatant's Torque",
+		neck="Iskur Gorget",
 		waist="Yemaya Belt",    -- 3 from impulse belt --
 		left_ear="Neritic Earring",
 		right_ear="Enervating Earring",
@@ -70,7 +70,7 @@ function init_gear_sets()
 		hands=TP_Hands,
 		legs="Adhemar Kecks",
 		feet="Adhemar Gamashes",
-		neck="Combatant's Torque",
+		neck="Iskur Gorget",
 		waist="Yemaya Belt",
 		left_ear="Neritic Earring",
 		right_ear="Enervating Earring",
@@ -84,7 +84,7 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
 		feet="Meg. Jam. +1",
-		neck="Combatant's Torque",
+		neck="Iskur Gorget",
 		waist="Yemaya Belt",
 		left_ear="Neritic Earring",
 		right_ear="Enervating Earring",
@@ -95,7 +95,7 @@ function init_gear_sets()
     
 	--Job Abilities
 	sets.precast.JA = {}
-    sets.precast.JA['Phantom Roll'] = {head="Lanun Tricorne",ring1="Barataria Ring",ring2="Luzaf's Ring",hands="Chasseur\'s Gants",back="Camulus\'s Mantle"}
+    sets.precast.JA['Phantom Roll'] = {head="Lanun Tricorne",ring2="Luzaf's Ring",hands="Chasseur\'s Gants",back="Camulus\'s Mantle",neck="Regal Necklace"}
 	sets.precast.JA['Random Deal'] = {body="Lanun Frac"}
 	sets.precast.JA['Snake Eye'] = {legs="Lanun Culottes"}
     sets.precast.JA.Wildcard = {feet="Lanun Bottes"}
@@ -224,7 +224,7 @@ function define_roll_values()
         ["Chaos Roll"]       = {lucky=4, unlucky=8, bonus="Attack"},
         ["Magus's Roll"]     = {lucky=2, unlucky=6, bonus="Magic Defense"},
         ["Healer's Roll"]    = {lucky=3, unlucky=7, bonus="Cure Potency Received"},
-        ["Puppet Roll"]      = {lucky=4, unlucky=8, bonus="Pet Magic Accuracy/Attack"},
+        ["Puppet Roll"]      = {lucky=3, unlucky=7, bonus="Pet Magic Accuracy/Attack"},
         ["Choral Roll"]      = {lucky=2, unlucky=6, bonus="Spell Interruption Rate"},
         ["Monk's Roll"]      = {lucky=3, unlucky=7, bonus="Subtle Blow"},
         ["Beast Roll"]       = {lucky=4, unlucky=8, bonus="Pet Attack"},
@@ -233,7 +233,7 @@ function define_roll_values()
         ["Rogue's Roll"]     = {lucky=5, unlucky=9, bonus="Critical Hit Rate"},
         ["Warlock's Roll"]   = {lucky=4, unlucky=8, bonus="Magic Accuracy"},
         ["Fighter's Roll"]   = {lucky=5, unlucky=9, bonus="Double Attack Rate"},
-        ["Drachen Roll"]     = {lucky=3, unlucky=7, bonus="Pet Accuracy"},
+        ["Drachen Roll"]     = {lucky=4, unlucky=8, bonus="Pet Accuracy"},
         ["Gallant's Roll"]   = {lucky=3, unlucky=7, bonus="Defense"},
         ["Wizard's Roll"]    = {lucky=5, unlucky=9, bonus="Magic Attack"},
         ["Dancer's Roll"]    = {lucky=3, unlucky=7, bonus="Regen"},

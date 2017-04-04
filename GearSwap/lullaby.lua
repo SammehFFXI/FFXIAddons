@@ -277,6 +277,7 @@ function calculate_duration_raw(spell_id)
 	if body.en == "Aoidos' Hngrln. +1" then mult = mult + 0.05 end
 	if legs.en == "Inyanga Shalwar" then mult = mult + 0.12 end
 	if legs.en == "Inyanga Shalwar +1" then mult = mult + 0.15 end
+	if legs.en == "Inyanga Shalwar +2" then mult = mult + 0.17 end
 	if legs.en == "Mdk. Shalwar +1" then mult = mult + 0.1 end
 	if feet.en == "Brioso Slippers" then mult = mult + 0.1 end
     if feet.en == "Brioso Slippers +1" then mult = mult + 0.11 end

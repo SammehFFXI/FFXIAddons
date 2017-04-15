@@ -143,7 +143,7 @@ function init_gear_sets()
 	sets.engaged = {
 		ammo="Ginsen",
 		head="Jhakri Coronal +1",
-		body="Jhakri Robe +1",
+		body="Jhakri Robe +2",
 		hands="Jhakri Cuffs +1",
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
 		feet="Jhakri Pigaches +1",
@@ -369,7 +369,7 @@ function init_gear_sets()
 		sub="Clerisy Strap +1",
 		ammo="Homiliary",
 		head="Befouled Crown",
-		body="Jhakri Robe +1",
+		body="Jhakri Robe +2",
 		hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}},
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
 		feet="Skaoi Boots",

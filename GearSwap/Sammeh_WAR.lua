@@ -112,7 +112,7 @@ function init_gear_sets()
     ---  PRECAST SETS  ---
 	sets.precast = {}
     sets.precast.JA = set_combine(sets.midcast.enmity, {})
-	sets.precast.JA.Berserk = {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +1",feet="Agoge Calligae +1"}
+	sets.precast.JA.Berserk = {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +2",feet="Agoge Calligae +1"}
 	sets.precast.JA.Warcry = {head="Agoge mask +1"}
 	sets.precast.JA['Blood Rage'] = {body="Boii Lorica +1"}
 	sets.precast.JA.Meditate = {}

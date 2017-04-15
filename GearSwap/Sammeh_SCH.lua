@@ -7,7 +7,7 @@ end
 
 function user_setup()
     state.CastingMode:options('Normal', 'MACC', 'MagicBurst','StoreTP')
-    state.IdleMode:options('Normal','PDT','MEVA')
+    state.IdleMode:options('Normal','PDT','MEVA','MaxHP')
 	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock'}
 	state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
 	send_command('alias tp gs c cycle tpmode')
@@ -15,7 +15,7 @@ function user_setup()
     send_command('bind f10 gs c cycle idlemode')
 	send_command('bind f12 gs c update caster')
 	select_default_macro_book()
-	send_command('@wait 5;input /lockstyleset 20')
+	--send_command('@wait 5;input /lockstyleset 20')
 	
 	-- Set Common Aliases --
 	send_command("alias idle gs equip sets.Idle.Current")
@@ -84,7 +84,7 @@ function init_gear_sets()
 	sets.engaged = {
 		ammo="Amar Cluster",
 		head="Jhakri Coronal +1",
-		body="Jhakri Robe +1",
+		body="Jhakri Robe +2",
 		hands="Jhakri Cuffs +1",
 		legs="Jhakri Slops +1",
 		feet="Jhakri Pigaches +1",
@@ -99,7 +99,7 @@ function init_gear_sets()
 	
 	sets.MaxHP = {
 	    ammo="Homiliary",
-		head="Befouled Crown",
+		head="Acad. Mortar. +2",
 		body={ name="Peda. Gown +1", augments={'Enhances "Enlightenment" effect',}},
 		hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}},
 		legs="Perdition Slops",
@@ -360,7 +360,7 @@ function init_gear_sets()
 		sub="Irenic Strap +1",
 		ammo="Homiliary",
 		head="Befouled Crown",
-		body="Jhakri Robe +1",
+		body="Jhakri Robe +2",
 		hands={ name="Chironic Gloves", augments={'"Blood Pact" ability delay -7','Accuracy+6','"Refresh"+1','Accuracy+15 Attack+15',}},
 		legs="Assid. Pants +1",
 		feet="Herald's Gaiters",
@@ -633,6 +633,8 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	   sets.Idle.Current = set_combine(sets.meva,{main=idle_pdt_main,body="Onca Suit",ear1="Dominance Earring",back="Tantalic Cape",hands="",legs="",feet=""})     
 	elseif state.IdleMode.value == "MEVA" then
 		sets.Idle.Current = sets.meva
+	elseif state.IdleMode.value == "MaxHP" then
+		sets.Idle.Current = sets.MaxHP
 	end
 	
 	if state.TPMode.value == "WeaponLock" then

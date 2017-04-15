@@ -119,7 +119,7 @@ function init_gear_sets()
       head={ name="Herculean Helm", augments={'Accuracy+27','Weapon skill damage +3%','STR+10',}},
       body={ name="Herculean Vest", augments={'Accuracy+22 Attack+22','Weapon skill damage +3%','STR+12','Accuracy+10','Attack+12',}},
       hands={ name="Herculean Gloves", augments={'Accuracy+7 Attack+7','Weapon skill damage +3%','STR+10','Accuracy+9','Attack+8',}},
-      legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
+      legs="Hiza. Hizayoroi +2",
       feet={ name="Herculean Boots", augments={'Accuracy+28','"Fast Cast"+2','Accuracy+20 Attack+20',}},
       neck="Fotia Gorget",
       waist="Fotia Belt",
@@ -139,7 +139,7 @@ function init_gear_sets()
 	sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS, {
 		neck="Caro Necklace",
 		waist="Grunfeld Rope",
-		legs="Hiza. Hizayoroi +1",
+		legs="Hiza. Hizayoroi +2",
 		feet={ name="Herculean Boots", augments={'Attack+18','Weapon skill damage +4%','STR+7','Accuracy+14',}},
 		left_ear="Ishvara Earring",
 	})

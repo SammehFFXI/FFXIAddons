@@ -41,7 +41,7 @@ function init_gear_sets()
 	    head={ name="Valorous Mask", augments={'Accuracy+18 Attack+18','Weapon skill damage +3%','STR+9','Accuracy+1',}},
 		body={ name="Valorous Mail", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','DEX+6','Accuracy+1','Attack+13',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+23 Attack+23','Weapon skill damage +3%','VIT+8','Accuracy+2','Attack+12',}},
-		legs="Hiza. Hizayoroi +1",
+		legs="Hiza. Hizayoroi +2",
 		feet={ name="Valorous Greaves", augments={'Accuracy+23 Attack+23','Enmity+2','STR+8','Accuracy+9','Attack+9',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",

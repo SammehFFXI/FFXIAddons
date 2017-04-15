@@ -79,7 +79,7 @@
 		["Southern San d\'Oria \[S\]"] = {Option=1,Index=77},
 		["East Ronfaure \[S\]"] = {Option=1,Index=78},
 		["Jugner Forest \[S\]"] = {Option=1,Index=79},
-		["Batallia Down \[S\]"] = {Option=1,Index=80},
+		["Batallia Downs \[S\]"] = {Option=1,Index=80},
 		["The Eldieme Necropolis \[S\]"] = {Option=1,Index=81},
 		["Bastok Market \[S\]"] = {Option=1,Index=82},
 		["North Gustaberg \[S\]"] = {Option=1,Index=83},

@@ -282,7 +282,7 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		range={ name="Dunna", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
 		head="Befouled Crown",
-		body="Jhakri Robe +1",
+		body="Jhakri Robe +2",
 		hands={ name="Bagua Mitaines", augments={'Enhances "Curative Recantation" effect',}},
 		legs="Assid. Pants +1",
 		feet="Geo. Sandals +1",
@@ -300,7 +300,7 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		range={ name="Dunna", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
 		head="Azimuth Hood +1",
-		body="Jhakri Robe +1",
+		body="Jhakri Robe +2",
 		hands="Geo. Mitaines +1",
 		legs="Assid. Pants +1",
 		feet={ name="Bagua Sandals", augments={'Enhances "Radial Arcana" effect',}},
@@ -520,181 +520,3 @@ function select_default_macro_book()
     set_macro_page(4, 2)
 end
 
-
---[[
-	-- Enhances JA 
-	sublimation_head="Acad. Mortar. +1"
-	sublimation_body="Pedagogy Gown +1"
-    enlightenment_body="Pedagogy gown +1"	
-
-	-- Idle Sets
-	idle_main="Bolelabunga"
-	idle_sub="Genmei Shield"
-	idle_ranged="Dunna"
-	idle_head="Befouled Crown"
-	idle_neck="Loricate Torque +1"
-	idle_ear1="Handler's Earring"
-	idle_ear2="Handler's Earring +1"
-	idle_body="Jhakri Robe +1"
-	idle_hands="Bagua Mitaines"
-	idle_ring1="Dark Ring"
-	idle_ring2="Defending Ring"
-	idle_back="Solemnity Cape"
-	idle_waist="Fucho-no-obi"
-	idle_legs="Assid. Pants +1"
-	idle_feet="Geomancy Sandals +1"
-
-	
-	idle_pdt_main="Mafic Cudgel"
-	
-	idle_loupon_main="Solstice"
-	idle_loupon_hands="Geomancy Mitaines +1"
-	idle_loupon_head="Azimuth Hood +1"
-	idle_loupon_waist="Isa Belt"
-	idle_loupon_feet="Bagua Sandals"
-	idle_loupon_back={ name="Nantosuelta's Cape", augments={'Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10',}}
-
-	-- Precast Section
-	FC_main="Solstice"
-	FC_sub="Chanter's Shield"
-	FC_ranged="Dunna"
-	FC_head="Vanya Hood"
-	FC_neck="Voltsurge Torque"
-	FC_ear1="Loquacious earring"
-	FC_ear2="Enchntr. Earring +1"
-	FC_body="Shango Robe"
-	FC_hands="Amalric Gages"
-	FC_ring1="Kishar Ring"
-	FC_ring2="Weather. Ring"
-	FC_back="Lifestream Cape"
-	FC_waist="Witful Belt"
-	FC_legs="Psycloth Lappas"
-	FC_feet="Regal Pumps +1"
-	
-	FC_enh_waist="Siegel Sash"
-	FC_stoneskin_legs="Doyen Pants"
-	FC_stoneskin_head="Umuthi Hat"
-	
-	FC_cure_legs=FC_stoneskin_legs
-	FC_cure_feet="Vanya Clogs"
-	FC_Cure_back="Pahtli Cape"
-	
-	-- Midcast Section
-	enh_main="Gada"
-	enh_sub="Chanter's Shield"
-	enh_ranged="Dunna"
-	enh_head="Befouled Crown"
-	enh_neck="Incanter's Torque"
-	enh_ear1=FC_ear1
-	enh_ear2=FC_ear2
-	enh_body="Telchine Chasuble"
-	enh_hands="Amalric Gages"
-	enh_ring1="Stikini Ring"
-	enh_ring2="Weather. Ring"
-	enh_back="Lifestream Cape"
-	enh_waist="Witful Belt"
-	enh_legs="Psycloth Lappas"
-	enh_feet="Regal Pumps +1"
-	
-	enh_stoneskin_waist="Siegel Sash"
-	enh_regen_main="Bolelabunga"
-	
-	cure_main="Tamaxchi"
-	cure_sub="Chanter's Shield"
-	cure_ranged="Dunna"
-	cure_head="Vanya Hood"
-	cure_neck="Loricate Torque +1"
-	cure_ear1=FC_ear1
-	cure_ear2=FC_ear2
-	cure_body="Amalric Doublet"
-	cure_hands="Telchine Gloves"
-	cure_ring1="Dark Ring"
-	cure_ring2="Defending Ring"
-	cure_back="Lifestream Cape"
-	cure_waist="Witful Belt"
-	cure_legs="Gyve Trousers"
-	cure_feet="Vanya Clogs"
-
-	curepotrec_waist="Gishdubar Sash"	
-	
-	ele_main="Grioavolr"
-	ele_sub="Zuuxowu Grip"
-	ele_ammo="Pemphredo Tathlum"
-	ele_head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}}
-	ele_neck="Sanctity Necklace"
-	ele_ear1="Crematio Earring"
-	ele_ear2="Barkarole Earring"
-	ele_body="Merlinic Jubbah"
-	ele_hands="Amalric Gages"
-	ele_ring1="Resonance Ring"
-	ele_ring2="Weather. Ring"
-	ele_back="Lifestream Cape"
-	ele_waist="Refoccilation Stone"
-	ele_legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','CHR+2','Mag. Acc.+14','"Mag.Atk.Bns."+15',}}
-	ele_feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}}
-		
-	ele_macc_main="Grioavolr"
-	ele_macc_sub="Niobid Strap"
-	ele_macc_ear1="Hermetic Earring"
-	ele_macc_neck="Incanter's Torque"
-	ele_macc_hands="Psycloth Manillas"
-
-	ele_storetp_legs="Perdition Slops"
-	ele_storetp_waist="Oneiros Rope"
-	ele_storetp_hands="Merlinic Dastanas"
-	ele_storetp_head="Helios Band"
-	ele_storetp_ammo="Seraphic Ampulla"
-	ele_storetp_feet="Helios Boots"
-			
-    ele_burst_main="Grioavolr"
-	ele_burst_hands="Amalric Gages"
-	ele_burst_neck="Mizu. Kubikazari"
-	ele_burst_ring1="Locus Ring"
-	ele_burst_ring2="Mujin Band"
-	ele_burst_ear2="Static Earring"
-	ele_burst_legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','CHR+2','Mag. Acc.+14','"Mag.Atk.Bns."+15',}}
-	ele_burst_feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}  -- 7 -- 
-	
-	dark_body="Shango Robe"
-	dark_ring1="Evanescence Ring"
-	dark_ring2="Archon Ring"
-	
-	enf_main="Gada"
-	enf_sub="Chanter's Shield"
-	enf_ranged="Dunna"
-	enf_head="Befouled Crown"
-	enf_neck="Incanter's Torque"
-	enf_ear1="Hermetic Earring"
-	enf_ear2="Barkarole Earring"
-	enf_body="Shango Robe"
-	enf_hands="Lurid Mitts"
-	enf_ring1="Stikini Ring"
-	enf_ring2="Weather. Ring"
-	enf_back="Lifestream Cape"
-	enf_waist="Luminary Sash"
-	enf_legs="Psycloth Lappas"
-	enf_feet="Skaoi Boots"
-	
-	
-	-- Geomancy sets
-	
-	geo_main="Solstice"
-	geo_sub="Culminus"
-	geo_ranged="Dunna"
-	geo_head="Azimuth Hood +1"
-	geo_neck="Incanter's Torque"
-	geo_ear1="Hermetic Earring"
-	geo_ear2="Barkarole Earring"
-	geo_body="Bagua Tunic +1"
-	geo_hands="Geomancy Mitaines +1"
-	geo_ring1="Etana Ring"
-	geo_ring2="Weather. Ring"
-	geo_back="Lifestream Cape"
-	geo_indi_back={ name="Nantosuelta's Cape", augments={'Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10',}}
-	geo_waist="Luminary Sash"
-	geo_legs="Bagua Pants +1"
-	geo_feet="Bagua Sandals"
-	geo_indi_feet="Azimuth Gaiters +1"
-			
-    
-]]

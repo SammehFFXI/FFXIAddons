@@ -125,8 +125,8 @@ function init_gear_sets()
       waist="Fotia Belt",
       left_ear="Cessance Earring",
       right_ear="Moonshade Earring",
-      left_ring="Apate Ring",
-      right_ring="Shukuyu Ring",
+      left_ring="Ilabrat Ring",
+      right_ring="Regal Ring",
       back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
 	}
 		

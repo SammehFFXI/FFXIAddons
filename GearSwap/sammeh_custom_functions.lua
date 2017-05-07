@@ -39,6 +39,7 @@ send_command('alias echodrop input /item "Echo Drops" <me>')
 send_command('alias remedy input /item "Remedy" <me>')
 send_command('alias holywater input /item "Holy Water" <me>')
 send_command('alias warpring input /equip ring1 "Warp Ring"')
+send_command('alias adrink input /item "Assassin\'s Drink"')
 
 sets.frenzysallet = {head="Frenzy Sallet"}
 

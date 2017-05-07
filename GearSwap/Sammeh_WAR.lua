@@ -6,9 +6,9 @@ function get_sets()
 end
 
 function user_setup()
-	state.IdleMode:options('Normal','Reraise')
+	state.IdleMode:options('Normal','Reraise','DT')
 	send_command('bind f10 gs c cycle IdleMode')
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','ACC','Reraise','DT'}
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT'}
     select_default_macro_book()
 	
 	-- Set Common Aliases --
@@ -16,6 +16,7 @@ function user_setup()
 	send_command("alias strwsset gs equip sets.ws.strbased")
 	send_command("alias vitwsset gs equip sets.ws.vitbased")
 	send_command("alias eng gs equip sets.engaged")
+	send_command("alias enmity gs equip sets.enmity")
 	send_command("alias meva gs equip sets.meva")
 	send_command("alias idle gs equip sets.Idle.Current")
 	send_command('@wait 5;input /lockstyleset 27')
@@ -25,20 +26,35 @@ end
 	
 function init_gear_sets()
 	sets.dt = {
-		ammo="Staunch Tathlum",
-	    head="Sulevia's Mask +1",
-		body="Sulevia's Plate. +1",
-		hands="Sulev. Gauntlets +1",
-		legs="Sulevi. Cuisses +1",
-		feet="Sulev. Leggings +1",
-		neck="Loricate Torque +1",
-		waist="Flume Belt +1",
-		left_ear="Eabani Earring",
-		right_ear="Flashward Earring",
-		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
-		right_ring="Defending Ring",
-		back="Solemnity Cape",
-	}
+		ammo="Staunch Tathlum", --dt2
+	    head="Sulevia's Mask +1", --dt5 
+		body="Sulevia's Plate. +1", --dt8
+		hands="Sulev. Gauntlets +1", --dt4
+		legs="Sulevi. Cuisses +1", --dt6
+		feet="Sulev. Leggings +1", --dt3
+		neck="Loricate Torque +1", --dt6 
+		waist="Ioskeha Belt",
+		right_ear="Telos Earring",
+		left_ear="Cessance Earring",
+		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}}, --pdt6, mdt3
+		right_ring="Defending Ring", -- dt10
+		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
+	} -- pdt 50 mdt -- 47 (Shell will easily make up diff)
+	sets.dtaftermath = {
+		ammo="Ginsen",
+	    head="Flamma Zucchetto +1",
+		body="Sulevia's Plate. +1", --dt8
+		hands="Sulev. Gauntlets +1", --dt4
+		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
+		feet="Sulev. Leggings +1", --dt3
+		neck="Loricate Torque +1", --dt6 
+		waist="Ioskeha Belt",
+		right_ear="Telos Earring",
+		left_ear="Cessance Earring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Defending Ring", -- dt10
+		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
+	} --pdt 31 --mdt 31 (+20% aftermath DT) 
 	sets.engaged = {
 		ammo="Ginsen",
 		head="Flamma Zucchetto +1",
@@ -54,13 +70,27 @@ function init_gear_sets()
 		right_ring="Petrov Ring",
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
+	sets.enmity = {
+	    head="Halitus Helm", -- 8
+		body={ name="Souveran Cuirass", augments={'VIT+10','Attack+20','"Refresh"+2',}}, -- 10
+		hands="Macabre Gaunt.", -- 6
+		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}}, -- 4
+		feet={ name="Yorium Sabatons", augments={'Enmity+9',}}, -- 14
+		neck="Unmoving Collar +1", -- 10
+		waist="Flume Belt +1",
+		left_ear="Cryptic Earring", -- 4
+		right_ear="Trux Earring", -- 5
+		left_ring="Supershear Ring", --5 
+		right_ring="Apeile Ring", --5~9
+		back="Philidor Mantle", -- 5
+	} -- Enmity = 76~80
 	sets.engaged.Reraise = set_combine(sets.engaged,{body="Twilight Mail",head="Twilight Helm"})
 	sets.engaged.DT = sets.dt
 	sets.ws = {
 		-- ammo="Seeth. Bomblet +1",
 		ammo="Knobkierrie",   -- Losing 13 acc for +10 att +6WSD; not sure if that's a gr8 thing.
 		head={ name="Valorous Mask", augments={'Weapon skill damage +5%','AGI+7','Accuracy+15','Attack+10',}},
-		body={ name="Valorous Mail", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','DEX+6','Accuracy+1','Attack+13',}},
+		body="Pumm. Lorica +3",
 		hands="Sulev. Gauntlets +1",
 		legs={ name="Valor. Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
 		feet="Sulev. Leggings +1",
@@ -74,6 +104,7 @@ function init_gear_sets()
 	}
 	--back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
 	sets.ws.vitbased = set_combine(sets.ws,{
+		body="Pumm. Lorica +3",
 		right_ring="Regal Ring",
 		legs="Sulevi. Cuisses +1",
 		back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
@@ -104,6 +135,7 @@ function init_gear_sets()
 	sets.ws["Fell Cleve"] = sets.ws.strbased
 	sets.ws["Resolution"] = sets.ws.strbased
 	sets.ws["Mistral Axe"] = sets.ws.strbased
+	sets.ws["Metatron Torment"] = sets.ws.strbased
 	sets.ws["Upheaval"] = sets.ws.vitbased
 	sets.ws["Cloudsplitter"] = sets.ws.magic
 	
@@ -111,13 +143,12 @@ function init_gear_sets()
 	
     ---  PRECAST SETS  ---
 	sets.precast = {}
-    sets.precast.JA = set_combine(sets.midcast.enmity, {})
-	sets.precast.JA.Berserk = {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +2",feet="Agoge Calligae +1"}
-	sets.precast.JA.Warcry = {head="Agoge mask +1"}
-	sets.precast.JA['Blood Rage'] = {body="Boii Lorica +1"}
-	sets.precast.JA.Meditate = {}
-	sets.precast.Restraint = {hands="Boii Mufflers +1"}
-	sets.precast.JA.Tomahawk = {ammo="Thr. Tomahawk",feet="Agoge Calligae +1"}
+    sets.precast.JA = set_combine(sets.enmity, {})
+	sets.precast.JA.Berserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +1"})
+	sets.precast.JA.Warcry = set_combine(sets.precast.JA, {head="Agoge mask +1"})
+	sets.precast.JA['Blood Rage'] = set_combine(sets.precast.JA, {body="Boii Lorica +1"})
+	sets.precast.Restraint = set_combine(sets.precast.JA, {hands="Boii Mufflers +1"})
+	sets.precast.JA.Tomahawk = set_combine(sets.precast.JA, {ammo="Thr. Tomahawk",feet="Agoge Calligae +1"})
 	
 	sets.meva = {
 		ammo="Staunch Tathlum",
@@ -148,7 +179,7 @@ function init_gear_sets()
 		body="Sulevia's Plate. +1",
 		hands="Sulev. Gauntlets +1",
 		legs="Sulevi. Cuisses +1",
-		feet="Sulev. Leggings +1",
+		feet="Hermes' Sandals",
 		neck="Bathy Choker +1",
 		waist="Flume Belt +1",
 		right_ear="Telos Earring",
@@ -229,7 +260,7 @@ end
 
 
 function job_buff_change(status,gain_or_loss)
-    handle_equipping_gear(player.status)
+    job_handle_equipping_gear(player.status)
    if (gain_or_loss) then  
      add_to_chat(4,'------- Gained Buff: '..status..'-------')
 	 if status == "sleep" then
@@ -266,7 +297,15 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
     end
 	if state.IdleMode.value == "Reraise" then
 	   sets.Idle.Current = set_combine(sets.Idle,{body="Twilight Mail",head="Twilight Helm"})   
-	else 
+	elseif state.IdleMode.value == "DT" or state.OffenseMode.value == "DT" then
+		if buffactive['Aftermath'] then
+			sets.Idle.Current = sets.dtaftermath
+			sets.engaged.DT = sets.dtaftermath
+		else
+			sets.Idle.Current = sets.dt
+			sets.engaged.DT = sets.dt
+		end
+	else
 	   sets.Idle.Current = sets.Idle
 	end
 end

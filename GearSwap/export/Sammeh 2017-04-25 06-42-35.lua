@@ -1,0 +1,17 @@
+sets.exported={
+    main="Bravura",
+    sub="Utu Grip",
+    ammo="Ginsen",
+    head="Halitus Helm",
+    body={ name="Souveran Cuirass", augments={'VIT+10','Attack+20','"Refresh"+2',}},
+    hands="Macabre Gaunt.",
+    legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
+    feet={ name="Yorium Sabatons", augments={'Enmity+9',}},
+    neck="Unmoving Collar +1",
+    waist="Flume Belt +1",
+    left_ear="Cryptic Earring",
+    right_ear="Trux Earring",
+    left_ring="Supershear Ring",
+    right_ring="Apeile Ring",
+    back="Philidor Mantle",
+}

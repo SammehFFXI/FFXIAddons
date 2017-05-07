@@ -1,3 +1,4 @@
+packets = require('packets')
 
 function get_sets()
     mote_include_version = 2
@@ -6,11 +7,20 @@ function get_sets()
 end
 
 function user_setup()
+	windower.add_to_chat(4,'F11: Auto RA')
+	windower.add_to_chat(4,'ALT  F11: WS Selection')
+	windower.add_to_chat(4,'CTRL F11: Auto WS')
+	-- for Auto RA
+	rngdelay = 1
+
     state.IdleMode:options('Normal','PDT')
 	state.TPMode = M{['description']='TP Mode', 'Normal','RACC'}
 	state.RngMode = M{['description']='Ranger Mode', 'Archery','Gun','XBow'}
 	state.Bolt = M{['description']='Bolt Mode','Normal','DefDown','Holy Bolt','Bloody Bolt'}
-	state.Arrow = M{['description']='Arrow Mode','Normal','Bodkin'}
+	state.AutoRA = M{['description']='Auto RA','false','true'}
+	state.AutoWSMode = M{['description']='Auto WS Mode','false','true'}
+	state.AutoWS = M{['description']='Auto WS',"Jishnu's Radiance","Last Stand","Trueflight"}
+	state.Arrow = M{['description']='Arrow Mode','Normal'}
 	state.Bullet = M{['description']='Bullet','Normal','Stun'}
 	
 	send_command('alias tp gs c cycle tpmode')
@@ -21,6 +31,9 @@ function user_setup()
 	send_command('bind ^f9 gs c cycle Bolt')
 	send_command('bind ^f10 gs c cycle Bullet')
     send_command('bind f10 gs c cycle idlemode')
+	send_command('bind f11 gs c cycle AutoRA')
+	send_command('bind ^f11 gs c cycle AutoWSMode')
+	send_command('bind !f11 gs c cycle AutoWS')
 	select_default_macro_book()
 	if player.sub_job == 'NIN' then
 	-- send_command('@wait 1;input /equip sub "Perun"')   
@@ -44,9 +57,11 @@ function user_setup()
 	elseif player.equipment.range == "Fomalhaut" then
 		send_command("gs c set RngMode Gun")
 		send_command("dp gun")
+		state.AutoWS = M{['description']='Auto WS','Last Stand','Trueflight'}
 	elseif player.equipment.range == "Wochowsen" then
 		send_command("gs c set RngMode XBow")
 		send_command("dp marksmanship")
+		state.AutoWS = M{['description']='Auto WS','Last Stand','Trueflight'}	
 	end
 	
 end
@@ -58,14 +73,9 @@ function init_gear_sets()
 	TP_Hands = { name="Herculean Gloves", augments={'Rng.Acc.+15 Rng.Atk.+15','Weapon skill damage +2%','DEX+9','Rng.Atk.+15',}}
 	
 	if state.RngMode.value == 'Archery' then
-	  -- RNGWeapon = { name="Teller", augments={'STR+4','Rng.Acc.+30','Rng.Atk.+29','DMG:+13',}}
 	  RNGWeapon = "Yoichinoyumi"
 	  TP_Ammo = "Yoichi's Arrow"
 	  WS_Ammo = "Yoichi's Arrow"
-	  if state.Arrow.value == 'Bodkin' then
-	    TP_Ammo = "Bodkin Arrow"
-		WS_Ammo = "Bodkin Arrow"
-	  end
 	  send_command("alias rngws1 input /ws 'Jishnu\'s Radiance' <t>")
 	  send_command("alias rngws2 input /ws 'Namas Arrow' <t>")
 	  send_command("alias rngws3 input /ws 'Apex Arrow' <t>")
@@ -105,17 +115,18 @@ function init_gear_sets()
 		ammo=TP_Ammo,
 		head="Amini Gapette",  -- 6 --
 		body={ name="Pursuer's Doublet", augments={'HP+50','Crit. hit rate+4%','"Snapshot"+6',}}, -- 6 --
-		hands="Alruna's Gloves +1",  -- 5 --
-		legs="Adhemar Kecks",  -- 9 -- 
+		hands="Carmine Fin. Ga. +1",  -- 8 --
+		legs={ name="Adhemar Kecks", augments={'AGI+10','"Rapid Shot"+10','Enmity-5',}},
 		feet="Adhemar Gamashes", -- 8 -- 
-		neck="Combatant's Torque",
+		neck="Iskur Gorget",
 		waist="Yemaya Belt",    
-		left_ear="Neritic Earring",
+		left_ear="Telos Earring",
 		right_ear="Enervating Earring",
 		left_ring="Dingir Ring",
-		right_ring="Rajas Ring",
+		right_ring="Ilabrat Ring",
 		back={ name="Belenus's Cape", augments={'"Snapshot"+10',}}, -- 10 -- 
-    }
+    } -- Snapshot: 47  -- Rapid Shot:16
+	
 	sets.precast.PreShot.Overkill = set_combine(sets.precast.PreShot, {})
 	
 	sets.midcast.TP = {} 
@@ -125,14 +136,14 @@ function init_gear_sets()
 		head="Arcadian Beret +1",
 		body={ name="Pursuer's Doublet", augments={'HP+50','Crit. hit rate+4%','"Snapshot"+6',}},
 		hands=TP_Hands,
-		legs="Adhemar Kecks",
+		legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
 		feet="Adhemar Gamashes",
-		neck="Combatant's Torque",
+		neck="Iskur Gorget",
 		waist="Yemaya Belt",
-		left_ear="Neritic Earring",
+		left_ear="Telos Earring",
 		right_ear="Enervating Earring",
 		left_ring="Dingir Ring",
-		right_ring="Rajas Ring",
+		right_ring="Ilabrat Ring",
 		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
 	}
 	sets.midcast.TP.RACC = {
@@ -141,9 +152,9 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
 		feet="Meg. Jam. +1",
-		neck="Combatant's Torque",
+		neck="Iskur Gorget",
 		waist="Yemaya Belt",
-		left_ear="Neritic Earring",
+		left_ear="Telos Earring",
 		right_ear="Enervating Earring",
 		left_ring="Cacoethic Ring",
 		right_ring="Cacoethic Ring +1",
@@ -176,7 +187,7 @@ function init_gear_sets()
 		waist="Fotia Belt",
 		left_ear="Moonshade Earring",
 		right_ear="Enervating Earring",
-		left_ring="Apate Ring",
+		left_ring="Regal Ring",
 		right_ring="Dingir Ring",
 		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Weapon skill damage +10%',}},
 	}
@@ -185,24 +196,24 @@ function init_gear_sets()
 		head={ name="Herculean Helm", augments={'Rng.Acc.+28','Weapon skill damage +3%','DEX+11','Rng.Atk.+12',}},
 		body="Meg. Cuirie +1",
 		hands="Meg. Gloves +1",
-		legs="Amini Brague +1",  -- have a crit hit dmg herc legs - may be good
+		legs="Darraigner's Brais",
+		feet="Thereoid Greaves",
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
-		left_ear="Moonshade Earring",
-		right_ear="Enervating Earring",  --- maybe a dex earring?
-		left_ring="Apate Ring",
+		left_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +25',}},
+		right_ear="Sherida Earring",
+		left_ring="Regal Ring",
 		right_ring="Dingir Ring",
-		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Weapon skill damage +10%',}},
-		-- change back to Belenus's cape w/ dex+30, crit hit rate +10%
-		feet="Thereoid Greaves",
+		back={ name="Belenus's Cape", augments={'DEX+20','Rng.Acc.+20 Rng.Atk.+20','DEX+10','Crit.hit rate+10',}},
 	}
 	sets.Jishnus = sets.precast.WS['Jishnu\'s Radiance']
 	sets.precast.WS['Trueflight'] = {
 	    head={ name="Herculean Helm", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','Enmity-5','VIT+6','Mag. Acc.+13','"Mag.Atk.Bns."+13',}},
 		body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+26','"Dbl.Atk."+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
-		hands="Leyline Gloves",
+		hands="Carmine Fin. Ga. +1",
 		legs="Gyve Trousers",
-		feet={ name="Adhemar Gamashes", augments={'HP+50','"Store TP"+6','"Snapshot"+8',}},
+		-- feet={ name="Adhemar Gamashes", augments={'HP+50','"Store TP"+6','"Snapshot"+8',}},
+		feet={ name="Herculean Boots", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','"Fast Cast"+1','MND+10','Mag. Acc.+6','"Mag.Atk.Bns."+11',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Crematio Earring",
@@ -224,6 +235,14 @@ end
 function job_precast(spell)
     handle_equipping_gear(player.status)
 	checkblocking(spell)
+	if not buffactive["Velocity Shot"] and spell.name == "Ranged" then
+	  velocity_recasttime = windower.ffxi.get_ability_recasts()[129] 
+	  if velocity_recasttime == 0 then 
+	    windower.add_to_chat(8,"Turn on Velocity Shot!")
+	  else
+	    windower.add_to_chat(8,"You need to turn on Velocity Shot!	Time Remaining: "..velocity_recasttime)
+	  end
+	end
 	if spell.name == 'Utsusemi: Ichi' and (buffactive['Copy Image (3)'] or buffactive ['Copy Image (4+)']) then
 	  cancel_spell()
 	  send_command('@wait 1;')
@@ -235,20 +254,17 @@ function job_precast(spell)
             equip(sets.precast.PreShot.Overkill)
         end
     end
-	if spell.type == "WeaponSkill" and buffactive["Velocity Shot"] then
-	    if sets.precast.WS[spell.name] then 
+end
+
+function job_post_precast(spell)
+  if spell.type == "WeaponSkill" and buffactive["Velocity Shot"] and spell.name ~= "Trueflight" and spell.name ~= "Wildfire" and (spell.skill == "Marksmanship" or spell.skill == "Archery") then
+		if sets.precast.WS[spell.name] then 
 			equip(set_combine(sets.precast.WS[spell.name], {body="Amini Caban +1"}))
 		else
 			equip(set_combine(sets.precast.WS, {body="Amini Caban +1"}))
 		end
-	end
-	--[[if spell.type == "WeaponSkill" and state.TPMode.value == 'RACC' then
-		if sets.precast.WS[spell.name].RACC then 
-			equip(sets.precast.WS[spell.name].RACC)
-		else
-			equip(sets.precast.WS.RACC)
-		end
-	end]]
+  end
+	weathercheck(spell.element)
 end
 
 function job_post_midcast(spell)
@@ -309,3 +325,23 @@ end
 function select_default_macro_book()
     set_macro_page(4, 1)
 end
+
+
+windower.raw_register_event('incoming chunk', function(id,original,modified,injected,blocked)
+	local self = windower.ffxi.get_player()
+    if id == 0x028 then
+		local packet = packets.parse('incoming', original)
+		local category = packet['Category']
+		--print(category)
+		if packet.Actor == self.id and category == 2 and state.AutoRA.value == 'true' then 
+			if state.AutoWSMode.value == 'true' and player.tp >= 1000 then 
+				send_command('wait '..rngdelay..';input /ws "'..state.AutoWS.value..'" <t>')
+			else 
+				send_command('wait '..rngdelay..'; input /ra <t>')
+			end
+		end
+		if packet.Actor == self.id and category == 3 and state.AutoRA.value == 'true' then 
+			send_command('wait 3.5; input /ra <t>')
+		end
+	end
+end)

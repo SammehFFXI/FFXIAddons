@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 _addon.author = 'Ivaar,Sammeh(Mod)'
 _addon.command = 'sc'
 _addon.name = 'SkillChains'
-_addon.version = '1.7.0'
+_addon.version = '1.7.1'
 
 
 -- Sammeh(Quetz) Mods.
@@ -46,6 +46,7 @@ _addon.version = '1.7.0'
 -- 1.6.1 Fix where when you lose a pet-mid fight spammed console log with nil values.  
 -- 1.6.2 Removing some unnecessary comments and loaded variables during debugs.
 -- 1.7.0 Fix Skillchains subtracting 1 second per-step and removing reson's after step 6.
+-- 1.7.1 Fix targeting variables
 
 texts = require('texts')
 packets = require('packets')
@@ -646,13 +647,13 @@ function display_results(targ)
 end
 
 windower.register_event('prerender', function()
-    local targ = windower.ffxi.get_mob_by_target('t')
+    local targ = windower.ffxi.get_mob_by_target('t') or nil
     local now = os.time()
     for k,v in pairs(resonating) do
-        if v.timer and now-v.timer >= (10-(resonating[targ.id].step-1)) then
+        if targ and resonating[targ.id] and v.timer and now-v.timer >= (10-(resonating[targ.id].step-1)) then
             resonating[k] = nil
         end
-		if resonating[targ.id] and resonating[targ.id].step == 6 then
+		if targ and resonating[targ.id] and resonating[targ.id].step == 6 then
 		    resonating[k] = nil
         end
     end

@@ -48,7 +48,7 @@ function init_gear_sets()
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
-		right_ring="Ilabrat Ring",
+		right_ring="Regal Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
 	}
 	

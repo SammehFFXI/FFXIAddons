@@ -12,7 +12,7 @@ function user_setup()
 	windower.add_to_chat(4,'CTRL F11: Auto WS')
 	-- for Auto RA
 	rngdelay = 1
-
+	
     state.IdleMode:options('Normal','PDT')
 	state.TPMode = M{['description']='TP Mode', 'Normal','RACC'}
 	state.RngMode = M{['description']='Ranger Mode', 'Archery','Gun','XBow'}
@@ -47,6 +47,7 @@ function user_setup()
 	send_command("alias rngtp gs equip sets.midcast.TP.normal")
 	send_command("alias rngtpacc gs equip sets.midcast.TP.RACC")
 	send_command("alias wsset gs equip sets.precast.WS")
+	send_command("alias agiwsset gs equip sets.precast.WS['Last Stand']")
 	send_command("alias mwsset gs equip sets.precast.WS['Trueflight']")
 	send_command("alias jr gs equip sets.Jishnus")
 	
@@ -189,7 +190,21 @@ function init_gear_sets()
 		right_ear="Enervating Earring",
 		left_ring="Regal Ring",
 		right_ring="Dingir Ring",
-		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Weapon skill damage +10%',}},
+		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},
+	}
+	sets.precast.WS['Last Stand'] = {
+	    head="Meghanada Visor +1",
+		body={ name="Herculean Vest", augments={'Rng.Acc.+23 Rng.Atk.+23','Weapon skill damage +3%','Rng.Atk.+9',}},
+		hands="Meg. Gloves +1",
+		legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
+		feet={ name="Herculean Boots", augments={'Rng.Acc.+25 Rng.Atk.+25','Weapon skill damage +2%','Rng.Acc.+1','Rng.Atk.+9',}},
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +25',}},
+		right_ear="Enervating Earring",
+		left_ring="Regal Ring",
+		right_ring="Dingir Ring",
+		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},
 	}
 	sets.precast.WS['Jishnu\'s Radiance'] = {
 		ammo=TP_Ammo,
@@ -220,7 +235,7 @@ function init_gear_sets()
 		right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +25',}},
 		left_ring="Dingir Ring",
 		right_ring="Weather. Ring",
-		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Weapon skill damage +10%',}},
+		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},
 	}
     sets.precast.WS['Wildfire'] = sets.precast.WS['Trueflight']
 	
@@ -233,6 +248,7 @@ function init_gear_sets()
 end
 
 function job_precast(spell)
+	last_precast = spell
     handle_equipping_gear(player.status)
 	checkblocking(spell)
 	if not buffactive["Velocity Shot"] and spell.name == "Ranged" then
@@ -295,8 +311,7 @@ function job_aftercast(spell)
 	if state.SpellDebug.value == "On" then 
       spelldebug(spell)
 	end
-
-    handle_equipping_gear(player.status)
+	handle_equipping_gear(player.status)
     equip(sets.idle)
 end
 
@@ -326,18 +341,21 @@ function select_default_macro_book()
     set_macro_page(4, 1)
 end
 
+function job_self_command(cmdParams, eventArgs)
+end
 
 windower.raw_register_event('incoming chunk', function(id,original,modified,injected,blocked)
 	local self = windower.ffxi.get_player()
     if id == 0x028 then
 		local packet = packets.parse('incoming', original)
 		local category = packet['Category']
-		--print(category)
-		if packet.Actor == self.id and category == 2 and state.AutoRA.value == 'true' then 
-			if state.AutoWSMode.value == 'true' and player.tp >= 1000 then 
-				send_command('wait '..rngdelay..';input /ws "'..state.AutoWS.value..'" <t>')
-			else 
-				send_command('wait '..rngdelay..'; input /ra <t>')
+		if packet.Actor == self.id and category == 2 then 
+			if state.AutoRA.value == 'true' then 
+				if state.AutoWSMode.value == 'true' and player.tp >= 1000 then 
+					send_command('wait '..rngdelay..';input /ws "'..state.AutoWS.value..'" <t>')
+				else 
+					send_command('wait '..rngdelay..'; input /ra <t>')
+				end
 			end
 		end
 		if packet.Actor == self.id and category == 3 and state.AutoRA.value == 'true' then 
@@ -345,3 +363,14 @@ windower.raw_register_event('incoming chunk', function(id,original,modified,inje
 		end
 	end
 end)
+
+windower.raw_register_event('incoming text', function(original)
+	if string.contains(original,"You must wait longer") then 
+		print('Interrupted:'..last_precast.name,os.clock())
+		if last_precast.name == 'Ranged' then 
+			send_command('wait .5; input /ra <t>')
+			return true
+		end
+	end
+end)
+

@@ -28,9 +28,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'Shopper'
 _addon.author = 'Sammeh'
-_addon.version = '1.0.0'
+_addon.version = '1.0.1'
 _addon.command = 'shop'
 
+-- 1.0.0 Orig release
+-- 1.0.1 Clean-up old copied code
+
+
+
+-- Todo:
+-- Add in a loop to buy multiples.  # requested / Stack Slot = # of Inv required. If inv_req > freeslots ; loop buy until # requested
+-- Track Guild NPCs 0x083 incoming- currently bad format
 
 
 require('tables')
@@ -193,16 +201,11 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 		
 		if found == 1 and pkt then
 			buy_item(npc_item_by_id,count,parsed_item_slot)
-		else
-			windower.add_to_chat(10,'NPC does not offer: '..npc_item_by_id..res.items[npc_item_by_id].en)
-		end
-
-		if busy and pkt and p['Menu ID'] == pkt['Menu ID'] then
 			busy = false
 			lastpkt = pkt
 			pkt = {}
-			return true
-		else 
+		else
+			windower.add_to_chat(10,'NPC does not offer: '..npc_item_by_id..res.items[npc_item_by_id].en)
 			busy = false
 			lastpkt = pkt
 			pkt = {}

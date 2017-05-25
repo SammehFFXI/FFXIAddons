@@ -1,5 +1,5 @@
 --[[
-Copyright © 2017, Ivaar
+Copyright © 2017, Ivaar,Sammeh
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -17,7 +17,7 @@ modification, are permitted provided that the following conditions are met:
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL Ivaar BE LIABLE FOR ANY
+DISCLAIMED. IN NO EVENT SHALL Ivaar,Sammeh BE LIABLE FOR ANY
 DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
 (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
 LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 _addon.author = 'Ivaar,Sammeh(Mod)'
 _addon.command = 'sc'
 _addon.name = 'SkillChains'
-_addon.version = '1.7.1'
+_addon.version = '1.8.0'
 
 
 -- Sammeh(Quetz) Mods.
@@ -47,6 +47,7 @@ _addon.version = '1.7.1'
 -- 1.6.2 Removing some unnecessary comments and loaded variables during debugs.
 -- 1.7.0 Fix Skillchains subtracting 1 second per-step and removing reson's after step 6.
 -- 1.7.1 Fix targeting variables
+-- 1.8.0 Adding in extra Skillchain Data.  Thanks Stamos (ffxiah)
 
 texts = require('texts')
 packets = require('packets')
@@ -177,9 +178,7 @@ prop_info = {
     Detonation = {elements='Wind',properties={[1]={['Compression']='Gravitation'},[2]={['Scission']='Compression'}},level=1},
     Impaction = {elements='Lightning',properties={[1]={Liquefaction='Liquefaction'},[2]={Detonation='Detonation'}},level=1},
     }
-	
-	
-    
+
 blood_pacts = L{
     [513] = {id=513,avatar='Carbuncle',en='Poison Nails',skillchain_a='Transfixion'},
     [521] = {id=521,avatar='Cait Sith',en='Regal Scratch',skillchain_a='Scission'},
@@ -278,47 +277,100 @@ npc_move = L{
     [2301] = {id=2301,en='Magic Mortar',skillchain_a='Fusion',skillchain_b='Liquefaction'},
     [2743] = {id=2743,en='String Shredder',skillchain_a='Distortion',skillchain_b='Scission'},
     [2744] = {id=2744,en='Armor Shatterer',skillchain_a='Fusion',skillchain_b='Impaction'},
-    -- Trusts
-    --[3195] = {id=3195,trust='Zeid',en="Abyssal Drain",skillchain_a='',skillchain_b='',skillchain_c=''},
-    --[3196] = {id=3196,trust='Zeid',en="Abyssal Strike",skillchain_a='',skillchain_b='',skillchain_c=''},
-    -- assumed magical [3203] = {id=3203,trust='MihliAliapoh',en='Scouring Bubbles',skillchain_a='',skillchain_b='',skillchain_c=''},
-    [3204] = {id=3204,trust='Tenzen',en='Amatsu: Tsukikage',skillchain_a='Fragmentation',skillchain_b='Detonation',skillchain_c=''},
-    [3215] = {id=3215,trust='NajaSalaheem',en="Peacebreaker",skillchain_a='Fragmentation',skillchain_b='',skillchain_c=''},
-    --[3224] = {id=3224,trust='',en="Hemorrhaze",skillchain_a='',skillchain_b='',skillchain_c=''},
-    [3231] = {id=3231,trust='LehkoHabhoka',en='Debonair Rush',skillchain_a='Detonation',skillchain_b='',skillchain_c=''},
-    --[3232] = {id=3232,trust='LehkoHabhoka',en='Iridal Pierce',skillchain_a='',skillchain_b='',skillchain_c=''},
-    --[3233] = {id=3233,trust='LehkoHabhoka',en='Lunar Revolution',skillchain_a='',skillchain_b='',skillchain_c=''},
-    [3234] = {id=3234,trust='Prishe',en="Nullifying Dropkick",skillchain_a='Induration',skillchain_b='',skillchain_c=''},
-    [3235] = {id=3235,trust='Prishe',en="Auroral Uppercut",skillchain_a='Fragmentation',skillchain_b='',skillchain_c=''},
-    [3236] = {id=3236,trust='Prishe',en="Knuckle Sandwich",skillchain_a='Fusion',skillchain_b='',skillchain_c=''},
-    --[3238] = {id=3238,trust='Gadalar',en="Salamander Flame",skillchain_a='',skillchain_b='',skillchain_c=''},
-    --[3239] = {id=3239,trust='Najelith',en='Typhonic Arrow',skillchain_a='',skillchain_b='',skillchain_c=''},
-    [3240] = {id=3240,trust='Zarag',en='Meteoric Impact',skillchain_a='Fragmentation',skillchain_b='',skillchain_c=''},
-    [3243] = {id=3243,trust='Nashmeira',en='Imperial Authority',skillchain_a='Fragmentation',skillchain_b='',skillchain_c=''},
-    [3252] = {id=3252,trust='Luzaf',en="Bisection",skillchain_a='Fragmentation',skillchain_b='Scission'},
-    [3253] = {id=3253,trust='Luzaf',en='Leaden Salute',skillchain_a='Gravitation',skillchain_b='Transfixion',skillchain_c=''},
-    [3254] = {id=3254,trust='Luzaf',en='Akimbo Shot',skillchain_a='Reverberation',skillchain_b='Detonation',skillchain_c=''},
-    [3255] = {id=3255,trust='Luzaf',en="Grisly Horizon",skillchain_a='Gravitation',skillchain_b='',skillchain_c=''},
-    [3337] = {id=3337,trust='Karaha-Baruha',en='Lunar Bay',skillchain_a='Gravitation',skillchain_b='',skillchain_c=''},
-    --[3355] = {id=3355,trust='Abenzio',en='Blow',skillchain_a='',skillchain_b='',skillchain_c=''},
-    --[3356] = {id=3356,trust='Abenzio',en='Uppercut',skillchain_a='',skillchain_b='',skillchain_c=''},
-    --[3357] = {id=3357,trust='Abenzio',en='Antiphase',skillchain_a='',skillchain_b='',skillchain_c=''},
-    --[3358] = {id=3358,trust='Abenzio',en='Blank Gaze',skillchain_a='',skillchain_b='',skillchain_c=''},
-    [3418] = {id=3418,trust='Tenzen',en='Amatsu: Torimai',skillchain_a='Transfixion',skillchain_b='Scission',skillchain_c=''},
-    [3419] = {id=3419,trust='Tenzen',en='Amatsu: Kazakiri',skillchain_a='Scission',skillchain_b='Detonation',skillchain_c=''},
-    [3420] = {id=3420,trust='Tenzen',en='Amatsu: Yukiarashi',skillchain_a='Induration',skillchain_b='Detonation',skillchain_c=''},
-    [3421] = {id=3421,trust='Tenzen',en='Amatsu: Tsukioboro',skillchain_a='Distortion',skillchain_b='Reverberation',skillchain_c=''},
-    [3422] = {id=3422,trust='Tenzen',en='Amatsu: Hanaikusa',skillchain_a='Fusion',skillchain_b='Compression',skillchain_c=''},
-    [3424] = {id=3424,trust='NanaaMihgo',en='Dancing Edge',skillchain_a='Scission',skillchain_b='Detonation',skillchain_c=''},
-    [3438] = {id=3438,trust='Areuhat',en='Dragon Breath',skillchain_a='Light',skillchain_b='Fusion',skillchain_c=''},
-    [3439] = {id=3439,trust='Areuhat',en='Hurricane Wing',skillchain_a='Detonation',skillchain_b='',skillchain_c=''},
-    [3487] = {id=3487,trust='SemihLafihna',en='Sidewinder',skillchain_a='Reverberation',skillchain_b='Transfixion',skillchain_c='Detonation'},
-    [3488] = {id=3488,trust='SemihLafihna',en='Arching Arrow',skillchain_a='Fusion',skillchain_b='',skillchain_c=''},
-    [3491] = {id=3491,trust='Lion',en='Grapeshot',skillchain_a='Transfixion',skillchain_b='Reverberation',skillchain_c=''},
-    [3492] = {id=3492,trust='Lion',en='Pirate Pummel',skillchain_a='Fusion',skillchain_b='',skillchain_c=''},
-    [3493] = {id=3493,trust='Lion',en='Powder Keg',skillchain_a='Fusion',skillchain_b='Compression',skillchain_c=''},
-    [3494] = {id=3494,trust='Lion',en='Walk the Plank',skillchain_a='Light',skillchain_b='Distortion',skillchain_c=''},
-    [3495] = {id=3495,trust='Zeid',en='Ground Strike',skillchain_a='Fragmentation',skillchain_b='Distortion',skillchain_c=''},
+	[2299] = {id=2299,en='Bone Crusher',skillchain_a='Fragmentation',skillchain_b=''},
+-- Trusts
+--[3195] = {id=3195,trust='Zeid',en="Abyssal Drain",skillchain_a='',skillchain_b='',skillchain_c=''},
+--[3196] = {id=3196,trust='Zeid',en="Abyssal Strike",skillchain_a='',skillchain_b='',skillchain_c=''},
+-- assumed magical [3203] = {id=3203,trust='MihliAliapoh',en='Scouring Bubbles',skillchain_a='',skillchain_b='',skillchain_c=''},
+	[3204] = {id=3204,trust='Tenzen',en='Amatsu: Tsukikage',skillchain_a='Fragmentation',skillchain_b='Detonation',skillchain_c=''},
+	[3215] = {id=3215,trust='NajaSalaheem',en="Peacebreaker",skillchain_a='Fragmentation',skillchain_b='',skillchain_c=''},
+	--[3224] = {id=3224,trust='',en="Hemorrhaze",skillchain_a='',skillchain_b='',skillchain_c=''},
+	[3231] = {id=3231,trust='LehkoHabhoka',en='Debonair Rush',skillchain_a='Detonation',skillchain_b='',skillchain_c=''},
+	--[3232] = {id=3232,trust='LehkoHabhoka',en='Iridal Pierce',skillchain_a='Light',skillchain_b='Fragmentation',skillchain_c=''},
+	--[3233] = {id=3233,trust='LehkoHabhoka',en='Lunar Revolution',skillchain_a='Gravitation',skillchain_b='Reverberation',skillchain_c=''},
+	[3234] = {id=3234,trust='Prishe',en="Nullifying Dropkick",skillchain_a='Induration',skillchain_b='',skillchain_c=''},
+	[3235] = {id=3235,trust='Prishe',en="Auroral Uppercut",skillchain_a='Fragmentation',skillchain_b='',skillchain_c=''},
+	[3236] = {id=3236,trust='Prishe',en="Knuckle Sandwich",skillchain_a='Fusion',skillchain_b='',skillchain_c=''},
+	--[3238] = {id=3238,trust='Gadalar',en="Salamander Flame",skillchain_a='',skillchain_b='',skillchain_c=''},
+	--[3239] = {id=3239,trust='Najelith',en='Typhonic Arrow',skillchain_a='',skillchain_b='',skillchain_c=''},
+	[3240] = {id=3240,trust='Zarag',en='Meteoric Impact',skillchain_a='Fragmentation',skillchain_b='',skillchain_c=''},
+	[3243] = {id=3243,trust='Nashmeira',en='Imperial Authority',skillchain_a='Fragmentation',skillchain_b='',skillchain_c=''},
+	[3252] = {id=3252,trust='Luzaf',en="Bisection",skillchain_a='Fragmentation',skillchain_b='Scission'},
+	[3434] = {id=3434,trust='Gilgamesh',en="Tachi: Kamai",skillchain_a='Gravitation',skillchain_b='Darkness'},
+	[3435] = {id=3435,trust='Gilgamesh',en="Iainuki",skillchain_a='Fragmentation',skillchain_b='Compression'},
+	[3436] = {id=3436,trust='Gilgamesh',en="Tachi: Goten",skillchain_a='Transfixion',skillchain_b='Impaction'},
+	[3437] = {id=3437,trust='Gilgamesh',en="Tachi: Kasha",skillchain_a='Fusion',skillchain_b='Compression'},
+	[3293] = {id=3293,trust='Excenmille',en="Stag's Charge",skillchain_a='Gravitation',skillchain_b='Transfixion'},
+	[3294] = {id=3294,trust='Excenmille',en="Orcsbane",skillchain_a='Distortion',skillchain_b='Compression'},
+	[3295] = {id=3295,trust='Excenmille',en="Songbird Swoop",skillchain_a='Fusion',skillchain_b='Reverberation'},
+	[3580] = {id=3580,trust='Arciela',en="Harmonic Displacement",skillchain_a='Fusion',skillchain_b='Reverberation'},
+	[3454] = {id=3454,trust='Mayakov',en="Coming Up Roses",skillchain_a='Fragmentation',skillchain_b=''},
+	[3591] = {id=3591,trust='August',en="Tartaric Sigil",skillchain_a='Compression',skillchain_b='Scission'},
+	[3592] = {id=3592,trust='August',en="Null Field",skillchain_a='Fusion',skillchain_b='Transfixion'},
+	[3593] = {id=3593,trust='August',en="Alabaster Burst",skillchain_a='Distortion',skillchain_b='Detonation'},
+	[3594] = {id=3594,trust='August',en="Noble Frenzy",skillchain_a='Gravitation',skillchain_b=''},
+	[3595] = {id=3595,trust='August',en="Fluminous Fury",skillchain_a='Fragmentation',skillchain_b=''},
+	[3596] = {id=3596,trust='August',en="No Quarter",skillchain_a='Light',skillchain_b='Distortion'},
+	[3677] = {id=3677,trust='Morimar',en="Camaraderie of the Crevasse",skillchain_a='Detonation',skillchain_b='Impaction'},
+	[3678] = {id=3678,trust='Morimar',en="Into the Light",skillchain_a='Fragmentation',skillchain_b='Impaction'},
+	[3679] = {id=3679,trust='Morimar',en="Arduous Decision",skillchain_a='Fragmentation',skillchain_b='Compression'},
+	[3680] = {id=3680,trust='Morimar',en="12 Blades of Remorse",skillchain_a='Distortion',skillchain_b=''},
+	[3582] = {id=3582,trust='Arciela',en="Darkest Hour",skillchain_a='Gravitation',skillchain_b=''},
+	[3585] = {id=3585,trust='Arciela',en="Naakual's Vengeance",skillchain_a='Induration',skillchain_b=''},
+	[3413] = {id=3413,trust='Maat',en="Combo",skillchain_a='Impaction',skillchain_b=''},
+	[3414] = {id=3414,trust='Maat',en="One-Ilm Punch",skillchain_a='Compression',skillchain_b=''},
+	[3415] = {id=3415,trust='Maat',en="Howling Fist",skillchain_a='Impaction',skillchain_b='Transfixion'},
+	[3416] = {id=3416,trust='Maat',en="Dragon Kick",skillchain_a='Fragmentation',skillchain_b=''},
+	[3417] = {id=3417,trust='Maat',en="Asuran Fists",skillchain_a='Gravitation',skillchain_b='Liquefaction'},
+	[3263] = {id=3263,trust='Maat',en="Bear Killer",skillchain_a='Reverberation',skillchain_b=''},
+	[3253] = {id=3253,trust='Luzaf',en='Leaden Salute',skillchain_a='Gravitation',skillchain_b='Transfixion',skillchain_c=''},
+	[3254] = {id=3254,trust='Luzaf',en='Akimbo Shot',skillchain_a='Reverberation',skillchain_b='Detonation',skillchain_c=''},
+	[3255] = {id=3255,trust='Luzaf',en="Grisly Horizon",skillchain_a='Gravitation',skillchain_b='',skillchain_c=''},
+	[3337] = {id=3337,trust='Karaha-Baruha',en='Lunar Bay',skillchain_a='Gravitation',skillchain_b='',skillchain_c=''},
+	[3691] = {id=3691,trust='KingofHearts',en='Bludgeon',skillchain_a='Fusion',skillchain_b='Liquefaction',skillchain_c=''},
+	[3740] = {id=3740,trust='Shantotto',en='Final Exam',skillchain_a='Light',skillchain_b='Fusion',skillchain_c=''},
+	[3741] = {id=3741,trust='Shantotto',en="Doctor's Orders",skillchain_a='Gravitation',skillchain_b='',skillchain_c=''},
+	[3742] = {id=3742,trust='Shantotto',en='Empirical Research',skillchain_a='Fragmentation',skillchain_b='Transfixion',skillchain_c=''},
+	[3743] = {id=3743,trust='Shantotto',en='Lessons in Pain',skillchain_a='Scission',skillchain_b='Distortion',skillchain_c=''},
+	[3692] = {id=3692,trust='KingofHearts',en='Deal Out',skillchain_a='Distortion',skillchain_b='',skillchain_c=''},
+	[3470] = {id=3470,trust='Mildaurion',en='Great Wheel',skillchain_a='Fragmentation',skillchain_b='Scission',skillchain_c=''},
+	[3471] = {id=3471,trust='Mildaurion',en='Light Blade',skillchain_a='Fusion',skillchain_b='',skillchain_c=''},
+	[3472] = {id=3472,trust='Mildaurion',en='Vortex',skillchain_a='Distortion',skillchain_b='Reverberation',skillchain_c=''},
+	[3473] = {id=3473,trust='Mildaurion',en='Stellar Burst',skillchain_a='Gravitation',skillchain_b='',skillchain_c=''},
+	[3732] = {id=3732,trust='Iroha',en='Amatsu: Fuga',skillchain_a='Impaction',skillchain_b='',skillchain_c=''},
+	[3500] = {id=3500,trust='Flaviria',en="Celidon's Torment",skillchain_a='Light',skillchain_b='Fragmentation',skillchain_c=''},
+	[3733] = {id=3733,trust='Iroha',en='Amatsu: Kyori',skillchain_a='Induration',skillchain_b='',skillchain_c=''},
+	[3734] = {id=3734,trust='Iroha',en='Amatsu: Hanadoki',skillchain_a='Reverberation',skillchain_b='Scission',skillchain_c=''},
+	[3735] = {id=3735,trust='Iroha',en='Amatsu: Choun',skillchain_a='Liquefaction',skillchain_b='',skillchain_c=''},
+	[3736] = {id=3736,trust='Iroha',en='Amatsu: Gachirin',skillchain_a='Light',skillchain_b='Fragmentation',skillchain_c=''},
+	[3737] = {id=3737,trust='Iroha',en='Amatsu: Suien',skillchain_a='Fusion',skillchain_b='Liquefaction',skillchain_c=''},
+	[3310] = {id=3310,trust='Lilisette',en="Dancer's Fury",skillchain_a='Fragmentation',skillchain_b='',skillchain_c=''},
+	[3311] = {id=3311,trust='Lilisette',en='Whirling Edge',skillchain_a='Distortion',skillchain_b='',skillchain_c=''},
+	--[3355] = {id=3355,trust='Abenzio',en='Blow',skillchain_a='',skillchain_b='',skillchain_c=''},
+	--[3356] = {id=3356,trust='Abenzio',en='Uppercut',skillchain_a='Liquefaction',skillchain_b='Impaction',skillchain_c=''},
+	--[3357] = {id=3357,trust='Abenzio',en='Antiphase',skillchain_a='',skillchain_b='',skillchain_c=''},
+	--[3358] = {id=3358,trust='Abenzio',en='Blank Gaze',skillchain_a='',skillchain_b='',skillchain_c=''},
+	[3418] = {id=3418,trust='Tenzen',en='Amatsu: Torimai',skillchain_a='Transfixion',skillchain_b='Scission',skillchain_c=''},
+	[3419] = {id=3419,trust='Tenzen',en='Amatsu: Kazakiri',skillchain_a='Scission',skillchain_b='Detonation',skillchain_c=''},
+	[3420] = {id=3420,trust='Tenzen',en='Amatsu: Yukiarashi',skillchain_a='Induration',skillchain_b='Detonation',skillchain_c=''},
+	[3421] = {id=3421,trust='Tenzen',en='Amatsu: Tsukioboro',skillchain_a='Distortion',skillchain_b='Reverberation',skillchain_c=''},
+	[3422] = {id=3422,trust='Tenzen',en='Amatsu: Hanaikusa',skillchain_a='Fusion',skillchain_b='Compression',skillchain_c=''},
+	[3424] = {id=3424,trust='NanaaMihgo',en='Dancing Edge',skillchain_a='Scission',skillchain_b='Detonation',skillchain_c=''},
+	[3189] = {id=3189,trust='NanaaMihgo',en='King Cobra Clamp',skillchain_a='Fragmentation',skillchain_b='',skillchain_c=''},
+	[3423] = {id=3423,trust='NanaaMihgo',en='Wasp Sting',skillchain_a='Scission',skillchain_b='',skillchain_c=''},
+	[3438] = {id=3438,trust='Areuhat',en='Dragon Breath',skillchain_a='Light',skillchain_b='Fusion',skillchain_c=''},
+	[3439] = {id=3439,trust='Areuhat',en='Hurricane Wing',skillchain_a='Detonation',skillchain_b='',skillchain_c=''},
+	[3487] = {id=3487,trust='SemihLafihna',en='Sidewinder',skillchain_a='Reverberation',skillchain_b='Transfixion',skillchain_c='Detonation'},
+	[3488] = {id=3488,trust='SemihLafihna',en='Arching Arrow',skillchain_a='Fusion',skillchain_b='',skillchain_c=''},
+	[3491] = {id=3491,trust='Lion',en='Grapeshot',skillchain_a='Transfixion',skillchain_b='Reverberation',skillchain_c=''},
+	[3492] = {id=3492,trust='Lion',en='Pirate Pummel',skillchain_a='Fusion',skillchain_b='',skillchain_c=''},
+	[3493] = {id=3493,trust='Lion',en='Powder Keg',skillchain_a='Fusion',skillchain_b='Compression',skillchain_c=''},
+	[3494] = {id=3494,trust='Lion',en='Walk the Plank',skillchain_a='Light',skillchain_b='Distortion',skillchain_c=''},
+	[3495] = {id=3495,trust='Zeid',en='Ground Strike',skillchain_a='Fragmentation',skillchain_b='Distortion',skillchain_c=''},
+	[3715] = {id=3715,trust='AAMR',en='Rampage',skillchain_a='Scission',skillchain_b='',skillchain_c=''},
+	[3716] = {id=3716,trust='AAMR',en='Calamity',skillchain_a='Scission',skillchain_b='Impaction',skillchain_c=''},
+	[3717] = {id=3717,trust='AAMR',en='Havoc Spiral',skillchain_a='',skillchain_b='',skillchain_c=''},
+	[3718] = {id=3718,trust='AAMR',en='Cloudsplitter',skillchain_a='Darkness',skillchain_b='Fragmentation',skillchain_c=''},
     -- Jug Pet
     [3840] = {id=3840,en='Foot Kick',skillchain_a='Reverberation',skillchain_b=''},
     [3842] = {id=3842,en='Whirl Claws',skillchain_a='Impaction',skillchain_b=''},

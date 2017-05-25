@@ -449,7 +449,7 @@ function init_gear_sets()
     -- PET SIC & READY MOVES
     sets.midcast.Pet.WS = {ammo="Demonry Core",
 		head=Ready_Atk_head,
-        neck="Empath Necklace",ear2="Domesticator's Earring",
+        neck="Shulmanu Collar",ear2="Domesticator's Earring",
         body=Ready_Atk_body,
         hands=Ready_Atk_hands,
         ring1="Varar Ring",
@@ -568,7 +568,7 @@ function init_gear_sets()
 
     sets.idle.Pet = set_combine(sets.idle, {ammo="Demonry Core",
         head=Hybrid_head,
-        neck="Empath Necklace",ear1="Handler's Earring",ear2="Handler's Earring +1",
+        neck="Shulmanu Collar",ear1="Enmerkar Earring",ear2="Handler's Earring +1",
         body=Pet_PDT_body,
         hands=Pet_PDT_hands,
         ring1="Paguroidea Ring",ring2="Sheltered Ring",
@@ -579,7 +579,7 @@ function init_gear_sets()
 
     sets.idle.Pet.Engaged = {ammo="Demonry Core",
         head=Pet_Melee_head,
-        neck="Empath Necklace",ear1="Sabong Earring",ear2="Domesticator's Earring",
+        neck="Shulmanu Collar",ear1="Sabong Earring",ear2="Domesticator's Earring",
         body=Pet_Melee_body,
         hands=Pet_Melee_hands,
         ring1="Dark Ring",ring2="Defending Ring",
@@ -592,7 +592,7 @@ function init_gear_sets()
     sets.defense.PDT = {
 	    main="Mafic Cudgel",
 	    ammo="Hasty Pinion +1",
-        head="Jumalik Helm",neck="Loricate Torque +1",ear1="Handler's Earring",ear2="Handler's Earring +1",
+        head="Jumalik Helm",neck="Loricate Torque +1",ear1="Enmerkar Earring",ear2="Handler's Earring +1",
         body="Jumalik Mail",hands="Umuthi Gloves",ring1="Dark Ring",ring2="Defending Ring",
         back="Iximulew Cape",waist="Flume Belt +1",legs="Iuitl Tights +1",feet="Diamantaire Sollerets"}
 
@@ -607,7 +607,7 @@ function init_gear_sets()
 
     sets.defense.PetPDT = {
 	    main=Pet_PDT_AxeMain,
-	    head="Anwig Salade",ear1="Handler's Earring",ear2="Handler's Earring +1",
+	    head="Anwig Salade",ear1="Enmerkar Earring",ear2="Handler's Earring +1",
 		neck="Shepherd's Chain",ring1="Dark Ring",ring2="Defending Ring",
         body=Pet_PDT_body,
         hands=Pet_PDT_hands,
@@ -746,7 +746,7 @@ function init_gear_sets()
     -- GEARSETS FOR MASTER ENGAGED (SINGLE-WIELD) & PET TANKING
     sets.engaged.PetTank = set_combine(sets.engaged, {
         head=Hybrid_head,
-        neck="Shepherd's Chain",ear1="Handler's Earring",ear2="Handler's Earring +1",
+        neck="Shepherd's Chain",ear1="Enmerkar Earring",ear2="Handler's Earring +1",
         body=Hybrid_body,
         hands=Hybrid_hands,
         ring1="Varar Ring",
@@ -763,7 +763,7 @@ function init_gear_sets()
     -- GEARSETS FOR MASTER ENGAGED (DUAL-WIELD) & PET TANKING
     sets.engaged.DW.PetTank = set_combine(sets.engaged.DW, {
         head=Pet_PDT_head,
-        neck="Shepherd's Chain",ear1="Handler's Earring",ear2="Handler's Earring +1",
+        neck="Shepherd's Chain",ear1="Enmerkar Earring",ear2="Handler's Earring +1",
         body=Hybrid_body,
         hands=Hybrid_hands,
         ring1="Varar Ring",
@@ -774,7 +774,7 @@ function init_gear_sets()
     sets.engaged.DW.PetTank.LowAccHaste = sets.engaged.DW.PetTank
     sets.engaged.DW.PetTank.MedAcc = set_combine(sets.engaged.DW.MedAcc, {
         head=Hybrid_head,
-        ear1="Handler's Earring",ear2="Handler's Earring +1",
+        ear1="Enmerkar Earring",ear2="Handler's Earring +1",
         body=Hybrid_body,
         ring1="Varar Ring",
         hands=Hybrid_hands,
@@ -783,7 +783,7 @@ function init_gear_sets()
     sets.engaged.DW.PetTank.MedAccHaste = sets.engaged.DW.PetTank.MedAcc
     sets.engaged.DW.PetTank.HighAcc = set_combine(sets.engaged.DW.HighAcc, {
         head=Hybrid_head,
-        ear1="Handler's Earring",ear2="Handler's Earring +1",
+        ear1="Enmerkar Earring",ear2="Handler's Earring +1",
         body="Mes'yohi Haubergeon",
         hands=Hybrid_hands,
         ring1="Varar Ring",

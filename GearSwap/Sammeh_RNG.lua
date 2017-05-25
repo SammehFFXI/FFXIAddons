@@ -15,7 +15,7 @@ function user_setup()
 	
     state.IdleMode:options('Normal','PDT')
 	state.TPMode = M{['description']='TP Mode', 'Normal','RACC'}
-	state.RngMode = M{['description']='Ranger Mode', 'Archery','Gun','XBow'}
+	state.RngMode = M{['description']='Ranger Mode', 'Fail-Not','Yoichinoyumi','Gun','XBow'}
 	state.Bolt = M{['description']='Bolt Mode','Normal','DefDown','Holy Bolt','Bloody Bolt'}
 	state.AutoRA = M{['description']='Auto RA','false','true'}
 	state.AutoWSMode = M{['description']='Auto WS Mode','false','true'}
@@ -53,8 +53,13 @@ function user_setup()
 	
 	add_to_chat(2,'Ranged Weapon:'..player.equipment.range)
 	if player.equipment.range == "Yoichinoyumi" then
-		send_command("gs c set RngMode Archery")
+		send_command("gs c set RngMode Yoichinoyumi")
 		send_command("dp bow")
+		state.AutoWS = M{['description']='Auto WS',"Jishnu's Radiance","Namas Arrow"}
+	elseif player.equipment.range == "Fail-Not" then
+		send_command("gs c set RngMode Fail-Not")
+		send_command("dp bow") 
+		state.AutoWS = M{['description']='Auto WS',"Jishnu's Radiance","Apex Arrow"}
 	elseif player.equipment.range == "Fomalhaut" then
 		send_command("gs c set RngMode Gun")
 		send_command("dp gun")
@@ -73,10 +78,21 @@ function init_gear_sets()
 	
 	TP_Hands = { name="Herculean Gloves", augments={'Rng.Acc.+15 Rng.Atk.+15','Weapon skill damage +2%','DEX+9','Rng.Atk.+15',}}
 	
-	if state.RngMode.value == 'Archery' then
+	if state.RngMode.value == 'Fail-Not' then
+	  --RNGWeapon = "Yoichinoyumi"
+	  RNGWeapon = "Fail-Not"
+	  TP_Ammo = "Chrono Arrow"
+	  WS_Ammo = "Chrono Arrow"
+	  send_command("alias rngws1 input /ws 'Jishnu\'s Radiance' <t>")
+	  send_command("alias rngws2 input /ws 'Namas Arrow' <t>")
+	  send_command("alias rngws3 input /ws 'Apex Arrow' <t>")
+	  TP_Hands = "Amini Glovelettes +1"
+	elseif state.RngMode.value == 'Yoichinoyumi' then
 	  RNGWeapon = "Yoichinoyumi"
-	  TP_Ammo = "Yoichi's Arrow"
-	  WS_Ammo = "Yoichi's Arrow"
+	  --TP_Ammo = "Yoichi's Arrow"
+	  --WS_Ammo = "Yoichi's Arrow"
+	  TP_Ammo = "Chrono Arrow"
+	  WS_Ammo = "Chrono Arrow"
 	  send_command("alias rngws1 input /ws 'Jishnu\'s Radiance' <t>")
 	  send_command("alias rngws2 input /ws 'Namas Arrow' <t>")
 	  send_command("alias rngws3 input /ws 'Apex Arrow' <t>")
@@ -148,6 +164,8 @@ function init_gear_sets()
 		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
 	}
 	sets.midcast.TP.RACC = {
+		range=RNGWeapon,
+		ammo=TP_Ammo,
 		head="Meghanada Visor +1",
 		body="Meg. Cuirie +1",
 		hands="Meg. Gloves +1",
@@ -364,9 +382,10 @@ windower.raw_register_event('incoming chunk', function(id,original,modified,inje
 	end
 end)
 
+--[[
 windower.raw_register_event('incoming text', function(original)
 	if string.contains(original,"You must wait longer") then 
-		print('Interrupted:'..last_precast.name,os.clock())
+		--print('Interrupted:'..last_precast.name,os.clock())
 		if last_precast.name == 'Ranged' then 
 			send_command('wait .5; input /ra <t>')
 			return true
@@ -374,3 +393,4 @@ windower.raw_register_event('incoming text', function(original)
 	end
 end)
 
+]]

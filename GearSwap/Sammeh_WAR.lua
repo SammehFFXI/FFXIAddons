@@ -29,7 +29,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum", --dt2
 	    head="Sulevia's Mask +1", --dt5 
 		body="Sulevia's Plate. +1", --dt8
-		hands="Sulev. Gauntlets +1", --dt4
+		hands="Sulev. Gauntlets +2", --dt4
 		legs="Sulevi. Cuisses +1", --dt6
 		feet="Sulev. Leggings +1", --dt3
 		neck="Loricate Torque +1", --dt6 
@@ -44,7 +44,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 	    head="Flamma Zucchetto +1",
 		body="Sulevia's Plate. +1", --dt8
-		hands="Sulev. Gauntlets +1", --dt4
+		hands="Sulev. Gauntlets +2", --dt5
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
 		feet="Sulev. Leggings +1", --dt3
 		neck="Loricate Torque +1", --dt6 
@@ -59,7 +59,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Flamma Zucchetto +1",
 		body={ name="Valorous Mail", augments={'Accuracy+22','"Store TP"+7',}},
-		hands="Sulev. Gauntlets +1",
+		hands="Sulev. Gauntlets +2",
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
 		feet={ name="Valorous Greaves", augments={'Accuracy+26','"Dbl.Atk."+4','DEX+8','Attack+3',}},
 		neck="Combatant's Torque",
@@ -91,7 +91,7 @@ function init_gear_sets()
 		ammo="Knobkierrie",   -- Losing 13 acc for +10 att +6WSD; not sure if that's a gr8 thing.
 		head={ name="Valorous Mask", augments={'Weapon skill damage +5%','AGI+7','Accuracy+15','Attack+10',}},
 		body="Pumm. Lorica +3",
-		hands="Sulev. Gauntlets +1",
+		hands="Sulev. Gauntlets +2",
 		legs={ name="Valor. Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
 		feet="Sulev. Leggings +1",
 		right_ear="Telos Earring",
@@ -177,7 +177,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Twilight Helm",
 		body="Sulevia's Plate. +1",
-		hands="Sulev. Gauntlets +1",
+		hands="Sulev. Gauntlets +2",
 		legs="Sulevi. Cuisses +1",
 		feet="Hermes' Sandals",
 		neck="Bathy Choker +1",

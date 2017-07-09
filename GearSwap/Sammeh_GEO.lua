@@ -245,7 +245,7 @@ function init_gear_sets()
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
     sets.midcast.Geomancy = {
 	    main={ name="Solstice", augments={'Mag. Acc.+20','Pet: Damage taken -4%','"Fast Cast"+5',}},
-		sub="Culminus",
+		sub="Ammurapi Shield",
 		range={ name="Dunna", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
 		head="Azimuth Hood +1",
 		body={ name="Bagua Tunic +1", augments={'Enhances "Bolster" effect',}},
@@ -262,7 +262,7 @@ function init_gear_sets()
 	}
     sets.midcast.Geomancy.Indi = {
 		main={ name="Solstice", augments={'Mag. Acc.+20','Pet: Damage taken -4%','"Fast Cast"+5',}},
-		sub="Culminus",
+		sub="Ammurapi Shield",
 		range={ name="Dunna", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
 		head="Azimuth Hood +1",
 		body={ name="Bagua Tunic +1", augments={'Enhances "Bolster" effect',}},

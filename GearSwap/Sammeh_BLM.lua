@@ -162,11 +162,12 @@ function init_gear_sets()
 		right_ring="Weather. Ring",
 		back={ name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},
 	}
-	sets.midcast['Elemental Magic'].MACC = set_combine(sets.midcast['Elemental Magic'], {
+	sets.midcast['Elemental Magic'].MACC = set_combine(sets.midcast['Elemental Magic'].Main, {
 		main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
 		sub="Enki Strap",
-		left_ear="Hermetic Earring",
-		neck="Incanter's Torque",
+		left_ear="Barkarole Earring",
+		right_ear="Dignitary's Earring",
+		neck="Erra Pendant",
 		hands={ name="Psycloth Manillas", augments={'Mag. Acc.+10','Spell interruption rate down +15%','MND+7',}},
 	})
 	sets.midcast['Elemental Magic'].StoreTP = set_combine(sets.midcast['Elemental Magic'].Main, {

@@ -43,44 +43,6 @@ function init_gear_sets()
 	weaponlock_sub="Genmei Shield"
 
 
---[[	
-	-- Idle Sets
-	idle_main="Akademos"
-	idle_sub="Clerisy Strap +1"
-	idle_ranged=""
-	idle_ammo="Homiliary"
-	idle_head="Befouled Crown"
-	idle_neck="Loricate Torque +1"
-	idle_ear1="Genmei Earring"
-	idle_ear2="Hearty Earring"
-	idle_body="Jhakri Robe +1"
-	idle_hands="Gende. Gages +1"
-	idle_ring1="Dark Ring"
-	idle_ring2="Defending Ring"
-	idle_back="Solemnity Cape"
-	idle_waist="Fucho-no-obi"
-	idle_legs="Carmine Cuisses +1"
-	idle_feet="Herald's Gaiters"
-	
-	idle_pdt_main="Terra's Staff"  -- 20 pdt -- 
-	idle_pdt_sub="Alber Strap" -- 2 pdt --
-	idle_pdt_ranged=""
-	idle_pdt_ammo="Homiliary"
-	idle_pdt_head={ name="Merlinic Hood", augments={'Attack+1','Magic dmg. taken -4%','Mag. Acc.+9',}}   -- 4 mdt --
-	idle_pdt_neck="Loricate Torque +1" -- 6dt --
-	idle_pdt_ear1="Genmei Earring"
-	idle_pdt_ear2="Handler's Earring +1"
-	idle_pdt_body={ name="Gende. Bilaut +1", augments={'Phys. dmg. taken -4%','Magic dmg. taken -4%','"Cure" potency +4%',}} -- 4pdt, 4mdt-- 
-	idle_pdt_hands={ name="Merlinic Dastanas", augments={'Magic dmg. taken -4%','INT+3','"Mag.Atk.Bns."+7',}}  --4mdt --
-	idle_pdt_ring1="Dark Ring" -- 6pdt, 3mdt -- 
-	idle_pdt_ring2="Defending Ring" -- 10dt --
-	idle_pdt_back="Solemnity Cape" -- 4dt --
-	idle_pdt_waist="Slipor Sash" -- 3mdt --
-	idle_pdt_legs={ name="Hagondes Pants +1", augments={'Phys. dmg. taken -3%','Magic dmg. taken -3%','"Avatar perpetuation cost" -5',}} -- 3pdt, 3mdt --
-	idle_pdt_feet="Herald's Gaiters"
-	-- total: 20 DT, 35 pdt, 21mdt
-]]
-
 	-- Precast Section
 	
 	FC_enh_waist="Siegel Sash"

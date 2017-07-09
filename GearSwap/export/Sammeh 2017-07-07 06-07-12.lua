@@ -1,0 +1,17 @@
+sets.exported={
+    main="Chango",
+    sub="Utu Grip",
+    ammo="Ginsen",
+    head="Flam. Zucchetto +1",
+    body={ name="Valorous Mail", augments={'Accuracy+22','"Store TP"+7',}},
+    hands="Sulev. Gauntlets +2",
+    legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
+    feet="Pumm. Calligae +3",
+    neck="Combatant's Torque",
+    waist="Ioskeha Belt",
+    left_ear="Cessance Earring",
+    right_ear="Telos Earring",
+    left_ring="Warp Ring",
+    right_ring="Petrov Ring",
+    back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
+}

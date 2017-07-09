@@ -52,7 +52,7 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
 	send_command('alias g11_m1g13 input /ma "Cait Sith" <me>')
-	send_command('alias g11_m1g14 input /pet "Mewing Lullaby" <t>')
+	send_command('alias g11_m1g14 input /pet "Mewing Lullaby" <t>; input /party Mewing Lullaby!')
 	
 	
 
@@ -255,12 +255,12 @@ function init_gear_sets()
     hands={ name="Merlinic Dastanas", augments={'Pet: Attack+25 Pet: Rng.Atk.+25','Blood Pact Dmg.+8','Pet: INT+10','Pet: Mag. Acc.+8','Pet: "Mag.Atk.Bns."+1',}},
     legs={ name="Enticer's Pants", augments={'MP+50','Pet: Accuracy+15 Pet: Rng. Acc.+15','Pet: Mag. Acc.+15','Pet: Damage taken -5%',}},
     feet="Con. Pigaches +1",
-    neck="Empath Necklace",
+    neck="Shulmanu Collar",
     waist="Incarnation Sash",
-    left_ear="Caller's Earring",
-    right_ear="Domes. Earring",
+    left_ear="Lugalbanda Earring",
+    right_ear="Enmerkar Earring",
     left_ring="Evoker's Ring",
-    right_ring="Globidonta Ring",
+    right_ring="Varar Ring",
     back="Campestres's Cape",
 		}
  
@@ -270,16 +270,16 @@ function init_gear_sets()
     sub="Alber Strap",
     ammo="Sancus Sachet",
     head="Apogee Crown",
-    body={ name="Merlinic Jubbah", augments={'Pet: Mag. Acc.+30','Blood Pact Dmg.+7','Pet: DEX+6','Pet: "Mag.Atk.Bns."+6',}},
+    body="Con. Doublet +1",
     hands={ name="Merlinic Dastanas", augments={'Pet: Attack+25 Pet: Rng.Atk.+25','Blood Pact Dmg.+8','Pet: INT+10','Pet: Mag. Acc.+8','Pet: "Mag.Atk.Bns."+1',}},
     legs={ name="Enticer's Pants", augments={'MP+50','Pet: Accuracy+15 Pet: Rng. Acc.+15','Pet: Mag. Acc.+15','Pet: Damage taken -5%',}},
     feet="Con. Pigaches +1",
-    neck="Empath Necklace",
+    neck="Adad Amulet",
     waist="Incarnation Sash",
-    left_ear="Caller's Earring",
-    right_ear="Domes. Earring",
+    left_ear="Lugalbanda Earring",
+    right_ear="Enmerkar Earring",
     left_ring="Evoker's Ring",
-    right_ring="Globidonta Ring",
+    right_ring="Varar Ring",
     back="Campestres's Cape",
 }
  
@@ -290,16 +290,16 @@ function init_gear_sets()
     sub="Alber Strap",
     ammo="Sancus Sachet",
     head="Apogee Crown",
-    body={ name="Merlinic Jubbah", augments={'Pet: Mag. Acc.+30','Blood Pact Dmg.+7','Pet: DEX+6','Pet: "Mag.Atk.Bns."+6',}},
+    body="Con. Doublet +1",
     hands={ name="Merlinic Dastanas", augments={'Pet: Attack+25 Pet: Rng.Atk.+25','Blood Pact Dmg.+8','Pet: INT+10','Pet: Mag. Acc.+8','Pet: "Mag.Atk.Bns."+1',}},
     legs={ name="Enticer's Pants", augments={'MP+50','Pet: Accuracy+15 Pet: Rng. Acc.+15','Pet: Mag. Acc.+15','Pet: Damage taken -5%',}},
     feet="Con. Pigaches +1",
     neck="Empath Necklace",
     waist="Incarnation Sash",
-    left_ear="Caller's Earring",
-    right_ear="Domes. Earring",
+    left_ear="Lugalbanda Earring",
+    right_ear="Enmerkar Earring",
     left_ring="Evoker's Ring",
-    right_ring="Globidonta Ring",
+    right_ring="Varar Ring",
     back="Campestres's Cape",
 	}
                
@@ -324,7 +324,7 @@ function init_gear_sets()
     sub="Alber Strap",
     ammo="Sancus Sachet",
     head={ name="Glyphic Horn +1", augments={'Enhances "Astral Flow" effect',}},
-    body="Con. Doublet +1",
+    body="Shomonjijoe +1",
     hands={ name="Glyphic Bracers", augments={'Inc. Sp. "Blood Pact" magic burst dmg.',}},
     legs={ name="Enticer's Pants", augments={'MP+50','Pet: Accuracy+15 Pet: Rng. Acc.+15','Pet: Mag. Acc.+15','Pet: Damage taken -5%',}},
     feet="Herald's Gaiters",
@@ -365,7 +365,7 @@ function init_gear_sets()
     sub="Alber Strap",
     ammo="Sancus Sachet",
     head={ name="Glyphic Horn +1", augments={'Enhances "Astral Flow" effect',}},
-    body="Con. Doublet +1",
+    body="Shomonjijoe +1",
     hands={ name="Glyphic Bracers", augments={'Inc. Sp. "Blood Pact" magic burst dmg.',}},
     legs={ name="Enticer's Pants", augments={'MP+50','Pet: Accuracy+15 Pet: Rng. Acc.+15','Pet: Mag. Acc.+15','Pet: Damage taken -5%',}},
     feet="Herald's Gaiters",

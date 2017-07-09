@@ -18,8 +18,23 @@ function user_setup()
 	send_command("alias eng gs equip sets.engaged")
 	send_command("alias meva gs equip sets.meva")
 	send_command("alias idle gs equip sets.Idle.Current")
-	--send_command('@wait 5;input /lockstyleset 27')
-	
+	send_command('@wait 5;input /lockstyleset 38')
+	send_command("alias g11_m2g1 input /ja 'Ancient Circle' <me>")
+	send_command("alias g11_m2g2 input /ja 'Deep Breathing' <me>")
+	send_command("alias g11_m2g3 input /ja Angon <t>")
+	send_command("alias g11_m2g4 input /ja 'Spirit Link' <me>")
+	send_command("alias g11_m2g8 input /ja Jump <t>")
+	send_command("alias g11_m2g9 input /ja 'High Jump' <t>")
+	send_command("alias g11_m2g10 input /pet 'Steady Wing' <me>")
+	send_command("alias g11_m2g11 input /pet 'Smiting Breath' <t>")
+	send_command("alias g11_m2g12 input /pet 'Restoring Breath' <me>")
+	send_command("alias g11_m2g13 input /ja Berserk <me>")
+	send_command("alias g11_m2g14 input /ja Warcry <me>")
+	send_command("alias g11_m2g15 input /ja Aggressor <me>")
+	send_command("alias g11_m2g16 input /ja Restraint <me>")
+	send_command("alias g11_m2g17 input /ws 'Camlann\'s Torment'")
+	send_command("alias g11_m2g18 input /ws 'Star Diver'")
+
 end
 
 	
@@ -28,8 +43,8 @@ function init_gear_sets()
 		ammo="Staunch Tathlum",
 	    head="Sulevia's Mask +1",
 		body="Sulevia's Plate. +1",
-		hands="Sulev. Gauntlets +1",
-		legs="Sulevi. Cuisses +1",
+		hands="Sulev. Gauntlets +2",
+		legs="Sulev. Cuisses +2",
 		feet="Sulev. Leggings +1",
 		neck="Loricate Torque +1",
 		waist="Flume Belt +1",
@@ -44,15 +59,15 @@ function init_gear_sets()
 		head="Flam. Zucchetto +1",
 		body={ name="Valorous Mail", augments={'Accuracy+22','"Store TP"+7',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
-		legs="Sulevi. Cuisses +1",
+		legs="Sulev. Cuisses +2",
 		feet={ name="Valorous Greaves", augments={'Accuracy+26','"Dbl.Atk."+4','DEX+8','Attack+3',}},
-		neck="Combatant's Torque",
+		neck="Shulmanu Collar",
 		waist="Ioskeha Belt",
 		left_ear="Cessance Earring",
-		right_ear="Telos Earring",
+		right_ear="Sherida Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Petrov Ring",
-		back="Solemnity Cape",
+		back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
 	sets.engaged.Reraise = set_combine(sets.engaged,{body="Twilight Mail",head="Twilight Helm"})
 	sets.engaged.DT = sets.dt
@@ -61,7 +76,7 @@ function init_gear_sets()
 		ammo="Knobkierrie",
 		head={ name="Valorous Mask", augments={'Weapon skill damage +5%','AGI+7','Accuracy+15','Attack+10',}},
 		body={ name="Valorous Mail", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','DEX+6','Accuracy+1','Attack+13',}},
-		hands={ name="Valorous Mitts", augments={'Accuracy+23 Attack+23','Weapon skill damage +3%','VIT+8','Accuracy+2','Attack+12',}},
+		hands="Sulev. Gauntlets +2",
 		legs={ name="Valor. Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
 		feet="Sulev. Leggings +1",
 		neck="Fotia Gorget",
@@ -69,15 +84,9 @@ function init_gear_sets()
 		left_ear="Sherida Earring",
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
-		right_ring="Shukuyu Ring",
-		back="Solemnity Cape",
+		right_ring="Regal Ring",
+		back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
-	--back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
-	sets.ws.vitbased = set_combine(sets.ws,{
-		right_ring="Petrov Ring",
-		legs="Sulevi. Cuisses +1",
-		back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
-	})
 	sets.ws.strbased = set_combine(sets.ws,{
 	})
 	sets.ws.magic = {
@@ -102,6 +111,7 @@ function init_gear_sets()
 	sets.precast.JA.Berserk = {}
 	sets.precast.JA.Warcry = {}
 	sets.precast.JA.Meditate = {}
+	sets.precast.JA.Angon = {ammo="Angon"}
 	
 	sets.meva = {
 		ammo="Staunch Tathlum",
@@ -130,13 +140,13 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Twilight Helm",
 		body="Sulevia's Plate. +1",
-		hands="Sulev. Gauntlets +1",
-		legs="Sulevi. Cuisses +1",
+		hands="Sulev. Gauntlets +2",
+		legs="Carmine Cuisses +1",
 		feet="Sulev. Leggings +1",
 		neck="Bathy Choker +1",
 		waist="Flume Belt +1",
-		right_ear="Telos Earring",
-		left_ear="Cessance Earring",
+		right_ear="Genmei Earring",
+		left_ear="Odnowa Earring +1",
 		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
 		right_ring="Defending Ring",
 		back="Solemnity Cape",
@@ -174,7 +184,7 @@ function job_precast(spell)
 end
 
 function job_post_precast(spell)
-	if player.tp < 2750 and spell.type == 'WeaponSkill' then
+	if player.tp < 2250 and spell.type == 'WeaponSkill' then
 		windower.add_to_chat(10,"Adding in Moonshade Earring for more TP:"..player.tp)
 		equip({left_ear="Moonshade Earring"})
 	end

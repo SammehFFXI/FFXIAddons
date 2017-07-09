@@ -32,25 +32,25 @@ function init_gear_sets()
 		feet={ name="Herculean Boots", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','STR+11','Quadruple Attack +2','Accuracy+18 Attack+18',}},
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",
-		left_ear="Cessance Earring",
+		left_ear="Sherida Earring",
 		right_ear="Telos Earring",
 		left_ring="Hetairoi Ring",
 		right_ring="Epona's Ring",
-		back="Agema Cape",
+		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
 	}
 	sets.ws = {
 		head={ name="Adhemar Bonnet", augments={'DEX+10','AGI+10','Accuracy+15',}},
 		body={ name="Herculean Vest", augments={'Accuracy+22 Attack+22','Weapon skill damage +3%','STR+12','Accuracy+10','Attack+12',}},
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
 		feet={ name="Herculean Boots", augments={'Accuracy+28','"Fast Cast"+2','Accuracy+20 Attack+20',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
-		left_ear="Cessance Earring",
-		right_ear="Telos Earring",
+		left_ear="Sherida Earring",
+		right_ear="Moonshade Earring",
 		left_ring="Hetairoi Ring",
 		right_ring="Epona's Ring",
-		back="Agema Cape",
+		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
 	}
 	
 	
@@ -72,7 +72,7 @@ function init_gear_sets()
 	sets.Idle.Current = sets.Idle
     sets.Resting = sets.Idle
 	
-	sets.WakeSleep = {head="Frenzy Sallet"}
+	sets.WakeSleep = {head="Frenzy Sallet",}
 
 end
 

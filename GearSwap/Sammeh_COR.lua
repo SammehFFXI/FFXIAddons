@@ -49,7 +49,7 @@ function init_gear_sets()
 		ammo=TP_Ammo,
 		head={ name="Herculean Helm", augments={'Rng.Acc.+28','Weapon skill damage +3%','DEX+11','Rng.Atk.+12',}},
 		body={ name="Pursuer's Doublet", augments={'HP+50','Crit. hit rate+4%','"Snapshot"+6',}}, -- 6 --
-		hands="Alruna's Gloves +1",  -- 5 --
+		hands="Carmine Fin. Ga. +1",  -- 8 --
 		legs="Adhemar Kecks",  -- 9 -- 
 		feet="Adhemar Gamashes", -- 8 -- 
 		neck="Iskur Gorget",

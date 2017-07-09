@@ -21,6 +21,14 @@ function user_setup()
 	send_command("alias idle gs equip sets.Idle.Current")
 	send_command('@wait 5;input /lockstyleset 27')
 	
+	send_command("alias g11_m2g13 input /ja Berserk <me>")
+	send_command("alias g11_m2g14 input /ja Warcry <me>")
+	send_command("alias g11_m2g15 input /ja Aggressor <me>")
+	send_command("alias g11_m2g16 input /ja Restraint <me>")
+	send_command("alias g11_m2g17 input /ws Scourge")
+	send_command("alias g11_m2g18 input /ws Resolution")
+
+	
 end
 
 	
@@ -28,9 +36,9 @@ function init_gear_sets()
 	sets.dt = {
 		ammo="Staunch Tathlum", --dt2
 	    head="Sulevia's Mask +1", --dt5 
-		body="Sulevia's Plate. +1", --dt8
+		body="Arke Corazza", --dt12
 		hands="Sulev. Gauntlets +2", --dt4
-		legs="Sulevi. Cuisses +1", --dt6
+		legs="Sulev. Cuisses +2", --dt6
 		feet="Sulev. Leggings +1", --dt3
 		neck="Loricate Torque +1", --dt6 
 		waist="Ioskeha Belt",
@@ -61,7 +69,7 @@ function init_gear_sets()
 		body={ name="Valorous Mail", augments={'Accuracy+22','"Store TP"+7',}},
 		hands="Sulev. Gauntlets +2",
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
-		feet={ name="Valorous Greaves", augments={'Accuracy+26','"Dbl.Atk."+4','DEX+8','Attack+3',}},
+		feet="Pumm. Calligae +3",
 		neck="Combatant's Torque",
 		waist="Ioskeha Belt",
 		right_ear="Telos Earring",
@@ -106,7 +114,7 @@ function init_gear_sets()
 	sets.ws.vitbased = set_combine(sets.ws,{
 		body="Pumm. Lorica +3",
 		right_ring="Regal Ring",
-		legs="Sulevi. Cuisses +1",
+		legs="Sulev. Cuisses +2",
 		back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
 	})
 	sets.ws.strbased = set_combine(sets.ws,{
@@ -135,6 +143,7 @@ function init_gear_sets()
 	sets.ws["Fell Cleve"] = sets.ws.strbased
 	sets.ws["Resolution"] = sets.ws.strbased
 	sets.ws["Mistral Axe"] = sets.ws.strbased
+	sets.ws["Savage Blade"] = sets.ws.strbased
 	sets.ws["Metatron Torment"] = sets.ws.strbased
 	sets.ws["Upheaval"] = sets.ws.vitbased
 	sets.ws["Cloudsplitter"] = sets.ws.magic
@@ -176,9 +185,9 @@ function init_gear_sets()
     sets.Idle = {
 		ammo="Ginsen",
 		head="Twilight Helm",
-		body="Sulevia's Plate. +1",
+		body="Arke Corazza",
 		hands="Sulev. Gauntlets +2",
-		legs="Sulevi. Cuisses +1",
+		legs="Sulev. Cuisses +2",
 		feet="Hermes' Sandals",
 		neck="Bathy Choker +1",
 		waist="Flume Belt +1",

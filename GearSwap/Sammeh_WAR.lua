@@ -115,9 +115,11 @@ function init_gear_sets()
 		body="Pumm. Lorica +3",
 		right_ring="Regal Ring",
 		legs="Sulev. Cuisses +2",
+		feet="Pumm. Calligae +3",
 		back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
 	})
 	sets.ws.strbased = set_combine(sets.ws,{
+	ammo="Seeth. Bomblet +1",
 	head={ name="Argosy Celata +1", augments={'STR+12','DEX+12','Attack+20',}},
     body={ name="Argosy Hauberk", augments={'STR+10','DEX+10','Attack+15',}},
 	hands={ name="Argosy Mufflers +1", augments={'STR+20','"Dbl.Atk."+3','Haste+3%',}},

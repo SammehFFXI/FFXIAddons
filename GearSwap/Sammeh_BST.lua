@@ -86,7 +86,7 @@ function user_setup()
     -- Set up Jug Pet cycling and keybind Alt+F8
     -- INPUT PREFERRED JUG PETS HERE
     state.JugMode = M{['description']='Jug Mode', 'BlackbeardRandy', 'SwoopingZhivago', 'WarlikePatrick',
-        'HeadbreakerKen', 'VivaciousVickie', 'BouncingBertha', 'ScissorlegXerin', 'ThreestarLynn', 'HeraldHenry', 'AlluringHoney','HurlerPercival'}
+        'HeadbreakerKen', 'VivaciousVickie', 'BouncingBertha', 'ScissorlegXerin', 'ThreestarLynn', 'HeraldHenry', 'AlluringHoney','FaithfulFalcorr'}
     send_command('bind !f8 gs c cycle JugMode')
 
     -- Set up Monster Correlation Modes and keybind Ctrl+F8

@@ -44,7 +44,7 @@ function init_gear_sets()
 	idle_legs={ name="Valor. Hose", augments={'Accuracy+20 Attack+20','Phys. dmg. taken -4%','DEX+1','Accuracy+15','Attack+12',}}
 	idle_feet={ name="Valorous Greaves", augments={'Accuracy+25 Attack+25','STR+5','Accuracy+1',}}
 	
-	idle_fastpants_legs="Crimson Cuisses"
+	idle_fastpants_legs="Crimson Cuisses +1"
 	
 	
 	-- Precast Section
@@ -108,14 +108,14 @@ function init_gear_sets()
 	engaged_ear1="Cessance Earring"
 	engaged_ear2="Thureous Earring"
 	engaged_body="Sulevia's Plate. +1"
-	engaged_hands="Sulev. Gauntlets +1"
+	engaged_hands="Sulev. Gauntlets +2"
 	engaged_ring1="Supershear Ring"
 	engaged_ring2="Defending Ring"
 	engaged_back="Agema Cape"
 	-- engaged_back="Philidor Mantle"
 	engaged_waist="Anguinus Belt"
-	engaged_legs="Sulevi. Cuisses +1"
-	engaged_legs="Sulev. Leggings +1"
+	engaged_legs="Sulev. Cuisses +2"
+	
 	
 	ws_ranged=""
 	ws_ammo="Hasty Pinion +1"
@@ -129,8 +129,8 @@ function init_gear_sets()
 	ws_ring2="Etana Ring"
 	ws_back="Agema Cape"
 	ws_waist="Fotia Belt"
-	ws_legs="Sulevia'a Cuisses +1"
-	ws_feet="Sulevia's Leggings +1"
+	ws_legs="Sulev. Cuisses +2"
+	ws_feet="Sulev. Leggings +1"
 	
 		
 	cure_ammo="Homiliary"

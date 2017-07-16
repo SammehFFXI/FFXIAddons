@@ -30,7 +30,7 @@ local busy = false
 function createpacket()
 	local found = 0
 	local result = {}
-	windower.add_to_chat(8,"got here looking for chest")
+	windower.add_to_chat(8,"Searching for Riftworn Pyxis:")
 	for i,v in pairs(windower.ffxi.get_mob_array()) do
 		if string.find(v['name'],'Riftworn Pyxis') and windower.ffxi.get_mob_by_index(i).valid_target then
 			found = 1
@@ -38,7 +38,7 @@ function createpacket()
 			target_id = v['id']
 			npc_name = v['name']
 			distance = windower.ffxi.get_mob_by_id(target_id).distance
-			windower.add_to_chat(8,'Riftworn Pyxis Found'..distance)
+			windower.add_to_chat(8,'Riftworn Pyxis Found! Distance:'..math.sqrt(distance))
 		end
 	end
 	
@@ -56,18 +56,25 @@ function createpacket()
 			result = nil
 		end
 	else
-		windower.add_to_chat(8,"No Pyxis Found")
+		windower.add_to_chat(8,"Riftworn Pyxis Found")
 	end
 	
 return result
 end
 
 windower.register_event('addon command', function(...)
-	if not busy then
-		pkt = createpacket()
-		if pkt and pkt['Target'] then
-			busy = true
-			poke_npc(pkt['Target'],pkt['Target Index'])
+    local args = T{...}
+    local cmd = args[1]
+	args:remove(1)
+	if cmd and cmd == 'reset' and lastpkt then 
+		reset_me()
+	else
+		if not busy then
+			pkt = createpacket()
+			if pkt and pkt['Target'] then
+				busy = true
+				poke_npc(pkt['Target'],pkt['Target Index'])
+			end
 		end
 	end
 end)
@@ -104,6 +111,11 @@ end
 windower.register_event('incoming chunk',function(id,data,modified,injected,blocked)
 
 	if id == 0x034 or id == 0x032 then
+	--[[
+		Need to parse packet for return.  If it says 'you're not elegible etc etc' then we need to mark 
+		menu ID or whatever to validate data.   Otherwise we'll lock up on some kind of menu.  May have 
+		fixed with the p['Menu ID'] == pkt['Menu ID'] statement below.. not sure 
+	]]
 		local p = packets.parse('incoming',data)
 		if busy and pkt and p['Menu ID'] == pkt['Menu ID'] then
 			local packet = packets.new('outgoing', 0x05B)
@@ -118,13 +130,15 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 			packets.inject(packet)
 		
 		busy = false
+		lastpkt = pkt
 		pkt = {}
+		
 		return true
 		else 
 			busy = false
+			lastpkt = pkt
 			pkt = {}
 		end
-		
 	end
 end)
 

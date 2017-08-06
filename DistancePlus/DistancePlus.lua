@@ -28,7 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'DistancePlus'
 _addon.author = 'Sammeh'
-_addon.version = '1.3.0.10'
+_addon.version = '1.4.0.0'
 _addon.command = 'dp'
 
 -- 1.3.0.2 Fixed up nil's per recommendation on submission to Windower 
@@ -231,7 +231,7 @@ windower.register_event('prerender', function()
         end
         
         if t.name == "Luopan" then
-            -- Get all mobs in range of loupan
+			-- Get all mobs in range of loupan
             local luopan_txtbox = 'Luopan List: '
             for i,v in pairs(windower.ffxi.get_mob_array()) do
                 local DistanceBetween = ((t.x - v.x)*(t.x-v.x) + (t.y-v.y)*(t.y-v.y)):sqrt()

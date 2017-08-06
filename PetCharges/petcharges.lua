@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'PetCharges'
 _addon.author = 'Sammeh'
-_addon.version = '1.6' 
+_addon.version = '1.7' 
 _addon.command = 'petcharges'
 
 config = require('config')
@@ -121,7 +121,6 @@ windower.register_event('incoming chunk',function(id,data)
         expect_ready_move = false
     end
 	if id == 0x67 or id == 0x68 then
-		
 		local packet = packets.parse('incoming', data)
 		local msg_type = packet['Message Type']
 		pet_idx = packet['Pet Index']
@@ -169,5 +168,31 @@ windower.register_event('login', function()
 		jobpoints = 0
 	end	
 	merits = self.merits.sic_recast
+end)
+
+windower.register_event('zone change', function(command)
+    coroutine.sleep(2)
+    self = windower.ffxi.get_player()
+	if self.job_points.bst.jp_spent >= 100 then
+		jobpoints = 5
+	else
+		jobpoints = 0
+	end	
+	merits = self.merits.sic_recast
+	pet = windower.ffxi.get_mob_by_target('pet')
+	abilitylist = windower.ffxi.get_abilities().job_abilities
+end)
+
+windower.register_event('job change', function(command)
+    coroutine.sleep(2)
+    self = windower.ffxi.get_player()
+	if self.job_points.bst.jp_spent >= 100 then
+		jobpoints = 5
+	else
+		jobpoints = 0
+	end	
+	merits = self.merits.sic_recast
+	pet = windower.ffxi.get_mob_by_target('pet')
+	abilitylist = windower.ffxi.get_abilities().job_abilities
 end)
 

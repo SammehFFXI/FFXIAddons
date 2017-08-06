@@ -436,13 +436,30 @@ function job_precast(spell)
 end
 
 function job_post_midcast(spell)
-    if string.find(spell.english,'Cur') then 
+    if string.find(spell.english,'Cur') and spell.target.type ~= "MONSTER" then 
         equip(sets.midcast.Cure)
 		if spell.target.type == 'SELF' then
 		 equip(sets.midcast.CurePotencyRecieved)
 		end
         weathercheck(spell.element)
         if buffactive.rapture then equip(sets.enh.Rapture) end
+	elseif string.find(spell.english,'Cur') and spell.target.type == "MONSTER" then 
+		if state.CastingMode.value == "MACC" then
+	        equip(sets.midcast['Elemental Magic'].MACC)
+			elseif state.CastingMode.value == "StoreTP" then
+	        equip(sets.midcast['Elemental Magic'].StoreTP)
+			elseif state.CastingMode.value == "MagicBurst" then
+			 if player.equipment.main == 'Khatvanga' then
+			   equip(sets.midcast['Elemental Magic'].MagicBurst,{feet={name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}})
+			 else 
+	           equip(sets.midcast['Elemental Magic'].MagicBurst)
+			 end
+			else 
+            equip(sets.midcast['Elemental Magic'])
+		end
+		equip{ring1="Mujin Band"}
+		equip{ring2="Weatherspoon Ring"}
+		weathercheck(spell.element)
     elseif spell.skill=="Elemental Magic" or spell.name == "Kaustra" then
         if string.find(spell.english,'helix') or spell.name == 'Kaustra' then
             if state.CastingMode.value == "MACC" then

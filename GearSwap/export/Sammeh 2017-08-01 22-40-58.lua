@@ -1,0 +1,17 @@
+sets.exported={
+    main="Bravura",
+    sub="Utu Grip",
+    ammo="Ginsen",
+    head="Flam. Zucchetto +1",
+    body="Pumm. Lorica +3",
+    hands="Sulev. Gauntlets +2",
+    legs="Pumm. Cuisses +3",
+    feet="Pumm. Calligae +3",
+    neck="Combatant's Torque",
+    waist="Ioskeha Belt",
+    left_ear="Cessance Earring",
+    right_ear="Telos Earring",
+    left_ring="Niqmaddu Ring",
+    right_ring="Regal Ring",
+    back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
+}

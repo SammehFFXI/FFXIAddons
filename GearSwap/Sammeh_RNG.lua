@@ -131,7 +131,7 @@ function init_gear_sets()
 	    range=RNGWeapon,
 		ammo=TP_Ammo,
 		head="Amini Gapette",  -- 6 --
-		body={ name="Pursuer's Doublet", augments={'HP+50','Crit. hit rate+4%','"Snapshot"+6',}}, -- 6 --
+		body="Oshosi Vest",
 		hands="Carmine Fin. Ga. +1",  -- 8 --
 		legs={ name="Adhemar Kecks", augments={'AGI+10','"Rapid Shot"+10','Enmity-5',}},
 		feet="Adhemar Gamashes", -- 8 -- 
@@ -151,7 +151,7 @@ function init_gear_sets()
 	    range=RNGWeapon,
 		ammo=TP_Ammo,
 		head="Arcadian Beret +1",
-		body={ name="Pursuer's Doublet", augments={'HP+50','Crit. hit rate+4%','"Snapshot"+6',}},
+		body="Oshosi Vest",
 		hands=TP_Hands,
 		legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
 		feet="Adhemar Gamashes",
@@ -167,8 +167,8 @@ function init_gear_sets()
 		range=RNGWeapon,
 		ammo=TP_Ammo,
 		head="Meghanada Visor +1",
-		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
+		body="Oshosi Vest",
+		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +1",
 		feet="Meg. Jam. +1",
 		neck="Iskur Gorget",
@@ -198,7 +198,7 @@ function init_gear_sets()
 	    ammo=TP_Ammo,
 		head={ name="Herculean Helm", augments={'Rng.Acc.+28','Weapon skill damage +3%','DEX+11','Rng.Atk.+12',}},
 		body={ name="Herculean Vest", augments={'Rng.Acc.+23 Rng.Atk.+23','Weapon skill damage +3%','Rng.Atk.+9',}},
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		--legs="Adhemar Kecks",
 		legs="Amini Brague +1",
 		feet={ name="Herculean Boots", augments={'Rng.Acc.+25 Rng.Atk.+25','Weapon skill damage +2%','Rng.Acc.+1','Rng.Atk.+9',}},
@@ -213,7 +213,7 @@ function init_gear_sets()
 	sets.precast.WS['Last Stand'] = {
 	    head="Meghanada Visor +1",
 		body={ name="Herculean Vest", augments={'Rng.Acc.+23 Rng.Atk.+23','Weapon skill damage +3%','Rng.Atk.+9',}},
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
 		feet={ name="Herculean Boots", augments={'Rng.Acc.+25 Rng.Atk.+25','Weapon skill damage +2%','Rng.Acc.+1','Rng.Atk.+9',}},
 		neck="Fotia Gorget",
@@ -228,7 +228,7 @@ function init_gear_sets()
 		ammo=TP_Ammo,
 		head={ name="Herculean Helm", augments={'Rng.Acc.+28','Weapon skill damage +3%','DEX+11','Rng.Atk.+12',}},
 		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs="Darraigner's Brais",
 		feet="Thereoid Greaves",
 		neck="Fotia Gorget",

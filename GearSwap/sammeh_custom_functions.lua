@@ -87,6 +87,7 @@ function spelldebug(spell)
   if spell.action_type == 'Magic' then
     add_to_chat(2,'-----------Spell Info-----------')
     add_to_chat(2,'Name:'..spell.name..'     Element:'..spell.element..'     Skill:'..spell.skill..'')
+	add_to_chat(2,'Target:'..spell.target.name..'     Target Type:'..spell.target.type)
 	add_to_chat(2,'Base Cast Time:'..spell.cast_time..'     Base Recast:'..spell.recast..'')
 	if spell.type ~= 'Ninjutsu' then
 	  add_to_chat(2,'MP Cost:'..spell.mp_cost..'')

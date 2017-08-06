@@ -1,0 +1,17 @@
+sets.exported={
+    main="Bravura",
+    sub="Utu Grip",
+    ammo="Staunch Tathlum",
+    head={ name="Jumalik Helm", augments={'MND+7','"Mag.Atk.Bns."+12','Magic burst dmg.+7%',}},
+    body="Pumm. Lorica +3",
+    hands={ name="Leyline Gloves", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
+    legs="Pumm. Cuisses +3",
+    feet="Pumm. Calligae +3",
+    neck="Warder's Charm +1",
+    waist="Engraved Belt",
+    left_ear="Eabani Earring",
+    right_ear="Flashward Earring",
+    left_ring="Purity Ring",
+    right_ring="Vengeful Ring",
+    back="Tantalic Cape",
+}

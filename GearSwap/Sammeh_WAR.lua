@@ -8,7 +8,7 @@ end
 function user_setup()
 	state.IdleMode:options('Normal','Reraise','DT')
 	send_command('bind f10 gs c cycle IdleMode')
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT'}
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','Accuracy'}
     select_default_macro_book()
 	
 	-- Set Common Aliases --
@@ -93,6 +93,21 @@ function init_gear_sets()
 		back="Philidor Mantle", -- 5
 	} -- Enmity = 76~80
 	sets.engaged.Reraise = set_combine(sets.engaged,{body="Twilight Mail",head="Twilight Helm"})
+	sets.engaged.Accuracy = {
+	    ammo="Ginsen",
+		head="Flam. Zucchetto +1",
+		body="Pumm. Lorica +3",
+		hands="Sulev. Gauntlets +2",
+		legs="Pumm. Cuisses +3",
+		feet="Pumm. Calligae +3",
+		neck="Combatant's Torque",
+		waist="Ioskeha Belt",
+		left_ear="Cessance Earring",
+		right_ear="Telos Earring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Regal Ring",
+		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
+	}
 	sets.engaged.DT = sets.dt
 	sets.ws = {
 		-- ammo="Seeth. Bomblet +1",
@@ -149,8 +164,7 @@ function init_gear_sets()
 	sets.ws["Metatron Torment"] = sets.ws.strbased
 	sets.ws["Upheaval"] = sets.ws.vitbased
 	sets.ws["Cloudsplitter"] = sets.ws.magic
-	
-	
+
 	
     ---  PRECAST SETS  ---
 	sets.precast = {}
@@ -164,10 +178,10 @@ function init_gear_sets()
 	sets.meva = {
 		ammo="Staunch Tathlum",
 		head={ name="Jumalik Helm", augments={'MND+7','"Mag.Atk.Bns."+12','Magic burst dmg.+7%',}},
-		body={ name="Jumalik Mail", augments={'HP+50','Attack+15','Enmity+9','"Refresh"+2',}},
+		body="Pumm. Lorica +3",
 		hands={ name="Leyline Gloves", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
-		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
-		feet="Founder's Greaves",
+		legs="Pumm. Cuisses +3",
+		feet="Pumm. Calligae +3",
 		neck="Warder's Charm +1",
 		waist="Engraved Belt",
 		left_ear="Eabani Earring",

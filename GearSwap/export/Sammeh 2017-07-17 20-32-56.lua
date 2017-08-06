@@ -1,0 +1,18 @@
+sets.exported={
+    main="Perun +1",
+    sub="Perun",
+    range="Fomalhaut",
+    ammo="Chrono Bullet",
+    head={ name="Arcadian Beret +1", augments={'Enhances "Recycle" effect',}},
+    body="Oshosi Vest",
+    hands={ name="Herculean Gloves", augments={'Rng.Acc.+15 Rng.Atk.+15','Weapon skill damage +2%','DEX+9','Rng.Atk.+15',}},
+    legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
+    feet={ name="Adhemar Gamashes", augments={'HP+50','"Store TP"+6','"Snapshot"+8',}},
+    neck="Iskur Gorget",
+    waist="Yemaya Belt",
+    left_ear="Telos Earring",
+    right_ear="Enervating Earring",
+    left_ring="Apate Ring",
+    right_ring="Ilabrat Ring",
+    back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
+}

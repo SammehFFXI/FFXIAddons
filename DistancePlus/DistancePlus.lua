@@ -28,7 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'DistancePlus'
 _addon.author = 'Sammeh'
-_addon.version = '1.4.0.0'
+_addon.version = '1.4.0.1'
 _addon.command = 'dp'
 
 -- 1.3.0.2 Fixed up nil's per recommendation on submission to Windower 
@@ -41,6 +41,7 @@ _addon.command = 'dp'
 -- 1.3.0.9 Fixup MaxDecimal from config plugin addition.
 -- 1.3.0.10  Changed slightly some variable scopes for lower mem usage.
 -- 1.4.0.0 Add in Luopon Box with mobs within range.
+-- 1.4.0.1 Fixup distance correlation from self to specific target
 
 require('tables')
 
@@ -235,7 +236,7 @@ windower.register_event('prerender', function()
             local luopan_txtbox = 'Luopan List: '
             for i,v in pairs(windower.ffxi.get_mob_array()) do
                 local DistanceBetween = ((t.x - v.x)*(t.x-v.x) + (t.y-v.y)*(t.y-v.y)):sqrt()
-                if DistanceBetween < (6 + s.model_size) and (v.status == 1 or v.status == 0) and v.name ~= "" and v.name ~= nil and v.name ~= "Luopan" then 
+                if DistanceBetween < (6 + v.model_size) and (v.status == 1 or v.status == 0) and v.name ~= "" and v.name ~= nil and v.name ~= "Luopan" then 
                     luopan_txtbox = luopan_txtbox.."\n"..v.name.." "..string.format("%.2f",DistanceBetween)
                 end 
             end

@@ -32,6 +32,9 @@ function user_setup()
 	send_command("alias idlepet gs equip sets.Idle.Pet")
 	indi_timer = ''
     indi_duration = 290  -- Update for whatever you get on your Cape  /////    Base = 180 + 15 Relic Legs, +20 Empy Feet, +15 Solstice + 20 JSE Back + 40 Job Points
+	
+	last_indi=''
+	last_geo=''
 end
 
 	
@@ -450,12 +453,17 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     
     if not spell.interrupted then
         if spell.english:startswith('Indi') then
+			if spell.target.type == 'SELF' then
+				last_indi = spell.name
+			end
             if not classes.CustomIdleGroups:contains('Indi') then
                 classes.CustomIdleGroups:append('Indi')
             end
             send_command('@timers d "'..indi_timer..'"')
             indi_timer = spell.english
             send_command('@timers c "'..indi_timer..'" '..indi_duration..' down spells/00136.png')
+		elseif spell.english:startswith('Geo') then
+			last_geo = spell.name
         elseif spell.english == 'Sleep' or spell.english == 'Sleepga' then
             send_command('@timers c "'..spell.english..' ['..spell.target.name..']" 60 down spells/00220.png')
         elseif spell.english == 'Sleep II' or spell.english == 'Sleepga II' then
@@ -520,3 +528,84 @@ function select_default_macro_book()
     set_macro_page(4, 2)
 end
 
+
+
+
+
+--- loupon wizardry -----
+-- at top of screen, declare 2 global variables of '' value.   last_indi='' and last_geo=''
+-- then update them in aftercast.
+-- last_indi and last_geo
+
+buff_list = S{'Indi-Focus','Indi-Voidance','Indi-Precision','Indi-Fend','Indi-Acumen','Indi-Barrier','Indi-Fury','Indi-CHR','Indi-MND','Indi-INT','Indi-STR','Indi-DEX','Indi-VIT','Indi-AGI','Indi-Haste','Indi-Refresh','Indi-Regen','Geo-Focus','Geo-Voidance','Geo-Precision','Geo-Fend','Geo-Acumen','Geo-Barrier','Geo-Fury','Geo-CHR','Geo-MND','Geo-INT','Geo-STR','Geo-DEX','Geo-VIT','Geo-AGI','Geo-Haste','Geo-Refresh','Geo-Regen'}
+debuff_list = S{'Indi-Gravity','Indi-Paralysis','Indi-Slow','Indi-Languor','Indi-Vex','Indi-Torpor','Indi-Slip','Indi-Malaise','Indi-Fade','Indi-Frailty','Indi-Wilt','Indi-Attunement','Indi-Poison','Geo-Gravity','Geo-Paralysis','Geo-Slow','Geo-Languor','Geo-Vex','Geo-Torpor','Geo-Slip','Geo-Malaise','Geo-Fade','Geo-Frailty','Geo-Wilt','Geo-Attunement','Geo-Poison'}
+ignore_list = S{'SlipperySilas','HareFamiliar','SheepFamiliar','FlowerpotBill','TigerFamiliar','FlytrapFamiliar','LizardFamiliar','MayflyFamiliar','EftFamiliar','BeetleFamiliar','AntlionFamiliar','CrabFamiliar','MiteFamiliar','KeenearedSteffi','LullabyMelodia','FlowerpotBen','SaberSiravarde','FunguarFamiliar','ShellbusterOrob','ColdbloodComo','CourierCarrie','Homunculus','VoraciousAudrey','AmbusherAllie','PanzerGalahad','LifedrinkerLars','ChopsueyChucky','AmigoSabotender','NurseryNazuna','CraftyClyvonne','PrestoJulio','SwiftSieghard','MailbusterCetas','AudaciousAnna','TurbidToloi','LuckyLulush','DipperYuly','FlowerpotMerle','DapperMac','DiscreetLouise','FatsoFargann','FaithfulFalcorr','BugeyedBroncha','BloodclawShasra','GorefangHobs','GooeyGerard','CrudeRaphie','DroopyDortwin','SunburstMalfik','WarlikePatrick','ScissorlegXerin','RhymingShizuna','AttentiveIbuki','AmiableRoche','HeraldHenry','BrainyWaluis','SuspiciousAlice','HeadbreakerKen','RedolentCandi','CaringKiyomaro','HurlerPercival','AnklebiterJedd','BlackbeardRandy','FleetReinhard','GenerousArthur','ThreestarLynn','BraveHeroGlenn','SharpwitHermes','AlluringHoney','CursedAnnabelle','SwoopingZhivago','BouncingBertha','MosquitoFamilia','Ifrit','Shiva','Garuda','Fenrir','Carbuncle','Ramuh','Leviathan','CaitSith','Diabolos','Titan','Atomos','WaterSpirit','FireSpirit','EarthSpirit','ThunderSpirit','AirSpirit','LightSpirit','DarkSpirit','IceSpirit'}
+
+luopantxt = {}
+luopantxt.pos = {}
+luopantxt.pos.x = -238
+luopantxt.pos.y = 221
+luopantxt.text = {}
+luopantxt.text.font = 'Arial'
+luopantxt.text.size = 10
+luopantxt.flags = {}
+luopantxt.flags.right = true
+
+luopan = texts.new('${value}', luopantxt)
+
+windower.raw_register_event('prerender', function()
+    local s = windower.ffxi.get_mob_by_target('me')
+    if windower.ffxi.get_mob_by_target('pet') then
+        myluopan = windower.ffxi.get_mob_by_target('pet')
+    else
+        myluopan = nil
+    end
+	local luopan_txtbox = ''
+	local indi_count = 0
+	local geo_count = 0
+    
+	if myluopan then 
+		luopan_txtbox = luopan_txtbox..'\\cs(0,255,0)'..last_geo..':\\cs(255,255,255)\n'
+	    for i,v in pairs(windower.ffxi.get_mob_array()) do
+            local DistanceBetween = ((myluopan.x - v.x)*(myluopan.x-v.x) + (myluopan.y-v.y)*(myluopan.y-v.y)):sqrt()
+            if DistanceBetween < (6 + v.model_size) and (v.status == 1 or v.status == 0) and v.name ~= "" and v.name ~= nil and v.name ~= "Luopan" and v.valid_target and v.model_size > 0 then 
+				if buff_list:contains(last_geo) and v.in_party then
+					luopan_txtbox = luopan_txtbox..v.name.." "..string.format("%.2f",DistanceBetween).."\n"
+					geo_count = geo_count + 1
+				end
+				if debuff_list:contains(last_geo) and v.in_party == false and v.is_npc == true and ignore_list:contains(v.name) == false then
+					luopan_txtbox = luopan_txtbox..v.name.." "..string.format("%.2f",DistanceBetween).."\n"
+					geo_count = geo_count + 1
+				end
+            end 
+        end
+    end
+	
+	if buffactive['Colure Active'] then
+		if myluopan then
+			luopan_txtbox = luopan_txtbox..'\n'
+		end
+		luopan_txtbox = luopan_txtbox..'\\cs(0,255,0)'..last_indi..'\\cs(255,255,255)\n'
+		for i,v in pairs(windower.ffxi.get_mob_array()) do
+            local DistanceBetween = ((s.x - v.x)*(s.x-v.x) + (s.y-v.y)*(s.y-v.y)):sqrt()
+            if DistanceBetween < (6 + v.model_size) and (v.status == 1 or v.status == 0) and v.name ~= "" and v.name ~= nil and v.name ~= "Luopan" and v.name ~= s.name and v.valid_target and v.model_size > 0 then 
+				if buff_list:contains(last_indi) and v.in_party then
+                  luopan_txtbox = luopan_txtbox..v.name.." "..string.format("%.2f",DistanceBetween).."\n"
+				  indi_count = indi_count + 1
+				end
+				if debuff_list:contains(last_indi) and v.in_party == false and v.is_npc == true and ignore_list:contains(v.name) == false then
+                  luopan_txtbox = luopan_txtbox..v.name.." "..string.format("%.2f",DistanceBetween).."\n"
+				  indi_count = indi_count + 1
+				end
+            end 
+        end
+	end
+	
+	luopan.value = luopan_txtbox
+	if (myluopan and geo_count ~= 0) or (buffactive['Colure Active'] and indi_count ~= 0) then 
+		luopan:visible(true)
+	else
+		luopan:visible(false)
+	end
+	
+end)

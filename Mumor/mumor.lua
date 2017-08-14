@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'Mumor'
 _addon.author = 'Sammeh'
-_addon.version = '1.0.0'
+_addon.version = '1.0.1'
 _addon.command = 'mumor'
 
 		--[[
@@ -62,7 +62,10 @@ HideMotion = false
 DanceTarget = "Uka Totlihn"  -- default dance target
 
 windower.register_event('incoming text', function(original, modified, original_mode, modified_mode, blocked)
-   
+    if original_mode == 142 and (string.find(original,"I hope you enjoy the show!") and string.find(original,"Bongo")) then 
+		DanceTarget = "Uka Totlihn"
+	end
+	
 	if original_mode == 142 and (string.find(original,"the true meaning of dance!") or string.find(original,"I need your help!")) then 
 	    cheerMode = true
 		LoopCheer()

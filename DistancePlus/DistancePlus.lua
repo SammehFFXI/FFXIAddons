@@ -28,7 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'DistancePlus'
 _addon.author = 'Sammeh'
-_addon.version = '1.4.0.1'
+_addon.version = '1.5.0.0'
 _addon.command = 'dp'
 
 -- 1.3.0.2 Fixed up nil's per recommendation on submission to Windower 
@@ -42,6 +42,8 @@ _addon.command = 'dp'
 -- 1.3.0.10  Changed slightly some variable scopes for lower mem usage.
 -- 1.4.0.0 Add in Luopon Box with mobs within range.
 -- 1.4.0.1 Fixup distance correlation from self to specific target
+-- 1.5.0.0 New mode //dp showradius ##  - Shows PC/NPCs in radius (max 20)
+
 
 require('tables')
 
@@ -101,8 +103,19 @@ defaults.heighttxt.text.size = 14
 defaults.heighttxt.flags = {}
 defaults.heighttxt.flags.right = true
 
+defaults.radiustxt = {}
+defaults.radiustxt.pos = {}
+defaults.radiustxt.pos.x = -238
+defaults.radiustxt.pos.y = 21
+defaults.radiustxt.text = {}
+defaults.radiustxt.text.font = 'Arial'
+defaults.radiustxt.text.size = 10
+defaults.radiustxt.flags = {}
+defaults.radiustxt.flags.right = true
+
 height_upper_threshold = 8.5
 height_lower_threshold = -7.5
+radius = 0
 
 
 settings = config.load(defaults)
@@ -111,11 +124,13 @@ petdistance = texts.new('${value||%.2f}', settings.pettxt)
 abilities = texts.new('${value}', settings.abilitytxt)
 luopan = texts.new('${value}', settings.luopantxt)
 height = texts.new('${value||%.2f}', settings.heighttxt)
+radiusbox = texts.new('${value}', settings.radiustxt)
 
 
 option = "Default"
 showabilities = false
 showheight = false
+showradius = false
 luopanlist = {}
 
 function displayabilities(distance,master_pet_distance,s,t)
@@ -356,14 +371,49 @@ windower.register_event('prerender', function()
         else
             height:color(255,0,0) -- red
         end
+		
+
+		
+		-- Get targets in range.
+        local ignore_list = S{'SlipperySilas','HareFamiliar','SheepFamiliar','FlowerpotBill','TigerFamiliar','FlytrapFamiliar','LizardFamiliar','MayflyFamiliar','EftFamiliar','BeetleFamiliar','AntlionFamiliar','CrabFamiliar','MiteFamiliar','KeenearedSteffi','LullabyMelodia','FlowerpotBen','SaberSiravarde','FunguarFamiliar','ShellbusterOrob','ColdbloodComo','CourierCarrie','Homunculus','VoraciousAudrey','AmbusherAllie','PanzerGalahad','LifedrinkerLars','ChopsueyChucky','AmigoSabotender','NurseryNazuna','CraftyClyvonne','PrestoJulio','SwiftSieghard','MailbusterCetas','AudaciousAnna','TurbidToloi','LuckyLulush','DipperYuly','FlowerpotMerle','DapperMac','DiscreetLouise','FatsoFargann','FaithfulFalcorr','BugeyedBroncha','BloodclawShasra','GorefangHobs','GooeyGerard','CrudeRaphie','DroopyDortwin','SunburstMalfik','WarlikePatrick','ScissorlegXerin','RhymingShizuna','AttentiveIbuki','AmiableRoche','HeraldHenry','BrainyWaluis','SuspiciousAlice','HeadbreakerKen','RedolentCandi','CaringKiyomaro','HurlerPercival','AnklebiterJedd','BlackbeardRandy','FleetReinhard','GenerousArthur','ThreestarLynn','BraveHeroGlenn','SharpwitHermes','AlluringHoney','CursedAnnabelle','SwoopingZhivago','BouncingBertha','MosquitoFamilia','Ifrit','Shiva','Garuda','Fenrir','Carbuncle','Ramuh','Leviathan','CaitSith','Diabolos','Titan','Atomos','WaterSpirit','FireSpirit','EarthSpirit','ThunderSpirit','AirSpirit','LightSpirit','DarkSpirit','IceSpirit'}
+        local targetsinrange = 0
+		local npc_text = ""
+        for i,v in pairs(windower.ffxi.get_mob_array()) do
+            local DistanceBetween = ((t.x - v.x)*(t.x-v.x) + (t.y-v.y)*(t.y-v.y)):sqrt()
+            if DistanceBetween < tonumber(radius) and (v.status == 1 or v.status == 0) and v.name ~= "" and v.name ~= nil and v.valid_target and v.model_size > 0 and v.is_npc and ignore_list:contains(v.name) == false then 
+				targetsinrange = targetsinrange + 1
+                npc_text = npc_text.."\n"..v.name.." "..string.format("%.2f",DistanceBetween)
+            end 
+        end
+		local radiusbox_text = "\\cs(0,255,0)Targets in Range: "..targetsinrange.."\\cs(255,255,255)"
+		if targetsinrange == 1 and t.id ~= s.id and ignore_list:contains(t.name) == false then 
+			radiusbox_text = radiusbox_text.."\nNo other targets in radius: "..radius
+		else
+		    if targetsinrange == 1 and t.id == s.id then 
+		      radiusbox_text = radiusbox_text..npc_text
+		    end 
+			if targetsinrange == 0 then
+			    radiusbox_text = radiusbox_text.."\nNo other targets in radius: "..radius
+			end 
+			if targetsinrange == 1 and t.id ~= s.id then 
+			    radiusbox_text = radiusbox_text..npc_text
+			end
+			if targetsinrange > 1 then
+			 radiusbox_text = radiusbox_text..npc_text
+			end
+			
+		end	
+        radiusbox.value = radiusbox_text
         
     end
-     distance:visible(t ~= nil)
+    distance:visible(t ~= nil)
     height:visible(t ~= nil and showheight)
+	radiusbox:visible(t ~= nil and t.valid_target and t.model_size > 0 and showradius)    
 end)
 
 
-windower.register_event('addon command', function(command)
+windower.register_event('addon command', function(command, ...)
+	local args = L{...}
     if command:lower() == 'help' then
         windower.add_to_chat(8,'DistancePlus: Valid Modes are //DP <command>:')
         windower.add_to_chat(8,' Gun, Bow, Xbow, Magic, JA')
@@ -420,6 +470,14 @@ windower.register_event('addon command', function(command)
         end
     elseif command:lower() == 'height' then
         showheight = true
+	elseif command:lower() == 'showradius' then
+	    if args[1] and tonumber(args[1]) and tonumber(args[1]) > 0 then 
+			showradius = true
+			radius = args[1]
+		else 
+			showradius = false
+			radius = 0
+		end
     end
 end)
 

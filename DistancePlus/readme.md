@@ -18,3 +18,5 @@ Features:
 	 Green:  Shoots squarely (Good)
 	 Blue: True Shot  (optimal range)
 	 
+As of 1.5.0.0  You can now:
+//dp showradius (yalms)    This will show NPCs in radius of target.

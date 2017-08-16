@@ -28,7 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'DistancePlus'
 _addon.author = 'Sammeh'
-_addon.version = '1.5.0.0'
+_addon.version = '1.5.0.1'
 _addon.command = 'dp'
 
 -- 1.3.0.2 Fixed up nil's per recommendation on submission to Windower 
@@ -42,7 +42,8 @@ _addon.command = 'dp'
 -- 1.3.0.10  Changed slightly some variable scopes for lower mem usage.
 -- 1.4.0.0 Add in Luopon Box with mobs within range.
 -- 1.4.0.1 Fixup distance correlation from self to specific target
--- 1.5.0.0 New mode //dp showradius ##  - Shows PC/NPCs in radius (max 20)
+-- 1.5.0.0 New mode //dp showradius ##  - Shows PC/NPCs in radius 
+-- 1.5.0.1 Add in //dp radiusfilter npc|pc|both
 
 
 require('tables')
@@ -116,7 +117,7 @@ defaults.radiustxt.flags.right = true
 height_upper_threshold = 8.5
 height_lower_threshold = -7.5
 radius = 0
-
+filter = "both"
 
 settings = config.load(defaults)
 distance = texts.new('${value||%.2f}', settings.main)
@@ -376,34 +377,76 @@ windower.register_event('prerender', function()
 		
 		-- Get targets in range.
         local ignore_list = S{'SlipperySilas','HareFamiliar','SheepFamiliar','FlowerpotBill','TigerFamiliar','FlytrapFamiliar','LizardFamiliar','MayflyFamiliar','EftFamiliar','BeetleFamiliar','AntlionFamiliar','CrabFamiliar','MiteFamiliar','KeenearedSteffi','LullabyMelodia','FlowerpotBen','SaberSiravarde','FunguarFamiliar','ShellbusterOrob','ColdbloodComo','CourierCarrie','Homunculus','VoraciousAudrey','AmbusherAllie','PanzerGalahad','LifedrinkerLars','ChopsueyChucky','AmigoSabotender','NurseryNazuna','CraftyClyvonne','PrestoJulio','SwiftSieghard','MailbusterCetas','AudaciousAnna','TurbidToloi','LuckyLulush','DipperYuly','FlowerpotMerle','DapperMac','DiscreetLouise','FatsoFargann','FaithfulFalcorr','BugeyedBroncha','BloodclawShasra','GorefangHobs','GooeyGerard','CrudeRaphie','DroopyDortwin','SunburstMalfik','WarlikePatrick','ScissorlegXerin','RhymingShizuna','AttentiveIbuki','AmiableRoche','HeraldHenry','BrainyWaluis','SuspiciousAlice','HeadbreakerKen','RedolentCandi','CaringKiyomaro','HurlerPercival','AnklebiterJedd','BlackbeardRandy','FleetReinhard','GenerousArthur','ThreestarLynn','BraveHeroGlenn','SharpwitHermes','AlluringHoney','CursedAnnabelle','SwoopingZhivago','BouncingBertha','MosquitoFamilia','Ifrit','Shiva','Garuda','Fenrir','Carbuncle','Ramuh','Leviathan','CaitSith','Diabolos','Titan','Atomos','WaterSpirit','FireSpirit','EarthSpirit','ThunderSpirit','AirSpirit','LightSpirit','DarkSpirit','IceSpirit'}
-        local targetsinrange = 0
+        local npc_in_range = 0
+		local pc_in_range = 0
 		local npc_text = ""
+		local pc_text = ""
         for i,v in pairs(windower.ffxi.get_mob_array()) do
             local DistanceBetween = ((t.x - v.x)*(t.x-v.x) + (t.y-v.y)*(t.y-v.y)):sqrt()
-            if DistanceBetween < tonumber(radius) and (v.status == 1 or v.status == 0) and v.name ~= "" and v.name ~= nil and v.valid_target and v.model_size > 0 and v.is_npc and ignore_list:contains(v.name) == false then 
-				targetsinrange = targetsinrange + 1
-                npc_text = npc_text.."\n"..v.name.." "..string.format("%.2f",DistanceBetween)
+            --[[
+			if DistanceBetween < tonumber(radius) and (v.status == 1 or v.status == 0) and v.name ~= "" and v.name ~= nil and v.valid_target and v.model_size > 0 and ignore_list:contains(v.name) == false then 
+			    if v.is_npc then 
+					npc_in_range = npc_in_range + 1		
+					npc_text = npc_text.."\n"..v.name.." "..string.format("%.2f",DistanceBetween)
+				elseif v.is_npc == false then
+					pc_in_range = pc_in_range + 1
+					pc_text = pc_text.."\n"..v.name.." "..string.format("%.2f",DistanceBetween)
+				end 
+            end 
+			]]
+			if DistanceBetween < tonumber(radius) and (v.status == 1 or v.status == 0) and v.name ~= "" and v.name ~= nil and v.valid_target then 
+			    if v.spawn_type == 16 then 
+					npc_in_range = npc_in_range + 1		
+					npc_text = npc_text.."\n"..v.name.." "..string.format("%.2f",DistanceBetween)
+				elseif v.spawn_type == 13 or v.spawn_type == 14 or v.spawn_type == 1 or v.spawn_type == 9 then
+					pc_in_range = pc_in_range + 1
+					pc_text = pc_text.."\n"..v.name.." "..string.format("%.2f",DistanceBetween)
+				end 
             end 
         end
-		local radiusbox_text = "\\cs(0,255,0)Targets in Range: "..targetsinrange.."\\cs(255,255,255)"
-		if targetsinrange == 1 and t.id ~= s.id and ignore_list:contains(t.name) == false then 
-			radiusbox_text = radiusbox_text.."\nNo other targets in radius: "..radius
-		else
-		    if targetsinrange == 1 and t.id == s.id then 
-		      radiusbox_text = radiusbox_text..npc_text
-		    end 
-			if targetsinrange == 0 then
-			    radiusbox_text = radiusbox_text.."\nNo other targets in radius: "..radius
-			end 
-			if targetsinrange == 1 and t.id ~= s.id then 
-			    radiusbox_text = radiusbox_text..npc_text
+		local radiusbox_text = ""
+		if filter == "npc" or filter == "both" then 
+		    radiusbox_text = radiusbox_text.."\\cs(0,255,0)NPC in Range: "..npc_in_range.."\\cs(255,255,255)"
+		    if npc_in_range == 1 and t.id ~= s.id then 
+			    radiusbox_text = radiusbox_text.."\nNo other NPCs in radius: "..radius
+		    else
+		        if npc_in_range == 1 and t.id == s.id then 
+		          radiusbox_text = radiusbox_text..npc_text
+		        end 
+			    if npc_in_range == 0 then
+			        radiusbox_text = radiusbox_text.."\nNo other NPCs in radius: "..radius
+			    end 
+			    if npc_in_range == 1 and t.id ~= s.id then 
+    			    radiusbox_text = radiusbox_text..npc_text
+			    end
+			    if npc_in_range > 1 then
+			     radiusbox_text = radiusbox_text..npc_text
+			    end
+		    end
+		end
+        if filter == "pc" or filter == "both" then
+			if filter == "both" then 
+				radiusbox_text = radiusbox_text.."\n\n"
 			end
-			if targetsinrange > 1 then
-			 radiusbox_text = radiusbox_text..npc_text
-			end
-			
-		end	
-        radiusbox.value = radiusbox_text
+		    radiusbox_text = radiusbox_text.."\\cs(0,255,0)PC in Range: "..pc_in_range.."\\cs(255,255,255)"
+		    if pc_in_range == 1 and t.id == s.id then 
+			    radiusbox_text = radiusbox_text.."\nNo other PCs in radius: "..radius
+		    else
+		        if pc_in_range == 1 and t.id == s.id then 
+		          radiusbox_text = radiusbox_text..pc_text
+		        end 
+			    if pc_in_range == 0 then
+			        radiusbox_text = radiusbox_text.."\nNo other PCs in radius: "..radius
+			    end 
+			    if pc_in_range == 1 and t.id ~= s.id then 
+    			    radiusbox_text = radiusbox_text..pc_text
+			    end
+			    if pc_in_range > 1 then
+			     radiusbox_text = radiusbox_text..pc_text
+			    end
+		    end	
+		end
+		radiusbox.value = radiusbox_text
         
     end
     distance:visible(t ~= nil)
@@ -420,6 +463,8 @@ windower.register_event('addon command', function(command, ...)
         windower.add_to_chat(8,' MaxDecimal    - Expand MaxDecimal for Max Accuracy. DP Calculates to the Thousand')
         windower.add_to_chat(8,' Default     - Reset to Defaults')
         windower.add_to_chat(8,' Pets         - Not a command.  If a pet is out another dialog will pop up with distance between you and Pet.')
+		windower.add_to_chat(8,' Radius       - //dp showradius ##   Shows all npc/pc in radius defined in yalms. Ex: //dp showradius 10')
+		windower.add_to_chat(8,'You can filter the radius by pc|npc|both(default). //dp radiusfilter pc|npc|both')
     elseif command:lower() == 'gun' then
         windower.add_to_chat(8,'Mode: Gun.')
         windower.add_to_chat(8,' White  = Can not shoot.')
@@ -470,7 +515,16 @@ windower.register_event('addon command', function(command, ...)
         end
     elseif command:lower() == 'height' then
         showheight = true
+	elseif command:lower() == 'radiusfilter' then
+		if args[1] and args[1]:lower() == "pc" then
+			filter = "pc"
+		elseif args[1] and args[1]:lower() == "npc" then
+			filter = "npc"
+		elseif args[1] and args[1]:lower() == "both" then
+			filter = "both"
+		end
 	elseif command:lower() == 'showradius' then
+		windower.add_to_chat(8,'You can filter the radius by pc|npc|both(default). //dp radiusfilter pc|npc|both')
 	    if args[1] and tonumber(args[1]) and tonumber(args[1]) > 0 then 
 			showradius = true
 			radius = args[1]

@@ -887,8 +887,13 @@ end
 -- Job-specific hooks that are called to process player actions at specific points in time.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_pretarget(spell) 
+ checkblocking(spell)
+end
+
 function job_precast(spell, action, spellMap, eventArgs)
-    if player.equipment.main == 'Aymur' then
+    
+	if player.equipment.main == 'Aymur' then
         custom_aftermath_timers_precast(spell)
     end
 
@@ -1091,6 +1096,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
+
 -- If Killer Instinct is active during WS, equip Nukumi Gausape +1.
     if spell.type:lower() == 'weaponskill' and buffactive['Killer Instinct'] then
         equip(sets.buff['Killer Instinct'])
@@ -1113,7 +1119,6 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 	if spell.type == "WeaponSkill" then
 	  tpspent = spell.tp_cost
 	end
-
 end
 
 function job_pet_midcast(spell, action, spellMap, eventArgs)

@@ -283,7 +283,7 @@ function checkblocking(spell)
 	   return
 	  end
 	end
-	if spell.name ~= 'Ranged' and spell.type ~= 'WeaponSkill' and spell.type ~= 'Scholar' then
+	if spell.name ~= 'Ranged' and spell.type ~= 'WeaponSkill' and spell.type ~= 'Scholar' and spell.type ~= 'Monster' then
       if spell.action_type == 'Ability' then
 	    if buffactive.Amnesia then
 		  cancel_spell()
@@ -302,7 +302,6 @@ function checkblocking(spell)
 	  end
 	end
     if spell.action_type == 'Magic' then
-		
 	    if buffactive.Silence then
 	      cancel_spell()
 		  send_command('gs c update')
@@ -376,6 +375,21 @@ function checkblocking(spell)
 	  add_to_chat(3,'Canceling Utsusemi - Already have Max and can not override')
 	  return
 	end
+	if spell.type == 'Monster' or spell.name == 'Reward' then
+		local s = windower.ffxi.get_mob_by_target('me')
+		local pet = windower.ffxi.get_mob_by_target('pet')
+		local PetMaxDistance = 4
+        local pettargetdistance = PetMaxDistance + pet.model_size + s.model_size
+        if pet.model_size > 1.6 then 
+                pettargetdistance = PetMaxDistance + pet.model_size + s.model_size + 0.1
+        end
+		if pet.distance:sqrt() >= pettargetdistance then
+             add_to_chat(3,'Canceling: '..spell.name..'! Outside Distance:'..pet.distance:sqrt())
+			 cancel_spell()
+			 send_command('gs c update')
+			 return
+        end
+	end 
 end
 
 

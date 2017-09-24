@@ -6,6 +6,7 @@ send_command('alias spelldebug gs c cycle spelldebug')
 -- require 'pack'
 require 'tables'
 files = require 'files'
+res = require 'resources'
 
 --lastspell = require('last_spell.lua')   -- this was just a test - don't ask
 --lastspell_file = files.new('data\\last_spell.lua')
@@ -51,11 +52,19 @@ function check_temp_items()
 end
 
 function disable_specialgear()
-	if player.equipment.head == "Frenzy Sallet" and buffactive['Sleep'] then
+
+--	if player.equipment.head == "Frenzy Sallet" and buffactive['Sleep'] then
+--		disable('head')
+--	else
+--		enable('head')
+--	end
+	
+	if player.equipment.head == "Reraise Hairpin" then
 		disable('head')
 	else
 		enable('head')
 	end
+	
 	if player.equipment.back == 'Mecisto. Mantle' or player.equipment.back == 'Aptitude Mantle' or player.equipment.back == 'Aptitude Mantle +1' or player.equipment.back == 'Nexus Cape' then
         disable('back')
     else
@@ -209,6 +218,47 @@ function check_run_status()
 	end
 end
 
+function GetElementID(element)
+   local elementID
+   for i,v in pairs(res.elements) do
+      if v.en == element then
+	     elementID = i
+	  end 
+   end
+   return elementID
+end
+
+function SpellsByElement(element,spelltype,skill)
+   local spellList = S{}
+   local AccessToSpells = windower.ffxi.get_spells()
+   local skillID = GetSkillIDBySkill(skill)
+   for i,v in pairs(res.spells) do
+      if v.element == element and v.type == spelltype and AccessToSpells[i] == true and v.skill == skillID then
+	     table.insert(spellList, i)
+	  end 
+   end
+   return spellList
+end
+
+function CurrentJobIDByJob(job)
+  local jobID
+  for i,v in pairs(res.jobs) do
+     if v.ens == job then
+	    jobID = i
+	 end
+  end
+  return jobID
+end
+
+function GetSkillIDBySkill(skill)
+  local skillID
+  for i,v in pairs(res.skills) do
+	if v.en == skill then
+	   skillID = i
+	end
+  end
+  return skillID
+end
 
 function checkblocking(spell)
 	if type(windower.ffxi.get_player().autorun) == 'table' and spell.action_type == 'Magic' then 
@@ -250,7 +300,9 @@ function checkblocking(spell)
           end
 		end
 	  end
-      if spell.action_type == 'Magic' then
+	end
+    if spell.action_type == 'Magic' then
+		
 	    if buffactive.Silence then
 	      cancel_spell()
 		  send_command('gs c update')
@@ -270,16 +322,48 @@ function checkblocking(spell)
 		   send_command('gs c update')
 		   return
 		  end
-	      recasttime = windower.ffxi.get_spell_recasts()[spell.recast_id] / 100
+		  allrecasts = windower.ffxi.get_spell_recasts()
+	      recasttime = allrecasts[spell.recast_id] / 100
           if spell and (recasttime >= 1) then
-		   add_to_chat(2,'Spell Canceled:'..spell.name..' - Waiting on Recast:(seconds) '..recasttime..'')
-           cancel_spell()
-		   send_command('gs c update')
-           return
+			if spell.skill == 'Elemental Magic' and AutoNextTier then 
+		   		local main_jobID = CurrentJobIDByJob(player.main_job)
+		   		local sub_jobID = CurrentJobIDByJob(player.sub_job)
+		   		local spellElementID = GetElementID(spell.element)
+		   		local spellsForElement = SpellsByElement(spellElementID,spell.type,spell.skill)
+		   		local spellsByJob = {}
+		   		for i,v in pairs(spellsForElement) do
+					for i2,v2 in pairs(res.spells[v].levels) do
+						if (i2 == main_jobID and v2 <= player.main_job_level) or (i2 == sub_jobID and v2 <= player.sub_job_level) then 
+							if not spellsByJob[v] then
+								spellsByJob[v] = v
+							end
+						end
+					end
+				end
+				for i,v in pairs(spellsByJob) do
+					print(i,v,res.spells[v].en,allrecasts[v] / 100)
+				end
+				add_to_chat(2,'Spell Canceled:'..spell.name..' - Moving to next Spell '..recasttime..'')
+				cancel_spell()
+				-- Determine Tier cast and go to next available in same class.
+			  
+				send_command('gs c update')
+				return
+			else 
+				add_to_chat(2,'Spell Canceled:'..spell.name..' - Waiting on Recast:(seconds) '..recasttime..'')
+				cancel_spell()
+				send_command('gs c update')
+				return
+			end
           end
 		end
-      end
     end
+    if spell.type == 'WeaponSkill' and player.tp < 1000 then
+		cancel_spell()
+		send_command('gs c update')
+		add_to_chat(3,'Canceled Spell:'..spell.name..' - Waiting on TP')
+		return
+	end
 	if spell.type == 'WeaponSkill' and buffactive.Amnesia then
 		  cancel_spell()
 		  send_command('gs c update')

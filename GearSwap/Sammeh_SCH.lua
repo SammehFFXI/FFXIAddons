@@ -34,6 +34,7 @@ function user_setup()
 	send_command("alias stunset gs equip sets.midcast.Stun")
 	send_command("alias myrkrset gs equip sets.precast.WS['Myrkr']")	
 	send_command("alias eng gs equip sets.engaged")	
+	AutoNextTier = true
 end
 
 	
@@ -156,9 +157,9 @@ function init_gear_sets()
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
 		body={ name="Amalric Doublet", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
 		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
-		legs="Perdition Slops",
+		legs={ name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},
+		neck="Sanctity Necklace",
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
-		neck="Voltsurge Torque",
 		waist="Luminary Sash",
 		left_ear="Loquac. Earring",
 		right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +25',}},

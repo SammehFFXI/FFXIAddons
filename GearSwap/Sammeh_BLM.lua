@@ -43,7 +43,7 @@ function init_gear_sets()
 	-- Weapon Locks used for TP Mode.  When WeaponLock is set - it locks in the following Main and SUB. 
 	weaponlock_main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}
 	--weaponlock_main="Khatvanga"
-	weaponlock_sub="Niobid Strap"
+	weaponlock_sub="Enki Strap"
 
     sets.ele = {}
     
@@ -126,20 +126,21 @@ function init_gear_sets()
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
 	}
 	-- Max MP set
-    sets.precast.WS['Myrkr'] = {
+	sets.precast.WS['Myrkr'] = {
 	    ammo="Pemphredo Tathlum",
+		ammo="Sihirik",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
-		body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+16','"Fast Cast"+6','INT+4',}},
-		hands={ name="Merlinic Dastanas", augments={'Mag. Acc.+2','"Fast Cast"+6','"Mag.Atk.Bns."+1',}},
+		body={ name="Amalric Doublet", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
+		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},
 		feet="Regal Pumps +1",
-		neck="Voltsurge Torque",
-		waist="Witful Belt",
+		neck="Sanctity Necklace",
+		waist="Luminary Sash",
 		left_ear="Loquac. Earring",
-		right_ear="Enchntr. Earring +1",
-		left_ring="Kishar Ring",
-		right_ring="Weather. Ring",
-		back="Perimede Cape",
+		right_ear="Barkaro. Earring",
+		left_ring="Etana Ring",
+		right_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+		back={ name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},
 	} 
 	
     ---  MIDCAST SETS  ---
@@ -147,7 +148,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'] = {}
 	sets.midcast['Elemental Magic'].Main = {
 	    main={ name="Lathi", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
-		sub="Niobid Strap",
+		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
 		body={ name="Merlinic Jubbah", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Drain" and "Aspir" potency +3','MND+5','Mag. Acc.+10','"Mag.Atk.Bns."+13',}},
@@ -272,7 +273,7 @@ function init_gear_sets()
     sets.Idle = {}
 	sets.Idle.Main = {
 	    main={ name="Lathi", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
-		sub="Niobid Strap",
+		sub="Enki Strap",
 		ammo="Sihirik",
 		head="Befouled Crown",
 		body="Jhakri Robe +2",

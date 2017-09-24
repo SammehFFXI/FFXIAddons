@@ -194,15 +194,28 @@ function init_gear_sets()
     -- For song defbuffs (duration primary, accuracy secondary)
     sets.midcast.SongDebuff = {
 	    main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Brioso Roundlet +2",neck="Moonbow Whistle",ear1="Digni. Earring",ear2="Enchntr. Earring +1",
+        head="Brioso Roundlet +2",neck="Moonbow Whistle",ear1="Regal Earring",ear2="Enchntr. Earring +1",
         body="Fili Hongreline +1",hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
         back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Inyanga Shalwar +1",feet="Brioso Slippers +3"}
 
     -- For song defbuffs (accuracy primary, duration secondary)
-    sets.midcast.ResistantSongDebuff = {main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Brioso Roundlet +2",neck="Moonbow Whistle",ear1="Digni. Earring",ear2="Enchntr. Earring +1",
-        body="Brioso Justau. +2",hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
-        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},feet="Brioso Slippers +3"}
+    sets.midcast.ResistantSongDebuff = {
+	    main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
+		sub="Ammurapi Shield",
+		range="Gjallarhorn",
+		head="Brioso Roundlet +2",
+		body="Brioso Justau. +2",
+		hands="Brioso Cuffs +3",
+		legs="Brioso Cannions +2",
+		feet="Brioso Slippers +3",
+		neck="Moonbow Whistle",
+		waist="Luminary Sash",
+		left_ear="Regal Earring",
+		right_ear="Enchntr. Earring +1",
+		left_ring="Stikini Ring",
+		right_ring="Weather. Ring",
+		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},
+	}
 		
 	sets.midcast.LullabyFull = set_combine(sets.midcast.SongDebuff, sets.midcast.Lullaby)
 

@@ -1,10 +1,10 @@
 sets.exported={
-    main="Bravura",
+    main="Chango",
     sub="Utu Grip",
     ammo="Staunch Tathlum",
-    head={ name="Jumalik Helm", augments={'MND+7','"Mag.Atk.Bns."+12','Magic burst dmg.+7%',}},
+    head="Pummeler's Mask +3",
     body="Pumm. Lorica +3",
-    hands={ name="Leyline Gloves", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
+    hands="Pumm. Mufflers +3",
     legs="Pumm. Cuisses +3",
     feet="Pumm. Calligae +3",
     neck="Warder's Charm +1",
@@ -13,5 +13,5 @@ sets.exported={
     right_ear="Flashward Earring",
     left_ring="Purity Ring",
     right_ring="Vengeful Ring",
-    back="Tantalic Cape",
+    back={ name="Cichol's Mantle", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10',}},
 }

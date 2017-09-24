@@ -160,7 +160,7 @@ function init_gear_sets()
      back="Conveyance Cape",waist="Kobo Obi",legs="Tatsumaki sitagoromo",feet="Beckoner's pigaches +1"}
  
  
-    sets.precast.JA['Mana Cede'] = {hands="Beckoner's Bracers"}
+    -- sets.precast.JA['Mana Cede'] = {hands="Beckoner's Bracers"}
  
     -- Pact delay reduction gear
     sets.precast.BloodPactWard = {

@@ -375,21 +375,42 @@ function checkblocking(spell)
 	  add_to_chat(3,'Canceling Utsusemi - Already have Max and can not override')
 	  return
 	end
-	if spell.type == 'Monster' or spell.name == 'Reward' then
-		local s = windower.ffxi.get_mob_by_target('me')
-		local pet = windower.ffxi.get_mob_by_target('pet')
-		local PetMaxDistance = 4
-        local pettargetdistance = PetMaxDistance + pet.model_size + s.model_size
-        if pet.model_size > 1.6 then 
-                pettargetdistance = PetMaxDistance + pet.model_size + s.model_size + 0.1
-        end
-		if pet.distance:sqrt() >= pettargetdistance then
-             add_to_chat(3,'Canceling: '..spell.name..'! Outside Distance:'..pet.distance:sqrt())
-			 cancel_spell()
-			 send_command('gs c update')
-			 return
-        end
-	end 
+	if spell.type == 'Monster' or spell.name == 'Reward' or spell.name == 'Spur' then
+		if pet.isvalid then 
+			local s = windower.ffxi.get_mob_by_target('me')
+			local pet = windower.ffxi.get_mob_by_target('pet')
+			local PetMaxDistance = 4
+			local pettargetdistance = PetMaxDistance + pet.model_size + s.model_size
+			if pet.model_size > 1.6 then 
+				pettargetdistance = PetMaxDistance + pet.model_size + s.model_size + 0.1
+			end
+			if pet.distance:sqrt() >= pettargetdistance then
+				add_to_chat(3,'Canceling: '..spell.name..'! Outside Distance:'..pet.distance:sqrt())
+				cancel_spell()
+				send_command('gs c update')
+				return
+			end
+		else
+			add_to_chat(3,'Canceling: '..spell.name..'!  You have no pet!')
+			cancel_spell()
+			send_command('gs c update')
+			return
+		end
+	end
+	if spell.name == 'Fight' then
+		if pet.isvalid then 
+			local t = windower.ffxi.get_mob_by_target('t') or windower.ffxi.get_mob_by_target('st')
+			local pet = windower.ffxi.get_mob_by_target('pet')
+			local PetMaxDistance = 30 
+			local DistanceBetween = ((t.x - pet.x)*(t.x-pet.x) + (t.y-pet.y)*(t.y-pet.y)):sqrt()
+			if DistanceBetween > PetMaxDistance then 
+				add_to_chat(3,'Canceling: Fight! Replacing with Heel - > 30 yalms away')
+				cancel_spell()
+				send_command('@wait .5; input /pet Heel <me>')
+				return
+			end
+		end
+	end
 end
 
 

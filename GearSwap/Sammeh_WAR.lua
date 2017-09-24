@@ -247,10 +247,12 @@ end
 
 
 
+function job_pretarget(spell) 
+checkblocking(spell)
+end
 
 
 function job_precast(spell)
-	checkblocking(spell)
     handle_equipping_gear(player.status)
 	if spell.name == 'Utsusemi: Ichi' and (buffactive['Copy Image (3)'] or buffactive ['Copy Image (4+)']) then
 	  cancel_spell()

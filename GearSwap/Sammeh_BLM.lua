@@ -311,9 +311,13 @@ function init_gear_sets()
 	sets.Idle.Current = sets.Idle.Main
 end
 
+function job_pretarget(spell)
+checkblocking(spell)
+end
+
 function job_precast(spell)
 	handle_equipping_gear(player.status)
-	checkblocking(spell)
+	
 	if string.find(spell.name,'Stoneskin') then 
 	  equip(sets.precast.Stoneskin) 
     elseif sets.precast.JA[spell.name] then

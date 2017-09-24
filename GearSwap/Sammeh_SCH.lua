@@ -15,7 +15,7 @@ function user_setup()
     send_command('bind f10 gs c cycle idlemode')
 	send_command('bind f12 gs c update caster')
 	select_default_macro_book()
-	--send_command('@wait 5;input /lockstyleset 20')
+	send_command('@wait 5;input /lockstyleset 20')
 	
 	-- Set Common Aliases --
 	send_command("alias idle gs equip sets.Idle.Current")
@@ -402,10 +402,13 @@ function init_gear_sets()
 	sets.pixiehairpin = {head="Pixie Hairpin +1"}
 end
 
+function job_pretarget(spell)
+checkblocking(spell)
+end
+
 function job_precast(spell)
 	precast_start = os.clock()
 	handle_equipping_gear(player.status)
-	checkblocking(spell)
     if string.find(spell.name,'Stoneskin') then 
 	  equip(sets.precast.Stoneskin) 
     elseif sets.precast.JA[spell.name] then

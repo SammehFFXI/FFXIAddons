@@ -357,6 +357,11 @@ end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
+
+function job_pretarget(spell)
+checkblocking(spell)
+end
+
 function job_precast(spell, action, spellMap, eventArgs)
 --[[
 	for i,v in pairs(buff) do
@@ -366,7 +371,6 @@ function job_precast(spell, action, spellMap, eventArgs)
 	end
     ]]
     -- handle_equipping_gear(player.status)
-	checkblocking(spell)
 	precast_start = os.clock()
 	handle_equipping_gear(player.status)
 	if spell.type == 'BardSong' then

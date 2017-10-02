@@ -200,7 +200,7 @@ function init_gear_sets()
 	
 	sets.meva = {
 		ammo="Staunch Tathlum",
-		head="Pumm. Mask +3",
+		head="Pummeler's Mask +3",
 		body="Pumm. Lorica +3",
 		hands="Pumm. Mufflers +3",
 		legs="Pumm. Cuisses +3",

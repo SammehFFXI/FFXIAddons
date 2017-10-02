@@ -319,9 +319,13 @@ function init_gear_sets()
 	sets.Idle.Current = sets.Idle
 end
 
+function job_pretarget(spell)
+checkblocking(spell)
+end
+
+
 function job_precast(spell)
 	handle_equipping_gear(player.status)
-	checkblocking(spell)
 	if spell.name == 'Utsusemi: Ichi' and (buffactive['Copy Image (3)'] or buffactive ['Copy Image (4+)']) then
 	  cancel_spell()
 	  send_command('@wait 1;')

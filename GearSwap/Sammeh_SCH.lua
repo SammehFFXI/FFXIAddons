@@ -35,6 +35,7 @@ function user_setup()
 	send_command("alias myrkrset gs equip sets.precast.WS['Myrkr']")	
 	send_command("alias eng gs equip sets.engaged")	
 	AutoNextTier = true
+	SublimationStartTimer = nil
 end
 
 	
@@ -116,11 +117,6 @@ function init_gear_sets()
 	
 	sets.enh_protect = {ring1="Sheltered Ring"}
 	
-    sets.precast.JA = {}
-    sets.precast.JA.Enlightenment = {body={ name="Peda. Gown +1", augments={'Enhances "Enlightenment" effect',}},}
-    sets.precast.JA['Tabula Rasa'] = {legs="Pedagogy Pants"}
-	sets.precast.JA.Sublimation = sets.MaxHP
-		
     sets.precast.FastCast = {
 		main="Oranyan", -- FC 7
 		sub="Clerisy Strap +1", -- FC 3
@@ -354,7 +350,6 @@ function init_gear_sets()
 	sets.midcast.RefreshRecieved = set_combine(sets.midcast['Enhancing Magic'], {back="Grapevine Cape",waist="Gishdubar Sash",feet="Inspirited Boots"})
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash",neck="Nodens Gorget"})
     
-    ---  AFTERCAST SETS  ---
     sets.Idle = {}
 	sets.Idle.Main = {
 		main={ name="Akademos", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
@@ -395,11 +390,18 @@ function init_gear_sets()
 		head="Acad. Mortar. +2",
 		body={ name="Peda. Gown +1", augments={'Enhances "Enlightenment" effect',}},
 		right_ear="Savant's Earring",
-	})
+	})	
+	
 	sets.Idle.Current = sets.Idle.NoSubl
     sets.Resting = sets.Idle.Main
 	
 	sets.pixiehairpin = {head="Pixie Hairpin +1"}
+	
+	sets.precast.JA = {}
+    sets.precast.JA.Enlightenment = {body={ name="Peda. Gown +1", augments={'Enhances "Enlightenment" effect',}},}
+    sets.precast.JA['Tabula Rasa'] = {legs="Pedagogy Pants"}
+	sets.precast.JA.Sublimation = sets.Idle.Subl
+	
 end
 
 function job_pretarget(spell)
@@ -408,6 +410,10 @@ end
 
 function job_precast(spell)
 	precast_start = os.clock()
+	if spell.english == 'Sublimation' and not buffactive["Sublimation: Activated"] and not buffactive["Sublimation: Complete"] then
+	  equip(sets.precast.JA.Sublimation)
+	  SublimationStartTimer = precast_start
+    end
 	handle_equipping_gear(player.status)
     if string.find(spell.name,'Stoneskin') then 
 	  equip(sets.precast.Stoneskin) 
@@ -592,8 +598,8 @@ function job_aftercast(spell)
 	end 
 	if spell.english == 'Sublimation' and not buffactive["Sublimation: Activated"] and not buffactive["Sublimation: Complete"] then
 	  sets.Idle.Current = sets.Idle.Subl
-	  send_command('@wait 2;gs equip sets.Idle.Current')
-      -- equip(sets.Idle.Current)
+	  --send_command('@wait 2;gs equip sets.Idle.Current')
+      equip(sets.Idle.Current)
     elseif spell.english == 'Sublimation' and (buffactive["Sublimation: Activated"] or buffactive["Sublimation: Complete"]) then
 	  sets.Idle.Current = sets.Idle.NoSubl
 	  equip(sets.Idle.Current)
@@ -613,7 +619,6 @@ function job_aftercast(spell)
 end
 
 
-
 function status_change(new,tab)
     handle_equipping_gear(player.status)
     if new == 'Resting' then
@@ -627,7 +632,10 @@ end
 
 
 function job_self_command(cmdParams, eventArgs)
-
+	if cmdParams[1]:lower() == 'test' then
+        print(player.status)
+        eventArgs.handled = true
+    end
 end
 
 
@@ -647,7 +655,13 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	sets.Idle.Current = sets.Idle.NoSubl
 	if buffactive["Sublimation: Activated"] then
         sets.Idle.Current = sets.Idle.Subl
+		if SublimationStartTimer and CurrentTime - SublimationStartTimer > 90 then
+		   sets.Idle.Current = sets.MaxHP
+		end
     end
+	if buffactive["Sublimation: Complete"] then
+		SublimationStartTimer = nil
+	end
 	if state.IdleMode.value == "PDT" then
 	   sets.Idle.Current = sets.Idle.PDT
 	elseif state.IdleMode.value == "OncaSuit" then
@@ -666,10 +680,6 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	  enable("main")
 	  enable("sub")
 	end
-	if playerStatus == 'Idle' then
-        equip(sets.Idle.Current)
-    end
-
 end
 
 
@@ -681,3 +691,10 @@ function select_default_macro_book()
 end
 
 
+windower.raw_register_event('time change',function()
+   CurrentTime = os.clock()
+   if SublimationStartTimer and CurrentTime - SublimationStartTimer > 96 then 
+	  job_handle_equipping_gear(player.status)
+	  send_command("gs equip sets.Idle.Current")
+   end
+end)	

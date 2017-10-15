@@ -53,7 +53,7 @@ function init_gear_sets()
 	sets.engaged = {
 		ammo="Ginsen",
 		head="Flamma Zucchetto +1",
-		body={ name="Valorous Mail", augments={'Accuracy+22','"Store TP"+7',}},
+		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
 		feet={ name="Valorous Greaves", augments={'Accuracy+26','"Dbl.Atk."+4','DEX+8','Attack+3',}},

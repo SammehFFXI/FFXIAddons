@@ -85,6 +85,9 @@ function user_setup()
     state.RestingMode:options('Normal')
     state.PhysicalDefenseMode:options('PetDT', 'PDT')
     state.MagicalDefenseMode:options('MDTShell', 'MEva')
+	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock'}
+	send_command('alias tp gs c cycle tpmode')
+	send_command('alias bpphys gs equip sets.midcast.Pet.WS')
 
     -- Set up Avatar cycling and keybind Alt+F8/Ctrl+F8
     state.AvatarMode = M{['description']='Avatar Mode', 'Garuda', 'Shiva', 'Ramuh', 'Carbuncle', 'Cait Sith', 'Diabolos',
@@ -206,13 +209,13 @@ function init_gear_sets()
     sets.precast.JA['Elemental Siphon'] = {main="Espiritus",sub="Vox Grip",ammo="Esper Stone +1",
         head="Telchine Cap",neck="Incanter's Torque",ear1="Summoning Earring",ear2="Andoaa earring",
         body="Beckoner's Doublet +1",hands="Lamassu Mitts +1",ring1="Zodiac Ring",ring2="Evoker's Ring",
-	    back="Conveyance Cape",waist="Kobo Obi",legs="Beckoner's Spats",feet="Beckoner's Pigaches +1"}
+	    back="Conveyance Cape",waist="Kobo Obi",legs="Beckoner's Spats +1",feet="Beckoner's Pigaches +1"}
 
     --------------------------
     -- BLOOD PACT GEAR SETS --
     --------------------------
 
-    --sets.precast.BloodPact = {main="Gridarvor",sub="Elan Strap +1 +1",ammo="Sancus Sachet +1",
+    --sets.precast.BloodPact = {main="Gridarvor",sub="Elan Strap +1 +1",ammo="Sancus Sachet +1 +1",
     --    head="Beckoner's Horn +1",neck="Incanter's Torque",ear1="Summoning Earring",ear2="Andoaa earring",
     --    body="Convoker's Doublet +3",hands="Lamassu Mitts +1",ring1="Globidonta Ring",ring2="Evoker's ring",
     --    waist="Kobo Obi",legs="Beckoner's Spats +1",feet="Rubeus Boots"}
@@ -220,7 +223,7 @@ function init_gear_sets()
 	sets.precast.BloodPact = {
 	    main={ name="Gridarvor", augments={'Pet: Accuracy+70','Pet: Attack+70','Pet: "Dbl. Atk."+15',}},
 		sub="Elan Strap +1",
-		ammo="Sancus Sachet",
+		ammo="Sancus Sachet +1",
 		head={ name="Glyphic Horn +1", augments={'Enhances "Astral Flow" effect',}},
 		body="Con. Doublet +3",
 		hands="Lamassu Mitts +1",
@@ -237,7 +240,7 @@ function init_gear_sets()
 
     sets.midcast.Pet.TPBonus = {legs="Enticer's Pants"}
 
-    --sets.midcast.Pet.WS = {main="Gridarvor",sub="Elan Strap +1 +1",ammo="Sancus Sachet +1",
+    --sets.midcast.Pet.WS = {main="Gridarvor",sub="Elan Strap +1 +1",ammo="Sancus Sachet +1 +1",
     --    head="Apogee Crown +1",neck="Shulmanu Collar",ear1="Lugalbanda Earring",ear2="Esper Earring",
     --    body="Convoker's Doublet +3",hands="Merlinic Dastanas",ring1="Varar Ring",ring2="Varar Ring +1",
     --    back=BP_Atk_back,waist="Regal Belt",legs="Apogee Slacks +1",feet="Apogee Pumps"}
@@ -245,10 +248,10 @@ function init_gear_sets()
 	sets.midcast.Pet.WS =  {
 		main={ name="Gridarvor", augments={'Pet: Accuracy+70','Pet: Attack+70','Pet: "Dbl. Atk."+15',}},
 		sub="Elan Strap +1",
-		ammo="Sancus Sachet",
+		ammo="Sancus Sachet +1",
 		head={ name="Apogee Crown +1", augments={'MP+80','Pet: Attack+35','Blood Pact Dmg.+8',}},
 		body="Con. Doublet +3",
-		hands={ name="Merlinic Dastanas", augments={'Pet: Attack+25 Pet: Rng.Atk.+25','Blood Pact Dmg.+8','Pet: INT+10','Pet: Mag. Acc.+8','Pet: "Mag.Atk.Bns."+1',}},
+		hands={ name="Merlinic Dastanas", augments={'Pet: Accuracy+26 Pet: Rng. Acc.+26','Blood Pact Dmg.+10','Pet: Mag. Acc.+14','Pet: "Mag.Atk.Bns."+7',}},
 		legs={ name="Enticer's Pants", augments={'MP+50','Pet: Accuracy+15 Pet: Rng. Acc.+15','Pet: Mag. Acc.+15','Pet: Damage taken -5%',}},
 		feet={ name="Apogee Pumps", augments={'MP+60','Pet: Attack+30','Blood Pact Dmg.+7',}},
 		neck="Shulmanu Collar",
@@ -271,12 +274,12 @@ function init_gear_sets()
         })
 
     sets.midcast.Pet.MABBloodPact = {
-	    main={ name="Grioavolr", augments={'Blood Pact Dmg.+9','Pet: INT+9','Pet: Mag. Acc.+18',}},
+	    main={ name="Grioavolr", augments={'Blood Pact Dmg.+10','Pet: STR+4','Pet: Mag. Acc.+23','Pet: "Mag.Atk.Bns."+21',}},
 		sub="Elan Strap +1",
-		ammo="Sancus Sachet",
+		ammo="Sancus Sachet +1",
 		head={ name="Apogee Crown", augments={'MP+60','Pet: "Mag.Atk.Bns."+30','Blood Pact Dmg.+7',}},
 		body="Con. Doublet +3",
-		hands={ name="Merlinic Dastanas", augments={'Pet: Attack+25 Pet: Rng.Atk.+25','Blood Pact Dmg.+8','Pet: INT+10','Pet: Mag. Acc.+8','Pet: "Mag.Atk.Bns."+1',}},
+		hands={ name="Merlinic Dastanas", augments={'Pet: Accuracy+26 Pet: Rng. Acc.+26','Blood Pact Dmg.+10','Pet: Mag. Acc.+14','Pet: "Mag.Atk.Bns."+7',}},
 		legs={ name="Enticer's Pants", augments={'MP+50','Pet: Accuracy+15 Pet: Rng. Acc.+15','Pet: Mag. Acc.+15','Pet: Damage taken -5%',}},
 		feet={ name="Apogee Pumps", augments={'MP+60','Pet: Attack+30','Blood Pact Dmg.+7',}},
 		neck="Adad Amulet",
@@ -308,7 +311,7 @@ function init_gear_sets()
     sets.midcast.Pet.MultiStrike = set_combine(sets.midcast.Pet.WS, {
         ear2="Domesticator's Earring",waist="Incarnation Sash"})
 
-    sets.midcast.Pet.Buff = {main="Espiritus",sub="Vox Grip",ammo="Sancus Sachet",
+    sets.midcast.Pet.Buff = {main="Espiritus",sub="Vox Grip",ammo="Sancus Sachet +1",
 	    head="Beckoner's Horn +1",neck="Incanter's Torque",ear1="Summoning earring",ear2="Andoaa earring",
         body="Beckoner's Doublet +1",hands="Lamassu Mitts +1",ring1="Globidonta Ring",ring2="Evoker's ring",
         back="Conveyance Cape",waist="Kobo Obi",legs="Beckoner's Spats +1",feet="Beckoner's Pigaches +1"}
@@ -317,12 +320,12 @@ function init_gear_sets()
     -- IDLE SETS --
     ---------------
 
-    sets.idle = {main="Gridarvor",sub="Irenic Strap +1",ammo="Sancus Sachet",
+    sets.idle = {main="Gridarvor",sub="Irenic Strap +1",ammo="Sancus Sachet +1",
         head="Beckoner's Horn +1",neck="Bathy Choker +1",ear1="Lugalbanda Earring",ear2="Genmei Earring",
         body="Shomonjijoe +1",hands="Asteria Mitts +1",ring2="Defending Ring",ring1="Dark Ring",
         back="Solemnity Cape",waist="Fucho-no-obi",legs="Assiduity pants +1",feet="Herald's Gaiters"}
 
-    sets.idle.Pet = {main="Gridarvor",sub="Irenic Strap +1",ammo="Sancus Sachet",
+    sets.idle.Pet = {main="Gridarvor",sub="Irenic Strap +1",ammo="Sancus Sachet +1",
         head="Beckoner's Horn +1",neck="Caller's Pendant",ear1="Enmerkar Earring",ear2="Evans Earring",
         body="Shomonjijoe +1",hands="Asteria Mitts +1",ring1="Defending Ring",ring2="Evoker's ring",
         back="Conveyance Cape",waist="Fucho-no-Obi",legs="Assiduity pants +1",feet="Apogee Pumps"}
@@ -434,6 +437,23 @@ function init_gear_sets()
 		back="Perimede Cape",
 	}
 	
+	sets.engaged = {
+	    ammo="Sancus Sachet +1",
+    head="Alhazen Hat +1",
+    body="Con. Doublet +3",
+    hands="Asteria Mitts +1",
+    legs="Assid. Pants +1",
+    feet="Herald's Gaiters",
+    neck="Combatant's Torque",
+    waist="Eschan Stone",
+    left_ear="Cessance Earring",
+    right_ear="Telos Earring",
+    left_ring="Petrov Ring",
+    right_ring="Begrudging Ring",
+    back="Argocham. Mantle",
+
+	}
+	
 	
     sets.midcast.Cursna = set_combine(sets.midcast.FastRecast, {waist="Gishdubar Sash"})
 
@@ -489,7 +509,7 @@ function init_gear_sets()
     -- ENGAGED SETS --
     ------------------
 
-    sets.engaged = {main="Gridarvor",sub="Irenic Strap +1",ammo="Sancus Sachet",
+    sets.engaged = {main="Gridarvor",sub="Irenic Strap +1",ammo="Sancus Sachet +1",
         head="Beckoner's Horn +1",neck="Caller's Pendant",ear1="Handler's Earring +1",ear2="Evans Earring",
         body="Shomonjijoe +1",hands="Asteria Mitts +1",ring1="Thurandaut Ring +1",ring2="Evoker's ring",
         back=Pet_Regen_back,waist="Fucho-no-Obi",legs="Assiduity pants +1",feet="Beckoner's Pigaches +1"}
@@ -713,14 +733,21 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 -- Called any time we attempt to handle automatic gear equips (ie: engaged or idle gear).
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    -- Equipping a Capacity Points Mantle locks it until it is manually unequipped.
-    if player.equipment.back == 'Mecisto. Mantle' or player.equipment.back == 'Aptitude Mantle' or player.equipment.back == 'Aptitude Mantle +1' then
-        disable('back')
-    else
-        enable('back')
-    end
+function job_handle_equipping_gear(playerStatus, eventArgs)    	
+	disable_specialgear()
+
+	if state.TPMode.value == "WeaponLock" then
+	  equip({main=weaponlock_main,sub=weaponlock_sub})
+	  disable("main")
+	  disable("sub")
+	else
+	  enable("main")
+	  enable("sub")
+	end
+
+
 end
+
 
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.

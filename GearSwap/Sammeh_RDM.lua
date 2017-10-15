@@ -113,7 +113,7 @@ function init_gear_sets()
 		waist="Reiki Yotai",
 		left_ear="Suppanomimi",
 		right_ear="Telos Earring",
-		left_ring="Hetairoio Ring",
+		left_ring="Hetairoi Ring",
 		right_ring="Cacoethic Ring +1",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
 	}

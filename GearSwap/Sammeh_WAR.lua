@@ -36,10 +36,10 @@ function init_gear_sets()
 	
 	sets.dt = {
 		ammo="Staunch Tathlum", --dt2
-	    head="Sulevia's Mask +1", --dt5 
-		body="Arke Corazza", --dt12
+	    head="Sulevia's Mask +2", --dt6 
+		body="Sulevia's Plate. +2", --dt9
 		hands="Sulev. Gauntlets +2", --dt4
-		legs="Sulev. Cuisses +2", --dt6
+		legs="Sulev. Cuisses +2", --dt7
 		feet="Pumm. Calligae +3", 
 		neck="Loricate Torque +1", --dt6 
 		waist="Ioskeha Belt",
@@ -48,14 +48,14 @@ function init_gear_sets()
 		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}}, --pdt6, mdt3
 		right_ring="Defending Ring", -- dt10
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
-	} -- pdt 51 mdt -- 48 (Shell will easily make up diff)
+	} -- pdt 48 mdt -- 48 (Shell will easily make up diff)
 	sets.dtaftermath = {
 		ammo="Ginsen",
-	    head="Flamma Zucchetto +1",
-		body="Sulevia's Plate. +1", --dt8
+	    head="Flamma Zucchetto +2",
+		body="Sulevia's Plate. +2", --dt9
 		hands="Sulev. Gauntlets +2", --dt5
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
-		feet="Sulev. Leggings +1", --dt3
+		feet="Sulev. Leggings +2", --dt4
 		neck="Loricate Torque +1", --dt6 
 		waist="Ioskeha Belt",
 		right_ear="Telos Earring",
@@ -66,7 +66,7 @@ function init_gear_sets()
 	} --pdt 31 --mdt 31 (+20% aftermath DT) 
 	sets.engaged = {
 		ammo="Ginsen",
-		head="Flamma Zucchetto +1",
+		head="Flamma Zucchetto +2",
 		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
 		hands="Sulev. Gauntlets +2",
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
@@ -112,7 +112,7 @@ function init_gear_sets()
 	}
 	sets.engaged.MedAccuracy = {
 	    ammo="Ginsen",
-		head="Flamma Zucchetto +1",
+		head="Flamma Zucchetto +2",
 		body="Pumm. Lorica +3",
 		hands="Sulev. Gauntlets +2",
 		legs="Pumm. Cuisses +3",
@@ -134,7 +134,7 @@ function init_gear_sets()
 		body="Pumm. Lorica +3",
 		hands="Sulev. Gauntlets +2",
 		legs={ name="Valor. Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
-		feet="Sulev. Leggings +1",
+		feet="Sulev. Leggings +2",
 		right_ear="Telos Earring",
 		left_ear="Cessance Earring",
 		neck="Fotia Gorget",
@@ -145,7 +145,7 @@ function init_gear_sets()
 	}
 	--back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
 	sets.ws.vitbased = set_combine(sets.ws,{
-		head="Sulevia's Mask +1",
+		head="Sulevia's Mask +2",
 		body="Pumm. Lorica +3",
 		right_ring="Regal Ring",
 		legs="Sulev. Cuisses +2",
@@ -224,7 +224,7 @@ function init_gear_sets()
     sets.Idle = {
 		ammo="Ginsen",
 		head="Twilight Helm",
-		body="Arke Corazza",
+		body="Sulevia's Plate. +2",
 		hands="Sulev. Gauntlets +2",
 		legs="Sulev. Cuisses +2",
 		feet="Hermes' Sandals",

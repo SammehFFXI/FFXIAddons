@@ -196,7 +196,8 @@ function job_buff_change(status,gain_or_loss)
 	   send_command('input /party These tears... they sting-wing....')
    end
    if status == "Sublimation: Complete" then
-   equip(sets.Idle.Current)
+		handle_equipping_gear(player.status)
+		equip(sets.Idle.Current)
    end
    else 
    add_to_chat(3,'------- Lost Buff: '..status..'-------')

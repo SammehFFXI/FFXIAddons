@@ -15,7 +15,7 @@ function user_setup()
     send_command('bind f10 gs c cycle idlemode')
 	send_command('bind f12 gs c update caster')
 	select_default_macro_book()
-	send_command('@wait 5;input /lockstyleset 20')
+	send_command('@wait 5;input /lockstyleset 11')
 	
 	-- Set Common Aliases --
 	send_command("alias idle gs equip sets.Idle.Current")
@@ -36,7 +36,13 @@ function user_setup()
 	send_command("alias eng gs equip sets.engaged")	
 	AutoNextTier = true
 	SublimationStartTimer = nil
+	AutoFire = false	
+	waittime = 2.6
+
+	packets = require('packets')
+	
 end
+
 
 	
 function init_gear_sets()
@@ -112,13 +118,13 @@ function init_gear_sets()
 		right_ear="Odnowa Earring +1",
 		left_ring="K'ayres Ring",
 		right_ring="Etana Ring",
-		back="Tantalic Cape",
+		back="Moonbeam Cape",
 	}
 	
 	sets.enh_protect = {ring1="Sheltered Ring"}
 	
     sets.precast.FastCast = {
-		main="Oranyan", -- FC 7
+		main="Hvergelmir", -- FC 50
 		sub="Clerisy Strap +1", -- FC 3
 		ammo="Incantor Stone", -- FC 2
 		head={ name="Merlinic Hood", augments={'"Fast Cast"+6',}}, -- FC 14
@@ -329,6 +335,7 @@ function init_gear_sets()
 		right_ring="Evanescence Ring",
 		back="Perimede Cape",
 	}
+	sets.midcast['Ninjutsu'] = sets.precast.FastCast
     sets.midcast.Embrava = sets.midcast['Enhancing Magic']
 	
 	-- regen defaults to Duration, Can swap to potency
@@ -406,6 +413,12 @@ end
 
 function job_pretarget(spell)
 checkblocking(spell)
+	if spell.action_type == 'Magic' then
+		if aftercast_start and os.clock() - aftercast_start < waittime then
+			windower.add_to_chat(8,"Precast too early! Adding Delay:"..waittime - (os.clock() - aftercast_start))
+			cast_delay(waittime - (os.clock() - aftercast_start))
+		end
+	end
 end
 
 function job_precast(spell)
@@ -591,6 +604,10 @@ function job_aftercast(spell)
 	end
     if spell.interrupted then
 	  add_to_chat(8,'--------- Casting Interupted: '..spell.name..'---------')
+	  if (AutoCast == true) then
+		add_to_chat(8,'AutoCast Interruption - canceling series').
+		AutoCast = false
+	  end
 	end 
 	if spell.english ~= 'Sublimation' then
 	  handle_equipping_gear(player.status)
@@ -598,7 +615,7 @@ function job_aftercast(spell)
 	end 
 	if spell.english == 'Sublimation' and not buffactive["Sublimation: Activated"] and not buffactive["Sublimation: Complete"] then
 	  sets.Idle.Current = sets.Idle.Subl
-	  --send_command('@wait 2;gs equip sets.Idle.Current')
+	  send_command('@wait 2;gs equip sets.Idle.Current')
       equip(sets.Idle.Current)
     elseif spell.english == 'Sublimation' and (buffactive["Sublimation: Activated"] or buffactive["Sublimation: Complete"]) then
 	  sets.Idle.Current = sets.Idle.NoSubl
@@ -615,7 +632,24 @@ function job_aftercast(spell)
 	if precast_start and state.SpellDebug.value == "On" then 
 		add_to_chat(8,"Spell: "..spell.name..string.format(" Casting Time: %.2f", aftercast_start - precast_start))
 	end
-	precast_start = nil
+	--precast_start = nil
+	if spell.action_type ~= 'Magic' then
+	 aftercast_start = nil
+	end
+	
+	if (AutoCast == true) then
+	  if AutoCastSet[AutoCastIteration] then
+	    windower.add_to_chat(8,"AutoCast: "..AutoCastSet[AutoCastIteration])
+	    send_command('wait '..waittime..'; input /ma "'..AutoCastSet[AutoCastIteration]..'" <t>')
+	  else 
+	    AutoCast = false
+	  end
+	  AutoCastIteration = AutoCastIteration + 1
+    end
+end
+
+function job_post_aftercast(spell)
+
 end
 
 
@@ -636,6 +670,17 @@ function job_self_command(cmdParams, eventArgs)
         print(player.status)
         eventArgs.handled = true
     end
+	if cmdParams[1]:lower() == 'UpdateIdle' then
+		job_handle_equipping_gear(player.status)
+		equip(sets.Idle.Current)
+	end
+	if cmdParams[1]:lower() == 'autocast' then
+		AutoCast = true
+		AutoCastIteration = 2
+		AutoCastSet = cmdParams
+		AutoCastSet[1] = nil -- Removing cmdParams
+		send_command('input /ma '..AutoCastSet[AutoCastIteration]..' <t>')
+	end
 end
 
 
@@ -644,8 +689,8 @@ function job_state_change(stateField, newValue, oldValue)
 	equip(sets.Idle.Current)
 end
 
-
 function job_handle_equipping_gear(playerStatus, eventArgs)    	
+	
 	disable_specialgear()
 	if player.equipment.neck == "Arciela's Grace +1" then
         disable('neck')
@@ -697,4 +742,43 @@ windower.raw_register_event('time change',function()
 	  job_handle_equipping_gear(player.status)
 	  send_command("gs equip sets.Idle.Current")
    end
+   if buffactive["Sublimation: Complete"] then
+		SublimationStartTimer = nil
+	end
+   if not buffactive["Sublimation: Complete"] and not buffactive["Sublimation: Activated"] and windower.ffxi.get_ability_recasts()[234] == 0 and not windower.ffxi.get_info().mog_house then
+	  send_command("input /ja sublimation")
+   end
 end)	
+
+--[[
+windower.raw_register_event('incoming chunk',function(id,data)
+	if id == 0x028 then
+		local packet = packets.parse('incoming', data)
+		print(packet.Recast,packet._unknown1,packet.Param)
+	end
+end)
+
+windower.raw_register_event('action',function (act)
+	-- Should mirror AfterCast - but get a few more variables..... I think?
+	-- info here: http://dev.windower.net/doku.php?id=lua:api:events:action
+	local actor = windower.ffxi.get_mob_by_id(act.actor_id)		
+	local self = windower.ffxi.get_player()
+	local target_count = act.target_count 
+	local category = act.category  
+	local param = act.param
+	local recast = act.recast  
+	local targets = act.targets
+	local primarytarget = windower.ffxi.get_mob_by_id(targets[1].id)
+	local valid_target = act.valid_target
+	if actor and actor.name == self.name and category == 4 then
+		if res.spells[param] then
+			--print('Completed Casting',actor.name,res.spells[param].en)
+			windower.add_to_chat(8,'Completed Casting: '..res.spells[param].en..' Recast Time: '..recast)
+			if (recast == 1) then 
+				windower.add_to_chat(8,'You got an insta-cast')
+			end
+		end
+	end
+end)
+
+]]

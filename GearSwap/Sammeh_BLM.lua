@@ -73,7 +73,7 @@ function init_gear_sets()
 	
 	sets.precast.FastCast = {
 	    --main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
-		main="Oranyan",
+		main="Hvergelmir",
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},

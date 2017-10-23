@@ -23,8 +23,8 @@ function init_gear_sets()
 	   
 	sets.engaged = {
 		ammo="Ginsen",
-		head="Flam. Zucchetto +1",
-		body={ name="Valorous Mail", augments={'Accuracy+22','"Store TP"+7',}},
+		head="Flam. Zucchetto +2",
+		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
 		legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
 		feet={ name="Valorous Greaves", augments={'Accuracy+26','"Dbl.Atk."+4','DEX+8','Attack+3',}},
@@ -42,7 +42,7 @@ function init_gear_sets()
 		body={ name="Valorous Mail", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','DEX+6','Accuracy+1','Attack+13',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+23 Attack+23','Weapon skill damage +3%','VIT+8','Accuracy+2','Attack+12',}},
 		legs="Hiza. Hizayoroi +2",
-		feet={ name="Valorous Greaves", augments={'Accuracy+23 Attack+23','Enmity+2','STR+8','Accuracy+9','Attack+9',}},
+		feet={ name="Valorous Greaves", augments={'Mag. Acc.+17','"Store TP"+4','Weapon skill damage +8%','Accuracy+5 Attack+5','Mag. Acc.+10 "Mag.Atk.Bns."+10',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Cessance Earring",

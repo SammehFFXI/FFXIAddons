@@ -281,7 +281,7 @@ function init_gear_sets()
 		body="Con. Doublet +3",
 		hands={ name="Merlinic Dastanas", augments={'Pet: Accuracy+26 Pet: Rng. Acc.+26','Blood Pact Dmg.+10','Pet: Mag. Acc.+14','Pet: "Mag.Atk.Bns."+7',}},
 		legs={ name="Enticer's Pants", augments={'MP+50','Pet: Accuracy+15 Pet: Rng. Acc.+15','Pet: Mag. Acc.+15','Pet: Damage taken -5%',}},
-		feet={ name="Apogee Pumps", augments={'MP+60','Pet: Attack+30','Blood Pact Dmg.+7',}},
+		feet={ name="Merlinic Crackows", augments={'Pet: "Mag.Atk.Bns."+22','Blood Pact Dmg.+10','Pet: Mag. Acc.+12',}},
 		neck="Adad Amulet",
 		waist="Incarnation Sash",
 		left_ear="Enmerkar Earring",
@@ -320,7 +320,7 @@ function init_gear_sets()
     -- IDLE SETS --
     ---------------
 
-    sets.idle = {main="Gridarvor",sub="Irenic Strap +1",ammo="Sancus Sachet +1",
+    sets.idle = {main="Hvergelmir",sub="Irenic Strap +1",ammo="Sancus Sachet +1",
         head="Beckoner's Horn +1",neck="Bathy Choker +1",ear1="Lugalbanda Earring",ear2="Genmei Earring",
         body="Shomonjijoe +1",hands="Asteria Mitts +1",ring2="Defending Ring",ring1="Dark Ring",
         back="Solemnity Cape",waist="Fucho-no-obi",legs="Assiduity pants +1",feet="Herald's Gaiters"}
@@ -378,7 +378,7 @@ function init_gear_sets()
     --------------------
 
     sets.precast.FC = {
-        main="Oranyan",
+        main="Hvergelmir",
 		sub="Clerisy Strap +1",
 		ammo="Impatiens",
 		head={ name="Merlinic Hood", augments={'"Fast Cast"+6',}},

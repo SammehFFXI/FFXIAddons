@@ -1,0 +1,21 @@
+windower.raw_register_event('action',function (act)
+	local actor = windower.ffxi.get_mob_by_id(act.actor_id)		
+	local self = windower.ffxi.get_player()
+	local target_count = act.target_count 
+	local category = act.category  
+	local param = act.param
+	local recast = act.recast  
+	local targets = act.targets
+	local primarytarget = windower.ffxi.get_mob_by_id(targets[1].id)
+	local valid_target = act.valid_target
+	local pet = windower.ffxi.get_mob_by_target('pet')
+	-- print(actor.name,category,param)
+	--[[
+	[1945] = {id=1945,en="Provoke",ja="挑発"},
+    [1946] = {id=1946,en="Shock Absorber",ja="Ｓ．アブソーバー"},
+    [1947] = {id=1947,en="Flashbulb",ja="フラッシュバルブ"},
+	]]
+	if actor and pet and actor.id == pet.id and (param == 1945 or param == 1947) then
+		print(actor.name.." just used something i care about")
+	end
+end)

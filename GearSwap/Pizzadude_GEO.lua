@@ -675,3 +675,4 @@ function select_default_macro_book()
     set_macro_page(3, 1)
 end
 
+

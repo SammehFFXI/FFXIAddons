@@ -28,16 +28,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'Shopper'
 _addon.author = 'Sammeh'
-_addon.version = '1.0.1'
+_addon.version = '1.0.2'
 _addon.command = 'shop'
 
 -- 1.0.0 Orig release
 -- 1.0.1 Clean-up old copied code
+-- 1.0.2 added in some ugly auto-purchases.   //shop buyall  (same syntax otherwise as //shop buy)
 
 
 
 -- Todo:
--- Add in a loop to buy multiples.  # requested / Stack Slot = # of Inv required. If inv_req > freeslots ; loop buy until # requested
 -- Track Guild NPCs 0x083 incoming- currently bad format
 
 
@@ -108,6 +108,7 @@ windower.register_event('addon command', function(...)
 	if cmd and cmd:lower() == 'reset' and lastpkt then 
 		reset_me()
 	end
+	
 	if cmd and cmd:lower() == 'buy' then
 		count = tonumber(args[1])
 		args:remove(1)
@@ -143,6 +144,46 @@ windower.register_event('addon command', function(...)
 			end
 		end
 	end
+	if cmd and cmd:lower() == 'buyall' then
+		local freeslots = count_inv()
+		count = tonumber(args[1])
+		args:remove(1)
+		local npc_by_name = args[1]:lower()
+		args:remove(1)
+		while (count_inv() > 0) do
+			coroutine.sleep(1)
+			if type(count) ~= 'number' then
+				windower.add_to_chat(10,'Count not specified.  Usage: //shop buyall COUNT NPC_NAME ITEM')
+			else
+				local npc_item = table.concat(args," "):lower()
+				npc_item_by_id = validate_item(npc_item)
+				if npc_item_by_id then
+					if res.items[npc_item_by_id].stack >= count then
+						if freeslots > 0 then 
+							if not busy and npc_item_by_id then
+								--windower.add_to_chat(8,'Trying to buy Item:'..npc_item..' Item ID: '..npc_item_by_id..' From: '..npc_by_name)
+								pkt = createpacket(npc_by_name)
+								if pkt and pkt['Target'] then
+									busy = true
+									poke_npc(pkt['Target'],pkt['Target Index'])
+								end
+							else
+								windower.add_to_chat(10,'Still Busy buying last Item!')
+							end
+						else
+							windower.add_to_chat(10,'You are out of inventory!')
+						end
+					else
+						windower.add_to_chat(10,'You specified too many.  Max Count for '..npc_item..' is '..res.items[npc_item_by_id].stack)
+					end
+				else 
+					windower.add_to_chat(10,'Cannot Find Item in Resources: '..npc_item)
+				end
+			end
+		end
+		windower.add_to_chat(10,'You are all out of inventory!')
+	end
+	
 	if cmd and cmd:lower() == 'find' then
 		local id = tonumber(args[1])
 		local target = windower.ffxi.get_mob_by_index(id)

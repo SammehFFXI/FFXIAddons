@@ -745,7 +745,7 @@ windower.raw_register_event('time change',function()
    if buffactive["Sublimation: Complete"] then
 		SublimationStartTimer = nil
 	end
-   if not buffactive["Sublimation: Complete"] and not buffactive["Sublimation: Activated"] and windower.ffxi.get_ability_recasts()[234] == 0 and not windower.ffxi.get_info().mog_house then
+   if not buffactive["Sublimation: Complete"] and not buffactive["Sublimation: Activated"] and windower.ffxi.get_ability_recasts()[234] == 0 and not windower.ffxi.get_info().mog_house and not buffactive['weakness'] and not buffactive['Refresh'] then
 	  send_command("input /ja sublimation")
    end
 end)	

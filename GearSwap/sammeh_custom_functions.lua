@@ -16,7 +16,7 @@ sets.craftgear = {body="Carpenter\'s Apron",ring1="Craftmaster\'s Ring",ring2="C
 follow = 0
 autorun = 0
 
-send_command('alias craft gs equip sets.craftgear; lua unload gearswap')
+send_command('alias craftgear gs equip sets.craftgear; lua unload gearswap')
 send_command('alias uncraft lua load gearswap; gs c update')
 send_command('alias revit input /item "Super Revitalizer" <me>')
 send_command('alias pot1 input /item "Lucid Potion I" <me>')

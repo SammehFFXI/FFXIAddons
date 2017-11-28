@@ -62,3 +62,8 @@ Run a Script:
 Runaway from a bad WS:
 //react add "Glassy Craver" "View Sync" ready "runaway 25"
 //react add "Glassy Craver" "View Sync" complete "runto 21"
+
+
+React 1.6.0.0 - adds in $ACTORID variable to use in a reaction.  Useful for sending helper lua's commands about the actor that performed the action   Replaces $ACTORID with the ID of the actor.
+
+

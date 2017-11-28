@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'React'
 _addon.author = 'Sammeh'
-_addon.version = '1.5.0.4'
+_addon.version = '1.6.0.0'
 _addon.command = 'react'
 
 -- 1.3.0 changing map.lua to job specific
@@ -48,6 +48,10 @@ _addon.command = 'react'
 -- 1.5.0.2 Fix an issue with runaway/to based on target that died or was no longer aggressive etc.
 -- 1.5.0.3 Went ahead and made it where you can't run away/to  yourself ;)
 -- 1.5.0.4 Identified if 'locked on' to target.   Thx sdahlka on Windower forums.
+
+
+-- 1.6.0.0 Add "ActorID" as global variable for use in custom commands
+-- Planned: 1.6.0.1 add in Global commands:   if (Mob specific) then react;  elseif (global) then react; else - no react
 
 require 'tables'
 require 'sets'
@@ -277,7 +281,8 @@ function reaction(actor,category,ability,primarytarget)
 							windower.add_to_chat(chatcolor,"----- React Action: Runto "..run_distance.." yalms.")
 						end
 					else
-						windower.send_command(custom_reactions[actor.name][ability.en].ready_reaction)
+						currentReaction = parseAction(actor,custom_reactions[actor.name][ability.en].ready_reaction)
+						windower.send_command(currentReaction)
 						if showcmds == 1 then 
 							windower.add_to_chat(chatcolor,"----- React Action:"..custom_reactions[actor.name][ability.en].ready_reaction)
 						end
@@ -315,7 +320,8 @@ function reaction(actor,category,ability,primarytarget)
 							windower.add_to_chat(chatcolor,"----- React Action: Running Default gs c update")
 						end
 					else
-						windower.send_command(custom_reactions[actor.name][ability.en].complete_reaction)
+						currentReaction = parseAction(actor, custom_reactions[actor.name][ability.en].complete_reaction)
+						windower.send_command(currentReaction)
 						if showcmds == 1 then 
 							windower.add_to_chat(chatcolor,"----- React Action:"..custom_reactions[actor.name][ability.en].complete_reaction)
 						end
@@ -334,7 +340,8 @@ function reaction(actor,category,ability,primarytarget)
 				if custom_reactions[self.name][ability.en] then
 					if category == 7 or category == 8 then
 						if custom_reactions[self.name][ability.en].ready_reaction then
-							windower.send_command(custom_reactions[self.name][ability.en].ready_reaction)
+							currentReaction = parseAction(actor,custom_reactions[self.name][ability.en].ready_reaction)
+							windower.send_command(currentReaction)
 							if showcmds == 1 then 
 								windower.add_to_chat(chatcolor,"----- React Action:"..custom_reactions[self.name][ability.en].ready_reaction)
 							end
@@ -347,7 +354,8 @@ function reaction(actor,category,ability,primarytarget)
 									windower.add_to_chat(chatcolor,"----- React Action: Running Default gs c update")
 								end
 							else
-								windower.send_command(custom_reactions[self.name][ability.en].complete_reaction)
+								currentReaction = parseAction(actor,custom_reactions[self.name][ability.en].complete_reaction)
+								windower.send_command(currentReaction)
 								if showcmds == 1 then 
 									windower.add_to_chat(chatcolor,"----- React Action:"..custom_reactions[self.name][ability.en].complete_reaction)
 								end
@@ -515,7 +523,10 @@ function runto(actor,action_distance)
 	end
 end
 
-
+function parseAction(actor,reaction)
+	local currentAction = string.gsub(reaction, "%$ACTORID", actor.id)
+	return currentAction
+end
 
 windower.register_event('job change', function()
 	windower.send_command('lua r react')    

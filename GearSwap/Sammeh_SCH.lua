@@ -107,7 +107,7 @@ function init_gear_sets()
 	
 	sets.MaxHP = {
 	    ammo="Homiliary",
-		head="Acad. Mortar. +2",
+		head="Acad. Mortar. +3",
 		body={ name="Peda. Gown +1", augments={'Enhances "Enlightenment" effect',}},
 		hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}},
 		legs="Perdition Slops",
@@ -263,7 +263,7 @@ function init_gear_sets()
 		left_ear="Digni. Earring",
 		right_ear="Barkaro. Earring",
 	})    
-    sets.midcast['Enfeebling Magic'] = {
+    --[[ sets.midcast['Enfeebling Magic'] = {
 	    main={ name="Gada", augments={'"Conserve MP"+3','INT+5','Mag. Acc.+24','"Mag.Atk.Bns."+25','DMG:+13',}},
 		sub="Ammurapi Shield",
 		ammo="Savant's Treatise",
@@ -280,19 +280,39 @@ function init_gear_sets()
 		right_ring="Kishar Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 	}
+	]]
+
+	sets.midcast['Enfeebling Magic'] = {
+	    main={ name="Gada", augments={'"Conserve MP"+3','INT+5','Mag. Acc.+24','"Mag.Atk.Bns."+25','DMG:+13',}},
+		sub="Ammurapi Shield",
+		ammo="Savant's Treatise",
+		head="Acad. Mortar. +3",
+		body="Acad. Gown +2",
+		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
+		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
+		feet="Skaoi Boots",
+		neck="Erra Pendant",
+		waist="Luminary Sash",
+		left_ear="Digni. Earring",
+		right_ear="Regal Earring",
+		left_ring="Etana Ring",
+		right_ring="Weather. Ring",
+		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
+	}
+	
 	sets.midcast['Enfeebling Magic'].MACC = {
 	    main={ name="Gada", augments={'"Conserve MP"+3','INT+5','Mag. Acc.+24','"Mag.Atk.Bns."+25','DMG:+13',}},
 		sub="Ammurapi Shield",
 		ammo="Savant's Treatise",
-		head={ name="Chironic Hat", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Cure" spellcasting time -3%','INT+1','Mag. Acc.+14',}},
-		body={ name="Chironic Doublet", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+9','Mag. Acc.+6','"Mag.Atk.Bns."+14',}},
+		head="Acad. Mortar. +3",
+		body="Acad. Gown +2",
 		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		feet="Skaoi Boots",
-		neck="Incanter's Torque",
+		neck="Erra Pendant",
 		waist="Luminary Sash",
 		left_ear="Digni. Earring",
-		right_ear="Barkaro. Earring",
+		right_ear="Regal Earring",
 		left_ring="Etana Ring",
 		right_ring="Weather. Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
@@ -394,7 +414,7 @@ function init_gear_sets()
 	}
 	sets.Idle.NoSubl = sets.Idle.Main
 	sets.Idle.Subl = set_combine(sets.Idle.NoSubl, {
-		head="Acad. Mortar. +2",
+		head="Acad. Mortar. +3",
 		body={ name="Peda. Gown +1", augments={'Enhances "Enlightenment" effect',}},
 		right_ear="Savant's Earring",
 	})	

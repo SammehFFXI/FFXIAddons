@@ -137,11 +137,11 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         range={ name="Linos", augments={'Accuracy+14','Sklchn.dmg.+4%','Quadruple Attack +2',}},
-		head="Aya. Zucchetto +1",
+		head="Aya. Zucchetto +2",
 		body="Ashera Harness",
 		hands="Aya. Manopolas +1",
 		legs="Jokushu Haidate",
-		feet="Aya. Gambieras +1",
+		feet="Aya. Gambieras +2",
 		neck="Caro Necklace",
 		waist="Grunfeld Rope",
 		left_ear="Ishvara Earring",
@@ -189,14 +189,14 @@ function init_gear_sets()
     sets.midcast.SongEffect = {main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
         head="Fili Calot +1",body="Fili Hongreline +1",neck="Moonbow Whistle",ear1="Aoidos' Earring",ear2="Loquac. Earring",
         hands="Gendewitha Gages +1",ring1="Stikini Ring",ring2="Weather. Ring",
-        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Inyanga Shalwar +1",feet="Brioso Slippers +3",}
+        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Inyanga Shalwar +2",feet="Brioso Slippers +3",}
 
     -- For song defbuffs (duration primary, accuracy secondary)
     sets.midcast.SongDebuff = {
 	    main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
         head="Brioso Roundlet +2",neck="Moonbow Whistle",ear1="Regal Earring",ear2="Enchntr. Earring +1",
         body="Fili Hongreline +1",hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
-        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Inyanga Shalwar +1",feet="Brioso Slippers +3"}
+        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Inyanga Shalwar +2",feet="Brioso Slippers +3"}
 
     -- For song defbuffs (accuracy primary, duration secondary)
     sets.midcast.ResistantSongDebuff = {
@@ -299,11 +299,11 @@ function init_gear_sets()
 
 	sets.engaged = {
 		range={ name="Linos", augments={'Accuracy+14','Sklchn.dmg.+4%','Quadruple Attack +2',}},
-	    head="Ayanmo Zucchetto +1",
+	    head="Ayanmo Zucchetto +2",
 		body="Ashera Harness",
 		hands="Aya. Manopolas +1",
 		legs="Jokushu Haidate",
-		feet="Aya. Gambieras +1",
+		feet="Aya. Gambieras +2",
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",
 		left_ear="Telos Earring",
@@ -564,6 +564,7 @@ function calculate_duration(spell, spellMap)
 	if player.equipment.neck == "Moonbow Whistle" then mult = mult + 0.2 end 
     if player.equipment.body == "Fili Hongreline +1" then mult = mult + 0.12 end
     if player.equipment.legs == "Inyanga Shalwar +1" then mult = mult + 0.15 end
+	if player.equipment.legs == "Inyanga Shalwar +2" then mult = mult + 0.17 end
     if player.equipment.feet == "Brioso Slippers" then mult = mult + 0.1 end
     if player.equipment.feet == "Brioso Slippers +1" then mult = mult + 0.11 end
 	if player.equipment.feet == "Brioso Slippers +2" then mult = mult + 0.13 end

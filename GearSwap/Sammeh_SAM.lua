@@ -13,6 +13,8 @@ function user_setup()
 	-- Set Common Aliases --
 	send_command("alias wsset gs equip sets.ws")
 	send_command("alias eng gs equip sets.engaged")
+	send_command("alias meva gs equip sets.meva")
+	send_command("alias rng gs equip sets.ranged")
 	send_command("alias idle gs equip sets.Idle.Current")
 	send_command('@wait 5;input /lockstyleset 1')
 	
@@ -24,7 +26,8 @@ function init_gear_sets()
 	sets.engaged = {
 		ammo="Ginsen",
 		head="Flam. Zucchetto +2",
-		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
+		--body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
+		body="Kendatsuba Samue +1",
 		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
 		legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
 		feet="Flamma gambieras +2",
@@ -53,6 +56,20 @@ function init_gear_sets()
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
 	}
 	
+	sets.ranged = {
+		head="Ken. Jinpachi",
+		body="Ken. Samue +1",
+		hands="Ken. Tekko",
+		legs="Ken. Hakama",
+		feet="Ken. Sune-Ate",
+		neck="Combatant's Torque",
+		waist="Reiki Yotai",
+		left_ear="Cessance Earring",
+		right_ear="Telos Earring",
+		left_ring="Cacoethic Ring",
+		right_ring="Cacoethic Ring +1",
+		back={ name="Smertrios's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+10','"Store TP"+10',}},
+	}
 	
     ---  PRECAST SETS  ---
 	sets.precast = {}
@@ -63,9 +80,10 @@ function init_gear_sets()
 		head="Wakido Kabuto +1"
 	}
     
-	
 	-- WS Sets
 	sets.precast.WS = sets.ws
+	sets.precast.WS['Namas Arrow'] = sets.ranged
+	sets.precast.WS['Apex Arrow'] = sets.ranged
 	
     ---  MIDCAST SETS  ---
     sets.midcast = {}
@@ -86,20 +104,34 @@ function init_gear_sets()
 		back="Solemnity Cape",
 		ammo="Staunch Tathlum"
 	}
+	sets.meva = {
+	    ammo="Staunch Tathlum",
+    head="Ken. Jinpachi",
+    body="Ken. Samue +1",
+    hands="Ken. Tekko",
+    legs="Ken. Hakama",
+    feet="Ken. Sune-Ate",
+    neck="Warder's Charm +1",
+    waist="Carrier's Sash",
+    left_ear="Hearty Earring",
+    right_ear="Eabani Earring",
+    left_ring="Purity Ring",
+    right_ring="Vengeful Ring",
+    back="Moonbeam Cape",
+	}
 	sets.Idle.Current = sets.Idle
     sets.Resting = sets.Idle
-	sets.dt = sets.Idle
+	sets.dt = set_combine(sets.Idle,{body="Kendatsuba Samue +1",ring2="Defending Ring",head="Loess barbuta +1",neck="Loricate Torque +1",ring1="Dark Ring",})
 	
 	sets.WakeSleep = {head="Frenzy Sallet"}
 
 end
-
-
-
-
+function job_pretarget(spell)
+	checkblocking(spell)
+end
 
 function job_precast(spell)
-    handle_equipping_gear(player.status)
+	handle_equipping_gear(player.status)
 	if spell.name == 'Utsusemi: Ichi' and (buffactive['Copy Image (3)'] or buffactive ['Copy Image (4+)']) then
 	  cancel_spell()
 	  send_command('@wait 1;')
@@ -108,12 +140,6 @@ function job_precast(spell)
 	end
     if sets.precast.JA[spell.name] then
         equip(sets.precast.JA[spell.name])
-    elseif string.find(spell.name,'Cur') and spell.name ~= 'Cursna' then
-        equip(sets.precast.Cure)
-    elseif spell.skill == 'EnhancingMagic' then
-        equip(sets.precast.EnhancingMagic)
-    elseif spell.action_type == 'Magic' then
-        equip(sets.precast.FastCast)
     end
 end
 
@@ -136,7 +162,10 @@ function job_post_midcast(spell)
 	if spell.type == "WeaponSkill" then
 	  tpspent = spell.tp_cost
 	end
-
+	if spell.name == 'Ranged' then
+		equip(sets.ranged)
+	end
+	
 end        
 
 function job_aftercast(spell)
@@ -182,30 +211,19 @@ function job_state_change(stateField, newValue, oldValue)
 end
 
 
-function job_handle_equipping_gear(playerStatus, eventArgs)    	
-    if buffactive.sleep then
-	equip(sets.WakeSleep)
+function job_handle_equipping_gear(playerStatus, eventArgs)    
+	disable_specialgear()
+	if player.equipment.ranged == "Yoichinoyumi" then
+		disable('ammo','ranged')
+	else
+		enable('ammo','ranged')
 	end
-
-    if player.equipment.back == 'Mecisto. Mantle' or player.equipment.back == 'Aptitude Mantle' or player.equipment.back == 'Aptitude Mantle +1' or player.equipment.back == 'Nexus Cape' then
-        disable('back')
-    else
-        enable('back')
-    end
-        if player.equipment.ring1 == 'Warp Ring' or player.equipment.ring1 == 'Trizek Ring' or player.equipment.ring1 == 'Capacity Ring' or player.equipment.ring1 == "Vocation Ring" then
-        disable('ring1')
-    else
-        enable('ring1')
-    end
-    if player.equipment.ring2 == 'Warp Ring' or player.equipment.ring2 == 'Trizek Ring' or player.equipment.ring2 == 'Capacity Ring' or player.equipment.ring2 == "Vocation Ring" then
-        disable('ring2')
-    else
-        enable('ring2')
-    end
+    if buffactive.sleep then
+		equip(sets.WakeSleep)
+	end
 	if playerStatus == 'Idle' then
         equip(sets.Idle.Current)
     end
-	
 end
 
 

@@ -1,0 +1,17 @@
+sets.exported={
+    main="Dojikiri Yasutsuna",
+    sub="Utu Grip",
+    ammo="Staunch Tathlum",
+    head="Ken. Jinpachi",
+    body="Ken. Samue +1",
+    hands="Ken. Tekko",
+    legs="Ken. Hakama",
+    feet="Ken. Sune-Ate",
+    neck="Warder's Charm +1",
+    waist="Reiki Yotai",
+    left_ear="Hearty Earring",
+    right_ear="Eabani Earring",
+    left_ring="Purity Ring",
+    right_ring="Vengeful Ring",
+    back={ name="Smertrios's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+10','"Store TP"+10',}},
+}

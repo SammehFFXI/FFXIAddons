@@ -11,7 +11,7 @@ res = require 'resources'
 --lastspell = require('last_spell.lua')   -- this was just a test - don't ask
 --lastspell_file = files.new('data\\last_spell.lua')
 
-sets.craftgear = {body="Carpenter\'s Apron",ring1="Craftmaster\'s Ring",ring2="Craftkeeper\'s Ring",neck="Carver\'s Torque",hands="Carpenter\'s Gloves"}
+sets.craftgear = {body="Carpenter\'s Apron",ring1="Craftmaster\'s Ring",ring2="Craftkeeper\'s Ring",neck="Carver\'s Torque",hands="Carpenter\'s Gloves",sub="Joiner's shield"}
 
 follow = 0
 autorun = 0
@@ -52,19 +52,11 @@ function check_temp_items()
 end
 
 function disable_specialgear()
-
---	if player.equipment.head == "Frenzy Sallet" and buffactive['Sleep'] then
---		disable('head')
---	else
---		enable('head')
---	end
-	
 	if player.equipment.head == "Reraise Hairpin" then
 		disable('head')
 	else
 		enable('head')
 	end
-	
 	if player.equipment.back == 'Mecisto. Mantle' or player.equipment.back == 'Aptitude Mantle' or player.equipment.back == 'Aptitude Mantle +1' or player.equipment.back == 'Nexus Cape' then
         disable('back')
     else

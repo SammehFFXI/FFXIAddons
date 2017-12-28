@@ -226,8 +226,10 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 	
 	 if busy == true and pkt then
 	 
+		--testing to force a lock
 		if p['Menu ID'] == 8700 or p['Menu ID'] == 8701 or p['Menu ID'] == 8702 or p['Menu ID'] == 8703 or p['Menu ID'] == 8704 then
 	    
+		
 		local packet = packets.new('outgoing', 0x05B)
 		
 		if hpset == 1 then 
@@ -301,20 +303,22 @@ end)
 
 function reset_me()
 		-- Resetting against last poked npc.
-		
- 		local packet = packets.new('outgoing', 0x05B)
- 		packet["Target"]=lastpkt['Target']
- 		packet["Option Index"]="0"
- 		packet["_unknown1"]="16384"
- 		packet["Target Index"]=lastpkt['Target Index']
- 		packet["Automated Message"]=false
- 		packet["_unknown2"]=0
- 		packet["Zone"]=lastpkt['Zone']
- 		packet["Menu ID"]=lastpkt['Menu ID']
- 		packets.inject(packet)
-		busy = false
-		
-		windower.add_to_chat(10,'Should be reset now. Please try again.')
+		if busy and pkt then 
+			local packet = packets.new('outgoing', 0x05B)
+			packet["Target"]=lastpkt['Target']
+			packet["Option Index"]="0"
+			packet["_unknown1"]="16384"
+			packet["Target Index"]=lastpkt['Target Index']
+			packet["Automated Message"]=false
+			packet["_unknown2"]=0
+			packet["Zone"]=lastpkt['Zone']
+			packet["Menu ID"]=lastpkt['Menu ID']
+			packets.inject(packet)
+			busy = false
+			windower.add_to_chat(10,'Should be reset now. Please try again.')
+		else
+			windower.add_to_chat(10,'You are not listed as in a menu interaction. Ignoring.')
+		end
 end
  
 

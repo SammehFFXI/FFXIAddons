@@ -88,7 +88,8 @@ function user_setup()
 	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock'}
 	send_command('alias tp gs c cycle tpmode')
 	send_command('alias bpphys gs equip sets.midcast.Pet.WS')
-
+	send_command('alias bpmag gs equip sets.midcast.Pet.MABBloodPact')
+	
     -- Set up Avatar cycling and keybind Alt+F8/Ctrl+F8
     state.AvatarMode = M{['description']='Avatar Mode', 'Garuda', 'Shiva', 'Ramuh', 'Carbuncle', 'Cait Sith', 'Diabolos',
         'Fenrir', 'Ifrit', 'Titan', 'Leviathan'}
@@ -143,7 +144,7 @@ physical_blood_pacts = S{'Poison Nails','Axe Kick','Double Slap','Claw','Rock Th
     'Spinning Dive','Punch','Regal Scratch','Regal Gash','Moonlit Charge','Crescent Fang','Camisado',
     'Chaotic Strike','Double Punch','Eclipse Bite','Predator Claws','Rush','Volt Strike'}
 
-magic_atk_blood_pacts = S{'Inferno','Earthen Fury','Tidal Wave','Aerial Blast','Diamond Dust','Judgment Bolt',
+magic_atk_blood_pacts = S{'Flaming Crush','Inferno','Earthen Fury','Tidal Wave','Aerial Blast','Diamond Dust','Judgment Bolt',
     'Searing Light','Howling Moon','Ruinous Omen',
     'Fire II','Stone II','Water II','Aero II','Blizzard II','Thunder II',
     'Fire IV','Stone IV','Water IV','Aero IV','Blizzard IV','Thunder IV',
@@ -284,7 +285,25 @@ function init_gear_sets()
 		feet={ name="Merlinic Crackows", augments={'Pet: "Mag.Atk.Bns."+22','Blood Pact Dmg.+10','Pet: Mag. Acc.+12',}},
 		neck="Adad Amulet",
 		waist="Regal Belt",
-		left_ear="Enmerkar Earring",
+		left_ear="Gelos Earring",
+		right_ear="Lugalbanda Earring",
+		left_ring="Varar Ring",
+		right_ring="Varar Ring",
+		back="Campestres's Cape",
+	}
+	
+	sets.midcast.Pet.HybridBloodPact = {
+	    main={ name="Grioavolr", augments={'Blood Pact Dmg.+10','Pet: STR+4','Pet: Mag. Acc.+23','Pet: "Mag.Atk.Bns."+21',}},
+		sub="Elan Strap +1",
+		ammo="Sancus Sachet +1",
+		head={ name="Apogee Crown", augments={'MP+60','Pet: "Mag.Atk.Bns."+30','Blood Pact Dmg.+7',}},
+		body="Con. Doublet +3",
+		hands={ name="Merlinic Dastanas", augments={'Pet: Accuracy+26 Pet: Rng. Acc.+26','Blood Pact Dmg.+10','Pet: Mag. Acc.+14','Pet: "Mag.Atk.Bns."+7',}},
+		legs={ name="Enticer's Pants", augments={'MP+50','Pet: Accuracy+15 Pet: Rng. Acc.+15','Pet: Mag. Acc.+15','Pet: Damage taken -5%',}},
+		feet={ name="Merlinic Crackows", augments={'Pet: "Mag.Atk.Bns."+22','Blood Pact Dmg.+10','Pet: Mag. Acc.+12',}},
+		neck="Adad Amulet",
+		waist="Regal Belt",
+		left_ear="Gelos Earring",
 		right_ear="Lugalbanda Earring",
 		left_ring="Varar Ring",
 		right_ring="Varar Ring",

@@ -8,7 +8,9 @@ end
 function user_setup()
 	state.IdleMode:options('Normal','Reraise','DT')
 	send_command('bind f10 gs c cycle IdleMode')
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy'}
+	send_command('bind f12 gs c wslist')
+	
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy','ShieldBlock'}
     select_default_macro_book()
 	
 	-- Set Common Aliases --
@@ -20,14 +22,43 @@ function user_setup()
 	send_command("alias meva gs equip sets.meva")
 	send_command("alias idle gs equip sets.Idle.Current")
 	send_command('@wait 5;input /lockstyleset 27')
-	
+	send_command("alias g11_m2g12 input /ja Restraint <me>")
 	send_command("alias g11_m2g13 input /ja Berserk <me>")
 	send_command("alias g11_m2g14 input /ja Warcry <me>")
 	send_command("alias g11_m2g15 input /ja Aggressor <me>")
-	send_command("alias g11_m2g16 input /ja Restraint <me>")
-	send_command("alias g11_m2g17 input /ws Scourge")
-	send_command("alias g11_m2g18 input /ws Resolution")
+	send_command("alias g11_m2g16 gs c ws 1")
+	send_command("alias g11_m2g17 gs c ws 2")
+	send_command("alias g11_m2g18 gs c ws 3")
 
+	res = require 'resources'
+	
+	WeaponSkill = {
+		["Great Sword"] = {
+			["1"] = "Resolution",
+			["2"] = "Scourge",
+			["3"] = "Shockwave"
+		},
+		["Great Axe"] = {
+			["1"] = "Upheaval",
+			["2"] = "King's Justice",
+			["3"] = "Full Break"
+		},
+		["Axe"] = {
+			["1"] = "Mistral Axe",
+			["2"] = "Decimation",
+			["3"] = "Cloudsplitter"
+		},
+		["Sword"] = {
+			["1"] = "Savage Blade",
+			["2"] = "Requiescat",
+			["3"] = "Vorpal Blade"
+		},
+		["Club"] = {
+			["1"] = "Realmrazer",
+			["2"] = "Black Halo",
+			["3"] = "True Strike"
+		},
+	}
 	
 end
 
@@ -125,6 +156,22 @@ function init_gear_sets()
 		right_ring="Regal Ring",
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
+	sets.engaged.ShieldBlock = {  
+		ammo="Staunch Tathlum",  --2
+    		head="Sulevia's Mask +2", -- 6
+    		body="Sulevia's Plate. +2", -- 9 
+    		hands="Agoge Mufflers +3", -- pdt 6
+    		legs="Arjuna Breeches", -- pdt 4
+    		feet={ name="Souveran Schuhs", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}}, -- pdt 4
+    		-- neck="Loricate Torque +1", -- 6
+			neck="Combatant's Torque",
+    		waist="Ioskeha Belt",
+    		left_ear="Thureous Earring",
+    		right_ear="Telos Earring",
+    		left_ring="Niqmaddu Ring",
+    		right_ring="Defending Ring", -- 10 
+    		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
+	} -- Axe + Shield = 4 pdt + 5 DT.    Totals: DT-38, PDT-18  (total PDT: 56) (should consider swapping neck)
 
 	sets.engaged.DT = sets.dt
 	sets.ws = {
@@ -175,11 +222,30 @@ function init_gear_sets()
 		right_ring="Weather. Ring",
 		back="Argocham. Mantle",
 	}
+	sets.ws.wsd = {
+	    ammo="Knobkierrie",
+		head={ name="Argosy Celata +1", augments={'STR+12','DEX+12','Attack+20',}},
+		body="Pumm. Lorica +3",
+		hands={ name="Argosy Mufflers +1", augments={'STR+20','"Dbl.Atk."+3','Haste+3%',}},
+		legs={ name="Argosy Breeches +1", augments={'STR+12','DEX+12','Attack+20',}},
+		feet="Sulev. Leggings +2",
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear="Cessance Earring",
+		right_ear="Telos Earring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Regal Ring",
+		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
+	}
+	
 	sets.ws["King\'s Justice"] = sets.ws.strbased
 	sets.ws["Fell Cleve"] = sets.ws.strbased
+	sets.ws["Scourge"] = sets.ws.wsd
 	sets.ws["Resolution"] = sets.ws.strbased
-	sets.ws["Mistral Axe"] = sets.ws.strbased
-	sets.ws["Savage Blade"] = sets.ws.strbased
+	sets.ws["Decimation"] = sets.ws.strbased
+	sets.ws["Rampage"] = sets.ws.strbased
+	sets.ws["Mistral Axe"] = sets.ws.wsd
+	sets.ws["Savage Blade"] = sets.ws.wsd
 	sets.ws["Metatron Torment"] = sets.ws.strbased
 	sets.ws["Upheaval"] = sets.ws.vitbased
 	sets.ws["Cloudsplitter"] = sets.ws.magic
@@ -192,6 +258,8 @@ function init_gear_sets()
 	sets.precast.JA.Berserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +1"})
 	sets.precast.JA.Warcry = set_combine(sets.precast.JA, {head="Agoge mask +1"})
 	sets.precast.JA.Aggressor = set_combine(sets.precast.JA, {head="Pummeler's Mask +3"})
+	sets.precast.JA['Mighty Strikes'] = set_combine(sets.precast.JA, {hands="Agoge Mufflers +3"})
+	sets.precast.JA['Defender'] = set_combine(sets.precast.JA, {hands="Agoge Mufflers +3"})
 	sets.precast.JA['Blood Rage'] = set_combine(sets.precast.JA, {body="Boii Lorica +1"})
 	sets.precast.Restraint = set_combine(sets.precast.JA, {hands="Boii Mufflers +1"})
 	sets.precast.JA.Tomahawk = set_combine(sets.precast.JA, {ammo="Thr. Tomahawk",feet="Agoge Calligae +1"})
@@ -212,6 +280,12 @@ function init_gear_sets()
 		left_ring="Purity Ring",
 		right_ring="Vengeful Ring",
 		back={ name="Cichol's Mantle", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10',}},
+	}
+	
+	sets.CurePotencyRecv = { 
+		body={ name="Souveran Cuirass", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
+		legs={ name="Souveran Diechlings", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
+		feet={ name="Souveran Schuhs", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
 	}
 	
 	-- WS Sets
@@ -329,11 +403,30 @@ function job_buff_change(status,gain_or_loss)
  end
 
  function job_self_command(command)
-
+	if command[1]:lower() == "ws" and command[2] ~= nil then
+		local EquipedGear = windower.ffxi.get_items()
+		local CurrentSkill
+		if EquipedGear.equipment.main == nil or EquipedGear.equipment.main == 0 then 
+		  CurrentSkill = "Hand-to-Hand"
+		else 
+		  CurrentSkill = res.skills[res.items[windower.ffxi.get_items(EquipedGear.equipment.main_bag, EquipedGear.equipment.main).id].skill].en
+		end
+		send_command('input /ws '..WeaponSkill[CurrentSkill][command[2]])
+	end
+	if command[1]:lower() == "wslist" then
+		local EquipedGear = windower.ffxi.get_items()
+		local CurrentSkill
+		if EquipedGear.equipment.main == nil or EquipedGear.equipment.main == 0 then 
+		  CurrentSkill = "Hand-to-Hand"
+		else 
+		  CurrentSkill = res.skills[res.items[windower.ffxi.get_items(EquipedGear.equipment.main_bag, EquipedGear.equipment.main).id].skill].en
+		end
+		windower.add_to_chat(2,"WS List:")
+		for i,v in pairs(WeaponSkill[CurrentSkill]) do
+			windower.add_to_chat(2,i..") "..v)
+		end
+	end
 end
-
-
-
 
 function job_state_change(stateField, newValue, oldValue)
     job_handle_equipping_gear(player.status)

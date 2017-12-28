@@ -1,0 +1,17 @@
+sets.exported={
+    main="Freydis",
+    sub="Adapa Shield",
+    ammo="Staunch Tathlum",
+    head="Sulevia's Mask +2",
+    body="Sulevia's Plate. +2",
+    hands="Sulev. Gauntlets +2",
+    legs="Pumm. Cuisses +3",
+    feet="Pumm. Calligae +3",
+    neck="Loricate Torque +1",
+    waist="Ioskeha Belt",
+    left_ear="Thureous Earring",
+    right_ear="Telos Earring",
+    left_ring="Niqmaddu Ring",
+    right_ring="Defending Ring",
+    back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
+}

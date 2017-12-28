@@ -1,0 +1,17 @@
+sets.exported={
+    main={ name="Gada", augments={'Enh. Mag. eff. dur. +5','VIT+8','"Mag.Atk.Bns."+2',}},
+    sub="Ammurapi Shield",
+    ammo="Staunch Tathlum",
+    head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
+    body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
+    hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
+    legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
+    feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
+    neck="Incanter's Torque",
+    waist="Rumination Sash",
+    left_ear="Genmei Earring",
+    right_ear="Enchntr. Earring +1",
+    left_ring="Stikini Ring",
+    right_ring="Evanescence Ring",
+    back="Perimede Cape",
+}

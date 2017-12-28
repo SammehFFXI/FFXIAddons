@@ -1,0 +1,17 @@
+sets.exported={
+    main="Freydis",
+    sub="Adapa Shield",
+    ammo="Ginsen",
+    head="Twilight Helm",
+    body={ name="Souveran Cuirass", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
+    hands="Sulev. Gauntlets +2",
+    legs="Sulev. Cuisses +2",
+    feet={ name="Souveran Schuhs", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
+    neck="Bathy Choker +1",
+    waist="Flume Belt +1",
+    left_ear="Cessance Earring",
+    right_ear="Telos Earring",
+    left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+    right_ring="Defending Ring",
+    back="Solemnity Cape",
+}

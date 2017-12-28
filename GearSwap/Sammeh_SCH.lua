@@ -287,7 +287,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		ammo="Savant's Treatise",
 		head="Acad. Mortar. +3",
-		body="Acad. Gown +2",
+		body="Acad. Gown +3",
 		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		feet="Skaoi Boots",
@@ -305,7 +305,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		ammo="Savant's Treatise",
 		head="Acad. Mortar. +3",
-		body="Acad. Gown +2",
+		body="Acad. Gown +3",
 		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		feet="Skaoi Boots",
@@ -339,7 +339,7 @@ function init_gear_sets()
 	    --main="Oranyan",
 		--sub="Clerisy Strap +1",
 		--sub="Enki Strap",
-		main={ name="Gada", augments={'"Conserve MP"+3','INT+5','Mag. Acc.+24','"Mag.Atk.Bns."+25','DMG:+13',}},
+		main={ name="Gada", augments={'Enh. Mag. eff. dur. +5','VIT+8','"Mag.Atk.Bns."+2',}},
 		sub="Ammurapi Shield",
 		ammo="Staunch Tathlum",
 		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
@@ -360,16 +360,11 @@ function init_gear_sets()
 	
 	-- regen defaults to Duration, Can swap to potency
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
-		main="Oranyan",
-		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
-		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
 		back={ name="Lugh's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10',}},
 	})
 	sets.midcast.RegenPotency = set_combine(sets.midcast['Enhancing Magic'], {
 		main="Bolelabunga",
-		sub="Chanter's Shield",
 		head="Arbatel Bonnet +1",
-		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
 		back={ name="Bookworm's Cape", augments={'INT+1','MND+1','Helix eff. dur. +20','"Regen" potency+8',}},
 	})
 	sets.midcast.Cure = sets.midcast['Healing Magic']
@@ -427,7 +422,7 @@ function init_gear_sets()
 	sets.precast.JA = {}
     sets.precast.JA.Enlightenment = {body={ name="Peda. Gown +1", augments={'Enhances "Enlightenment" effect',}},}
     sets.precast.JA['Tabula Rasa'] = {legs="Pedagogy Pants"}
-	sets.precast.JA.Sublimation = sets.Idle.Subl
+	--sets.precast.JA.Sublimation = sets.Idle.Subl
 	
 end
 
@@ -758,17 +753,28 @@ end
 
 windower.raw_register_event('time change',function()
    CurrentTime = os.clock()
+   if precast_start == nil then 
+      precast_start = CurrentTime
+   end
    if SublimationStartTimer and CurrentTime - SublimationStartTimer > 96 then 
 	  job_handle_equipping_gear(player.status)
 	  send_command("gs equip sets.Idle.Current")
    end
    if buffactive["Sublimation: Complete"] then
 		SublimationStartTimer = nil
-	end
-   if not buffactive["Sublimation: Complete"] and not buffactive["Sublimation: Activated"] and windower.ffxi.get_ability_recasts()[234] == 0 and not windower.ffxi.get_info().mog_house and not buffactive['weakness'] and not buffactive['Refresh'] then
-	  send_command("input /ja sublimation")
+   end
+   CurrentInfo = windower.ffxi.get_info()
+   if not buffactive["Sublimation: Complete"] and not buffactive["Sublimation: Activated"] and windower.ffxi.get_ability_recasts()[234] == 0 
+      and not CurrentInfo.mog_house and not buffactive['weakness'] and not buffactive['Refresh'] then
+	  if (areas.Cities:contains(world.zone) or (CurrentTime - precast_start) > 1800) and not buffactive['Regen'] then   -- Basically if AFK for > 30 min or in a City, use Regen V after casting. 
+		send_command("input /ja sublimation; wait 1; input /ma Regen V <me>")
+	  else 
+	    send_command("input /ja sublimation")
+	  end
    end
 end)	
+
+
 
 --[[
 windower.raw_register_event('incoming chunk',function(id,data)

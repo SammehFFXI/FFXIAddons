@@ -63,7 +63,7 @@ continue = false
 windower.register_event('addon command', function(command, skill)
 		if command == 'help'
 			display_help()
-		if command == 'stop' then
+		elseif command == 'stop' then
 			continue = false
 		elseif command == 'start' then
 			continue = true

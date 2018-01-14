@@ -1,0 +1,17 @@
+sets.exported={
+    main="Dojikiri Yasutsuna",
+    sub="Utu Grip",
+    ammo="Ginsen",
+    head="Wakido Kabuto +3",
+    body="Ken. Samue +1",
+    hands="Ken. Tekko",
+    legs="Wakido Haidate +3",
+    feet="Flam. Gambieras +2",
+    neck="Moonbeam Nodowa",
+    waist="Ioskeha Belt",
+    left_ear="Cessance Earring",
+    right_ear="Telos Earring",
+    left_ring="Niqmaddu Ring",
+    right_ring="Regal Ring",
+    back={ name="Takaha Mantle", augments={'STR+4','"Zanshin"+1','"Store TP"+2','Meditate eff. dur. +6',}},
+}

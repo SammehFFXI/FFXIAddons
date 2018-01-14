@@ -53,6 +53,7 @@ function job_setup()
 	send_command("alias wsset gs equip sets.precast.WS")
 	    -- For tracking current recast timers via the Timers plugin.
     custom_timers = {}
+	
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -82,6 +83,9 @@ function user_setup()
 
     select_default_macro_book()
 	send_command('@wait 5;input /lockstyleset 40')
+	
+	waittime = 2.7
+
 end
 
 
@@ -298,14 +302,14 @@ function init_gear_sets()
     -- Engaged sets
 
 	sets.engaged = {
-		range={ name="Linos", augments={'Accuracy+14','Sklchn.dmg.+4%','Quadruple Attack +2',}},
+		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 	    head="Ayanmo Zucchetto +2",
 		body="Ashera Harness",
-		hands="Aya. Manopolas +1",
+		hands="Aya. Manopolas +2",
 		legs="Jokushu Haidate",
 		feet="Aya. Gambieras +2",
 		neck="Combatant's Torque",
-		waist="Reiki Yotai",
+		waist="Dynamic Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Cessance Earring",
 		left_ring="Ilabrat Ring",
@@ -313,7 +317,21 @@ function init_gear_sets()
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
 	}
 	
-	
+    sets.engaged = {
+    	range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
+		head="Aya. Zucchetto +2",
+		body="Ashera Harness",
+		hands="Aya. Manopolas +2",
+		legs={ name="Chironic Hose", augments={'"Triple Atk."+2','"Mag.Atk.Bns."+21','Accuracy+20 Attack+20',}},
+		feet={ name="Chironic Slippers", augments={'Accuracy+17','MND+9','Quadruple Attack +3','Accuracy+7 Attack+7',}},
+		neck="Combatant's Torque",
+		waist="Dynamic Belt +1",
+		left_ear="Telos Earring",
+		right_ear="Cessance Earring",
+		left_ring="Ilabrat Ring",
+		right_ring="Hetairoi Ring",
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
+	}	
 	
 	sets.meva = {
 		main="Terra's Staff",
@@ -360,6 +378,12 @@ end
 
 function job_pretarget(spell)
 checkblocking(spell)
+	if spell.action_type == 'Magic' then
+		if aftercast_start and os.clock() - aftercast_start < waittime then
+			windower.add_to_chat(8,"Precast too early! Adding Delay:"..waittime - (os.clock() - aftercast_start))
+			cast_delay(waittime - (os.clock() - aftercast_start))
+		end
+	end
 end
 
 function job_precast(spell, action, spellMap, eventArgs)

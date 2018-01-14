@@ -34,6 +34,10 @@ function user_setup()
 	send_command('bind f11 gs c cycle AutoRA')
 	send_command('bind ^f11 gs c cycle AutoWSMode')
 	send_command('bind !f11 gs c cycle AutoWS')
+	send_command('bind f12 gs c wslist')
+	send_command("alias g11_m2g16 gs c ws 1")
+	send_command("alias g11_m2g17 gs c ws 2")
+	send_command("alias g11_m2g18 gs c ws 3")
 	select_default_macro_book()
 	if player.sub_job == 'NIN' then
 	-- send_command('@wait 1;input /equip sub "Perun"')   
@@ -70,13 +74,30 @@ function user_setup()
 		state.AutoWS = M{['description']='Auto WS','Last Stand','Trueflight'}	
 	end
 	
+	res = require 'resources'
+	
+	WeaponSkill = {
+		["Marksmanship"] = {
+			["1"] = "Trueflight",
+			["2"] = "Last Stand",
+			["3"] = "Wildfire"
+		},
+		["Archery"] = {
+		    ["1"] = "Jishnu's Radiance",
+			["2"] = "Namas Arrow",
+			["3"] = "Apex Arrow"
+		},
+		
+	}
+	
+	
 end
 
 	
 function init_gear_sets()
 	
 	
-	TP_Hands = { name="Herculean Gloves", augments={'Rng.Acc.+15 Rng.Atk.+15','Weapon skill damage +2%','DEX+9','Rng.Atk.+15',}}
+	TP_Hands = "Meg. Gloves +2"
 	
 	if state.RngMode.value == 'Fail-Not' then
 	  --RNGWeapon = "Yoichinoyumi"
@@ -105,6 +126,7 @@ function init_gear_sets()
 		TP_Ammo="Spartan Bullet"
 		WS_Ammo="Spartan Bullet"
 	  end
+	  TP_Hands = "Meg. Gloves +2"
 	  send_command("alias rngws1 input /ws 'Trueflight' <t>")
 	  send_command("alias rngws2 input /ws 'Last Stand' <t>")
 	  send_command("alias rngws3 input /ws 'Trueflight' <t>")
@@ -166,11 +188,11 @@ function init_gear_sets()
 	sets.midcast.TP.RACC = {
 		range=RNGWeapon,
 		ammo=TP_Ammo,
-		head="Meghanada Visor +1",
+		head="Meghanada Visor +2",
 		body="Oshosi Vest",
 		hands="Meg. Gloves +2",
-		legs="Meg. Chausses +1",
-		feet="Meg. Jam. +1",
+		legs="Meg. Chausses +2",
+		feet="Meg. Jam. +2",
 		neck="Iskur Gorget",
 		waist="Yemaya Belt",
 		left_ear="Telos Earring",
@@ -179,12 +201,12 @@ function init_gear_sets()
 		right_ring="Cacoethic Ring +1",
 		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
 	}
-	sets.Barrage = {hands="Orion Bracers +1"}
+	sets.Barrage = {hands="Orion Bracers +3"}
     
 	--Job Abilities
 	sets.precast.JA = {}
     sets.precast.JA.Scavenge = {feet="Orion Socks +1"}
-	sets.precast.JA.Sharpshot = {hands="Orion Braccae +1"}
+	sets.precast.JA.Sharpshot = {legs="Orion Braccae +1"}
 	sets.precast.JA['Bounty Shot'] = { hands="Amini Glove. +1"}
     sets.precast.JA.Camouflage = {body="Orion Jerkin +1"}
     sets.precast.JA['Eagle Eye Shot'] = {}
@@ -211,7 +233,7 @@ function init_gear_sets()
 		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},
 	}
 	sets.precast.WS['Last Stand'] = {
-	    head="Meghanada Visor +1",
+	    head="Meghanada Visor +2",
 		body={ name="Herculean Vest", augments={'Rng.Acc.+23 Rng.Atk.+23','Weapon skill damage +3%','Rng.Atk.+9',}},
 		hands="Meg. Gloves +2",
 		legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
@@ -227,7 +249,7 @@ function init_gear_sets()
 	sets.precast.WS['Jishnu\'s Radiance'] = {
 		ammo=TP_Ammo,
 		head={ name="Herculean Helm", augments={'Rng.Acc.+28','Weapon skill damage +3%','DEX+11','Rng.Atk.+12',}},
-		body="Meg. Cuirie +1",
+		body="Meg. Cuirie +2",
 		hands="Meg. Gloves +2",
 		legs="Darraigner's Brais",
 		feet="Thereoid Greaves",
@@ -241,14 +263,17 @@ function init_gear_sets()
 	}
 	sets.Jishnus = sets.precast.WS['Jishnu\'s Radiance']
 	sets.precast.WS['Trueflight'] = {
+		-- head="Orion Beret +2"
 	    head={ name="Herculean Helm", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','Enmity-5','VIT+6','Mag. Acc.+13','"Mag.Atk.Bns."+13',}},
 		body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+26','"Dbl.Atk."+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
 		hands="Carmine Fin. Ga. +1",
 		legs="Gyve Trousers",
 		-- feet={ name="Adhemar Gamashes", augments={'HP+50','"Store TP"+6','"Snapshot"+8',}},
 		feet={ name="Herculean Boots", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','"Fast Cast"+1','MND+10','Mag. Acc.+6','"Mag.Atk.Bns."+11',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
+		--neck="Fotia Gorget",
+		--waist="Fotia Belt",
+		neck="Sanctity necklace",
+		waist="Eschan Stone",
 		left_ear="Crematio Earring",
 		right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +25',}},
 		left_ring="Dingir Ring",
@@ -359,7 +384,31 @@ function select_default_macro_book()
     set_macro_page(4, 1)
 end
 
-function job_self_command(cmdParams, eventArgs)
+
+ function job_self_command(command)
+	if command[1]:lower() == "ws" and command[2] ~= nil then
+		local EquipedGear = windower.ffxi.get_items()
+		local CurrentSkill
+		if EquipedGear.equipment.range == nil or EquipedGear.equipment.range == 0 then 
+		  CurrentSkill = "Hand-to-Hand"
+		else 
+		  CurrentSkill = res.skills[res.items[windower.ffxi.get_items(EquipedGear.equipment.main_bag, EquipedGear.equipment.range).id].skill].en
+		end
+		send_command('input /ws '..WeaponSkill[CurrentSkill][command[2]])
+	end
+	if command[1]:lower() == "wslist" then
+		local EquipedGear = windower.ffxi.get_items()
+		local CurrentSkill
+		if EquipedGear.equipment.range == nil or EquipedGear.equipment.range == 0 then 
+		  CurrentSkill = "Hand-to-Hand"
+		else 
+		  CurrentSkill = res.skills[res.items[windower.ffxi.get_items(EquipedGear.equipment.main_bag, EquipedGear.equipment.range).id].skill].en
+		end
+		windower.add_to_chat(2,"WS List:")
+		for i,v in pairs(WeaponSkill[CurrentSkill]) do
+			windower.add_to_chat(2,i..") "..v)
+		end
+	end
 end
 
 windower.raw_register_event('incoming chunk', function(id,original,modified,injected,blocked)

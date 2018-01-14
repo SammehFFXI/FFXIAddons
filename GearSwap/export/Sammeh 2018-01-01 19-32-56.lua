@@ -1,0 +1,17 @@
+sets.exported={
+    main="Aeneas",
+    sub="Genmei Shield",
+    range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
+    head={ name="Gende. Caubeen +1", augments={'Phys. dmg. taken -1%','"Cure" potency +5%',}},
+    body={ name="Gende. Bilaut +1", augments={'Phys. dmg. taken -4%','Magic dmg. taken -4%','"Cure" potency +4%',}},
+    hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}},
+    legs="Assid. Pants +1",
+    feet="Fili Cothurnes +1",
+    neck="Loricate Torque +1",
+    waist="Flume Belt +1",
+    left_ear="Odnowa Earring +1",
+    right_ear="Genmei Earring",
+    left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+    right_ring="Defending Ring",
+    back="Solemnity Cape",
+}

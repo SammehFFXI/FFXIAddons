@@ -227,7 +227,6 @@ function init_gear_sets()
 		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
 		right_ring="Defending Ring",
 		back="Solemnity Cape",
-
 	}
 
 	sets.idle.Town = sets.idle
@@ -287,6 +286,22 @@ function init_gear_sets()
     left_ring="Epona's Ring",
     right_ring="Hetairoi Ring",
     back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
+	}
+	
+	sets.engaged = {
+		ammo=gear.AccAmmo,
+	    head="Ken. Jinpachi",
+		body="Ken. Samue +1",
+		hands="Ken. Tekko",
+		legs="Ken. Hakama",
+		feet="Ken. Sune-Ate",
+		neck="Moonbeam Nodowa",
+		waist="Reiki Yotai",
+		left_ear="Telos Earring",
+		right_ear="Suppanomimi",
+		left_ring="Epona's Ring",
+		right_ring="Hetairoi Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
 	}
 		
 	-- Acc 1043 (Kikoku/Ochu) :: Acc 1070 (Ochu/Shigi) :: Acc 1077 (Ochu/Ochu)

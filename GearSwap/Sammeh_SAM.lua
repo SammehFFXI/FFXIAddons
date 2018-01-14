@@ -27,6 +27,7 @@ function user_setup()
 	send_command('@wait 5;input /lockstyleset 1')
 	
 	-- the following aliases are based on having a Logitech G11 keyboard with extra function keys.
+	
 	send_command("alias g11_m2g13 input /ja Berserk <me>")
 	send_command("alias g11_m2g14 input /ja Warcry <me>")
 	send_command("alias g11_m2g15 input /ja Aggressor <me>")
@@ -120,10 +121,10 @@ function init_gear_sets()
 		right_ring="Regal Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
 	}
-	--[[
-	sets.precast.WS.Accuracy = {
+	
+	sets.precast.WS.Acc = {
 		ammo="Knobkierrie",
-	    head={ name="Valorous Mask", augments={'Accuracy+18 Attack+18','Weapon skill damage +3%','STR+9','Accuracy+1',}},
+	    head="Wakido Kabuto +3",
 		body={ name="Valorous Mail", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','DEX+6','Accuracy+1','Attack+13',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+23 Attack+23','Weapon skill damage +3%','VIT+8','Accuracy+2','Attack+12',}},
 		legs="Wakido Haidate +3",
@@ -136,7 +137,7 @@ function init_gear_sets()
 		right_ring="Regal Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
 	}
-	]]
+	
 	sets.precast.WS.magic = {
 	    ammo="Pemphredo Tathlum",
 		head={ name="Jumalik Helm", augments={'MND+7','"Mag.Atk.Bns."+12','Magic burst dmg.+7%',}},
@@ -176,10 +177,7 @@ function init_gear_sets()
 		right_ring="Cacoethic Ring +1",
 		back={ name="Smertrios's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+10','"Store TP"+10',}},
 	}
-	
-    ---  PRECAST SETS  ---
-	sets.precast = {}
-    sets.precast.JA = {}
+
 	sets.precast.JA.Meditate = set_combine(sets.precast.JA, {
 		back="Smertrios's Mantle",
 		hands={ name="Sakonji Kote +2", augments={'Enhances "Blade Bash" effect',}},
@@ -250,7 +248,6 @@ end
 
 
 function job_precast(spell)
-	windower.add_to_chat(spell.name)
     handle_equipping_gear(player.status)
 	if spell.name == 'Utsusemi: Ichi' and (buffactive['Copy Image (3)'] or buffactive ['Copy Image (4+)']) then
 	  cancel_spell()

@@ -1,0 +1,17 @@
+sets.exported={
+    main="Dojikiri Yasutsuna",
+    sub="Utu Grip",
+    ammo="Pemphredo Tathlum",
+    head={ name="Valorous Mask", augments={'Magic burst dmg.+8%','Mag. Acc.+26','Accuracy+20 Attack+20','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
+    body={ name="Found. Breastplate", augments={'Accuracy+15','Mag. Acc.+15','Attack+15','"Mag.Atk.Bns."+15',}},
+    hands={ name="Leyline Gloves", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
+    legs="Wakido Haidate +3",
+    feet={ name="Valorous Greaves", augments={'"Snapshot"+4','"Mag.Atk.Bns."+27','"Fast Cast"+1','Accuracy+8 Attack+8','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
+    neck="Sanctity Necklace",
+    waist="Eschan Stone",
+    left_ear="Hermetic Earring",
+    right_ear="Crematio Earring",
+    left_ring="Etana Ring",
+    right_ring="Weather. Ring",
+    back="Argocham. Mantle",
+}

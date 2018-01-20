@@ -155,16 +155,7 @@ function init_gear_sets()
 		right_ring="Weather. Ring",
 		back="Argocham. Mantle",
 	}
-	
-	-- WS Sets
-	sets.precast.WS['Namas Arrow'] = sets.ranged
-	sets.precast.WS['Apex Arrow'] = sets.ranged
-	sets.precast.WS["Tachi: Jinpu"] = sets.precast.WS.magic
-	sets.precast.WS["Tachi: Goten"] = sets.precast.WS.magic
-	sets.precast.WS["Tachi: Koki"] = sets.precast.WS.magic
-	
-	
-		
+			
 	sets.ranged = {
 		head="Ken. Jinpachi",
 		body="Ken. Samue +1",
@@ -179,6 +170,15 @@ function init_gear_sets()
 		right_ring="Cacoethic Ring +1",
 		back={ name="Smertrios's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+10','"Store TP"+10',}},
 	}
+
+	-- WS Sets
+	sets.precast.WS['Namas Arrow'] = sets.ranged
+	sets.precast.WS['Apex Arrow'] = sets.ranged
+	sets.precast.WS["Tachi: Jinpu"] = sets.precast.WS.magic
+	sets.precast.WS["Tachi: Goten"] = sets.precast.WS.magic
+	sets.precast.WS["Tachi: Koki"] = sets.precast.WS.magic
+	
+	
 
 	sets.precast.JA.Meditate = set_combine(sets.precast.JA, {
 		back="Smertrios's Mantle",

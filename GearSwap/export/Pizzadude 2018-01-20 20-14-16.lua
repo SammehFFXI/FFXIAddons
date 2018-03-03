@@ -1,0 +1,17 @@
+sets.exported={
+    main={ name="Aettir", augments={'Accuracy+70','Mag. Evasion+50','Weapon skill damage +10%',}},
+    sub="Refined Grip +1",
+    ammo="Ginsen",
+    head={ name="Futhark Bandeau", augments={'Enhances "Battuta" effect',}},
+    body={ name="Futhark Coat +1", augments={'Enhances "Elemental Sforzo" effect',}},
+    hands={ name="Herculean Gloves", augments={'Accuracy+29','Accuracy+16 Attack+16','Quadruple Attack +1','Mag. Acc.+14 "Mag.Atk.Bns."+14',}},
+    legs="Eri. Leg Guards +1",
+    feet={ name="Futhark Boots", augments={'Enhances "Rayke" effect',}},
+    neck="Twilight Torque",
+    waist="Olseni Belt",
+    left_ear="Genmei Earring",
+    right_ear="Sherida Earring",
+    left_ring="Patricius Ring",
+    right_ring="Vengeful Ring",
+    back={ name="Evasionist's Cape", augments={'Enmity+3','"Embolden"+9','"Dbl.Atk."+2','Damage taken-2%',}},
+}

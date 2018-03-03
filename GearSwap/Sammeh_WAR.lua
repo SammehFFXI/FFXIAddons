@@ -8,9 +8,11 @@ end
 function user_setup()
 	state.IdleMode:options('Normal','Reraise','DT')
 	send_command('bind f10 gs c cycle IdleMode')
+	send_command('bind f11 gs c berserkmode')
 	send_command('bind f12 gs c wslist')
 	
 	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy','ShieldBlock'}
+	state.BerserkMode = M{['description']='Berserk Mode', 'Normal','Auto'}
     select_default_macro_book()
 	
 	-- Set Common Aliases --
@@ -22,7 +24,9 @@ function user_setup()
 	send_command("alias enmity gs equip sets.enmity")
 	send_command("alias meva gs equip sets.meva")
 	send_command("alias idle gs equip sets.Idle.Current")
-	send_command('@wait 5;input /lockstyleset 27')
+	send_command("alias shieldblock gs equip sets.engaged.ShieldBlock")
+	send_command('@wait 5;input /lockstyleset 15')
+	send_command("alias g11_m2g11 input /ja Defender <me>")
 	send_command("alias g11_m2g12 input /ja Restraint <me>")
 	send_command("alias g11_m2g13 input /ja Berserk <me>")
 	send_command("alias g11_m2g14 input /ja Warcry <me>")
@@ -46,7 +50,7 @@ function user_setup()
 		},
 		["Axe"] = {
 			["1"] = "Mistral Axe",
-			["2"] = "Decimation",
+			["2"] = "Calamity",
 			["3"] = "Cloudsplitter"
 		},
 		["Sword"] = {
@@ -57,7 +61,7 @@ function user_setup()
 		["Club"] = {
 			["1"] = "Realmrazer",
 			["2"] = "Black Halo",
-			["3"] = "True Strike"
+			["3"] = "Judgment"
 		},
 	}
 	
@@ -81,6 +85,21 @@ function init_gear_sets()
 		right_ring="Defending Ring", -- dt10
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	} -- pdt 48 mdt -- 48 (Shell will easily make up diff)
+	sets.dtenmity = {
+	    ammo="Staunch Tathlum",
+		head="Pummeler's Mask +3",
+		body={ name="Souveran Cuirass", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
+		hands="Pumm. Mufflers +3",
+		legs="Sulev. Cuisses +2",
+		feet={ name="Souveran Schuhs", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
+		neck="Loricate Torque +1",
+		waist="Flume Belt +1",
+		left_ear="Cryptic Earring",
+		right_ear="Trux Earring",
+		left_ring="Apeile Ring +1",
+		right_ring="Apeile Ring",
+		back="Philidor Mantle",
+	}
 	sets.dtaftermath = {
 		ammo="Ginsen",
 	    head="Flamma Zucchetto +2",
@@ -159,13 +178,14 @@ function init_gear_sets()
 	}
 	sets.engaged.ShieldBlock = {  
 		ammo="Staunch Tathlum",  --2
-    		head="Sulevia's Mask +2", -- 6
+    		-- head="Sulevia's Mask +2", -- 6
+			head={ name="Valorous Mask", augments={'Mag. Acc.+22','MND+8','Chance of successful block +10','Accuracy+13 Attack+13','Mag. Acc.+12 "Mag.Atk.Bns."+12',}},
     		body="Sulevia's Plate. +2", -- 9 
     		hands="Agoge Mufflers +3", -- pdt 6
     		legs="Arjuna Breeches", -- pdt 4
     		feet={ name="Souveran Schuhs", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}}, -- pdt 4
-    		-- neck="Loricate Torque +1", -- 6
-			neck="Combatant's Torque",
+    		neck="Loricate Torque +1", -- 6
+			--neck="Combatant's Torque",
     		waist="Ioskeha Belt",
     		left_ear="Thureous Earring",
     		right_ear="Telos Earring",
@@ -173,7 +193,6 @@ function init_gear_sets()
     		right_ring="Defending Ring", -- 10 
     		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	} -- Axe + Shield = 4 pdt + 5 DT.    Totals: DT-38, PDT-18  (total PDT: 56) (should consider swapping neck)
-
 	sets.engaged.DT = sets.dt
 	sets.ws = {
 		-- ammo="Seeth. Bomblet +1",
@@ -225,7 +244,7 @@ function init_gear_sets()
 	}
 	sets.ws.wsd = {
 	    ammo="Knobkierrie",
-		head={ name="Argosy Celata +1", augments={'STR+12','DEX+12','Attack+20',}},
+		head="Agoge mask +3",
 		body="Pumm. Lorica +3",
 		hands={ name="Argosy Mufflers +1", augments={'STR+20','"Dbl.Atk."+3','Haste+3%',}},
 		legs={ name="Argosy Breeches +1", augments={'STR+12','DEX+12','Attack+20',}},
@@ -245,9 +264,13 @@ function init_gear_sets()
 	sets.ws["Resolution"] = sets.ws.strbased
 	sets.ws["Decimation"] = sets.ws.strbased
 	sets.ws["Rampage"] = sets.ws.strbased
-	sets.ws["Mistral Axe"] = sets.ws.wsd
-	sets.ws["Savage Blade"] = sets.ws.wsd
-	sets.ws["Metatron Torment"] = sets.ws.strbased
+	sets.ws["Mistral Axe"] = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt"})
+	sets.ws.savageblade = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt",hands="Agoge Mufflers +3",legs="Sulev. Cuisses +2",})
+	sets.ws["Savage Blade"] = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt",hands="Agoge Mufflers +3",legs="Sulev. Cuisses +2",})
+	sets.ws["Judgment"] = sets.ws.savageblade
+	sets.ws["True Strike"] = sets.ws.wsd
+	sets.ws["Black Halo"] = sets.ws.savageblade
+	sets.ws["Metatron Torment"] = sets.ws.wsd
 	sets.ws["Upheaval"] = sets.ws.vitbased
 	sets.ws["Cloudsplitter"] = sets.ws.magic
 	sets.ws["Freezebite"] = sets.ws.magic
@@ -256,14 +279,15 @@ function init_gear_sets()
     ---  PRECAST SETS  ---
 	sets.precast = {}
     sets.precast.JA = set_combine(sets.enmity, {})
-	sets.precast.JA.Berserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +1"})
-	sets.precast.JA.Warcry = set_combine(sets.precast.JA, {head="Agoge mask +1"})
+	sets.precast.JA.Berserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +2"})
+	sets.MaxBerserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +2",main="Firangi"})
+	sets.precast.JA.Warcry = set_combine(sets.precast.JA, {head="Agoge mask +3"})
 	sets.precast.JA.Aggressor = set_combine(sets.precast.JA, {head="Pummeler's Mask +3",body="Agoge Lorica +1"})
 	sets.precast.JA['Mighty Strikes'] = set_combine(sets.precast.JA, {hands="Agoge Mufflers +3"})
 	sets.precast.JA['Defender'] = set_combine(sets.precast.JA, {hands="Agoge Mufflers +3"})
 	sets.precast.JA['Blood Rage'] = set_combine(sets.precast.JA, {body="Boii Lorica +1"})
 	sets.precast.Restraint = set_combine(sets.precast.JA, {hands="Boii Mufflers +1"})
-	sets.precast.JA.Tomahawk = set_combine(sets.precast.JA, {ammo="Thr. Tomahawk",feet="Agoge Calligae +1"})
+	sets.precast.JA.Tomahawk = set_combine(sets.precast.JA, {ammo="Thr. Tomahawk",feet="Agoge Calligae +2"})
 	sets.precast.Ranged = { ammo="Dart" }
 
 	
@@ -289,16 +313,32 @@ function init_gear_sets()
 		feet={ name="Souveran Schuhs", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
 	}
 	
-	-- WS Sets
 	sets.precast.WS = sets.ws
 	
-    ---  MIDCAST SETS  ---
+	sets.precast.FastCast = {
+		ammo="Impatiens",
+		head={ name="Odyssean Helm", augments={'Mag. Acc.+19','"Fast Cast"+6','AGI+6','"Mag.Atk.Bns."+3',}},
+		body={ name="Odyss. Chestplate", augments={'Mag. Acc.+14','"Fast Cast"+5','"Mag.Atk.Bns."+6',}},
+		hands={ name="Leyline Gloves", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
+		legs="Arjuna Breeches",
+		feet={ name="Odyssean Greaves", augments={'"Mag.Atk.Bns."+15','"Fast Cast"+4','Mag. Acc.+8',}},
+		neck="Voltsurge Torque",
+		waist="Flume Belt +1",
+		left_ear="Loquac. Earring",
+		right_ear="Enchntr. Earring +1",
+		left_ring="Weather. Ring",
+		right_ring="Defending Ring",
+		back="Moonbeam Cape",
+	}
+
+	
     sets.midcast = {}
     
     ---  AFTERCAST SETS  ---
     sets.Idle = {
 		ammo="Ginsen",
-		head="Twilight Helm",
+		--head="Twilight Helm",
+		head="Volte Salade",
 		body="Sulevia's Plate. +2",
 		hands="Sulev. Gauntlets +2",
 		legs="Sulev. Cuisses +2",
@@ -359,6 +399,18 @@ function job_post_precast(spell)
 	end
 end
 
+function job_midcast(spell)
+	if spell.name == 'Ranged' then
+		equip(sets.precast.Ranged)
+	end	
+	if spell.action_type == 'Magic' then 
+		equip(sets.dtenmity)
+	end
+	if spell.name:contains('Utsusemi') then
+		equip(sets.precast.FastCast)
+	end
+end
+
 function job_post_midcast(spell)
     if spell.name == 'Utsusemi: Ichi' then
 	  send_command('cancel Copy Image|Copy Image (2)')
@@ -366,6 +418,7 @@ function job_post_midcast(spell)
 	if spell.type == "WeaponSkill" then
 	  tpspent = spell.tp_cost
 	end
+	
 
 end        
 
@@ -376,6 +429,19 @@ function job_aftercast(spell)
     
     handle_equipping_gear(player.status)
     equip(sets.Idle.Current)    
+end
+
+function job_post_aftercast(spell)
+	if spell.type == "WeaponSkill" and state.BerserkMode.value == "Auto" and windower.ffxi.get_ability_recasts()[1] == 0 then
+	   currentMain = player.equipment.main
+	   currentSub = player.equipment.sub
+	   windower.add_to_chat("Current Equipment: "..currentMain.." "..currentSub)
+	   equip(sets.MaxBerserk)
+	   send_command("@wait 2.5;input /ja Berserk <me>")
+	end
+	if spell.name == "Berserk" and state.BerserkMode.value == "Auto" and currentMain and currentSub then
+		equip({main=currentMain,sub=currentSub})
+	end
 end
 
 function status_change(new,tab)
@@ -426,6 +492,11 @@ function job_buff_change(status,gain_or_loss)
 		for i,v in pairs(WeaponSkill[CurrentSkill]) do
 			windower.add_to_chat(2,i..") "..v)
 		end
+	end
+	if command[1]:lower() == "berserkmode" then
+	   currentMain = player.equipment.main
+	   currentSub = player.equipment.sub
+	   send_command('gs c cycle BerserkMode')
 	end
 end
 

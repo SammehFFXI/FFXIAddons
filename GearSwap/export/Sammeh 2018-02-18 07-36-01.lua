@@ -1,0 +1,17 @@
+sets.exported={
+    main="Dojikiri Yasutsuna",
+    sub="Utu Grip",
+    ammo="Knobkierrie",
+    head="Loess Barbuta +1",
+    body={ name="Valorous Mail", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','DEX+6','Accuracy+1','Attack+13',}},
+    hands={ name="Valorous Mitts", augments={'Accuracy+23 Attack+23','Weapon skill damage +3%','VIT+8','Accuracy+2','Attack+12',}},
+    legs="Wakido Haidate +3",
+    feet={ name="Valorous Greaves", augments={'Mag. Acc.+17','"Store TP"+4','Weapon skill damage +8%','Accuracy+5 Attack+5','Mag. Acc.+10 "Mag.Atk.Bns."+10',}},
+    neck="Fotia Gorget",
+    waist="Fotia Belt",
+    left_ear="Cessance Earring",
+    right_ear="Telos Earring",
+    left_ring="Niqmaddu Ring",
+    right_ring="Regal Ring",
+    back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
+}

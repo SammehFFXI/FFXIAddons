@@ -135,7 +135,7 @@ function init_gear_sets()
 		body={ name="Amalric Doublet", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
 		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},
-		feet="Regal Pumps +1",
+		feet="Skaoi Boots",
 		neck="Sanctity Necklace",
 		waist="Luminary Sash",
 		left_ear="Loquac. Earring",

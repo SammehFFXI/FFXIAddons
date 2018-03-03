@@ -40,7 +40,7 @@ function user_setup()
 	WeaponSkill = {
 		["Great Katana"] = {
 			["1"] = "Tachi: Shoha",
-			["2"] = "Tachi: Fudo",
+			["2"] = "Tachi: Hobaku",
 			["3"] = "Tachi: Jinpu"
 		},
 		["Polearm"] = {
@@ -110,7 +110,7 @@ function init_gear_sets()
 	
 	sets.precast.WS = {
 		ammo="Knobkierrie",
-	    head={ name="Valorous Mask", augments={'Accuracy+18 Attack+18','Weapon skill damage +3%','STR+9','Accuracy+1',}},
+	    head="Flam. Zucchetto +2",
 		body={ name="Valorous Mail", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','DEX+6','Accuracy+1','Attack+13',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+23 Attack+23','Weapon skill damage +3%','VIT+8','Accuracy+2','Attack+12',}},
 		legs="Wakido Haidate +3",
@@ -121,7 +121,7 @@ function init_gear_sets()
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Regal Ring",
-		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
 	}
 	
 	sets.precast.WS.Acc = {
@@ -137,7 +137,7 @@ function init_gear_sets()
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Regal Ring",
-		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
 	}
 	
 	sets.precast.WS.magic = {
@@ -182,13 +182,13 @@ function init_gear_sets()
 
 	sets.precast.JA.Meditate = set_combine(sets.precast.JA, {
 		back="Smertrios's Mantle",
-		hands={ name="Sakonji Kote +2", augments={'Enhances "Blade Bash" effect',}},
+		hands={ name="Sakonji Kote +3", augments={'Enhances "Blade Bash" effect',}},
 		head="Wakido Kabuto +3"
 	})
 	sets.precast.JA['Warding Circle'] = set_combine(sets.precast.JA, {head="Wakido Kabuto +3"})
 	sets.precast.JA['Sekkanoki'] = set_combine(sets.precast.JA, {})
 	sets.precast.JA['Konzen-ittai'] = set_combine(sets.precast.JA, {})
-	sets.precast.JA['Blade Bash'] = set_combine(sets.precast.JA, {hands="Sakonji Kote +2"})
+	sets.precast.JA['Blade Bash'] = set_combine(sets.precast.JA, {hands="Sakonji Kote +3"})
 	sets.precast.JA['Meikyo Shisui'] = set_combine(sets.precast.JA, {})
 	sets.precast.JA['Hasso'] = set_combine(sets.precast.JA, {})
 	sets.precast.JA['Sengikori'] = set_combine(sets.precast.JA, {})
@@ -219,7 +219,7 @@ function init_gear_sets()
     sets.Idle = {
 	    head="Loess Barbuta +1",
 		body="Chozor. Coselete",
-		hands="Macabre Gaunt.",
+		hands="Sakonji Kote +3",
 		legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
 		feet="Danzo Sune-Ate",
 		neck="Loricate Torque +1",

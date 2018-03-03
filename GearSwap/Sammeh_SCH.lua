@@ -91,11 +91,11 @@ function init_gear_sets()
 	
 	sets.engaged = {
 		ammo="Amar Cluster",
-		head="Jhakri Coronal +1",
+		head="Jhakri Coronal +2",
 		body="Jhakri Robe +2",
-		hands="Jhakri Cuffs +1",
-		legs="Jhakri Slops +1",
-		feet="Jhakri Pigaches +1",
+		hands="Jhakri Cuffs +2",
+		legs="Jhakri Slops +2",
+		feet="Jhakri Pigaches +2",
 		neck="Combatant's Torque",
 		waist="Eschan Stone",
 		left_ear="Cessance Earring",
@@ -148,7 +148,7 @@ function init_gear_sets()
 		feet={ name="Vanya Clogs", augments={'"Cure" potency +5%','"Cure" spellcasting time -15%','"Conserve MP"+6',}}
 	})
 	
-	sets.precast.Grimoire = {head="Pedagogy Mortarboard +1",feet="Acad. Loafers +2"}
+	sets.precast.Grimoire = {head="Pedagogy Mortarboard +2",feet="Acad. Loafers +3"}
 
 	-- WS Sets
 	sets.precast.WS = set_combine(sets.engaged,{neck="Fotia Gorget",waist="Fotia Belt"})
@@ -220,7 +220,8 @@ function init_gear_sets()
 	    main={ name="Akademos", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
 		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
-		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
+		--head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
+		head="Pedagogy Mortarboard +2",
 		body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst dmg.+11%','VIT+8','Mag. Acc.+14',}},
 		hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
 		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
@@ -290,7 +291,8 @@ function init_gear_sets()
 		body="Acad. Gown +3",
 		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
-		feet="Skaoi Boots",
+		--feet="Skaoi Boots",
+		feet="Acad. Loafers +3",
 		neck="Erra Pendant",
 		waist="Luminary Sash",
 		left_ear="Digni. Earring",
@@ -536,7 +538,10 @@ function job_post_midcast(spell)
             weathercheck(spell.element)
         end
         if buffactive.ebullience then equip(sets.enh.Ebullience) end
-        if buffactive.klimaform then equip(sets.enh.Klimaform) end
+        if buffactive.klimaform and spell.element == world.weather_element then 
+		  windower.add_to_chat("got_here")
+		  equip(sets.enh.Klimaform) 
+		end
 		if spell.element == "Dark" and spell.english ~= 'Impact' then equip(sets.pixiehairpin) end
     elseif spell.english == 'Impact' then
         equip(sets.midcast[spell.skill],{head=empty,body="Twilight Cloak"})
@@ -765,7 +770,7 @@ windower.raw_register_event('time change',function()
    end
    CurrentInfo = windower.ffxi.get_info()
    if not buffactive["Sublimation: Complete"] and not buffactive["Sublimation: Activated"] and windower.ffxi.get_ability_recasts()[234] == 0 
-      and not CurrentInfo.mog_house and not buffactive['weakness'] and not buffactive['Refresh'] then
+      and not CurrentInfo.mog_house and not buffactive['weakness'] and not buffactive['Refresh'] and player.hpp > 75 then
 	  if (areas.Cities:contains(world.zone) or (CurrentTime - precast_start) > 1800) and not buffactive['Regen'] then   -- Basically if AFK for > 30 min or in a City, use Regen V after casting. 
 		send_command("input /ja sublimation; wait 1; input /ma Regen V <me>")
 	  else 

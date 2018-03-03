@@ -49,10 +49,15 @@ function job_setup()
 	send_command("alias fc gs equip sets.precast.FastCast.BardSong")
 	send_command("alias idle gs equip sets.Idle.Current")
 	send_command("alias meva gs equip sets.meva")
+	send_command("alias enh gs equip sets.midcast['Enhancing Magic']")
 	send_command("alias eng gs equip sets.engaged")
 	send_command("alias wsset gs equip sets.precast.WS")
 	    -- For tracking current recast timers via the Timers plugin.
     custom_timers = {}
+	
+	send_command("alias g11_m2g16 input /ws Rudra's Storm")
+	send_command("alias g11_m2g17 input /ws Mordant Rime")
+	send_command("alias g11_m2g18 input /ws Exenterator")
 	
 end
 
@@ -119,7 +124,8 @@ function init_gear_sets()
     sets.precast.FastCast['Enhancing Magic'] = set_combine(sets.precast.FastCast, {waist="Witful Belt"})
 
     sets.precast.FastCast.BardSong = {
-    	main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
+    	main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
+		sub="Ammurapi Shield",range="Gjallarhorn",body="Brioso Justau. +3",
         head="Fili Calot +1",neck="Aoidos' Matinee",ear1="Aoidos' Earring",ear2="Loquac. Earring",
         hands="Gendewitha Gages +1",ring1="Kishar Ring",ring2="Weather. Ring",
         back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Doyen Pants",feet="Bihu Slippers",}
@@ -181,8 +187,8 @@ function init_gear_sets()
 	sets.midcast.HonorMarch = {hands="Fili Manchettes +1",range="Marsyas"}
     sets.midcast.Minuet = {body="Fili Hongreline +1"}
     sets.midcast.Minne = {}
-    sets.midcast.Paeon = {head="Brioso Roundlet +2"}
-    sets.midcast.Carol = {}
+    sets.midcast.Paeon = {head="Brioso Roundlet +3"}
+    sets.midcast.Carol = {hands="Mousai Gages"}
     sets.midcast["Sentinel's Scherzo"] = {feet="Fili Cothurnes +1"}
     sets.midcast['Magic Finale'] = {neck="Sanctity Necklace",waist="Luminary Sash",legs="Fili Rhingrave +1"}
 
@@ -192,13 +198,13 @@ function init_gear_sets()
     -- For song buffs (duration and AF3 set bonus)
     sets.midcast.SongEffect = {main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
         head="Fili Calot +1",body="Fili Hongreline +1",neck="Moonbow Whistle",ear1="Aoidos' Earring",ear2="Loquac. Earring",
-        hands="Gendewitha Gages +1",ring1="Stikini Ring",ring2="Weather. Ring",
+        hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
         back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Inyanga Shalwar +2",feet="Brioso Slippers +3",}
 
     -- For song defbuffs (duration primary, accuracy secondary)
     sets.midcast.SongDebuff = {
 	    main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Brioso Roundlet +2",neck="Moonbow Whistle",ear1="Regal Earring",ear2="Enchntr. Earring +1",
+        head="Brioso Roundlet +3",neck="Moonbow Whistle",ear1="Regal Earring",ear2="Enchntr. Earring +1",
         body="Fili Hongreline +1",hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
         back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Inyanga Shalwar +2",feet="Brioso Slippers +3"}
 
@@ -207,10 +213,10 @@ function init_gear_sets()
 	    main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		sub="Ammurapi Shield",
 		range="Gjallarhorn",
-		head="Brioso Roundlet +2",
-		body="Brioso Justau. +2",
+		head="Brioso Roundlet +3",
+		body="Brioso Justau. +3",
 		hands="Brioso Cuffs +3",
-		legs="Brioso Cannions +2",
+		legs="Brioso Cannions +3",
 		feet="Brioso Slippers +3",
 		neck="Moonbow Whistle",
 		waist="Luminary Sash",
@@ -220,8 +226,10 @@ function init_gear_sets()
 		right_ring="Weather. Ring",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},
 	}
+	
 		
 	sets.midcast.LullabyFull = set_combine(sets.midcast.SongDebuff, sets.midcast.Lullaby)
+	sets.midcast.LullabyFull.ResistantSongDebuff = set_combine(sets.midcast.ResistantSongDebuff, sets.midcast.Lullaby)
 
     -- Song-specific recast reduction
     sets.midcast.SongRecast = {ear2="Loquacious Earring",ring1="Kishar Ring",legs="Fili Rhingrave +1"} --back="Harmony Cape",waist="Corvax Sash",
@@ -247,17 +255,32 @@ function init_gear_sets()
         
     sets.midcast.Curaga = sets.midcast.Cure
         
-    sets.midcast['Enhancing Magic'] = {
-        head="Vanya Hood",
-		neck="Incanter's Torque",ear1="Loquacious earring",ear2="Enchntr. Earring +1",
-		body="Telchine Chasuble",hands="Chironic Gloves",ring1="Kishar Ring",ring2="Weather. Ring",
-		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Doyen Pants",feet="Chironic Slippers"}
-    
-	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
         
     sets.midcast.Cursna = sets.midcast.Cure
 
     
+	sets.midcast['Enhancing Magic'] = {
+		sub="Ammurapi Shield",
+		ammo="Staunch Tathlum",
+		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
+		body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
+		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
+		legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
+		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
+		neck="Incanter's Torque",
+		waist="Rumination Sash",
+		left_ear="Loquacious Earring",
+		right_ear="Enchntr. Earring +1",
+		left_ring="Stikini Ring",
+		right_ring="Evanescence Ring",
+		back="Perimede Cape",
+	}
+	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
+    
+	sets.midcast.RefreshRecieved = set_combine(sets.midcast['Enhancing Magic'], {back="Grapevine Cape",waist="Gishdubar Sash"})
+	
+	
+	
     -- Sets to return to when not performing an action.
     
     
@@ -266,12 +289,12 @@ function init_gear_sets()
 	sets.Idle.Main = {
 		main="Sangoma",
 		sub="Genmei Shield",
-		head="Gende. Caubeen +1",
+		head="Aya. Zucchetto +2",
+		body={ name="Gende. Bilaut +1", augments={'Phys. dmg. taken -4%','Magic dmg. taken -4%','"Cure" potency +4%',}},
+		hands={ name="Chironic Gloves", augments={'"Blood Pact" ability delay -7','Accuracy+6','"Refresh"+1','Accuracy+15 Attack+15',}},
 		neck="Loricate Torque +1",
 		ear1="Odnowa Earring +1",
 		ear2="Genmei Earring",
-		body="Gende. Bilaut +1",
-		hands="Gende. Gages +1",
 		ring1="Dark Ring",
 		ring2="Defending ring",
 		back="Solemnity Cape",
@@ -284,7 +307,8 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		head="Gende. Caubeen +1",
 		neck="Loricate Torque +1",ear1="Odnowa Earring +1",ear2="Genmei Earring",
-		body="Gende. Bilaut +1",hands="Gende. Gages +1",ring1="Dark Ring",ring2="Defending ring",
+		body={ name="Gende. Bilaut +1", augments={'Phys. dmg. taken -4%','Magic dmg. taken -4%','"Cure" potency +4%',}},
+		hands="Gende. Gages +1",ring1="Dark Ring",ring2="Defending ring",
 		back="Solemnity Cape",waist="Flume Belt +1",legs="Assiduity Pants +1",feet="Fili Cothurnes +1"
 	}
 	sets.Idle.Current = sets.Idle.Main
@@ -407,9 +431,10 @@ function job_precast(spell, action, spellMap, eventArgs)
 		else 
 			equip(sets.precast.FastCast.BardSong)
 		end
-		if buffactive.Nightingale and string.find(spell.name,'Lullaby') then
+		if buffactive.Troubadour and string.find(spell.name,'Lullaby') then
 			equip({range="Marsyas"})
-			windower.add_to_chat(8,'Marsyas Equipped - Nigtengale / Lullaby active')
+			equip(sets.midcast.LullabyFull)
+			windower.add_to_chat(8,'Marsyas Equipped - Troubadour / Lullaby active')
 		end
 	elseif string.find(spell.name,'Cur') and spell.name ~= 'Cursna' then
 		equip(sets.precast.FastCast.Cure)
@@ -465,6 +490,11 @@ function job_midcast(spell, action, spellMap, eventArgs)
     end
 	-- Auto use Extra Song Instrument for Buffs if less than max # of songs
 	
+	if spell.english == 'Refresh' and spell.target.type == 'SELF' then
+	  equip(sets.midcast.RefreshRecieved)
+	end
+    
+	
 	if num_bard_songs >= 2 and num_bard_songs < info.MaxSongs and spell.name ~= 'Honor March' and generalClass == 'SongEffect' then
 		equip({range=info.ExtraSongInstrument})
 	end
@@ -472,7 +502,8 @@ function job_midcast(spell, action, spellMap, eventArgs)
 	if spell.name == 'Honor March' then
         equip(sets.midcast.HonorMarch)
 	end
-	if buffactive.Nightingale and string.find(spell.name,'Lullaby') then
+	if buffactive.Troubadour and string.find(spell.name,'Lullaby') then
+		equip(sets.midcast.LullabyFull)
 		equip({range="Marsyas"})
 	end
 	weathercheck(spell.element)
@@ -494,7 +525,7 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     if spell.type == 'BardSong' and not spell.interrupted then
         -- if spell.target and spell.target.type == 'SELF' then
 		-- if spell.target.type ~= 'SELF' and spell.name ~= "Magic Finale" then   -- (Only using Custom Timers for debuffs; no huge reason for buffs)
-		if spell.name ~= "Magic Finale" and generalClass == "SongDebuff" then   -- (Only using Custom Timers for debuffs; no huge reason for buffs)
+		if spell.name ~= "Magic Finale" and (generalClass == "SongDebuff" or generalClass == "ResistantSongDebuff") then   -- (Only using Custom Timers for debuffs; no huge reason for buffs)
             --adjust_timers(spell, spellMap)
 			local dur = calculate_duration(spell, spellMap)
 			send_command('timers create "'..spell.target.name..':'..spell.name..'" '..dur..' down')
@@ -595,6 +626,7 @@ function calculate_duration(spell, spellMap)
 	if player.equipment.feet == "Brioso Slippers +3" then mult = mult + 0.15 end
     
     if spellMap == 'Paeon' and player.equipment.head == "Brioso Roundlet" then mult = mult + 0.1 end
+	if spellMap == 'Paeon' and player.equipment.head == "Brioso Roundlet +3" then mult = mult + 0.2 end
 	if spellMap == 'Paeon' and player.equipment.head == "Brioso Roundlet +2" then mult = mult + 0.1 end
     if spellMap == 'Paeon' and player.equipment.head == "Brioso Roundlet +1" then mult = mult + 0.1 end
     if spellMap == 'Madrigal' and player.equipment.head == "Fili Calot +1" then mult = mult + 0.1 end

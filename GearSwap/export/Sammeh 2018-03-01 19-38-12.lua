@@ -1,0 +1,17 @@
+sets.exported={
+    main="Reikiko",
+    sub="Blurred Shield +1",
+    ammo="Impatiens",
+    head={ name="Odyssean Helm", augments={'Mag. Acc.+19','"Fast Cast"+6','AGI+6','"Mag.Atk.Bns."+3',}},
+    body={ name="Odyss. Chestplate", augments={'Mag. Acc.+14','"Fast Cast"+5','"Mag.Atk.Bns."+6',}},
+    hands={ name="Leyline Gloves", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
+    legs="Arjuna Breeches",
+    feet={ name="Odyssean Greaves", augments={'"Mag.Atk.Bns."+15','"Fast Cast"+4','Mag. Acc.+8',}},
+    neck="Voltsurge Torque",
+    waist="Flume Belt +1",
+    left_ear="Loquac. Earring",
+    right_ear="Enchntr. Earring +1",
+    left_ring="Weather. Ring",
+    right_ring="Defending Ring",
+    back="Moonbeam Cape",
+}

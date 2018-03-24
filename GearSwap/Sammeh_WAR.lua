@@ -25,7 +25,8 @@ function user_setup()
 	send_command("alias meva gs equip sets.meva")
 	send_command("alias idle gs equip sets.Idle.Current")
 	send_command("alias shieldblock gs equip sets.engaged.ShieldBlock")
-	send_command('@wait 5;input /lockstyleset 15')
+	--send_command('@wait 5;input /lockstyleset 15')
+	send_command('@wait 5;input /lockstyleset 27')
 	send_command("alias g11_m2g11 input /ja Defender <me>")
 	send_command("alias g11_m2g12 input /ja Restraint <me>")
 	send_command("alias g11_m2g13 input /ja Berserk <me>")
@@ -63,6 +64,17 @@ function user_setup()
 			["2"] = "Black Halo",
 			["3"] = "Judgment"
 		},
+		["Dagger"] = {
+			["1"] = "Evisceration",
+			["2"] = "Aeolian Edge",
+			["3"] = "Exenterator"
+		},
+		["Polearm"] = {
+			["1"] = "Stardiver",
+			["2"] = "Impulse Drive",
+			["3"] = "Vorpal Thrust"
+		},
+
 	}
 	
 end
@@ -274,6 +286,9 @@ function init_gear_sets()
 	sets.ws["Upheaval"] = sets.ws.vitbased
 	sets.ws["Cloudsplitter"] = sets.ws.magic
 	sets.ws["Freezebite"] = sets.ws.magic
+	sets.ws["Aeolian Edge"] = sets.ws.magic
+	sets.ws["Flash Nova"] = sets.ws.magic
+	
 
 	
     ---  PRECAST SETS  ---

@@ -18,7 +18,7 @@ function user_setup()
 	send_command("alias eng gs equip sets.engaged")
 	send_command("alias meva gs equip sets.meva")
 	send_command("alias idle gs equip sets.Idle.Current")
-	send_command('@wait 5;input /lockstyleset 38')
+	send_command('@wait 5;input /lockstyleset 27')
 	send_command("alias g11_m2g1 input /ja 'Ancient Circle' <me>")
 	send_command("alias g11_m2g2 input /ja 'Deep Breathing' <me>")
 	send_command("alias g11_m2g3 input /ja Angon <t>")
@@ -41,11 +41,11 @@ end
 function init_gear_sets()
 	sets.dt = {
 		ammo="Staunch Tathlum",
-	    head="Sulevia's Mask +1",
-		body="Sulevia's Plate. +1",
+	    head="Sulevia's Mask +2",
+		body="Sulevia's Plate. +2",
 		hands="Sulev. Gauntlets +2",
 		legs="Sulev. Cuisses +2",
-		feet="Sulev. Leggings +1",
+		feet="Sulev. Leggings +2",
 		neck="Loricate Torque +1",
 		waist="Flume Belt +1",
 		left_ear="Eabani Earring",
@@ -56,8 +56,8 @@ function init_gear_sets()
 	}
 	sets.engaged = {
 		ammo="Ginsen",
-		head="Flam. Zucchetto +1",
-		body={ name="Valorous Mail", augments={'Accuracy+22','"Store TP"+7',}},
+		head="Flam. Zucchetto +2",
+		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
 		legs="Sulev. Cuisses +2",
 		feet={ name="Valorous Greaves", augments={'Accuracy+26','"Dbl.Atk."+4','DEX+8','Attack+3',}},
@@ -74,11 +74,12 @@ function init_gear_sets()
 	sets.ws = {
 		-- ammo="Seeth. Bomblet +1",
 		ammo="Knobkierrie",
-		head={ name="Valorous Mask", augments={'Weapon skill damage +5%','AGI+7','Accuracy+15','Attack+10',}},
+		--head={ name="Valorous Mask", augments={'Weapon skill damage +5%','AGI+7','Accuracy+15','Attack+10',}},
+		head="Flamma Zucchetto +2",
 		body={ name="Valorous Mail", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','DEX+6','Accuracy+1','Attack+13',}},
 		hands="Sulev. Gauntlets +2",
 		legs={ name="Valor. Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
-		feet="Sulev. Leggings +1",
+		feet="Sulev. Leggings +2",
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Sherida Earring",
@@ -139,10 +140,10 @@ function init_gear_sets()
     sets.Idle = {
 		ammo="Ginsen",
 		head="Twilight Helm",
-		body="Sulevia's Plate. +1",
+		body="Sulevia's Plate. +2",
 		hands="Sulev. Gauntlets +2",
 		legs="Carmine Cuisses +1",
-		feet="Sulev. Leggings +1",
+		feet="Sulev. Leggings +2",
 		neck="Bathy Choker +1",
 		waist="Flume Belt +1",
 		right_ear="Genmei Earring",

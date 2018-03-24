@@ -1,0 +1,17 @@
+sets.exported={
+    main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+    sub="Enki Strap",
+    ammo="Pemphredo Tathlum",
+    head="Acad. Mortar. +3",
+    body="Acad. Gown +3",
+    hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
+    legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
+    feet="Acad. Loafers +3",
+    neck="Incanter's Torque",
+    waist="Refoccilation Stone",
+    left_ear="Regal Earring",
+    right_ear="Barkaro. Earring",
+    left_ring="Stikini Ring",
+    right_ring="Weather. Ring",
+    back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
+}

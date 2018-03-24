@@ -13,10 +13,12 @@ function user_setup()
     state.CastingMode:options('Normal', 'MACC','MagicBurst','StoreTP')
     state.IdleMode:options('Normal','PDT','Death')
 	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock'}
+	state.ManaWallMode = M{['description']='ManaWall Mode', 'DT', 'Normal'}
 	state.SuperTank = M{['description']='Super Tank Mode','Off','On'}
 	send_command('alias tank gs c cycle SuperTank')
 	send_command('alias tp gs c cycle tpmode')
 	send_command('bind f10 gs c cycle idlemode')
+	send_command('bind ^f10 gs c cycle ManaWallMode')
 	send_command('bind f12 gs c update CastingMode')
 	select_default_macro_book()
 	send_command('@wait 1;input /lockstyleset 20')
@@ -43,9 +45,11 @@ end
 function init_gear_sets()
 
 	-- Weapon Locks used for TP Mode.  When WeaponLock is set - it locks in the following Main and SUB. 
-	weaponlock_main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}
+	--weaponlock_main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}
 	--weaponlock_main="Khatvanga"
-	weaponlock_sub="Enki Strap"
+	--weaponlock_sub="Enki Strap"
+	weaponlock_main="Hvergelmir"
+	weaponlock_sub="Clerisy Strap +1"
 
     sets.ele = {}
     
@@ -80,7 +84,8 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
 		body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+16','"Fast Cast"+6','INT+4',}},
-		hands={ name="Merlinic Dastanas", augments={'Mag. Acc.+2','"Fast Cast"+6','"Mag.Atk.Bns."+1',}},
+		--hands={ name="Merlinic Dastanas", augments={'Mag. Acc.+2','"Fast Cast"+6','"Mag.Atk.Bns."+1',}},
+		hands="Ea Cuffs",
 		legs={ name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},
 		feet="Regal Pumps +1",
 		neck="Voltsurge Torque",
@@ -100,8 +105,10 @@ function init_gear_sets()
 		sub="Irenic Strap +1",
 		ammo="Staunch Tathlum",
 		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
+		--body="Ea Houppe. +1",
 		body="Ea Houppelande",
 		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
+		--legs="Ea Slops +1",
 		legs="Ea Slops",
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
 		neck="Warder's Charm +1",
@@ -116,16 +123,19 @@ function init_gear_sets()
 	
 	-- WS Sets
 	sets.precast.WS = {
-		ammo="Homiliary",
-		head="Alhazen Hat +1",
-		body="Onca Suit",
+		ammo="Amar Cluster",
+		head="Jhakri Coronal +2",
+		body="Jhakri Robe +2",
+		hands="Jhakri Cuffs +2",
+		legs="Jhakri Slops +2",
+		feet="Jhakri Pigaches +2",
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Cessance Earring",
 		right_ear="Digni. Earring",
 		left_ring="Etana Ring",
 		right_ring="Rajas Ring",
-		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
+		back="Solemnity Cape",
 	}
 	-- Max MP set
 	sets.precast.WS['Myrkr'] = {
@@ -144,6 +154,7 @@ function init_gear_sets()
 		right_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
 		back={ name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},
 	} 
+	sets.precast.WS['Vidohunir'] = sets.precast.WS['Myrkr']
 	
     ---  MIDCAST SETS  ---
     sets.midcast = {}
@@ -192,6 +203,8 @@ function init_gear_sets()
 		-- hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},  -- 5(over cap)
 		hands="Ea Cuffs",
 		--body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst dmg.+11%','VIT+8','Mag. Acc.+14',}}, -- 11
+		--body="Ea Houppe. +1",
+		--legs="Ea Slops +1",
 		body="Ea Houppelande",
 		legs="Ea Slops",
 		neck="Mizu. Kubikazari", -- 10
@@ -205,24 +218,43 @@ function init_gear_sets()
 		sub="Culminus",
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
-		body="Shango Robe",
+		--body="Shango Robe",
+		body={ name="Amalric Doublet", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
 		-- hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
 		hands="Ea Cuffs",
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
+		--legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
+		legs="Ea Slops",
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
 		neck="Sanctity Necklace",
 		waist="Fucho-no-Obi",
 		left_ear="Barkaro. Earring",
-		right_ear="Crematio Earring",
-		left_ring="Evanescence Ring",
-		right_ring="Archon Ring",
-		back={ name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},
+		right_ear="Regal Earring",
+		right_ring="Evanescence Ring",
+		left_ring="Archon Ring",
+		back={ name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',},priority=15}
 	}
 	sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {right_ear="Digni. Earring"})    
 	-- commenting out and making it match DeathMagicBurst because if it didn't burst it sucks anyway.
     --sets.midcast['Dark Magic'].Death = set_combine(sets.midcast['Elemental Magic'].Main,{head={ name="Pixie Hairpin +1",priority=14},back={ name="Bane Cape",ring1="Evanescence Ring",ring2="Archon Ring",feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},})
-	-- sets.midcast['Dark Magic'].DeathMagicBurst = set_combine(sets.midcast['Elemental Magic'].MagicBurst, {head={ name="Pixie Hairpin +1",priority=14},back={ name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',},priority=15},ring1="Archon Ring",feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},})
-	sets.midcast['Dark Magic'].DeathMagicBurst = set_combine(sets.midcast['Elemental Magic'].MagicBurst, {head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},back={ name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',},priority=15},ring1="Archon Ring",feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},})
+	sets.midcast['Dark Magic'].DeathMagicBurst = {
+	    ammo="Pemphredo Tathlum",
+		--head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
+		head="Ea Hat +1",
+		--body={ name="Ea Houppelande",priority=12},
+		body={ name="Ea Houppe. +1",priority=12},
+		hands="Ea Cuffs",
+		--legs="Ea Slops",
+		legs="Ea Slops +1",
+		--feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},
+		feet="Spae. Sabots +3",
+		neck={ name="Sanctity Necklace",priority=14},
+		waist="Refoccilation Stone",
+		left_ear="Barkaro. Earring",
+		right_ear={ name="Regal Earring",priority=13},
+		left_ring="Archon Ring",
+		right_ring="Mujin Band",
+		back={ name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',},priority=15},
+	}
 	sets.midcast['Dark Magic'].Death = sets.midcast['Dark Magic'].DeathMagicBurst
     sets.midcast['Enfeebling Magic'] = {
 	    main={ name="Gada", augments={'"Conserve MP"+3','INT+5','Mag. Acc.+24','"Mag.Atk.Bns."+25','DMG:+13',}},
@@ -320,7 +352,7 @@ function init_gear_sets()
 	}
 	sets.Idle.Manawall = set_combine(sets.Idle.PDT,{feet="Wicce Sabots +1",back={ name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}})
 	
-	sets.Idle.Death = set_combine(sets.precast.FastCast,{body="Amalric Doublet"})
+	sets.Idle.Death = set_combine(sets.precast.FastCast,{body="Amalric Doublet",feet="Skaoi Boots"})
 	sets.Idle.Current = sets.Idle.Main
 end
 
@@ -345,6 +377,8 @@ function job_precast(spell)
         equip(sets.precast.Cure)
     elseif spell.skill == 'EnhancingMagic' then
         equip(sets.precast.EnhancingMagic)
+	elseif spell.name == 'Death' then
+		equip(sets.Idle.Death)
     elseif spell.action_type == 'Magic' then
         equip(sets.precast.FastCast)
     end
@@ -446,7 +480,7 @@ function job_aftercast(spell)
 	end 
 	handle_equipping_gear(player.status)
 	equip(sets.Idle.Current)    
-	if spell.name == "Mana Wall" then 
+	if spell.name == "Mana Wall" and state.ManaWallMode.value == "DT" then 
 	   equip(sets.Idle.Manawall)
 	end
     if spell.english == 'Sleep' or spell.english == 'Sleepga' then
@@ -475,7 +509,7 @@ end
 
 function job_handle_equipping_gear(playerStatus, eventArgs)    
 
-	if buffactive["Mana Wall"] then
+	if buffactive["Mana Wall"] and state.ManaWallMode.value == "DT" then
 		-- add_to_chat(8,'Mana wall is On')
 	    sets.Idle.Current = sets.Idle.Manawall
 		if state.SuperTank.value == "On" then

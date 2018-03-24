@@ -190,13 +190,23 @@ function init_gear_sets()
 		right_ring="Weather. Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 	}
-	sets.midcast['Elemental Magic'].MACC = set_combine(sets.midcast['Elemental Magic'], {
+	sets.midcast['Elemental Magic'].MACC = {
+	    main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
+		sub="Enki Strap",
+		ammo="Pemphredo Tathlum",
+		head="Acad. Mortar. +3",
+		body="Acad. Gown +3",
 		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
-		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
+		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
+		feet="Acad. Loafers +3",
 		neck="Incanter's Torque",
-		left_ear="Hermetic Earring",
+		waist="Refoccilation Stone",
+		left_ear="Regal Earring",
 		right_ear="Barkaro. Earring",
-	})
+		left_ring="Stikini Ring",
+		right_ring="Weather. Ring",
+		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
+	}
 	
 	sets.midcast['Elemental Magic'].StoreTP = {
 	    main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
@@ -351,7 +361,7 @@ function init_gear_sets()
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
 		neck="Incanter's Torque",
 		waist="Rumination Sash",
-		left_ear="Halasz Earring",
+		left_ear="Loquac. Earring",
 		right_ear="Enchntr. Earring +1",
 		left_ring="Stikini Ring",
 		right_ring="Evanescence Ring",
@@ -539,7 +549,6 @@ function job_post_midcast(spell)
         end
         if buffactive.ebullience then equip(sets.enh.Ebullience) end
         if buffactive.klimaform and spell.element == world.weather_element then 
-		  windower.add_to_chat("got_here")
 		  equip(sets.enh.Klimaform) 
 		end
 		if spell.element == "Dark" and spell.english ~= 'Impact' then equip(sets.pixiehairpin) end

@@ -14,6 +14,7 @@ function user_setup()
 	send_command("alias wsset gs equip sets.ws")
 	send_command("alias eng gs equip sets.engaged")
 	send_command("alias idle gs equip sets.Idle.Current")
+	send_command("alias g11_m2g1 input /equip head 'Frenzy Sallet'")
 	send_command('@wait 1;input /lockstyleset 3')
 	
 end

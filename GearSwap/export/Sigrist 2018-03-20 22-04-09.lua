@@ -1,0 +1,18 @@
+sets.exported={
+    main="Fettering Blade",
+    sub="Nusku Shield",
+    range="Molybdosis",
+    ammo="Adlivun Bullet",
+    head={ name="Lanun Tricorne", augments={'Enhances "Winning Streak" effect',}},
+    body="Meg. Cuirie +1",
+    hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
+    legs={ name="Herculean Trousers", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic burst dmg.+3%','MND+3','Mag. Acc.+9','"Mag.Atk.Bns."+5',}},
+    feet="Meg. Jam. +1",
+    neck="Iskur Gorget",
+    waist="Yemaya Belt",
+    left_ear="Infused Earring",
+    right_ear="Neritic Earring",
+    left_ring="Defending Ring",
+    right_ring="Rajas Ring",
+    back="Camulus's Mantle",
+}

@@ -1,0 +1,17 @@
+sets.exported={
+    main="Reikiko",
+    sub="Blurred Shield +1",
+    ammo="Ginsen",
+    head="Volte Salade",
+    body="Sulevia's Plate. +2",
+    hands="Sulev. Gauntlets +2",
+    legs="Volte Brayettes",
+    feet="Hermes' Sandals",
+    neck="Bathy Choker +1",
+    waist="Flume Belt +1",
+    left_ear="Cessance Earring",
+    right_ear="Telos Earring",
+    left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+    right_ring="Defending Ring",
+    back="Solemnity Cape",
+}

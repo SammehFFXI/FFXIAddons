@@ -1,0 +1,17 @@
+sets.exported={
+    main="Reikiko",
+    sub="Blurred Shield +1",
+    ammo="Staunch Tathlum",
+    head="Volte Salade",
+    body="Pumm. Lorica +3",
+    hands="Pumm. Mufflers +3",
+    legs="Volte Brayettes",
+    feet="Pumm. Calligae +3",
+    neck="Warder's Charm +1",
+    waist="Engraved Belt",
+    left_ear="Eabani Earring",
+    right_ear="Flashward Earring",
+    left_ring="Purity Ring",
+    right_ring="Vengeful Ring",
+    back={ name="Cichol's Mantle", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Mag. Evasion+15',}},
+}

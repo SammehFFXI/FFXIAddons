@@ -314,10 +314,10 @@ function init_gear_sets()
 	
 	sets.meva = {
 		ammo="Staunch Tathlum",
-		head="Pummeler's Mask +3",
+		head="Volte Salade",
 		body="Pumm. Lorica +3",
 		hands="Pumm. Mufflers +3",
-		legs="Pumm. Cuisses +3",
+		legs="Volte Brayettes",
 		feet="Pumm. Calligae +3",
 		neck="Warder's Charm +1",
 		waist="Engraved Belt",
@@ -325,7 +325,7 @@ function init_gear_sets()
 		right_ear="Flashward Earring",
 		left_ring="Purity Ring",
 		right_ring="Vengeful Ring",
-		back={ name="Cichol's Mantle", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10',}},
+		back={ name="Cichol's Mantle", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Mag. Evasion+15',}},
 	}
 	
 	sets.CurePotencyRecv = { 
@@ -357,17 +357,16 @@ function init_gear_sets()
     
     ---  AFTERCAST SETS  ---
     sets.Idle = {
-		ammo="Ginsen",
-		--head="Twilight Helm",
+		ammo="Staunch Tathlum",
 		head="Volte Salade",
 		body="Sulevia's Plate. +2",
 		hands="Sulev. Gauntlets +2",
-		legs="Sulev. Cuisses +2",
+		legs="Volte Brayettes",
 		feet="Hermes' Sandals",
 		neck="Bathy Choker +1",
 		waist="Flume Belt +1",
-		right_ear="Telos Earring",
-		left_ear="Cessance Earring",
+		left_ear="Genmei Earring",
+		right_ear="Odnowa Earring +1",
 		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
 		right_ring="Defending Ring",
 		back="Solemnity Cape",

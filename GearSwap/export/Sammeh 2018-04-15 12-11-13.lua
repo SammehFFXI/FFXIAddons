@@ -1,0 +1,17 @@
+sets.exported={
+    main="Reikiko",
+    sub="Blurred Shield +1",
+    ammo="Staunch Tathlum",
+    head="Volte Salade",
+    body="Sulevia's Plate. +2",
+    hands="Sulev. Gauntlets +2",
+    legs="Volte Brayettes",
+    feet="Hermes' Sandals",
+    neck="Bathy Choker +1",
+    waist="Flume Belt +1",
+    left_ear="Genmei Earring",
+    right_ear="Odnowa Earring +1",
+    left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+    right_ring="Defending Ring",
+    back="Solemnity Cape",
+}

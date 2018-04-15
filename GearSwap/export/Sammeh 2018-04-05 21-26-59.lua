@@ -1,0 +1,17 @@
+sets.exported={
+    main={ name="Akademos", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
+    sub="Enki Strap",
+    ammo="Pemphredo Tathlum",
+    head={ name="Peda. M.Board +2", augments={'Enh. "Altruism" and "Focalization"',}},
+    body={ name="Merlinic Jubbah", augments={'Mag. Acc.+25 "Mag.Atk.Bns."+25','Magic burst dmg.+10%','"Mag.Atk.Bns."+7',}},
+    hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+    legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+5',}},
+    feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
+    neck="Mizu. Kubikazari",
+    waist="Refoccilation Stone",
+    left_ear="Regal Earring",
+    right_ear="Static Earring",
+    left_ring="Locus Ring",
+    right_ring="Mujin Band",
+    back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
+}

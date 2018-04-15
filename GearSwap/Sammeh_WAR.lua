@@ -74,6 +74,11 @@ function user_setup()
 			["2"] = "Impulse Drive",
 			["3"] = "Vorpal Thrust"
 		},
+		["Staff"] = {
+			["1"] = "Cataclysm",
+			["2"] = "Earth Crusher",
+			["3"] = "Shattersoul"
+		},
 
 	}
 	
@@ -288,7 +293,8 @@ function init_gear_sets()
 	sets.ws["Freezebite"] = sets.ws.magic
 	sets.ws["Aeolian Edge"] = sets.ws.magic
 	sets.ws["Flash Nova"] = sets.ws.magic
-	
+	sets.ws["Cataclysm"] = sets.ws.magic
+	sets.ws["Earth Crusher"] = sets.ws.magic
 
 	
     ---  PRECAST SETS  ---
@@ -297,7 +303,7 @@ function init_gear_sets()
 	sets.precast.JA.Berserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +2"})
 	sets.MaxBerserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +2",main="Firangi"})
 	sets.precast.JA.Warcry = set_combine(sets.precast.JA, {head="Agoge mask +3"})
-	sets.precast.JA.Aggressor = set_combine(sets.precast.JA, {head="Pummeler's Mask +3",body="Agoge Lorica +1"})
+	sets.precast.JA.Aggressor = set_combine(sets.precast.JA, {head="Pummeler's Mask +3",body="Agoge Lorica +2"})
 	sets.precast.JA['Mighty Strikes'] = set_combine(sets.precast.JA, {hands="Agoge Mufflers +3"})
 	sets.precast.JA['Defender'] = set_combine(sets.precast.JA, {hands="Agoge Mufflers +3"})
 	sets.precast.JA['Blood Rage'] = set_combine(sets.precast.JA, {body="Boii Lorica +1"})

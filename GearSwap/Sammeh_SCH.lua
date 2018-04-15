@@ -62,7 +62,8 @@ function init_gear_sets()
 		sub="Irenic Strap +1",
 		ammo="Staunch Tathlum",
 		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
+		--body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
+		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
@@ -108,7 +109,7 @@ function init_gear_sets()
 	sets.MaxHP = {
 	    ammo="Homiliary",
 		head="Acad. Mortar. +3",
-		body={ name="Peda. Gown +1", augments={'Enhances "Enlightenment" effect',}},
+		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}},
 		legs="Perdition Slops",
 		feet="Skaoi Boots",
@@ -179,7 +180,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
 		body={ name="Merlinic Jubbah", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Drain" and "Aspir" potency +3','MND+5','Mag. Acc.+10','"Mag.Atk.Bns."+13',}},
-		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
+		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
 		neck="Sanctity Necklace",
@@ -232,8 +233,8 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		--head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
 		head="Pedagogy Mortarboard +2",
-		body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst dmg.+11%','VIT+8','Mag. Acc.+14',}},
-		hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
+		body={ name="Merlinic Jubbah", augments={'Mag. Acc.+25 "Mag.Atk.Bns."+25','Magic burst dmg.+10%','"Mag.Atk.Bns."+7',}},
+		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
 		neck="Mizu. Kubikazari",
@@ -246,10 +247,16 @@ function init_gear_sets()
 	}
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'].StoreTP, {head=empty,body="Twilight Cloak",neck="Combatant's Torque"})
 	
-	sets.midcast.Helix = sets.midcast['Elemental Magic']
-	sets.midcast.Helix.MACC = sets.midcast['Elemental Magic'].MACC
+	sets.midcast.Helix = set_combine(sets.midcast['Elemental Magic'], {
+		main="Raetic Staff +1",
+	})
+	sets.midcast.Helix.MACC = set_combine(sets.midcast['Elemental Magic'].MACC, {
+		main="Raetic Staff +1",
+	})
 	sets.midcast.Helix.StoreTP = sets.midcast['Elemental Magic'].StoreTP
-	sets.midcast.Helix.MagicBurst = sets.midcast['Elemental Magic'].MagicBurst
+	sets.midcast.Helix.MagicBurst = set_combine(sets.midcast['Elemental Magic'].MagicBurst, {
+		main="Raetic Staff +1",
+	})
     sets.midcast['Dark Magic'] = {
 	    main={ name="Rubicundity", augments={'Mag. Acc.+10','"Mag.Atk.Bns."+10','Dark magic skill +10','"Conserve MP"+7',}},
 		sub="Ammurapi Shield",
@@ -355,7 +362,8 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		ammo="Staunch Tathlum",
 		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
+		-- body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
+		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
@@ -422,7 +430,7 @@ function init_gear_sets()
 	sets.Idle.NoSubl = sets.Idle.Main
 	sets.Idle.Subl = set_combine(sets.Idle.NoSubl, {
 		head="Acad. Mortar. +3",
-		body={ name="Peda. Gown +1", augments={'Enhances "Enlightenment" effect',}},
+		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		right_ear="Savant's Earring",
 	})	
 	
@@ -432,7 +440,7 @@ function init_gear_sets()
 	sets.pixiehairpin = {head="Pixie Hairpin +1"}
 	
 	sets.precast.JA = {}
-    sets.precast.JA.Enlightenment = {body={ name="Peda. Gown +1", augments={'Enhances "Enlightenment" effect',}},}
+    sets.precast.JA.Enlightenment = {body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},}
     sets.precast.JA['Tabula Rasa'] = {legs="Pedagogy Pants"}
 	--sets.precast.JA.Sublimation = sets.Idle.Subl
 	
@@ -499,8 +507,11 @@ function job_post_midcast(spell)
 			elseif state.CastingMode.value == "StoreTP" then
 	        equip(sets.midcast['Elemental Magic'].StoreTP)
 			elseif state.CastingMode.value == "MagicBurst" then
-			 if player.equipment.main == 'Khatvanga' then
-			   equip(sets.midcast['Elemental Magic'].MagicBurst,{feet={name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}})
+			 if player.equipment.main == 'Khatvanga' or player.equipment.main == "Raetic Staff +1" then
+			   equip(sets.midcast['Elemental Magic'].MagicBurst,{
+			   legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst dmg.+8%','AGI+9','"Mag.Atk.Bns."+12',}},
+			   -- feet={name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}
+			   })
 			 else 
 	           equip(sets.midcast['Elemental Magic'].MagicBurst)
 			 end
@@ -515,8 +526,10 @@ function job_post_midcast(spell)
             if state.CastingMode.value == "MACC" then
 			  equip(sets.midcast.Helix.MACC)
 			elseif state.CastingMode.value == "MagicBurst" then
-			 if player.equipment.main == 'Khatvanga' then
-			   equip(sets.midcast.Helix.MagicBurst,{feet={name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}})
+			 if player.equipment.main == 'Khatvanga' or player.equipment.main == 'Raetic Staff +1' then
+			   equip(sets.midcast.Helix.MagicBurst,{
+			   legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst dmg.+8%','AGI+9','"Mag.Atk.Bns."+12',}},
+			   })
 			 else 
 	           equip(sets.midcast.Helix.MagicBurst)
 			 end
@@ -532,8 +545,10 @@ function job_post_midcast(spell)
 			elseif state.CastingMode.value == "StoreTP" then
 	        equip(sets.midcast['Elemental Magic'].StoreTP)
 			elseif state.CastingMode.value == "MagicBurst" then
-			 if player.equipment.main == 'Khatvanga' then
-			   equip(sets.midcast['Elemental Magic'].MagicBurst,{feet={name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}}})
+			 if player.equipment.main == 'Khatvanga' or player.equipment.main == 'Raetic Staff +1' then
+			   equip(sets.midcast['Elemental Magic'].MagicBurst,{
+			   legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst dmg.+8%','AGI+9','"Mag.Atk.Bns."+12',}},
+			   })
 			 else 
 	           equip(sets.midcast['Elemental Magic'].MagicBurst)
 			 end
@@ -729,7 +744,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	sets.Idle.Current = sets.Idle.NoSubl
 	if buffactive["Sublimation: Activated"] then
         sets.Idle.Current = sets.Idle.Subl
-		if SublimationStartTimer and CurrentTime - SublimationStartTimer > 90 then
+		if SublimationStartTimer and CurrentTime - SublimationStartTimer > 85 then
 		   sets.Idle.Current = sets.MaxHP
 		end
     end
@@ -770,7 +785,7 @@ windower.raw_register_event('time change',function()
    if precast_start == nil then 
       precast_start = CurrentTime
    end
-   if SublimationStartTimer and CurrentTime - SublimationStartTimer > 96 then 
+   if SublimationStartTimer and CurrentTime - SublimationStartTimer > 80 then 
 	  job_handle_equipping_gear(player.status)
 	  send_command("gs equip sets.Idle.Current")
    end

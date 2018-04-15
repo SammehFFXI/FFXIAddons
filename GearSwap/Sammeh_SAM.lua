@@ -127,7 +127,7 @@ function init_gear_sets()
 	sets.precast.WS = {
 		ammo="Knobkierrie",
 		head="Flam. Zucchetto +2",
-		body={ name="Sakonji Domaru +2", augments={'Enhances "Overwhelm" effect',}},
+		body={ name="Sakonji Domaru +3", augments={'Enhances "Overwhelm" effect',}},
 		hands={ name="Valorous Mitts", augments={'Attack+16','Weapon skill damage +3%','STR+10','Accuracy+7',}},
 		legs="Wakido Haidate +3",
 		feet={ name="Valorous Greaves", augments={'Mag. Acc.+17','"Store TP"+4','Weapon skill damage +8%','Accuracy+5 Attack+5','Mag. Acc.+10 "Mag.Atk.Bns."+10',}},
@@ -143,7 +143,7 @@ function init_gear_sets()
 	sets.precast.WS.Acc = {
 		ammo="Knobkierrie",
 	    head="Wakido Kabuto +3",
-		body={ name="Sakonji Domaru +2", augments={'Enhances "Overwhelm" effect',}},
+		body={ name="Sakonji Domaru +3", augments={'Enhances "Overwhelm" effect',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+23 Attack+23','Weapon skill damage +3%','VIT+8','Accuracy+2','Attack+12',}},
 		legs="Wakido Haidate +3",
 		feet={ name="Valorous Greaves", augments={'Mag. Acc.+17','"Store TP"+4','Weapon skill damage +8%','Accuracy+5 Attack+5','Mag. Acc.+10 "Mag.Atk.Bns."+10',}},

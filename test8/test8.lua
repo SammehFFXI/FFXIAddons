@@ -52,11 +52,11 @@ function createpacket()
 			result['Target Index'] = target_index
 			result['Zone'] = zone 
 		else
-			windower.add_to_chat(10,"Not close enough to Pxiys")
+			windower.add_to_chat(10,"Not close enough to Pyxis")
 			result = nil
 		end
 	else
-		windower.add_to_chat(8,"Riftworn Pyxis Found")
+		windower.add_to_chat(8,"Riftworn Pyxis Not Found")
 	end
 	
 return result
@@ -74,6 +74,7 @@ windower.register_event('addon command', function(...)
 			if pkt and pkt['Target'] then
 				busy = true
 				poke_npc(pkt['Target'],pkt['Target Index'])
+				lastpkt = pkt
 			end
 		end
 	end
@@ -97,7 +98,7 @@ function reset_me()
 		local packet = packets.new('outgoing', 0x05B)
 		packet["Target"]=lastpkt['Target']
 		packet["Option Index"]=lastpkt['Option Index']
-		packet["_unknown1"]="16384"
+		packet["_unknown1"]=16384
 		packet["Target Index"]=lastpkt['Target Index']
 		packet["Automated Message"]=false
 		packet["_unknown2"]=0
@@ -117,7 +118,8 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 		fixed with the p['Menu ID'] == pkt['Menu ID'] statement below.. not sure 
 	]]
 		local p = packets.parse('incoming',data)
-		if busy and pkt and p['Menu ID'] == pkt['Menu ID'] then
+		print(p['Menu ID'], pkt['Menu ID'])
+		if busy and pkt then
 			local packet = packets.new('outgoing', 0x05B)
 			packet["Target"]=pkt['Target']
 			packet["Option Index"]=pkt['Option Index']
@@ -126,17 +128,16 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 			packet["Automated Message"]=false
 			packet["_unknown2"]=pkt['_unknown2']
 			packet["Zone"]=pkt['Zone']
-			packet["Menu ID"]=pkt['Menu ID']
+			packet["Menu ID"]=p['Menu ID']
 			packets.inject(packet)
 		
 		busy = false
-		lastpkt = pkt
+		
 		pkt = {}
 		
 		return true
 		else 
 			busy = false
-			lastpkt = pkt
 			pkt = {}
 		end
 	end

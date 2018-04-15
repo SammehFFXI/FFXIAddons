@@ -118,7 +118,7 @@ windower.register_event('incoming chunk',function(id,data,modified,injected,bloc
 		fixed with the p['Menu ID'] == pkt['Menu ID'] statement below.. not sure 
 	]]
 		local p = packets.parse('incoming',data)
-		print(p['Menu ID'], pkt['Menu ID'])
+		
 		if busy and pkt then
 			local packet = packets.new('outgoing', 0x05B)
 			packet["Target"]=pkt['Target']

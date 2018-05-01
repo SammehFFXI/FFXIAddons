@@ -155,7 +155,7 @@ function init_gear_sets()
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}}, -- 4   (+8 aug) 
 		feet={ name="Yorium Sabatons", augments={'Enmity+9',}}, -- 14
 		neck="Unmoving Collar +1", -- 10 
-		waist="Sulla belt", -- 3
+		waist="Sinew belt", -- 3
 		left_ear="Cryptic Earring", -- 4
 		right_ear="Trux Earring", -- 5
 		left_ring="Apeile Ring +1", -- 5~9

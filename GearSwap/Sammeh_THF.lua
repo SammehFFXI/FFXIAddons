@@ -53,6 +53,19 @@ function init_gear_sets()
 		right_ring="Epona's Ring",
 		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
 	}
+	sets.ws.magic = {
+	head={ name="Herculean Helm", augments={'Magic burst dmg.+7%','Mag. Acc.+11','"Mag.Atk.Bns."+9',}},
+    body={ name="Samnuha Coat", augments={'Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+5','"Dual Wield"+5',}},
+    hands={ name="Plun. Armlets +1", augments={'Enhances "Perfect Dodge" effect',}},
+    legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
+    feet={ name="Herculean Boots", augments={'Attack+18','Weapon skill damage +4%','STR+7','Accuracy+14',}},
+    neck="Sanctity Necklace",
+    waist="Eschan Stone",
+    left_ear="Crematio Earring",
+    right_ear="Hermetic Earring",
+    left_ring="Hetairoi Ring",
+    right_ring="Epona's Ring",
+	}
 	
 	
     ---  PRECAST SETS  ---
@@ -63,6 +76,7 @@ function init_gear_sets()
 	
 	-- WS Sets
 	sets.precast.WS = sets.ws
+	sets.ws["Aeolian Edge"] = sets.ws.magic
 	
     ---  MIDCAST SETS  ---
     sets.midcast = {}

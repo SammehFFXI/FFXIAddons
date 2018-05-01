@@ -1,0 +1,16 @@
+sets.exported={
+    main="Aeneas",
+    sub={ name="Taming Sari", augments={'STR+10','DEX+10','DMG:+15','"Treasure Hunter"+1',}},
+    ammo="Ginsen",
+    head={ name="Herculean Helm", augments={'Magic burst dmg.+7%','Mag. Acc.+11','"Mag.Atk.Bns."+9',}},
+    body={ name="Samnuha Coat", augments={'Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+5','"Dual Wield"+5',}},
+    hands={ name="Plun. Armlets +1", augments={'Enhances "Perfect Dodge" effect',}},
+    legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
+    feet={ name="Herculean Boots", augments={'Attack+18','Weapon skill damage +4%','STR+7','Accuracy+14',}},
+    neck="Sanctity Necklace",
+    waist="Eschan Stone",
+    left_ear="Crematio Earring",
+    right_ear="Hermetic Earring",
+    left_ring="Hetairoi Ring",
+    right_ring="Epona's Ring",
+}

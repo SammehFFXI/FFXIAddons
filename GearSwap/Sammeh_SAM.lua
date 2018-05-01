@@ -48,6 +48,12 @@ function user_setup()
 			["2"] = "Impulse Drive",
 			["3"] = "Leg Sweep"
 		},
+		["Staff"] = {
+			["1"] = "Earth Crusher",
+			["2"] = "Earth Crusher",
+			["3"] = "Earth Crusher"
+		},
+		
 	}
 	
 end
@@ -188,11 +194,15 @@ function init_gear_sets()
 	}
 
 	-- WS Sets
-	sets.precast.WS['Namas Arrow'] = sets.ranged
-	sets.precast.WS['Apex Arrow'] = sets.ranged
+	sets.precast.WS['Namas Arrow'] = set_combine(sets.ranged, {
+		body={ name="Sakonji Domaru +3", augments={'Enhances "Overwhelm" effect',}},
+		legs="Wakido Haidate +3",
+		})
+	sets.precast.WS['Apex Arrow'] = sets.precast.WS['Namas Arrow']
 	sets.precast.WS["Tachi: Jinpu"] = sets.precast.WS.magic
 	sets.precast.WS["Tachi: Goten"] = sets.precast.WS.magic
 	sets.precast.WS["Tachi: Koki"] = sets.precast.WS.magic
+	sets.precast.WS["Earth Crusher"] = sets.precast.WS.magic
 	
 	
 
@@ -277,7 +287,7 @@ function job_precast(spell)
         equip(sets.precast.JA[spell.name])
     end
 	if spell.name == 'Ranged' then
-		equip(sets.precast.Ranged)
+		equip(sets.ranged)
 	end	
 end
 

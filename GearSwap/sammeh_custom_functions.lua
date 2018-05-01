@@ -254,7 +254,7 @@ function GetSkillIDBySkill(skill)
 end
 
 function checkblocking(spell)
-	if type(windower.ffxi.get_player().autorun) == 'table' and spell.action_type == 'Magic' then 
+	if type(windower.ffxi.get_player().autorun) == 'table' and (spell.action_type == 'Magic' or spell.name == 'Ranged') then 
 		windower.add_to_chat(3,'Currently auto-running - stopping to cast spell')
 		windower.ffxi.run(false)
 		windower.ffxi.follow()  -- disabling Follow - turning back autorun automatically turns back on follow.
@@ -361,6 +361,28 @@ function checkblocking(spell)
 		  send_command('gs c update')
 		  add_to_chat(3,'Canceling Ability - Currently have Amnesia')
 		  return	  
+	end
+	if spell.type == 'WeaponSkill' then
+	    local range_mult = {
+			[2] = 1.55,
+			[3] = 1.490909,
+			[4] = 1.44,
+			[5] = 1.377778,
+			[6] = 1.30,
+			[7] = 1.15,
+			[8] = 1.25,
+			[9] = 1.377778,
+			[10] = 1.45,
+			[11] = 1.454545454545455,
+			[12] = 1.666666666666667,
+		}
+		ability_distance = res.weapon_skills[spell.id].range
+		if spell.target.distance > (ability_distance * range_mult[ability_distance] + spell.target.model_size + player.model_size) then
+		    cancel_spell()
+			add_to_chat(3, spell.name..' Canceled: [Out of Range]')
+			send_command('gs c update')
+			return
+		end
 	end
 	if spell.name == 'Utsusemi: Ichi' and (buffactive['Copy Image (3)'] or buffactive ['Copy Image (4+)']) then
 	  cancel_spell()

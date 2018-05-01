@@ -149,7 +149,7 @@ function init_gear_sets()
 		feet={ name="Vanya Clogs", augments={'"Cure" potency +5%','"Cure" spellcasting time -15%','"Conserve MP"+6',}}
 	})
 	
-	sets.precast.Grimoire = {head="Pedagogy Mortarboard +2",feet="Acad. Loafers +3"}
+	sets.precast.Grimoire = {head="Peda. M.Board +3",feet="Acad. Loafers +3"}
 
 	-- WS Sets
 	sets.precast.WS = set_combine(sets.engaged,{neck="Fotia Gorget",waist="Fotia Belt"})
@@ -232,7 +232,7 @@ function init_gear_sets()
 		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		--head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
-		head="Pedagogy Mortarboard +2",
+		head="Peda. M.Board +3",
 		body={ name="Merlinic Jubbah", augments={'Mag. Acc.+25 "Mag.Atk.Bns."+25','Magic burst dmg.+10%','"Mag.Atk.Bns."+7',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
@@ -337,7 +337,8 @@ function init_gear_sets()
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 	}
     sets.midcast['Healing Magic'] = {
-		main={ name="Akademos", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
+		--main={ name="Akademos", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
+		main="Chatoyant Staff",
 		--sub="Clerisy Strap +1",
 		sub="Enki Strap",
 		ammo="Incantor Stone",
@@ -562,7 +563,7 @@ function job_post_midcast(spell)
             if sets.ele[spell.element] then equip(sets.ele[spell.element]) end
             weathercheck(spell.element)
         end
-        if buffactive.ebullience then equip(sets.enh.Ebullience) end
+        --if buffactive.ebullience then equip(sets.enh.Ebullience) end  (Doesn't seem to beat out relic head +3)
         if buffactive.klimaform and spell.element == world.weather_element then 
 		  equip(sets.enh.Klimaform) 
 		end

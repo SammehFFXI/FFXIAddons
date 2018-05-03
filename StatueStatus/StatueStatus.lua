@@ -1,7 +1,7 @@
 
 _addon.name = 'StatueStatus'
 _addon.author = 'Windower'
-_addon.version = '1.0.0.3'
+_addon.version = '1.0.0.4'
 _addon.command = 'StatueStatus'
 
 
@@ -38,7 +38,7 @@ aurix_textbox:color(255,0,0)
 debug.setmetatable(nil, {__index = {}, __call = functions.empty})
 
 local statue_list = {}
-local AurixIndex = 99999999999
+local AurixIndex = 999999999999
 
 windower.register_event('incoming chunk', function(id,original,modified,injected,blocked)
     if id == 0x00E then
@@ -46,8 +46,16 @@ windower.register_event('incoming chunk', function(id,original,modified,injected
 		local index = packet["Index"]
 		local mob = windower.ffxi.get_mob_by_index(index)
 		if mob.name == "Corporal Tombstone" or mob.name == "Lithicthrower Image" or mob.name == "Incarnation Icon" or mob.name == "Impish Statue" then 
+			local Time = os.clock()
 			local status = packet["_unknown4"]
-			color = statue_list[index] or nil
+			color = statue_list[index]["Color"] or nil
+			firstSeenTime = statue_list[index]["firstSeenTime"] or nil
+			statue_list[index] = {}
+			if firstSeenTime == nil then 
+				statue_list[index]["firstSeenTime"] = Time
+			else
+				statue_list[index]["firstSeenTime"] = firstSeenTime
+			end
 			if (status == 458784) then color = "Green" end
 			if (status == 393248) then color = "Blue" end
 			if (status == 327712) then color = "Red" end
@@ -55,7 +63,7 @@ windower.register_event('incoming chunk', function(id,original,modified,injected
 				color = "Aurix" 
 				AurixIndex = index
 			end
-			statue_list[index] = color
+			statue_list[index]["Color"] = color
 		end
 	end
 end)
@@ -64,21 +72,20 @@ end)
 
 windower.register_event('prerender', function()
     local t = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().target_index or 0)
-	if  statue_list[t.index] and (t.name == "Corporal Tombstone" or t.name == "Lithicthrower Image" or t.name == "Incarnation Icon" or t.name == "Impish Statue") then
-		if statue_list[t.index] == "Green" then statue_textbox:color(0,255,0)
-		elseif statue_list[t.index] == "Blue" then statue_textbox:color(0,0,255)
-		elseif statue_list[t.index] == "Red" then statue_textbox:color(255,0,0)
+	if  statue_list[t.index] then
+		if statue_list[t.index]["Color"] == "Green" then statue_textbox:color(0,255,0)
+		elseif statue_list[t.index]["Color"] == "Blue" then statue_textbox:color(0,0,255)
+		elseif statue_list[t.index]["Color"] == "Red" then statue_textbox:color(255,0,0)
 		else statue_textbox:color(255,255,255)	end
-		statue_textbox.value = statue_list[t.index]
+		statue_textbox.value = statue_list[t.index]["Color"]
 	else
 		statue_textbox.value = nil
 	end
 	local mobArray = windower.ffxi.get_mob_array()
-	--aurix_textbox.value = nil
 	local AurixVisible = false
 	for i,v in pairs(mobArray) do
 		local mob = windower.ffxi.get_mob_by_index(i)
-		if mob.index == AurixIndex and (mob.status == 1 or mob.status == 0) and mob.distance < 2500 then
+		if statue_list[mob.index] and mob.index == AurixIndex and (mob.status == 1 or mob.status == 0) and mob.distance < 2500 and (os.clock() - statue_list[mob.index]["firstSeenTime"]) > 5 then
 			local self_vector = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().index or 0)
 			local angle = (math.atan2((mob.y - self_vector.y), (mob.x - self_vector.x))*180/math.pi)*-1
 			local direction = (angle):radian()

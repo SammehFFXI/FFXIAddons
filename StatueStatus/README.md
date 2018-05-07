@@ -15,4 +15,5 @@ To help mitigate the distance/transition period etc,  I make sure that I've seen
 A couple notes:
 * Please note this is a WIP and hard to debug due to 3 day dev cycles where you get an hour-90 minutes in a zone that I'd rather "play" than debug.
 * If Aurix runs away, it's unknown if a mob you've already tracked with a color change simply stops rotating, or if a new index pops up etc.  Because of this, after Aurix has run away, it may be wise to reload the addon (it'd be easy to program this in, just haven't done so). 
+* Trying to think of ways to help mitigate 'false positives'
 * probably more I'm forgetting.

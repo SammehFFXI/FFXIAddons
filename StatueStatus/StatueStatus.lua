@@ -1,7 +1,7 @@
 
 _addon.name = 'StatueStatus'
 _addon.author = 'Windower'
-_addon.version = '1.0.0.4'
+_addon.version = '1.0.0.5'
 _addon.command = 'StatueStatus'
 
 
@@ -38,7 +38,7 @@ aurix_textbox:color(255,0,0)
 debug.setmetatable(nil, {__index = {}, __call = functions.empty})
 
 local statue_list = {}
-local AurixIndex = 999999999999
+local AurixIndex = 9999999999999
 
 windower.register_event('incoming chunk', function(id,original,modified,injected,blocked)
     if id == 0x00E then
@@ -85,7 +85,7 @@ windower.register_event('prerender', function()
 	local AurixVisible = false
 	for i,v in pairs(mobArray) do
 		local mob = windower.ffxi.get_mob_by_index(i)
-		if statue_list[mob.index] and mob.index == AurixIndex and (mob.status == 1 or mob.status == 0) and mob.distance < 2500 and (os.clock() - statue_list[mob.index]["firstSeenTime"]) > 5 then
+		if statue_list[mob.index] and mob.index == AurixIndex and (mob.status == 1 or mob.status == 0) and mob.distance < 1225 and (os.clock() - statue_list[mob.index]["firstSeenTime"]) > 15 then
 			local self_vector = windower.ffxi.get_mob_by_index(windower.ffxi.get_player().index or 0)
 			local angle = (math.atan2((mob.y - self_vector.y), (mob.x - self_vector.x))*180/math.pi)*-1
 			local direction = (angle):radian()
@@ -109,5 +109,15 @@ end)
 windower.register_event('addon command', function(command)
     if command == 'save' then
         config.save(settings, 'all')
+	elseif command == 'debug' then
+		for i,v in pairs(statue_list) do
+			print(i,v)
+		end
     end
 end)
+
+
+windower.register_event('zone change', function(command)
+	statue_list = {}
+end)
+

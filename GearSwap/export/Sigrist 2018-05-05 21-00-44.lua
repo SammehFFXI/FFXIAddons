@@ -1,0 +1,18 @@
+sets.exported={
+    main="Fettering Blade",
+    sub="Nusku Shield",
+    range="Molybdosis",
+    ammo="Adlivun Bullet",
+    head="Meghanada Visor +1",
+    body="Meg. Cuirie +1",
+    hands="Meg. Gloves +1",
+    legs="Meg. Chausses +2",
+    feet="Meg. Jam. +2",
+    neck="Iskur Gorget",
+    waist="Yemaya Belt",
+    left_ear="Infused Earring",
+    right_ear="Neritic Earring",
+    left_ring="Defending Ring",
+    right_ring="Rajas Ring",
+    back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','Weapon skill damage +10%',}},
+}

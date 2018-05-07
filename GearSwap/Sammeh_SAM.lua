@@ -6,11 +6,11 @@ function get_sets()
 end
 
 function user_setup()
-	state.IdleMode:options('Normal','Reraise','DT')
+	state.IdleMode:options('Normal','Reraise','DT','MEVA')
 	send_command('bind f10 gs c cycle IdleMode')
 	send_command('bind f12 gs c wslist')
 	
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy'}
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy','MEVA'}
 	-- f9 =  offense mode
 	state.WeaponskillMode:options('Normal', 'Acc')
 	-- win+f9 = ws mode
@@ -61,6 +61,23 @@ end
 	
 function init_gear_sets()
 	
+	sets.meva = {
+		ammo="Staunch Tathlum",
+		head="Ken. Jinpachi",
+		body="Ken. Samue +1",
+		hands="Ken. Tekko",
+		legs="Ken. Hakama",
+		feet="Ken. Sune-Ate",
+		neck="Warder's Charm +1",
+		waist="Carrier's Sash",
+		left_ear="Hearty Earring",
+		right_ear="Eabani Earring",
+		left_ring="Purity Ring",
+		right_ring="Vengeful Ring",
+		back="Moonbeam Cape",
+	}
+	
+	
 	sets.engaged = {
 		ammo="Ginsen",
 		head="Flam. Zucchetto +2",
@@ -80,7 +97,7 @@ function init_gear_sets()
 	}
 	
 	sets.engaged.Reraise = set_combine(sets.engaged,{body="Twilight Mail",head="Twilight Helm"})
-	
+	sets.engaged.MEVA = sets.meva
 	sets.engaged.HighAccuracy = {
 	    head="Wakido Kabuto +3",
 		body="Ken. Samue +1",
@@ -219,21 +236,6 @@ function init_gear_sets()
 	sets.precast.JA['Hasso'] = set_combine(sets.precast.JA, {})
 	sets.precast.JA['Sengikori'] = set_combine(sets.precast.JA, {})
 	
-	sets.meva = {
-		ammo="Staunch Tathlum",
-		head="Ken. Jinpachi",
-		body="Ken. Samue +1",
-		hands="Ken. Tekko",
-		legs="Ken. Hakama",
-		feet="Ken. Sune-Ate",
-		neck="Warder's Charm +1",
-		waist="Carrier's Sash",
-		left_ear="Hearty Earring",
-		right_ear="Eabani Earring",
-		left_ring="Purity Ring",
-		right_ring="Vengeful Ring",
-		back="Moonbeam Cape",
-	}
 	
 	sets.CurePotencyRecv = { }
 	
@@ -387,6 +389,8 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
     end
 	if state.IdleMode.value == "Reraise" then
 	   sets.Idle.Current = set_combine(sets.Idle,{body="Twilight Mail",head="Twilight Helm"})   
+	elseif state.IdleMode.value == "MEVA" then 
+		sets.Idle.Current = sets.meva
 	elseif state.IdleMode.value == "DT" or state.OffenseMode.value == "DT" then
 		if buffactive['Aftermath'] then
 			sets.Idle.Current = sets.dtaftermath

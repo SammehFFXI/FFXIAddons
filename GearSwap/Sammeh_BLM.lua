@@ -64,7 +64,7 @@ function init_gear_sets()
 		ammo="Sihirik",
 		head={ name="Merlinic Hood", augments={'Attack+1','Magic dmg. taken -4%','Mag. Acc.+9',}},
 		body={ name="Hagondes Coat +1", augments={'Phys. dmg. taken -3%','Magic dmg. taken -4%','Pet: Accuracy+21 Pet: Rng. Acc.+21',}},
-		hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
+		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Hagondes Pants +1", augments={'Phys. dmg. taken -3%','Magic dmg. taken -3%','"Avatar perpetuation cost" -5',}},
 		feet="Wicce Sabots +1",
 		neck="Loricate Torque +1",
@@ -165,7 +165,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
 		body={ name="Merlinic Jubbah", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Drain" and "Aspir" potency +3','MND+5','Mag. Acc.+10','"Mag.Atk.Bns."+13',}},
-		--hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
+		--hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		--body="Ea Houppelande",
 		hands="Ea Cuffs",
 		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
@@ -200,7 +200,7 @@ function init_gear_sets()
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'].Main, {head=empty,body="Twilight Cloak",ring1="K'ayres Ring",ring2="Rajas Ring",neck="Combatant's Torque"})
 	sets.midcast['Elemental Magic'].MagicBurst = set_combine(sets.midcast['Elemental Magic'].Main, {
 		main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},   -- 6
-		-- hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},  -- 5(over cap)
+		-- hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},  -- 5(over cap)
 		hands="Ea Cuffs",
 		--body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst dmg.+11%','VIT+8','Mag. Acc.+14',}}, -- 11
 		--body="Ea Houppe. +1",
@@ -220,7 +220,7 @@ function init_gear_sets()
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
 		--body="Shango Robe",
 		body={ name="Amalric Doublet", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
-		-- hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
+		-- hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		hands="Ea Cuffs",
 		--legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
 		legs="Ea Slops",
@@ -238,13 +238,13 @@ function init_gear_sets()
     --sets.midcast['Dark Magic'].Death = set_combine(sets.midcast['Elemental Magic'].Main,{head={ name="Pixie Hairpin +1",priority=14},back={ name="Bane Cape",ring1="Evanescence Ring",ring2="Archon Ring",feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},})
 	sets.midcast['Dark Magic'].DeathMagicBurst = {
 	    ammo="Pemphredo Tathlum",
-		--head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
-		head="Ea Hat +1",
-		--body={ name="Ea Houppelande",priority=12},
-		body={ name="Ea Houppe. +1",priority=12},
+		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
+		--head="Ea Hat +1",
+		body={ name="Ea Houppelande",priority=12},
+		--body={ name="Ea Houppe. +1",priority=12},
 		hands="Ea Cuffs",
-		--legs="Ea Slops",
-		legs="Ea Slops +1",
+		legs="Ea Slops",
+		--legs="Ea Slops +1",
 		--feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},
 		feet="Spae. Sabots +3",
 		neck={ name="Sanctity Necklace",priority=14},
@@ -338,7 +338,7 @@ function init_gear_sets()
 		ammo="Sihirik",
 		head={ name="Merlinic Hood", augments={'Attack+1','Magic dmg. taken -4%','Mag. Acc.+9',}},
 		body={ name="Hagondes Coat +1", augments={'Phys. dmg. taken -3%','Magic dmg. taken -4%','Pet: Accuracy+21 Pet: Rng. Acc.+21',}},
-		-- hands={ name="Amalric Gages", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
+		-- hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		hands={ name="Merlinic Dastanas", augments={'Chance of successful block +1','Weapon skill damage +4%','"Refresh"+1','Accuracy+20 Attack+20',}},
 		legs={ name="Hagondes Pants +1", augments={'Phys. dmg. taken -3%','Magic dmg. taken -3%','"Avatar perpetuation cost" -5',}},
 		feet="Herald's Gaiters",

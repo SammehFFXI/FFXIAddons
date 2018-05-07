@@ -6,16 +6,20 @@ function get_sets()
 end
 
 function user_setup()
-	state.IdleMode:options('Normal','Reraise','DT')
+	state.IdleMode:options('Normal','Reraise','DT','MEVA')
 	send_command('bind f10 gs c cycle IdleMode')
 	send_command('bind f11 gs c berserkmode')
 	send_command('bind f12 gs c wslist')
 	
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy','ShieldBlock'}
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy','ShieldBlock','MEVA'}
 	state.BerserkMode = M{['description']='Berserk Mode', 'Normal','Auto'}
     select_default_macro_book()
 	
 	-- Set Common Aliases --
+	send_command("alias axe gs equip sets.axe")
+	send_command("alias sword gs equip sets.sword")
+	send_command("alias greatsword gs equip sets.greatsword")
+	send_command("alias greataxe gs equip sets.greataxe")
 	send_command("alias wsset gs equip sets.ws")
 	send_command("alias mwsset gs equip sets.ws.magic")
 	send_command("alias strwsset gs equip sets.ws.strbased")
@@ -87,6 +91,39 @@ end
 	
 function init_gear_sets()
 	
+	sets.greataxe = {
+		main="Chango",
+		sub="Utu Grip"
+	}
+	sets.greatsword = {
+		main="Ragnarok",
+		sub="Utu Grip"
+	}
+	sets.sword = {
+		main="Reikiko",
+		sub="Blurred Shield +1"
+	}
+	sets.axe = {
+		main="Barbarity",
+		sub="Blurred Shield +1"
+	}
+	
+	
+	sets.meva = {
+		ammo="Staunch Tathlum",
+		head="Volte Salade",
+		body="Pumm. Lorica +3",
+		hands="Pumm. Mufflers +3",
+		legs="Volte Brayettes",
+		feet="Pumm. Calligae +3",
+		neck="Warder's Charm +1",
+		waist="Engraved Belt",
+		left_ear="Eabani Earring",
+		right_ear="Flashward Earring",
+		left_ring="Purity Ring",
+		right_ring="Vengeful Ring",
+		back={ name="Cichol's Mantle", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Mag. Evasion+15',}},
+	}
 	sets.dt = {
 		ammo="Staunch Tathlum", --dt2
 	    head="Sulevia's Mask +2", --dt6 
@@ -210,6 +247,7 @@ function init_gear_sets()
     		right_ring="Defending Ring", -- 10 
     		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	} -- Axe + Shield = 4 pdt + 5 DT.    Totals: DT-38, PDT-18  (total PDT: 56) (should consider swapping neck)
+	sets.engaged.MEVA = sets.meva
 	sets.engaged.DT = sets.dt
 	sets.ws = {
 		-- ammo="Seeth. Bomblet +1",
@@ -311,22 +349,7 @@ function init_gear_sets()
 	sets.precast.JA.Tomahawk = set_combine(sets.precast.JA, {ammo="Thr. Tomahawk",feet="Agoge Calligae +2"})
 	sets.precast.Ranged = { ammo="Dart" }
 
-	
-	sets.meva = {
-		ammo="Staunch Tathlum",
-		head="Volte Salade",
-		body="Pumm. Lorica +3",
-		hands="Pumm. Mufflers +3",
-		legs="Volte Brayettes",
-		feet="Pumm. Calligae +3",
-		neck="Warder's Charm +1",
-		waist="Engraved Belt",
-		left_ear="Eabani Earring",
-		right_ear="Flashward Earring",
-		left_ring="Purity Ring",
-		right_ring="Vengeful Ring",
-		back={ name="Cichol's Mantle", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Mag. Evasion+15',}},
-	}
+
 	
 	sets.CurePotencyRecv = { 
 		body={ name="Souveran Cuirass", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
@@ -536,6 +559,8 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
     end
 	if state.IdleMode.value == "Reraise" then
 	   sets.Idle.Current = set_combine(sets.Idle,{body="Twilight Mail",head="Twilight Helm"})   
+	elseif state.IdleMode.value == "MEVA" or state.OffenseMode.value == "MEVA" then
+		sets.Idle.Current = sets.meva
 	elseif state.IdleMode.value == "DT" or state.OffenseMode.value == "DT" then
 		if buffactive['Aftermath'] then
 			sets.Idle.Current = sets.dtaftermath

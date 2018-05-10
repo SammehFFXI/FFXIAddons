@@ -201,7 +201,17 @@ function job_buff_change(status,gain_or_loss)
 	end
    end
    end
-    handle_equipping_gear(player.status)
+   build_melee_classes()
+   handle_equipping_gear(player.status)
+end
+
+function build_melee_classes() 
+    classes.CustomMeleeGroups:clear()
+	self = windower.ffxi.get_player()
+	for i,v in pairs(self.buffs) do
+		local buff = res.buffs[v]
+		classes.CustomMeleeGroups:append(buff.en)
+	end
 end
 
 function check_run_status()

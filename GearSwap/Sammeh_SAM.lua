@@ -95,6 +95,7 @@ function init_gear_sets()
 		right_ring="Ilabrat Ring",
 		back={ name="Takaha Mantle", augments={'STR+4','"Zanshin"+1','"Store TP"+2','Meditate eff. dur. +6',}},
 	}
+	sets.engaged["Aftermath: Lv.3"] = set_combine(sets.engaged, {legs="Ken. Hakama"})
 	
 	sets.engaged.Reraise = set_combine(sets.engaged,{body="Twilight Mail",head="Twilight Helm"})
 	sets.engaged.MEVA = sets.meva

@@ -34,23 +34,7 @@ _addon.author = 'Sammeh'
 _addon.version = '1.0.1'
 _addon.command = 'mumor'
 
-		--[[
-		IMPORTANT THIS WILL NOT WORK WITHOUT THIS.
-		
-		This definition must be inside of libs\packets\fields.lua.  I recommend right after outgoing.0x05C which should end at 692. 
-		
--- Emote 
-fields.outgoing[0x05D] = L{
-    {ctype='unsigned int',      label='Target',             fn=id},             -- 04
-    {ctype='unsigned short',    label='Target Index',       fn=index},          -- 08
-    {ctype='unsigned char',     label='Emote'},                                 -- 0A -- emote # - pull from resources
-	{ctype='unsigned char',     label='Motion'},                                -- 0B -- 0 for normal, 2 for 'motion' (silent)
-    {ctype='unsigned short',    label='Dance Index'},                           -- 0C -- dance1 = 2, dance2 = 3, dance3 = 4, dance4 = 5
-    {ctype='unsigned short',    label='_unknown1'},                             -- 0E -- always 0
-}
-
-		]]
-
+-- version 1.0.1 Updated for 2018 version 
 
 require('chat')
 require('logger')
@@ -62,10 +46,7 @@ HideMotion = false
 DanceTarget = "Uka Totlihn"  -- default dance target
 
 windower.register_event('incoming text', function(original, modified, original_mode, modified_mode, blocked)
-    if original_mode == 142 and (string.find(original,"I hope you enjoy the show!") and string.find(original,"Bongo")) then 
-		DanceTarget = "Uka Totlihn"
-	end
-	
+   
 	if original_mode == 142 and (string.find(original,"the true meaning of dance!") or string.find(original,"I need your help!")) then 
 	    cheerMode = true
 		LoopCheer()
@@ -156,11 +137,11 @@ function send_emote_by_name(tname,temote)
 		
 		if TargetID then 
 			local packet = packets.new('outgoing', 0x05D, {
-				['Target'] = TargetID,
+				['Target ID'] = TargetID,
 				['Target Index'] = TargetIndex,
-				['Motion'] = MotionValue,
+				['Type'] = MotionValue,
 				['Emote'] = EmoteID,
-				['Dance Index'] = DanceIndex,
+				['_unknown1'] = DanceIndex,
 			})
 			packets.inject(packet)
 		end

@@ -10,9 +10,9 @@ function user_setup()
 	send_command('bind f10 gs c cycle IdleMode')
 	send_command('bind f12 gs c wslist')
 	
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy','MEVA'}
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Zanshin','Reraise','DT','MedAccuracy','HighAccuracy','MEVA'}
 	-- f9 =  offense mode
-	state.WeaponskillMode:options('Normal', 'Acc')
+	state.WeaponskillMode:options('Normal', 'Acc','WSD')
 	-- win+f9 = ws mode
     select_default_macro_book()
 	
@@ -27,7 +27,12 @@ function user_setup()
 	send_command('@wait 5;input /lockstyleset 1')
 	
 	-- the following aliases are based on having a Logitech G11 keyboard with extra function keys.
-	
+	send_command("alias g11_m2g7 gs c set OffenseMode Normal")
+	send_command("alias g11_m2g8 gs c set OffenseMode Zanshin")
+	send_command("alias g11_m2g9 gs c set OffenseMode DT")
+	send_command("alias g11_m2g10 gs c set OffenseMode MedAccuracy")
+	send_command("alias g11_m2g10 gs c set OffenseMode HighAccuracy")
+	send_command("alias g11_m2g12 gs c set OffenseMode MEVA")
 	send_command("alias g11_m2g13 input /ja Berserk <me>")
 	send_command("alias g11_m2g14 input /ja Warcry <me>")
 	send_command("alias g11_m2g15 input /ja Aggressor <me>")
@@ -63,10 +68,10 @@ function init_gear_sets()
 	
 	sets.meva = {
 		ammo="Staunch Tathlum",
-		head="Ken. Jinpachi",
+		head="Volte Cap",
 		body="Ken. Samue +1",
-		hands="Ken. Tekko",
-		legs="Ken. Hakama",
+		hands="Volte Bracers",
+		legs="Ken. Hakama +1",
 		feet="Ken. Sune-Ate",
 		neck="Warder's Charm +1",
 		waist="Carrier's Sash",
@@ -78,7 +83,8 @@ function init_gear_sets()
 	}
 	
 	
-	sets.engaged = {
+	sets.engaged = {}
+	sets.engaged.Normal = {
 		ammo="Ginsen",
 		head="Flam. Zucchetto +2",
 		--body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
@@ -87,15 +93,34 @@ function init_gear_sets()
 		hands="Wakido Kote +3",
 		legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
 		feet="Flamma gambieras +2",
-		neck="Moonbeam Nodowa",
-		waist="Ioskeha Belt",
+		neck="Moonlight Nodowa",
+		waist="Ioskeha Belt +1",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
-		right_ring="Ilabrat Ring",
-		back={ name="Takaha Mantle", augments={'STR+4','"Zanshin"+1','"Store TP"+2','Meditate eff. dur. +6',}},
+		--right_ring="Ilabrat Ring",
+		right_ring="Flamma Ring",
+		back={ name="Takaha Mantle", augments={'STR+4','"Zanshin"+3','"Store TP"+3','Meditate eff. dur. +7',}},
 	}
-	sets.engaged["Aftermath: Lv.3"] = set_combine(sets.engaged, {legs="Ken. Hakama"})
+	
+	sets.engaged.Zanshin = {
+		ammo="Ginsen",
+		head="Flam. Zucchetto +2",
+		--body="Kendatsuba Samue +1",
+		body="Kasuga Domaru +1",
+		hands="Wakido Kote +3",
+		legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
+		feet="Flamma gambieras +2",
+		neck="Moonlight Nodowa",
+		waist="Ioskeha Belt +1",
+		left_ear="Cessance Earring",
+		right_ear="Brutal Earring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Flamma Ring",
+		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10',}},
+	}
+	sets.engaged["Aftermath: Lv.3"] = set_combine(sets.engaged, {legs="Ken. Hakama +1"})
+	sets.engaged.Zanshin["Aftermath: Lv.3"] = set_combine(sets.engaged, {legs="Ken. Hakama +1"})
 	
 	sets.engaged.Reraise = set_combine(sets.engaged,{body="Twilight Mail",head="Twilight Helm"})
 	sets.engaged.MEVA = sets.meva
@@ -105,13 +130,13 @@ function init_gear_sets()
 		hands="Wakido Kote +3",
 		legs="Wakido Haidate +3",
 		feet="Flam. Gambieras +2",
-		neck="Moonbeam Nodowa",
-		waist="Ioskeha Belt",
+		neck="Moonlight Nodowa",
+		waist="Ioskeha Belt +1",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Regal Ring",
-		back={ name="Takaha Mantle", augments={'STR+4','"Zanshin"+1','"Store TP"+2','Meditate eff. dur. +6',}},
+		back={ name="Takaha Mantle", augments={'STR+4','"Zanshin"+3','"Store TP"+3','Meditate eff. dur. +7',}},
 	}
 	sets.engaged.MedAccuracy = {
 	    ammo="Ginsen",
@@ -121,33 +146,32 @@ function init_gear_sets()
 		hands="Wakido Kote +3",
 		legs="Wakido Haidate +3",
 		feet="Flam. Gambieras +2",
-		neck="Moonbeam Nodowa",
-		waist="Ioskeha Belt",
+		neck="Moonlight Nodowa",
+		waist="Ioskeha Belt +1",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Regal Ring",
-		back={ name="Takaha Mantle", augments={'STR+4','"Zanshin"+1','"Store TP"+2','Meditate eff. dur. +6',}},
+		back={ name="Takaha Mantle", augments={'STR+4','"Zanshin"+3','"Store TP"+3','Meditate eff. dur. +7',}},
 	}
 
-	sets.engaged.DT = sets.dt
-	--[[
-	sets.precast.WS = {
-		ammo="Knobkierrie",
-	    head="Flam. Zucchetto +2",
-		body={ name="Valorous Mail", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','DEX+6','Accuracy+1','Attack+13',}},
-		hands={ name="Valorous Mitts", augments={'Accuracy+23 Attack+23','Weapon skill damage +3%','VIT+8','Accuracy+2','Attack+12',}},
-		legs="Wakido Haidate +3",
-		feet={ name="Valorous Greaves", augments={'Mag. Acc.+17','"Store TP"+4','Weapon skill damage +8%','Accuracy+5 Attack+5','Mag. Acc.+10 "Mag.Atk.Bns."+10',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
+	sets.dt = {
+	    head="Ynglinga Sallet",
+		body="Chozor. Coselete",
+		hands="Sakonji Kote +3",
+		--legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
+		legs="Sakonji Haidate +3",
+		feet="Flam. Gambieras +2",
+		neck="Loricate Torque +1",
+		waist="Flume Belt +1",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
-		left_ring="Niqmaddu Ring",
-		right_ring="Regal Ring",
-		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
+		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+		right_ring="Defending Ring",
+		back="Moonbeam Cape",
+		ammo="Staunch Tathlum"
 	}
-	]]
+	sets.engaged.DT = sets.dt
 	sets.precast.WS = {
 		ammo="Knobkierrie",
 		head="Flam. Zucchetto +2",
@@ -168,9 +192,9 @@ function init_gear_sets()
 		ammo="Knobkierrie",
 	    head="Wakido Kabuto +3",
 		body={ name="Sakonji Domaru +3", augments={'Enhances "Overwhelm" effect',}},
-		hands={ name="Valorous Mitts", augments={'Accuracy+23 Attack+23','Weapon skill damage +3%','VIT+8','Accuracy+2','Attack+12',}},
+		hands={ name="Valorous Mitts", augments={'Attack+16','Weapon skill damage +3%','STR+10','Accuracy+7',}},
 		legs="Wakido Haidate +3",
-		feet={ name="Valorous Greaves", augments={'Mag. Acc.+17','"Store TP"+4','Weapon skill damage +8%','Accuracy+5 Attack+5','Mag. Acc.+10 "Mag.Atk.Bns."+10',}},
+		feet="Flam. Gambieras +2",
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Cessance Earring",
@@ -179,28 +203,47 @@ function init_gear_sets()
 		right_ring="Regal Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
 	}
+	sets.precast.WS.WSD = {
+		ammo="Knobkierrie",
+	    head={ name="Valorous Mask", augments={'"Mag.Atk.Bns."+4','Mag. Acc.+24','Weapon skill damage +9%',}},
+		body={ name="Sakonji Domaru +3", augments={'Enhances "Overwhelm" effect',}},
+		hands={ name="Valorous Mitts", augments={'Attack+16','Weapon skill damage +3%','STR+10','Accuracy+7',}},
+		legs="Wakido Haidate +3",
+		feet={ name="Valorous Greaves", augments={'Mag. Acc.+17','"Store TP"+4','Weapon skill damage +8%','Accuracy+5 Attack+5','Mag. Acc.+10 "Mag.Atk.Bns."+10',}},
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear="Cessance Earring",
+		right_ear="Ishvara Earring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Regal Ring",
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
+	}
+	
 	
 	sets.precast.WS.magic = {
-	    ammo="Pemphredo Tathlum",
-		head={ name="Valorous Mask", augments={'Magic burst dmg.+8%','Mag. Acc.+26','Accuracy+20 Attack+20','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
+	    ammo="Knobkierrie",
+		head={ name="Valorous Mask", augments={'"Mag.Atk.Bns."+4','Mag. Acc.+24','Weapon skill damage +9%',}},
 		body={ name="Found. Breastplate", augments={'Accuracy+15','Mag. Acc.+15','Attack+15','"Mag.Atk.Bns."+15',}},
 		hands={ name="Leyline Gloves", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
 		legs="Wakido Haidate +3",
 		feet={ name="Valorous Greaves", augments={'"Snapshot"+4','"Mag.Atk.Bns."+27','"Fast Cast"+1','Accuracy+8 Attack+8','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
-		neck="Sanctity Necklace",
-		waist="Eschan Stone",
+		--neck="Sanctity Necklace",
+		neck="Fotia Gorget",
+		--waist="Eschan Stone",
+		waist="Fotia Belt",
 		left_ear="Hermetic Earring",
 		right_ear="Crematio Earring",
 		left_ring="Etana Ring",
 		right_ring="Weather. Ring",
-		back="Argocham. Mantle",
+		--back="Argocham. Mantle",
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
 	}
 			
 	sets.ranged = {
 		head="Ken. Jinpachi",
 		body="Ken. Samue +1",
 		hands="Ken. Tekko",
-		legs="Ken. Hakama",
+		legs="Ken. Hakama +1",
 		feet="Ken. Sune-Ate",
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",
@@ -246,10 +289,11 @@ function init_gear_sets()
     
     ---  AFTERCAST SETS  ---
     sets.Idle = {
-	    head="Loess Barbuta +1",
+	    head="Ynglinga Sallet",
 		body="Chozor. Coselete",
 		hands="Sakonji Kote +3",
-		legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
+		--legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
+		legs="Sakonji Haidate +3",
 		feet="Danzo Sune-Ate",
 		neck="Loricate Torque +1",
 		waist="Flume Belt +1",
@@ -260,9 +304,6 @@ function init_gear_sets()
 		back="Moonbeam Cape",
 		ammo="Staunch Tathlum"
 	}
-	
-	sets.dt = sets.Idle
-	
 	sets.Idle.Current = sets.Idle
     sets.Resting = sets.Idle
 	

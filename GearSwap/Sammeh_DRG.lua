@@ -6,16 +6,18 @@ function get_sets()
 end
 
 function user_setup()
-	state.IdleMode:options('Normal','Reraise')
+	state.IdleMode:options('Normal','Reraise','DT','MEVA')
 	send_command('bind f10 gs c cycle IdleMode')
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','ACC','Reraise','DT'}
+	send_command('bind f12 gs c wslist')
+	
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MEVA'}
     select_default_macro_book()
 	
 	-- Set Common Aliases --
 	send_command("alias wsset gs equip sets.ws")
 	send_command("alias strwsset gs equip sets.ws.strbased")
 	send_command("alias vitwsset gs equip sets.ws.vitbased")
-	send_command("alias eng gs equip sets.engaged")
+	send_command("alias eng gs equip sets.engaged.Normal")
 	send_command("alias meva gs equip sets.meva")
 	send_command("alias idle gs equip sets.Idle.Current")
 	send_command('@wait 5;input /lockstyleset 27')
@@ -23,17 +25,34 @@ function user_setup()
 	send_command("alias g11_m2g2 input /ja 'Deep Breathing' <me>")
 	send_command("alias g11_m2g3 input /ja Angon <t>")
 	send_command("alias g11_m2g4 input /ja 'Spirit Link' <me>")
-	send_command("alias g11_m2g8 input /ja Jump <t>")
-	send_command("alias g11_m2g9 input /ja 'High Jump' <t>")
+	send_command("alias g11_m2g8 input /ja 'Spirit Jump' <t>")
+	send_command("alias g11_m2g9 input /ja 'Soul Jump' <t>")
 	send_command("alias g11_m2g10 input /pet 'Steady Wing' <me>")
-	send_command("alias g11_m2g11 input /pet 'Smiting Breath' <t>")
-	send_command("alias g11_m2g12 input /pet 'Restoring Breath' <me>")
-	send_command("alias g11_m2g13 input /ws 'Double Thrust'")
-	send_command("alias g11_m2g14 input /ws 'Sonic Thrust'")
-	send_command("alias g11_m2g15 input /ja 'Drakesbane'")
-	send_command("alias g11_m2g16 input /ja Restraint <me>")
-	send_command("alias g11_m2g17 input /ws 'Camlann\'s Torment'")
-	send_command("alias g11_m2g18 input /ws 'Star Diver'")
+	send_command("alias g11_m2g11 input /ja Defender <me>")
+	send_command("alias g11_m2g12 input /ja Restraint <me>")
+	send_command("alias g11_m2g13 input /ja Berserk <me>")
+	send_command("alias g11_m2g14 input /ja Warcry <me>")
+	send_command("alias g11_m2g15 input /ja Aggressor <me>")
+	send_command("alias g11_m2g16 gs c ws 1")
+	send_command("alias g11_m2g17 gs c ws 2")
+	send_command("alias g11_m2g18 gs c ws 3")
+
+	
+	res = require 'resources'
+	
+	WeaponSkill = {
+		["Polearm"] = {
+			["1"] = "Leg Sweep",
+			["2"] = "Camlann\'s Torment",
+			["3"] = "Stardiver"
+		},
+		["Staff"] = {
+			["1"] = "Cataclysm",
+			["2"] = "Earth Crusher",
+			["3"] = "Shattersoul"
+		},
+
+	}
 
 end
 
@@ -54,29 +73,46 @@ function init_gear_sets()
 		right_ring="Defending Ring",
 		back="Solemnity Cape",
 	}
-	sets.engaged = {
-		ammo="Ginsen",
+	sets.engaged = {}
+	sets.engaged.Normal = {ammo="Ginsen",
 		head="Flam. Zucchetto +2",
 		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
 		legs="Sulev. Cuisses +2",
-		feet={ name="Valorous Greaves", augments={'Accuracy+26','"Dbl.Atk."+4','DEX+8','Attack+3',}},
+		feet="Flam. Gambieras +2",
 		neck="Shulmanu Collar",
-		waist="Ioskeha Belt",
+		waist="Ioskeha Belt +1",
 		left_ear="Cessance Earring",
 		right_ear="Sherida Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Petrov Ring",
 		back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
-	sets.engaged.Reraise = set_combine(sets.engaged,{body="Twilight Mail",head="Twilight Helm"})
+	sets.meva = {
+		ammo="Staunch Tathlum",
+		head="Volte Cap",
+		body={ name="Jumalik Mail", augments={'HP+50','Attack+15','Enmity+9','"Refresh"+2',}},
+		hands="Volte Bracers",
+		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
+		feet="Volte Boots",
+		neck="Warder's Charm +1",
+		waist="Flume Belt +1",
+		left_ear="Eabani Earring",
+		right_ear="Flashward Earring",
+		left_ring="Purity Ring",
+		right_ring="Vengeful Ring",
+		back="Solemnity Cape",
+	}
+	sets.engaged.MEVA = sets.meva
+	
+	sets.engaged.Reraise = set_combine(sets.engaged.Normal,{body="Twilight Mail",head="Twilight Helm"})
 	sets.engaged.DT = sets.dt
 	sets.ws = {
 		-- ammo="Seeth. Bomblet +1",
 		ammo="Knobkierrie",
 		--head={ name="Valorous Mask", augments={'Weapon skill damage +5%','AGI+7','Accuracy+15','Attack+10',}},
 		head="Flamma Zucchetto +2",
-		body={ name="Valorous Mail", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','DEX+6','Accuracy+1','Attack+13',}},
+		body={ name="Valorous Mail", augments={'Attack+21','"Dbl.Atk."+4','STR+10','Accuracy+12',}},
 		hands="Sulev. Gauntlets +2",
 		legs={ name="Valor. Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
 		feet="Sulev. Leggings +2",
@@ -88,8 +124,13 @@ function init_gear_sets()
 		right_ring="Regal Ring",
 		back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
-	sets.ws.strbased = set_combine(sets.ws,{
+	sets.ws.Stardiver = set_combine(sets.ws, {
+		feet="Flam. Gambieras +2",
 	})
+	sets.ws['Camlann\'s Torment'] = set_combine(sets.ws, {
+	    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
+	})
+	
 	sets.ws.magic = {
 	    ammo="Pemphredo Tathlum",
 		head={ name="Jumalik Helm", augments={'MND+7','"Mag.Atk.Bns."+12','Magic burst dmg.+7%',}},
@@ -112,24 +153,10 @@ function init_gear_sets()
 	sets.precast.JA.Berserk = {}
 	sets.precast.JA.Warcry = {}
 	sets.precast.JA.Meditate = {}
-	sets.precast.JA.Angon = {ammo="Angon"}
+	sets.precast.JA.Angon = {ammo="Angon", hands="Ptero. Fin. G. +1"}
 	
-	sets.meva = {
-		ammo="Staunch Tathlum",
-		head={ name="Jumalik Helm", augments={'MND+7','"Mag.Atk.Bns."+12','Magic burst dmg.+7%',}},
-		body={ name="Jumalik Mail", augments={'HP+50','Attack+15','Enmity+9','"Refresh"+2',}},
-		hands={ name="Leyline Gloves", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
-		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
-		feet="Founder's Greaves",
-		neck="Warder's Charm +1",
-		waist="Engraved Belt",
-		left_ear="Eabani Earring",
-		right_ear="Flashward Earring",
-		left_ring="Purity Ring",
-		right_ring="Vengeful Ring",
-		back="Tantalic Cape",
-	}
-	
+	sets.WSDayBonus = {head="Gavialis Helm"}
+
 	-- WS Sets
 	sets.precast.WS = sets.ws
 	
@@ -161,6 +188,16 @@ function init_gear_sets()
 
 end
 
+check_ws_day = {
+Firesday = S {'Liquefaction','Fusion','Light'},
+Earthsday= S {'Scission','Gravitation','Darkness'},
+Watersday = S {'Reverberation','Distortion','Darkness'},
+Windsday = S {'Detonation','Fragmentation','Light'},
+Iceday = S {'Induration','Distortion','Darkness'},
+Lightningsday = S {'Impaction','Fragmentation','Light'},
+Lightsday = S {'Transfixion','Fusion','Light'},
+Darksday = S {'Compression','Gravitation','Darkness'},
+}
 
 
 
@@ -185,9 +222,13 @@ function job_precast(spell)
 end
 
 function job_post_precast(spell)
-	if player.tp < 2250 and spell.type == 'WeaponSkill' then
+	if player.tp < 2250 and spell.type == 'WeaponSkill' and player.equipment.main == "Trishula" then
 		windower.add_to_chat(10,"Adding in Moonshade Earring for more TP:"..player.tp)
 		equip({left_ear="Moonshade Earring"})
+	end
+	if spell.english == 'Stardiver' and (check_ws_day[world.day]:contains(spell.skillchain_a) or check_ws_day[world.day]:contains(spell.skillchain_b) or check_ws_day[world.day]:contains(spell.skillchain_c)) then
+	 windower.add_to_chat(8,"Adding in Helm for WS")
+	 equip(sets.WSDayBonus)
 	end
 end
 
@@ -236,9 +277,35 @@ function job_buff_change(status,gain_or_loss)
  end
 
  function job_self_command(command)
-
+ 	if command[1]:lower() == "ws" and command[2] ~= nil then
+		local EquipedGear = windower.ffxi.get_items()
+		local CurrentSkill
+		if EquipedGear.equipment.main == nil or EquipedGear.equipment.main == 0 then 
+		  CurrentSkill = "Hand-to-Hand"
+		else 
+		  CurrentSkill = res.skills[res.items[windower.ffxi.get_items(EquipedGear.equipment.main_bag, EquipedGear.equipment.main).id].skill].en
+		end
+		send_command('input /ws '..WeaponSkill[CurrentSkill][command[2]])
+	end
+	if command[1]:lower() == "wslist" then
+		local EquipedGear = windower.ffxi.get_items()
+		local CurrentSkill
+		if EquipedGear.equipment.main == nil or EquipedGear.equipment.main == 0 then 
+		  CurrentSkill = "Hand-to-Hand"
+		else 
+		  CurrentSkill = res.skills[res.items[windower.ffxi.get_items(EquipedGear.equipment.main_bag, EquipedGear.equipment.main).id].skill].en
+		end
+		windower.add_to_chat(2,"WS List:")
+		for i,v in pairs(WeaponSkill[CurrentSkill]) do
+			windower.add_to_chat(2,i..") "..v)
+		end
+	end
 end
 
+
+function job_pretarget(spell) 
+checkblocking(spell)
+end
 
 
 

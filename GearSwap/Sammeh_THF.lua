@@ -34,10 +34,10 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",
 		left_ear="Sherida Earring",
-		right_ear="Telos Earring",
+		right_ear="Brutal Earring",
 		left_ring="Hetairoi Ring",
 		right_ring="Epona's Ring",
-		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
+		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
 	}
 	sets.ws = {
 		head={ name="Adhemar Bonnet", augments={'DEX+10','AGI+10','Accuracy+15',}},
@@ -82,7 +82,7 @@ function init_gear_sets()
     sets.midcast = {}
     
     ---  AFTERCAST SETS  ---
-    sets.Idle = set_combine(sets.engaged,{feet="Jute Boots +1"})
+    sets.Idle = set_combine(sets.engaged,{feet="Skd. Jambeaux +1"})
 	sets.idle = sets.Idle
 	sets.Idle.Current = sets.Idle
     sets.Resting = sets.Idle

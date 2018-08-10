@@ -16,7 +16,7 @@ function user_setup()
 	--if player.sub_job == 'NIN' then
 	-- equip(sub="Perun")  
 	-- end
-	send_command('@wait 1;input /lockstyle on')
+	send_command('@wait 1;input /lockstyleset 1')
 	send_command('@wait 1;input //lua load rolltracker')
 	
 	-- Set Common Aliases --
@@ -30,6 +30,10 @@ function user_setup()
 	
 	define_roll_values()
 	
+end
+
+function user_unload()
+	send_command('@wait 1;input //lua unload rolltracker')
 end
 
 	
@@ -48,8 +52,8 @@ function init_gear_sets()
 	sets.precast.PreShot = {
 	    range=RNGWeapon,
 		ammo=TP_Ammo,
-		head="Meghanada Visor +1",
-		body="Meg. Cuirie +1",
+		head="Meghanada Visor +2",
+		body="Oshosi Vest",
 		hands="Carmine Fin. Ga. +1",
 		legs="Mirador Trou. +1",
 		feet="Meg. Jam. +2",
@@ -58,7 +62,7 @@ function init_gear_sets()
 		left_ear="Infused Earring",
 		right_ear="Neritic Earring",
 		left_ring="Defending Ring",
-		right_ring="Rajas Ring",
+		right_ring="Ilabrat Ring",
 		back="Camulus's Mantle",
     }
 	
@@ -66,74 +70,104 @@ function init_gear_sets()
 	sets.midcast.TP.normal = {
 	    range=RNGWeapon,
 		ammo=TP_Ammo,
-		head="Meghanada Visor +1",
-		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
+		head="Meghanada Visor +2",
+		body="Oshosi Vest",
+		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +2",
 		feet="Meg. Jam. +2",
 		neck="Iskur Gorget",
 		waist="Yemaya Belt",
 		left_ear="Infused Earring",
 		right_ear="Neritic Earring",
-		left_ring="Defending Ring",
-		right_ring="Rajas Ring",
+		left_ring="Dingir Ring",
+		right_ring="Ilabrat Ring",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
+	}
+	sets.engaged = {
+	    head="Meghanada Visor +2",
+		body="Sayadio's Kaftan",
+		hands="Meg. Gloves +2",
+		legs="Meg. Chausses +2",
+		feet="Meg. Jam. +2",
+		neck="Sanctity Necklace",
+		waist="Yemaya Belt",
+		left_ear="Steelflash Earring",
+		right_ear="Bladeborn Earring",
+		left_ring="Epona's Ring",
+		right_ring="Ilabrat Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
 	}
 	sets.midcast.TP.RACC = {
-		head="Meghanada Visor +1",
-		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
+		head="Meghanada Visor +2",
+		body="Oshosi Vest",
+		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +2",
 		feet="Meg. Jam. +2",
 		neck="Iskur Gorget",
 		waist="Yemaya Belt",
 		left_ear="Infused Earring",
 		right_ear="Neritic Earring",
-		left_ring="Defending Ring",
-		right_ring="Rajas Ring",
+		left_ring="Dingir Ring",
+		right_ring="Ilabrat Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
 	}
     
 	--Job Abilities
 	sets.precast.JA = {}
     sets.precast.JA['Phantom Roll'] = {head="Lanun Tricorne",ring2="Luzaf's Ring",hands="Chasseur\'s Gants",back="Camulus\'s Mantle",neck="Regal Necklace"}
-	sets.precast.JA['Random Deal'] = {body="Lanun Frac"}
-	sets.precast.JA['Snake Eye'] = {legs="Lanun Culottes"}
-    sets.precast.JA.Wildcard = {feet="Lanun Bottes"}
+	sets.precast.JA['Random Deal'] = {body="Lanun Frac +3"}
+	sets.precast.JA['Snake Eye'] = {legs="Lanun Trews"}
+    sets.precast.JA['Wild Card'] = {feet="Lanun Bottes +3"}
     
 	-- WS Sets
 	sets.precast.WS = {
 	    ammo=TP_Ammo,
-		head="Meghanada Visor +1",
+		head="Meghanada Visor +2",
 		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +2",
 		feet="Meg. Jam. +2",
 		neck="Iskur Gorget",
 		waist="Yemaya Belt",
 		left_ear="Infused Earring",
 		right_ear="Neritic Earring",
-		left_ring="Defending Ring",
-		right_ring="Rajas Ring",
+		left_ring="Dingir Ring",
+		right_ring="Ilabrat Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','Weapon skill damage +10%',}},
 	}
 	sets.precast.WS['Leaden Salute'] = {
-	    head="Pixie Hairpin +1",
-		head="Meghanada Visor +1",
-		body="Meg. Cuirie +1",
-		--hands="Meg. Gloves +1",
-		hands="Carmine Fin. Ga. +1",
-		legs="Meg. Chausses +2",
-		feet="Meg. Jam. +2",
-		neck="Iskur Gorget",
+	    head={ name="Herculean Helm", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Weapon skill damage +2%','INT+8','Mag. Acc.+15',}},
+		--head="Pixie Hairpin +1",
+		body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
+		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
+		--legs={ name="Herculean Trousers", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic burst dmg.+3%','MND+3','Mag. Acc.+9','"Mag.Atk.Bns."+5',}},
+		legs={ name="Herculean Trousers", augments={'"Mag.Atk.Bns."+21','DEX+1','Phalanx +3','Accuracy+19 Attack+19','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
+		--feet={ name="Herculean Boots", augments={'Accuracy+29','INT+7','"Refresh"+2','Mag. Acc.+16 "Mag.Atk.Bns."+16',}},
+		feet="Lanun Bottes +3",
+		neck="Sanctity Necklace",
 		waist="Yemaya Belt",
-		left_ear="Infused Earring",
-		right_ear="Neritic Earring",
-		left_ring="Defending Ring",
-		right_ring="Rajas Ring",
+		left_ear="Hermetic Earring",
+		right_ear="Friomisi Earring",
+		left_ring="Dingir Ring",
+		right_ring="Ilabrat Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','Weapon skill damage +10%',}},
 	}
     sets.precast.WS['Wildfire'] = sets.precast.WS['Leaden Salute']
+	sets.precast.CorsairShot = {
+	    head={ name="Herculean Helm", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Weapon skill damage +2%','INT+8','Mag. Acc.+15',}},
+		body="Oshosi Vest",
+		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
+		legs={ name="Herculean Trousers", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic burst dmg.+3%','MND+3','Mag. Acc.+9','"Mag.Atk.Bns."+5',}},
+		--feet={ name="Herculean Boots", augments={'Accuracy+29','INT+7','"Refresh"+2','Mag. Acc.+16 "Mag.Atk.Bns."+16',}},
+		feet="Lanun Bottes +3",
+		neck="Iskur Gorget",
+		waist="Yemaya Belt",
+		left_ear="Hermetic Earring",
+		right_ear="Friomisi Earring",
+		left_ring="Dingir Ring",
+		right_ring="Ilabrat Ring",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','Weapon skill damage +10%',}},
+	}
 	
     ---  AFTERCAST SETS  ---
     sets.idle = set_combine(sets.precast.PreShot)
@@ -164,7 +198,21 @@ function job_precast(spell)
 	    equip(sets.precast.JA['Snake Eye'])
 	  end
 	end
-	
+end
+
+function job_post_precast(spell)
+	if spell_element == world.weather_element then
+        equip(sets.weather)
+        if sets.obi[spell_element] then
+            equip({waist="Anrin Obi"})
+        end
+    end
+    if spell_element == world.day_element then
+        equip(sets.day)
+        if sets.obi[spell_element] then
+            equip({waist="Anrin Obi"})
+        end
+    end
 end
 
 function job_post_midcast(spell)

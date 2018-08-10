@@ -61,10 +61,9 @@ function init_gear_sets()
 		main="Reikikon",
 		sub="Irenic Strap +1",
 		ammo="Staunch Tathlum",
-		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
-		--body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
+		head="Volte Cap",
 		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
-		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
+		hands="Volte Bracers",
 		legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
 		neck="Warder's Charm +1",
@@ -156,19 +155,19 @@ function init_gear_sets()
 	
 	-- Max MP set
     sets.precast.WS['Myrkr'] = {
-	    ammo="Incantor Stone",
+		ammo="Incantor Stone",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
 		body={ name="Amalric Doublet", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
-		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
+		hands={ name="Amalric Gages", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
 		legs={ name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},
+		feet="Volte Boots",
 		neck="Sanctity Necklace",
-		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
 		waist="Luminary Sash",
 		left_ear="Loquac. Earring",
-		right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +25',}},
-		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+		right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +250',}},
+		left_ring="Mephitas's Ring +1",
 		right_ring="Etana Ring",
-		back="Pahtli Cape",	
+		back="Pahtli Cape",
 	} 
 	
 	

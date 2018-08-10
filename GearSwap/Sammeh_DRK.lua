@@ -9,7 +9,7 @@ function user_setup()
 	state.IdleMode:options('Normal','Reraise')
 	send_command('bind f10 gs c cycle IdleMode')
 	send_command('bind f7 gs c turnaround')
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','ACC','Reraise','DT'}
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal', 'DT'}
     select_default_macro_book()
 	turnmode = "turnaround"
 	
@@ -37,11 +37,11 @@ end
 function init_gear_sets()
 	sets.dt = {
 		ammo="Staunch Tathlum",
-	    head="Sulevia's Mask +1",
-		body="Sulevia's Plate. +1",
+	    head="Sulevia's Mask +2",
+		body="Sulevia's Plate. +2",
 		hands="Sulev. Gauntlets +2",
 		legs="Sulev. Cuisses +2",
-		feet="Sulev. Leggings +1",
+		feet="Sulev. Leggings +2",
 		neck="Loricate Torque +1",
 		waist="Flume Belt +1",
 		left_ear="Eabani Earring",
@@ -52,11 +52,26 @@ function init_gear_sets()
 	}
 	sets.engaged = {
 		ammo="Ginsen",
-		head="Flamma Zucchetto +1",
+		head="Flamma Zucchetto +2",
 		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
-		feet={ name="Valorous Greaves", augments={'Accuracy+26','"Dbl.Atk."+4','DEX+8','Attack+3',}},
+		feet="Flamma gambieras +2",
+		neck="Combatant's Torque",
+		waist="Ioskeha Belt",
+		right_ear="Telos Earring",
+		left_ear="Cessance Earring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Petrov Ring",
+		back={ name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
+	}
+	sets.engaged.Normal = {
+		ammo="Ginsen",
+		head="Flamma Zucchetto +2",
+		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
+		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
+		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
+		feet="Flamma gambieras +2",
 		neck="Combatant's Torque",
 		waist="Ioskeha Belt",
 		right_ear="Telos Earring",
@@ -134,10 +149,10 @@ function init_gear_sets()
     sets.Idle = {
 		ammo="Ginsen",
 		head="Twilight Helm",
-		body="Sulevia's Plate. +1",
+		body="Sulevia's Plate. +2",
 		hands="Sulev. Gauntlets +2",
 		legs="Carmine Cuisses +1",
-		feet="Sulev. Leggings +1",
+		feet="Sulev. Leggings +2",
 		neck="Bathy Choker +1",
 		waist="Flume Belt +1",
 		right_ear="Telos Earring",

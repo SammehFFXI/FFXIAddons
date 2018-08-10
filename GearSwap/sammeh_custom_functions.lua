@@ -7,6 +7,7 @@ send_command('alias spelldebug gs c cycle spelldebug')
 require 'tables'
 files = require 'files'
 res = require 'resources'
+extdata = require('extdata')
 
 --lastspell = require('last_spell.lua')   -- this was just a test - don't ask
 --lastspell_file = files.new('data\\last_spell.lua')
@@ -51,7 +52,60 @@ function check_temp_items()
   end
 end
 
+-- Thanks Langly for has_charges and is_enchant_ready
+-- Item must be equipped for it to return any meaningful value.
+function is_enchant_ready(--[[name of item]]item)
+	local item_id, item = res.items:find(function(v) if v.name == item then return true end end)
+	local inventory = windower.ffxi.get_items()
+	local usable_bags = T{'inventory','wardrobe','wardrobe2','wardrobe3','wardrobe4'}
+	local itemdata = {}
+	
+	for i,v in pairs(inventory) do
+		if usable_bags:contains(i) then
+			for key,val in pairs(v) do
+				if type(val) == 'table' and val.id == item_id then
+					itemdata = extdata.decode(val)
+				end
+			end
+		end
+	end
+	
+	if itemdata and itemdata.charges_remaining then
+		if itemdata.activation_time - itemdata.next_use_time > item.cast_delay then
+			return true
+		end
+	end
+	return false
+end
+
+function has_charges(--[[name of item]]item)
+	local item_id, item = res.items:find(function(v) if v.name == item then return true end end)
+	local inventory = windower.ffxi.get_items()
+	local bags = T{'inventory','safe','safe2','storage','satchel','locker','sack','case','wardrobe','wardrobe2','wardrobe3','wardrobe4'}
+	local itemdata = {}
+	
+	for i,v in pairs(inventory) do
+		if bags:contains(i) then
+			for key,val in pairs(v) do
+				if type(val) == 'table' and val.id == item_id then
+					itemdata = extdata.decode(val)
+				end
+			end
+		end
+	end
+	
+	if itemdata and itemdata.charges_remaining then
+		if itemdata.charges_remaining > 0 then
+			return true
+		end
+	end
+	return false
+end
+
+
+
 function disable_specialgear()
+--[[
 	if player.equipment.head == "Reraise Hairpin" then
 		disable('head')
 	else
@@ -72,6 +126,20 @@ function disable_specialgear()
     else
         enable('ring2')
     end
+]]
+	local lockables = T{'Mecisto. Mantle', 'Shobuhouou Kabuto', 'Aptitude Mantle', 'Nexus Cape', 'Aptitude Mantle +1', 'Warp Ring', 'Vocation Ring', 'Reraise Earring', 'Capacity Ring', 'Trizek Ring', 'Echad Ring', 'Facility Ring', 'Dim. Ring (Holla)', 'Dim. Ring (Dem)', 'Dim. Ring (Mea)'}
+	local watch_slots = T{'ear1','ear2','ring1','ring2','back','head'}
+
+	for _,v in pairs(watch_slots) do
+		if lockables:contains(player.equipment[v]) then
+			disable(v)
+			if has_charges(player.equipment[v]) and (not is_enchant_ready(player.equipment[v])) then
+				enable(v)
+			end
+		else
+			enable(v)
+		end
+	end
 end
 
 function check_height() 

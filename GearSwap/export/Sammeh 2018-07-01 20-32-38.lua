@@ -1,0 +1,17 @@
+sets.exported={
+    main={ name="Brilliance", augments={'Shield skill +10','Divine magic skill +15','Enmity+7','DMG:+15',}},
+    sub="Ochain",
+    ammo="Staunch Tathlum",
+    head={ name="Souv. Schaller +1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',}},
+    body={ name="Souv. Cuirass +1", augments={'VIT+12','Attack+25','"Refresh"+3',}},
+    hands={ name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+    legs={ name="Founder's Hose", augments={'MND+10','Mag. Acc.+15','Attack+15','Breath dmg. taken -5%',}},
+    feet={ name="Odyssean Greaves", augments={'"Mag.Atk.Bns."+15','"Fast Cast"+4','Mag. Acc.+8',}},
+    neck="Unmoving Collar +1",
+    waist="Rumination Sash",
+    left_ear="Odnowa Earring +1",
+    right_ear="Trux Earring",
+    left_ring="Apeile Ring",
+    right_ring="Apeile Ring +1",
+    back="Moonbeam Cape",
+}

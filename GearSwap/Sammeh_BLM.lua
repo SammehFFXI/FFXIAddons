@@ -10,7 +10,7 @@ function user_setup()
 -- F10 Changes Idle Mode
 -- Ctrl+F11 = Magical Mode Change
 
-    state.CastingMode:options('Normal', 'MACC','MagicBurst','StoreTP')
+    state.CastingMode:options('Normal', 'MACC','MagicBurst','StoreTP','TH')
     state.IdleMode:options('Normal','PDT','Death')
 	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock'}
 	state.ManaWallMode = M{['description']='ManaWall Mode', 'DT', 'Normal'}
@@ -213,6 +213,7 @@ function init_gear_sets()
 		right_ear="Static Earring",  -- 5 
 		-- feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},  -- 7
 	}) -- Back adds 5, that gives +52
+	sets.midcast['Elemental Magic'].TH = set_combine(sets.midcast['Elemental Magic'].Main, {head="Volte Cap",hands="Volte Bracers"})
     sets.midcast['Dark Magic'] = {
 	    main={ name="Rubicundity", augments={'Mag. Acc.+10','"Mag.Atk.Bns."+10','Dark magic skill +10','"Conserve MP"+7',}},
 		sub="Culminus",
@@ -413,6 +414,8 @@ function job_post_midcast(spell)
 	     equip(sets.midcast['Elemental Magic'].MACC)
 		elseif state.CastingMode.value == "StoreTP" then
 	     equip(sets.midcast['Elemental Magic'].StoreTP)
+		elseif state.CastingMode.value == "TH" then
+		 equip(sets.midcast['Elemental Magic'].TH)
 		elseif state.CastingMode.value == "MagicBurst" then
 		 if player.equipment.main == 'Khatvanga' then
 		   equip(sets.midcast['Elemental Magic'].MagicBurst,{feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},})

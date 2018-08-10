@@ -156,7 +156,8 @@ function init_gear_sets()
 		body="Oshosi Vest",
 		hands="Carmine Fin. Ga. +1",  -- 8 --
 		legs={ name="Adhemar Kecks", augments={'AGI+10','"Rapid Shot"+10','Enmity-5',}},
-		feet="Adhemar Gamashes", -- 8 -- 
+		--feet="Adhemar Gamashes", -- 8 -- 
+		feet="Meg. Jam. +2", -- 10 -- 
 		neck="Iskur Gorget",
 		waist="Yemaya Belt",    
 		left_ear="Telos Earring",
@@ -218,7 +219,8 @@ function init_gear_sets()
 	-- WS Sets
 	sets.precast.WS = {
 	    ammo=TP_Ammo,
-		head={ name="Herculean Helm", augments={'Rng.Acc.+28','Weapon skill damage +3%','DEX+11','Rng.Atk.+12',}},
+		head="Orion Beret +3",
+		--head={ name="Herculean Helm", augments={'Rng.Acc.+28','Weapon skill damage +3%','DEX+11','Rng.Atk.+12',}},
 		body={ name="Herculean Vest", augments={'Rng.Acc.+23 Rng.Atk.+23','Weapon skill damage +3%','Rng.Atk.+9',}},
 		hands="Meg. Gloves +2",
 		--legs="Adhemar Kecks",
@@ -233,7 +235,7 @@ function init_gear_sets()
 		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},
 	}
 	sets.precast.WS['Last Stand'] = {
-	    head="Meghanada Visor +2",
+	    head="Orion Beret +3",
 		body={ name="Herculean Vest", augments={'Rng.Acc.+23 Rng.Atk.+23','Weapon skill damage +3%','Rng.Atk.+9',}},
 		hands="Meg. Gloves +2",
 		legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
@@ -248,7 +250,8 @@ function init_gear_sets()
 	}
 	sets.precast.WS['Jishnu\'s Radiance'] = {
 		ammo=TP_Ammo,
-		head={ name="Herculean Helm", augments={'Rng.Acc.+28','Weapon skill damage +3%','DEX+11','Rng.Atk.+12',}},
+		--head={ name="Herculean Helm", augments={'Rng.Acc.+28','Weapon skill damage +3%','DEX+11','Rng.Atk.+12',}},
+		head="Orion Beret +3",
 		body="Meg. Cuirie +2",
 		hands="Meg. Gloves +2",
 		legs="Darraigner's Brais",
@@ -263,7 +266,7 @@ function init_gear_sets()
 	}
 	sets.Jishnus = sets.precast.WS['Jishnu\'s Radiance']
 	sets.precast.WS['Trueflight'] = {
-		-- head="Orion Beret +2"
+		-- head="Orion Beret +3"
 	    head={ name="Herculean Helm", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','Enmity-5','VIT+6','Mag. Acc.+13','"Mag.Atk.Bns."+13',}},
 		body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+26','"Dbl.Atk."+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
 		hands="Carmine Fin. Ga. +1",
@@ -283,7 +286,7 @@ function init_gear_sets()
     sets.precast.WS['Wildfire'] = sets.precast.WS['Trueflight']
 	
     ---  AFTERCAST SETS  ---
-    sets.idle = set_combine(sets.precast.PreShot, {feet="Jute Boots +1"})
+    sets.idle = set_combine(sets.precast.PreShot, {feet="Skadi's Jambeaux +1"})
 	sets.Idle = sets.idle
 	sets.Idle.Current = sets.Idle
 

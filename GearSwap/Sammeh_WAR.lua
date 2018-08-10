@@ -111,11 +111,11 @@ function init_gear_sets()
 	
 	sets.meva = {
 		ammo="Staunch Tathlum",
-		head="Volte Salade",
+		head="Volte Cap",
 		body="Pumm. Lorica +3",
-		hands="Pumm. Mufflers +3",
+		hands="Volte Bracers",
 		legs="Volte Brayettes",
-		feet="Pumm. Calligae +3",
+		feet="Volte Boots",
 		neck="Warder's Charm +1",
 		waist="Engraved Belt",
 		left_ear="Eabani Earring",
@@ -132,7 +132,7 @@ function init_gear_sets()
 		legs="Sulev. Cuisses +2", --dt7
 		feet="Pumm. Calligae +3", 
 		neck="Loricate Torque +1", --dt6 
-		waist="Ioskeha Belt",
+		waist="Ioskeha Belt +1",
 		right_ear="Telos Earring",
 		left_ear="Cessance Earring",
 		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}}, --pdt6, mdt3
@@ -145,7 +145,7 @@ function init_gear_sets()
 		body={ name="Souveran Cuirass", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
 		hands="Pumm. Mufflers +3",
 		legs="Sulev. Cuisses +2",
-		feet={ name="Souveran Schuhs", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
+		feet={ name="Souveran Schuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
 		neck="Loricate Torque +1",
 		waist="Flume Belt +1",
 		left_ear="Cryptic Earring",
@@ -162,14 +162,15 @@ function init_gear_sets()
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
 		feet="Sulev. Leggings +2", --dt4
 		neck="Loricate Torque +1", --dt6 
-		waist="Ioskeha Belt",
+		waist="Ioskeha Belt +1",
 		right_ear="Telos Earring",
 		left_ear="Cessance Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Defending Ring", -- dt10
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	} --pdt 31 --mdt 31 (+20% aftermath DT) 
-	sets.engaged = {
+	sets.engaged = {}
+	sets.engaged.Normal = {
 		ammo="Ginsen",
 		head="Flamma Zucchetto +2",
 		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
@@ -177,13 +178,14 @@ function init_gear_sets()
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
 		feet="Pumm. Calligae +3",
 		neck="Combatant's Torque",
-		waist="Ioskeha Belt",
+		waist="Ioskeha Belt +1",
 		right_ear="Telos Earring",
 		left_ear="Cessance Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Petrov Ring",
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
+	
 	sets.enmity = {
 	    ammo="Aqreqaq Bomblet", -- 2
 		head="Pummeler's Mask +3", -- 12  (+3 adds +3)
@@ -208,7 +210,7 @@ function init_gear_sets()
 		legs="Pumm. Cuisses +3",
 		feet="Pumm. Calligae +3",
 		neck="Combatant's Torque",
-		waist="Ioskeha Belt",
+		waist="Ioskeha Belt +1",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
@@ -223,7 +225,7 @@ function init_gear_sets()
 		legs="Pumm. Cuisses +3",
 		feet="Pumm. Calligae +3",
 		neck="Combatant's Torque",
-		waist="Ioskeha Belt",
+		waist="Ioskeha Belt +1",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
@@ -237,10 +239,10 @@ function init_gear_sets()
     		body="Sulevia's Plate. +2", -- 9 
     		hands="Agoge Mufflers +3", -- pdt 6
     		legs="Arjuna Breeches", -- pdt 4
-    		feet={ name="Souveran Schuhs", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}}, -- pdt 4
+    		feet={ name="Souveran Schuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}, -- pdt 5
     		neck="Loricate Torque +1", -- 6
 			--neck="Combatant's Torque",
-    		waist="Ioskeha Belt",
+    		waist="Ioskeha Belt +1",
     		left_ear="Thureous Earring",
     		right_ear="Telos Earring",
     		left_ring="Niqmaddu Ring",
@@ -252,7 +254,7 @@ function init_gear_sets()
 	sets.ws = {
 		-- ammo="Seeth. Bomblet +1",
 		ammo="Knobkierrie",   -- Losing 13 acc for +10 att +6WSD; not sure if that's a gr8 thing.
-		head={ name="Valorous Mask", augments={'Weapon skill damage +5%','AGI+7','Accuracy+15','Attack+10',}},
+		head="Agoge mask +3",
 		body="Pumm. Lorica +3",
 		hands="Sulev. Gauntlets +2",
 		legs={ name="Valor. Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
@@ -288,7 +290,7 @@ function init_gear_sets()
 		body={ name="Found. Breastplate", augments={'Accuracy+15','Mag. Acc.+15','Attack+15','"Mag.Atk.Bns."+15',}},
 		hands={ name="Leyline Gloves", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
 		legs="Pumm. Cuisses +3",
-		feet={ name="Founder's Greaves", augments={'VIT+10','Accuracy+15','"Mag.Atk.Bns."+15','Mag. Evasion+15',}},
+		feet={ name="Valorous Greaves", augments={'"Snapshot"+4','"Mag.Atk.Bns."+27','"Fast Cast"+1','Accuracy+8 Attack+8','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
 		neck="Sanctity Necklace",
 		waist="Eschan Stone",
 		left_ear="Hermetic Earring",
@@ -341,7 +343,7 @@ function init_gear_sets()
 	sets.precast.JA.Berserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +2"})
 	sets.MaxBerserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +2",main="Firangi"})
 	sets.precast.JA.Warcry = set_combine(sets.precast.JA, {head="Agoge mask +3"})
-	sets.precast.JA.Aggressor = set_combine(sets.precast.JA, {head="Pummeler's Mask +3",body="Agoge Lorica +2"})
+	sets.precast.JA.Aggressor = set_combine(sets.precast.JA, {head="Pummeler's Mask +3",body="Agoge Lorica +3"})
 	sets.precast.JA['Mighty Strikes'] = set_combine(sets.precast.JA, {hands="Agoge Mufflers +3"})
 	sets.precast.JA['Defender'] = set_combine(sets.precast.JA, {hands="Agoge Mufflers +3"})
 	sets.precast.JA['Blood Rage'] = set_combine(sets.precast.JA, {body="Boii Lorica +1"})
@@ -353,9 +355,9 @@ function init_gear_sets()
 	
 	sets.CurePotencyRecv = { 
 		body={ name="Souveran Cuirass", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
-		legs={ name="Souveran Diechlings", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
-		feet={ name="Souveran Schuhs", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
-	}
+		legs={ name="Souv. Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+		feet={ name="Souveran Schuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+    }
 	
 	sets.precast.WS = sets.ws
 	

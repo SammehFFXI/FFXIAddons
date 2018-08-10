@@ -155,7 +155,7 @@ function init_gear_sets()
 		neck="Caro Necklace",
 		waist="Grunfeld Rope",
 		left_ear="Ishvara Earring",
-		right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +25',}},
+		right_ear="Moonshade Earring",
 		left_ring="Ilabrat Ring",
 		right_ring="Shukuyu Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},

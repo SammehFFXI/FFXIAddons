@@ -37,13 +37,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -- Usage: //mobmon "Name of Mob"
 -- 		  //mobmon runto    (runs in direction of mob)
-
+--		   //mobmon 0xXX  (hex of the mob)
+--		  //mobmon 101  (index of mob)
 -- Example:  //mobmon Sisyphus
  
 
 _addon.name = 'mobmon'
 _addon.author = 'Sammeh'
-_addon.version = '1.0.0.1'
+_addon.version = '1.0.0.2'
 _addon.command = 'mobmon'
 
 require 'tables'
@@ -74,7 +75,7 @@ function mobup(name)
  local self = windower.ffxi.get_player()
  local currentmobs = windower.ffxi.get_mob_array()
  for i,v in pairs(currentmobs) do
-	if v.name == name and v.hpp > 0 then 
+	if (v.name == name or (tonumber(name) and tonumber(name) == v.index)) and v.hpp > 0 then 
 		mob_by_id = v.id
 		mobup_run = os.clock()
 		last_seen = os.date()

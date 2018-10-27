@@ -67,7 +67,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('None', 'Normal')
+    state.OffenseMode:options('None', 'DualWield')
     state.CastingMode:options('Normal', 'Resistant')
     
     -- Adjust this if using the Terpander (new +song instrument)
@@ -130,13 +130,20 @@ function init_gear_sets()
         hands="Gendewitha Gages +1",ring1="Kishar Ring",ring2="Weather. Ring",
         back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Doyen Pants",feet="Bihu Slippers",}
 
+    sets.precast.FastCast.BardSong = {
+    	main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
+		sub="Ammurapi Shield",range="Gjallarhorn",body="Brioso Justau. +3",
+        head="Fili Calot +1",neck="Aoidos' Matinee",ear1="Aoidos' Earring",ear2="Loquac. Earring",
+        hands="Gendewitha Gages +1",ring1="Kishar Ring",--ring2="Weather. Ring",
+        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Doyen Pants",feet="Bihu Slippers",}
+
     sets.precast.FastCast.Daurdabla = set_combine(sets.precast.FastCast.BardSong, {range=info.ExtraSongInstrument})
         
     
     -- Precast sets to enhance JAs
     
     sets.precast.JA.Nightingale = {feet="Bihu Slippers"}
-    sets.precast.JA.Troubadour = {body="Bihu Justaucorps"}
+    sets.precast.JA.Troubadour = {body="Bihu Jstcorps. +3"}
     sets.precast.JA['Soul Voice'] = {legs="Bihu Cannions"}
 
     -- Waltz set (chr and vit)
@@ -148,17 +155,18 @@ function init_gear_sets()
     sets.precast.WS = {
         range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head="Aya. Zucchetto +2",
-		body="Ashera Harness",
+		body="Bihu Jstcorps. +3",
 		hands="Aya. Manopolas +2",
 		legs="Jokushu Haidate",
 		feet="Aya. Gambieras +2",
-		neck="Caro Necklace",
+		--neck="Caro Necklace",
+        neck="Bard's Charm",
 		waist="Grunfeld Rope",
 		left_ear="Ishvara Earring",
 		right_ear="Moonshade Earring",
 		left_ring="Ilabrat Ring",
 		right_ring="Shukuyu Ring",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},
 	}
 
 		
@@ -197,14 +205,14 @@ function init_gear_sets()
 
     -- For song buffs (duration and AF3 set bonus)
     sets.midcast.SongEffect = {main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Fili Calot +1",body="Fili Hongreline +1",neck="Moonbow Whistle",ear1="Aoidos' Earring",ear2="Loquac. Earring",
+        head="Fili Calot +1",body="Fili Hongreline +1",neck="Mnbw. Whistle +1",ear1="Aoidos' Earring",ear2="Loquac. Earring",
         hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
         back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Inyanga Shalwar +2",feet="Brioso Slippers +3",}
 
     -- For song defbuffs (duration primary, accuracy secondary)
     sets.midcast.SongDebuff = {
 	    main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Brioso Roundlet +3",neck="Moonbow Whistle",ear1="Regal Earring",ear2="Enchntr. Earring +1",
+        head="Brioso Roundlet +3",neck="Mnbw. Whistle +1",ear1="Regal Earring",ear2="Enchntr. Earring +1",
         body="Fili Hongreline +1",hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
         back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Inyanga Shalwar +2",feet="Brioso Slippers +3"}
 
@@ -218,7 +226,7 @@ function init_gear_sets()
 		hands="Brioso Cuffs +3",
 		legs="Brioso Cannions +3",
 		feet="Brioso Slippers +3",
-		neck="Moonbow Whistle",
+		neck="Mnbw. Whistle +1",
 		waist="Luminary Sash",
 		left_ear="Regal Earring",
 		right_ear="Enchntr. Earring +1",
@@ -249,7 +257,9 @@ function init_gear_sets()
     -- Other general spells and classes.
     sets.midcast.Cure = {
         head="Vanya Hood",
-		neck="Loricate Torque +1",ear1="Loquacious earring",ear2="Enchntr. Earring +1",
+		--neck="Loricate Torque +1",
+        neck="Bard's Charm",
+        ear1="Loquacious earring",ear2="Enchntr. Earring +1",
 		body="Chironic Doublet",hands="Telchine Gloves",ring1="Dark Ring",ring2="Defending ring",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Fucho-no-obi",legs="Gyve Trousers",feet="Vanya Clogs"}
         
@@ -306,7 +316,9 @@ function init_gear_sets()
 		main="Mafic Cudgel",
 		sub="Genmei Shield",
 		head="Gende. Caubeen +1",
-		neck="Loricate Torque +1",ear1="Odnowa Earring +1",ear2="Genmei Earring",
+		neck="Loricate Torque +1",
+        neck="Bard's Charm",
+        ear1="Odnowa Earring +1",ear2="Genmei Earring",
 		body={ name="Gende. Bilaut +1", augments={'Phys. dmg. taken -4%','Magic dmg. taken -4%','"Cure" potency +4%',}},
 		hands="Gende. Gages +1",ring1="Dark Ring",ring2="Defending ring",
 		back="Solemnity Cape",waist="Flume Belt +1",legs="Assiduity Pants +1",feet="Fili Cothurnes +1"
@@ -324,23 +336,6 @@ function init_gear_sets()
     sets.latent_refresh = {waist="Fucho-no-obi"}
 
     -- Engaged sets
-
-	sets.engaged = {
-		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
-	    head="Ayanmo Zucchetto +2",
-		body="Ashera Harness",
-		hands="Aya. Manopolas +2",
-		legs="Jokushu Haidate",
-		feet="Aya. Gambieras +2",
-		neck="Combatant's Torque",
-		waist="Dynamic Belt +1",
-		left_ear="Telos Earring",
-		right_ear="Cessance Earring",
-		left_ring="Ilabrat Ring",
-		right_ring="Hetairoi Ring",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
-	}
-	
     sets.engaged = {
     	range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head="Aya. Zucchetto +2",
@@ -348,7 +343,8 @@ function init_gear_sets()
 		hands="Aya. Manopolas +2",
 		legs={ name="Chironic Hose", augments={'"Triple Atk."+2','"Mag.Atk.Bns."+21','Accuracy+20 Attack+20',}},
 		feet={ name="Chironic Slippers", augments={'Accuracy+17','MND+9','Quadruple Attack +3','Accuracy+7 Attack+7',}},
-		neck="Combatant's Torque",
+		--neck="Combatant's Torque",
+        neck="Bard's Charm",
 		waist="Dynamic Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Cessance Earring",
@@ -356,23 +352,40 @@ function init_gear_sets()
 		right_ring="Hetairoi Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
 	}	
+    
+    sets.engaged.DualWield = {
+        range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
+        head="Aya. Zucchetto +2",
+        body="Ashera Harness",
+        hands="Aya. Manopolas +2",
+        legs="Jokushu Haidate",
+        feet={ name="Chironic Slippers", augments={'Accuracy+17','MND+9','Quadruple Attack +3','Accuracy+7 Attack+7',}},
+        neck="Bard's Charm",
+        waist="Reiki Yotai",
+        left_ear="Telos Earring",
+        right_ear="Suppanomimi",
+        left_ring="Ilabrat Ring",
+        right_ring="Hetairoi Ring",
+        back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
+    }
+    
 	
 	sets.meva = {
 		main="Terra's Staff",
-		sub="Irenic Strap +1",
-		ammo="Staunch Tathlum",
-		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
-		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
-		legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
-		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
-		neck="Warder's Charm +1",
-		waist="Carrier's Sash",
-		left_ear="Eabani Earring",
-		right_ear="Flashward Earring",
-		left_ring="Purity Ring",
-		right_ring="Vengeful Ring",
-		back="Solemnity Cape"
+        sub="Irenic Strap +1",
+        ammo="Staunch Tathlum",
+        head="Volte Cap",
+        body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
+        hands="Volte Bracers",
+        legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
+        feet="Volte Boots",
+        neck="Warder's Charm +1",
+        waist="Carrier's Sash",
+        left_ear="Eabani Earring",
+        right_ear="Flashward Earring",
+        left_ring="Purity Ring",
+        right_ring="Vengeful Ring",
+        back="Solemnity Cape",
 	}
 	
 	
@@ -411,6 +424,8 @@ checkblocking(spell)
 end
 
 function job_precast(spell, action, spellMap, eventArgs)
+windower.add_to_chat(2,'Party Buffs in range?')
+checkblocking(spell)
 --[[
 	for i,v in pairs(buff) do
 	   for i2,v2 in pairs(v) do
@@ -616,7 +631,8 @@ function calculate_duration(spell, spellMap)
     if player.equipment.sub == "Kali" then mult = mult + 0.05 end
     if player.equipment.sub == "Legato Dagger" then mult = mult + 0.05 end
     if player.equipment.neck == "Aoidos' Matinee" then mult = mult + 0.1 end
-	if player.equipment.neck == "Moonbow Whistle" then mult = mult + 0.2 end 
+	if player.equipment.neck == "Mnbw. Whistle +1" then mult = mult + 0.2 end
+	if player.equipment.neck == "Mnbw. Whistle +1 +1" then mult = mult + 0.3 end
     if player.equipment.body == "Fili Hongreline +1" then mult = mult + 0.12 end
     if player.equipment.legs == "Inyanga Shalwar +1" then mult = mult + 0.15 end
 	if player.equipment.legs == "Inyanga Shalwar +2" then mult = mult + 0.17 end

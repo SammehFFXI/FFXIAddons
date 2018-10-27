@@ -104,7 +104,7 @@ function init_gear_sets()
 		sub="Blurred Shield +1"
 	}
 	sets.axe = {
-		main="Barbarity",
+		main="Barbarity +1",
 		sub="Blurred Shield +1"
 	}
 	
@@ -269,7 +269,7 @@ function init_gear_sets()
 	}
 	--back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
 	sets.ws.vitbased = set_combine(sets.ws,{
-		head="Sulevia's Mask +2",
+        --head="Sulevia's Mask +2",
 		body="Pumm. Lorica +3",
 		right_ring="Regal Ring",
 		legs="Sulev. Cuisses +2",
@@ -318,9 +318,11 @@ function init_gear_sets()
 	sets.ws["King\'s Justice"] = sets.ws.strbased
 	sets.ws["Fell Cleve"] = sets.ws.strbased
 	sets.ws["Scourge"] = sets.ws.wsd
-	sets.ws["Resolution"] = sets.ws.strbased
+	--sets.ws["Resolution"] = sets.ws.strbased
+    sets.ws["Resolution"] = sets.ws.wsd
+    
 	sets.ws["Decimation"] = sets.ws.strbased
-	sets.ws["Rampage"] = sets.ws.strbased
+	sets.ws["Rampage"] = sets.ws.wsd
 	sets.ws["Mistral Axe"] = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt"})
 	sets.ws.savageblade = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt",hands="Agoge Mufflers +3",legs="Sulev. Cuisses +2",})
 	sets.ws["Savage Blade"] = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt",hands="Agoge Mufflers +3",legs="Sulev. Cuisses +2",})
@@ -340,15 +342,15 @@ function init_gear_sets()
     ---  PRECAST SETS  ---
 	sets.precast = {}
     sets.precast.JA = set_combine(sets.enmity, {})
-	sets.precast.JA.Berserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +2"})
-	sets.MaxBerserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +2",main="Firangi"})
+	sets.precast.JA.Berserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +3"})
+	sets.MaxBerserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +3",main="Firangi"})
 	sets.precast.JA.Warcry = set_combine(sets.precast.JA, {head="Agoge mask +3"})
 	sets.precast.JA.Aggressor = set_combine(sets.precast.JA, {head="Pummeler's Mask +3",body="Agoge Lorica +3"})
 	sets.precast.JA['Mighty Strikes'] = set_combine(sets.precast.JA, {hands="Agoge Mufflers +3"})
 	sets.precast.JA['Defender'] = set_combine(sets.precast.JA, {hands="Agoge Mufflers +3"})
 	sets.precast.JA['Blood Rage'] = set_combine(sets.precast.JA, {body="Boii Lorica +1"})
 	sets.precast.Restraint = set_combine(sets.precast.JA, {hands="Boii Mufflers +1"})
-	sets.precast.JA.Tomahawk = set_combine(sets.precast.JA, {ammo="Thr. Tomahawk",feet="Agoge Calligae +2"})
+	sets.precast.JA.Tomahawk = set_combine(sets.precast.JA, {ammo="Thr. Tomahawk",feet="Agoge Calligae +3"})
 	sets.precast.Ranged = { ammo="Dart" }
 
 
@@ -442,6 +444,9 @@ function job_post_precast(spell)
 		windower.add_to_chat(10,"Adding in Moonshade Earring for more TP:"..player.tp)
 		equip({left_ear="Moonshade Earring"})
 	end
+    if (world.time >= (17*60) or world.time < (7*60)) and spell.type == 'WeaponSkill' then
+        equip({right_ear="Lugra Earring +1"})
+    end
 end
 
 function job_midcast(spell)

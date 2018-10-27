@@ -15,11 +15,11 @@ function user_setup()
 	
     state.IdleMode:options('Normal','PDT')
 	state.TPMode = M{['description']='TP Mode', 'Normal','RACC'}
-	state.RngMode = M{['description']='Ranger Mode', 'Fail-Not','Yoichinoyumi','Gun','XBow'}
+	state.RngMode = M{['description']='Ranger Mode', 'Fail-Not','Yoichinoyumi','Fomalhaut','Armageddon','XBow'}
 	state.Bolt = M{['description']='Bolt Mode','Normal','DefDown','Holy Bolt','Bloody Bolt'}
 	state.AutoRA = M{['description']='Auto RA','false','true'}
 	state.AutoWSMode = M{['description']='Auto WS Mode','false','true'}
-	state.AutoWS = M{['description']='Auto WS',"Jishnu's Radiance","Last Stand","Trueflight"}
+	state.AutoWS = M{['description']='Auto WS',"Last Stand","Trueflight","Jishnu's Radiance"}
 	state.Arrow = M{['description']='Arrow Mode','Normal'}
 	state.Bullet = M{['description']='Bullet','Normal','Stun'}
 	
@@ -65,9 +65,13 @@ function user_setup()
 		send_command("dp bow") 
 		state.AutoWS = M{['description']='Auto WS',"Jishnu's Radiance","Apex Arrow"}
 	elseif player.equipment.range == "Fomalhaut" then
-		send_command("gs c set RngMode Gun")
+		send_command("gs c set RngMode Fomalhaut")
 		send_command("dp gun")
 		state.AutoWS = M{['description']='Auto WS','Last Stand','Trueflight'}
+	elseif player.equipment.range == "Armageddon" then
+		send_command("gs c set RngMode Armageddon")
+		send_command("dp gun")
+		state.AutoWS = M{['description']='Auto WS','Wildfire','Last Stand','Trueflight'}
 	elseif player.equipment.range == "Wochowsen" then
 		send_command("gs c set RngMode XBow")
 		send_command("dp marksmanship")
@@ -78,9 +82,9 @@ function user_setup()
 	
 	WeaponSkill = {
 		["Marksmanship"] = {
-			["1"] = "Trueflight",
+			["1"] = "Wildfire",
 			["2"] = "Last Stand",
-			["3"] = "Wildfire"
+			["3"] = "Trueflight"
 		},
 		["Archery"] = {
 		    ["1"] = "Jishnu's Radiance",
@@ -118,7 +122,7 @@ function init_gear_sets()
 	  send_command("alias rngws2 input /ws 'Namas Arrow' <t>")
 	  send_command("alias rngws3 input /ws 'Apex Arrow' <t>")
 	  TP_Hands = "Amini Glovelettes +1"
-	elseif state.RngMode.value == 'Gun' then 
+	elseif state.RngMode.value == 'Fomalhaut' then 
 	  RNGWeapon = "Fomalhaut"
 	  TP_Ammo="Chrono Bullet"
 	  WS_Ammo="Chrono Bullet"
@@ -127,7 +131,19 @@ function init_gear_sets()
 		WS_Ammo="Spartan Bullet"
 	  end
 	  TP_Hands = "Meg. Gloves +2"
-	  send_command("alias rngws1 input /ws 'Trueflight' <t>")
+	  send_command("alias rngws1 input /ws 'Wildfire' <t>")
+	  send_command("alias rngws2 input /ws 'Last Stand' <t>")
+	  send_command("alias rngws3 input /ws 'Trueflight' <t>")
+	elseif state.RngMode.value == 'Armageddon' then 
+	  RNGWeapon = "Armageddon"
+	  TP_Ammo="Chrono Bullet"
+	  WS_Ammo="Chrono Bullet"
+	  if state.Bullet.value == 'Stun' then
+		TP_Ammo="Spartan Bullet"
+		WS_Ammo="Spartan Bullet"
+	  end
+	  TP_Hands = "Meg. Gloves +2"
+	  send_command("alias rngws1 input /ws 'Wildfire' <t>")
 	  send_command("alias rngws2 input /ws 'Last Stand' <t>")
 	  send_command("alias rngws3 input /ws 'Trueflight' <t>")
 	elseif state.RngMode.value == 'XBow' then
@@ -153,6 +169,7 @@ function init_gear_sets()
 	    range=RNGWeapon,
 		ammo=TP_Ammo,
 		head="Amini Gapette",  -- 6 --
+		--body="Nisroch Jerkin",
 		body="Oshosi Vest",
 		hands="Carmine Fin. Ga. +1",  -- 8 --
 		legs={ name="Adhemar Kecks", augments={'AGI+10','"Rapid Shot"+10','Enmity-5',}},
@@ -162,8 +179,8 @@ function init_gear_sets()
 		waist="Yemaya Belt",    
 		left_ear="Telos Earring",
 		right_ear="Enervating Earring",
-		left_ring="Dingir Ring",
-		right_ring="Ilabrat Ring",
+		right_ring="Dingir Ring",
+		left_ring="Ilabrat Ring",
 		back={ name="Belenus's Cape", augments={'"Snapshot"+10',}}, -- 10 -- 
     } -- Snapshot: 47  -- Rapid Shot:16
 	
@@ -173,8 +190,8 @@ function init_gear_sets()
 	sets.midcast.TP.normal = {
 	    range=RNGWeapon,
 		ammo=TP_Ammo,
-		head="Arcadian Beret +1",
-		body="Oshosi Vest",
+		head="Arcadian Beret +2",
+		body="Nisroch Jerkin",
 		hands=TP_Hands,
 		legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
 		feet="Adhemar Gamashes",
@@ -182,17 +199,59 @@ function init_gear_sets()
 		waist="Yemaya Belt",
 		left_ear="Telos Earring",
 		right_ear="Enervating Earring",
-		left_ring="Dingir Ring",
-		right_ring="Ilabrat Ring",
+		right_ring="Dingir Ring",
+		left_ring="Ilabrat Ring",
 		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
+	}
+	sets.midcast.TP.DoubleShotArmageddon = {
+	    --head={ name="Arcadian Beret +2", augments={'Enhances "Recycle" effect',}},
+		--head="Meghanada Visor +2",
+		head="Oshosi Mask",
+		body={ name="Arc. Jerkin +3", augments={'Enhances "Snapshot" effect',}},
+		
+		--hands="Mummu Wrists +2",
+		hands="Oshosi Gloves",
+		--legs="Mummu Kecks +2",
+        legs="Oshosi Trousers",
+		feet="Oshosi Leggings",
+		neck="Iskur Gorget",
+		--waist="Yemaya Belt",
+		waist="K. Kachina Belt +1",
+		left_ear="Telos Earring",
+		right_ear="Enervating Earring",
+		--left_ring="Mummu Ring",
+        left_ring="Ilabrat Ring",
+		right_ring="Dingir Ring",
+		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10',}},
+	}
+	sets.midcast.TP.ArmageddonAftermath = {
+	    --head="Meghanada Visor +2",
+		head="Oshosi Mask",
+		body="Nisroch Jerkin",
+		--hands="Mummu Wrists +2",
+		hands="Oshosi Gloves",
+		--legs="Mummu Kecks +2",
+        legs="Oshosi Trousers",
+		-- feet="Thereoid Greaves",
+		feet="Oshosi Leggings",
+		neck="Iskur Gorget",
+		--waist="Yemaya Belt",
+		waist="K. Kachina Belt +1",
+		left_ear="Telos Earring",
+		right_ear="Enervating Earring",
+		--left_ring="Mummu Ring",
+        left_ring="Ilabrat Ring",
+		right_ring="Dingir Ring",
+		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10',}},
 	}
 	sets.midcast.TP.RACC = {
 		range=RNGWeapon,
 		ammo=TP_Ammo,
 		head="Meghanada Visor +2",
-		body="Oshosi Vest",
+		body="Nisroch Jerkin",
 		hands="Meg. Gloves +2",
-		legs="Meg. Chausses +2",
+		--legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
+        legs="Oshosi Trousers",
 		feet="Meg. Jam. +2",
 		neck="Iskur Gorget",
 		waist="Yemaya Belt",
@@ -202,7 +261,20 @@ function init_gear_sets()
 		right_ring="Cacoethic Ring +1",
 		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
 	}
-	sets.Barrage = {hands="Orion Bracers +3"}
+	sets.Barrage = {
+	    head="Meghanada Visor +2",
+		body="Nisroch Jerkin",
+		hands="Orion Bracers +3",
+		legs="Oshosi Trousers",
+		feet="Oshosi Leggings",
+		neck="Iskur Gorget",
+		waist="K. Kachina Belt +1",
+		left_ear="Telos Earring",
+		right_ear="Enervating Earring",
+		left_ring="Cacoethic Ring",
+		right_ring="Cacoethic Ring +1",
+		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
+	}
     
 	--Job Abilities
 	sets.precast.JA = {}
@@ -213,18 +285,17 @@ function init_gear_sets()
     sets.precast.JA['Eagle Eye Shot'] = {}
     sets.precast.JA.Shadowbind = {}
     sets.precast.JA.Sharpshot = {}
-     
-	-- sets.precast.FastCast = {main=FC_Main,sub=FC_sub,ammo=FC_ammo,head=FC_head,neck=FC_neck,ear1=FC_ear1,ear2=FC_ear2,body=FC_body,hands=FC_hands,ring1=FC_ring1,ring2=FC_ring2,back=FC_back,waist=FC_waist,legs=FC_legs,feet=FC_feet}
-    
+ 
 	-- WS Sets
 	sets.precast.WS = {
 	    ammo=TP_Ammo,
 		head="Orion Beret +3",
 		--head={ name="Herculean Helm", augments={'Rng.Acc.+28','Weapon skill damage +3%','DEX+11','Rng.Atk.+12',}},
-		body={ name="Herculean Vest", augments={'Rng.Acc.+23 Rng.Atk.+23','Weapon skill damage +3%','Rng.Atk.+9',}},
+		body="Nisroch Jerkin",
 		hands="Meg. Gloves +2",
-		--legs="Adhemar Kecks",
-		legs="Amini Brague +1",
+		--legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
+		--legs="Amini Brague +1",
+        legs="Arc. Braccae +3",
 		feet={ name="Herculean Boots", augments={'Rng.Acc.+25 Rng.Atk.+25','Weapon skill damage +2%','Rng.Acc.+1','Rng.Atk.+9',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
@@ -236,13 +307,14 @@ function init_gear_sets()
 	}
 	sets.precast.WS['Last Stand'] = {
 	    head="Orion Beret +3",
-		body={ name="Herculean Vest", augments={'Rng.Acc.+23 Rng.Atk.+23','Weapon skill damage +3%','Rng.Atk.+9',}},
+		body="Nisroch Jerkin",
 		hands="Meg. Gloves +2",
-		legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
+		--legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
+        legs="Arc. Braccae +3",
 		feet={ name="Herculean Boots", augments={'Rng.Acc.+25 Rng.Atk.+25','Weapon skill damage +2%','Rng.Acc.+1','Rng.Atk.+9',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
-		left_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +25',}},
+		left_ear="Moonshade Earring",
 		right_ear="Enervating Earring",
 		left_ring="Regal Ring",
 		right_ring="Dingir Ring",
@@ -254,11 +326,12 @@ function init_gear_sets()
 		head="Orion Beret +3",
 		body="Meg. Cuirie +2",
 		hands="Meg. Gloves +2",
-		legs="Darraigner's Brais",
+		--legs="Darraigner's Brais",
+        legs="Arc. Braccae +3",
 		feet="Thereoid Greaves",
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
-		left_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +25',}},
+		left_ear="Moonshade Earring",
 		right_ear="Sherida Earring",
 		left_ring="Regal Ring",
 		right_ring="Dingir Ring",
@@ -267,10 +340,12 @@ function init_gear_sets()
 	sets.Jishnus = sets.precast.WS['Jishnu\'s Radiance']
 	sets.precast.WS['Trueflight'] = {
 		-- head="Orion Beret +3"
+		ammo="Devastating Bullet",
 	    head={ name="Herculean Helm", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','Enmity-5','VIT+6','Mag. Acc.+13','"Mag.Atk.Bns."+13',}},
 		body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+26','"Dbl.Atk."+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
 		hands="Carmine Fin. Ga. +1",
-		legs="Gyve Trousers",
+		--legs="Gyve Trousers",
+        legs="Arc. Braccae +3",
 		-- feet={ name="Adhemar Gamashes", augments={'HP+50','"Store TP"+6','"Snapshot"+8',}},
 		feet={ name="Herculean Boots", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','"Fast Cast"+1','MND+10','Mag. Acc.+6','"Mag.Atk.Bns."+11',}},
 		--neck="Fotia Gorget",
@@ -278,7 +353,7 @@ function init_gear_sets()
 		neck="Sanctity necklace",
 		waist="Eschan Stone",
 		left_ear="Crematio Earring",
-		right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +25',}},
+		right_ear="Moonshade Earring",
 		left_ring="Dingir Ring",
 		right_ring="Weather. Ring",
 		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},
@@ -305,6 +380,13 @@ function job_precast(spell)
 	    windower.add_to_chat(8,"You need to turn on Velocity Shot!	Time Remaining: "..velocity_recasttime)
 	  end
 	end
+	if not buffactive["Double Shot"] and spell.name == "Ranged" then
+	  doubleshot_recasttime = windower.ffxi.get_ability_recasts()[126] 
+	  if doubleshot_recasttime == 0 then 
+	    windower.add_to_chat(8,"Turn on Double Shot!")
+	  end
+	end
+	
 	if spell.name == 'Utsusemi: Ichi' and (buffactive['Copy Image (3)'] or buffactive ['Copy Image (4+)']) then
 	  cancel_spell()
 	  send_command('@wait 1;')
@@ -343,7 +425,14 @@ function job_post_midcast(spell)
 	 elseif state.TPMode.Value == 'RACC' then
 	   equip(sets.midcast.TP.RACC)
 	 end
+	 if player.equipment.range == "Armageddon" and (buffactive["Aftermath: Lv.3"] or buffactive["Aftermath: Lv.2"] or buffactive["Aftermath: Lv.1"]) then
+		equip(sets.midcast.TP.ArmageddonAftermath)
+	 end
+	 if buffactive['Double Shot'] and player.equipment.range == "Armageddon" and (buffactive["Aftermath: Lv.3"] or buffactive["Aftermath: Lv.2"] or buffactive["Aftermath: Lv.1"]) then
+	   equip(sets.midcast.TP.DoubleShotArmageddon)
+	 end
      if buffactive.Barrage then
+		windower.add_to_chat(8,"Barrage Active - adding in hands")
         equip(sets.Barrage)
      end
     end
@@ -395,7 +484,7 @@ end
 		if EquipedGear.equipment.range == nil or EquipedGear.equipment.range == 0 then 
 		  CurrentSkill = "Hand-to-Hand"
 		else 
-		  CurrentSkill = res.skills[res.items[windower.ffxi.get_items(EquipedGear.equipment.main_bag, EquipedGear.equipment.range).id].skill].en
+		  CurrentSkill = res.skills[res.items[windower.ffxi.get_items(EquipedGear.equipment.range_bag, EquipedGear.equipment.range).id].skill].en
 		end
 		send_command('input /ws '..WeaponSkill[CurrentSkill][command[2]])
 	end
@@ -405,13 +494,13 @@ end
 		if EquipedGear.equipment.range == nil or EquipedGear.equipment.range == 0 then 
 		  CurrentSkill = "Hand-to-Hand"
 		else 
-		  CurrentSkill = res.skills[res.items[windower.ffxi.get_items(EquipedGear.equipment.main_bag, EquipedGear.equipment.range).id].skill].en
+          CurrentSkill = res.skills[res.items[windower.ffxi.get_items(EquipedGear.equipment.range_bag, EquipedGear.equipment.range).id].skill].en
 		end
 		windower.add_to_chat(2,"WS List:")
 		for i,v in pairs(WeaponSkill[CurrentSkill]) do
 			windower.add_to_chat(2,i..") "..v)
 		end
-	end
+	end    
 end
 
 windower.raw_register_event('incoming chunk', function(id,original,modified,injected,blocked)

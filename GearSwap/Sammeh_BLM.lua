@@ -137,13 +137,31 @@ function init_gear_sets()
 		right_ring="Rajas Ring",
 		back="Solemnity Cape",
 	}
+	
+	sets.engaged = {
+		ammo="Amar Cluster",
+		head="Jhakri Coronal +2",
+		body="Jhakri Robe +2",
+		hands="Jhakri Cuffs +2",
+		legs="Jhakri Slops +2",
+		feet="Jhakri Pigaches +2",
+		neck="Combatant's Torque",
+		waist="Eschan Stone",
+		left_ear="Cessance Earring",
+		right_ear="Digni. Earring",
+		left_ring="Etana Ring",
+		right_ring="Hetairoi Ring",
+		back="Argocham. Mantle",
+	}
+	
+	
 	-- Max MP set
 	sets.precast.WS['Myrkr'] = {
 	    ammo="Pemphredo Tathlum",
 		ammo="Sihirik",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
 		body={ name="Amalric Doublet", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
-		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
+		hands={ name="Amalric Gages", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
 		legs={ name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},
 		feet="Skaoi Boots",
 		neck="Sanctity Necklace",
@@ -151,7 +169,7 @@ function init_gear_sets()
 		left_ear="Loquac. Earring",
 		right_ear="Barkaro. Earring",
 		left_ring="Etana Ring",
-		right_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+		right_ring="Mephitas's Ring +1",
 		back={ name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},
 	} 
 	sets.precast.WS['Vidohunir'] = sets.precast.WS['Myrkr']

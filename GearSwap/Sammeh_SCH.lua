@@ -75,7 +75,7 @@ function init_gear_sets()
 		back={ name="Lugh's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10',}},
 	}
 	
-	sets.oncasuit = set_combine(sets.meva,{body="Onca Suit",ear1="Dominance Earring",back="Tantalic Cape",hands="",legs="",feet=""})
+	--sets.oncasuit = set_combine(sets.meva,{body="Onca Suit",ear1="Dominance Earring",back="Tantalic Cape",hands="",legs="",feet=""})
     
     sets.enh = {}
     sets.enh.Rapture = {head="Arbatel Bonnet +1"}
@@ -106,19 +106,21 @@ function init_gear_sets()
 	}
 	
 	sets.MaxHP = {
-	    ammo="Homiliary",
-		head="Acad. Mortar. +3",
-		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
-		hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}},
-		legs="Perdition Slops",
-		feet="Skaoi Boots",
-		neck="Sanctity Necklace",
-		waist="Eschan Stone",
-		left_ear="Cryptic Earring",
-		right_ear="Odnowa Earring +1",
-		left_ring="K'ayres Ring",
-		right_ring="Etana Ring",
-		back="Moonbeam Cape",
+	    main="Raetic Staff +1",
+        sub="Irenic Strap +1",
+        ammo="Homiliary",
+        head="Acad. Mortar. +3",
+        body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
+        hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}},
+        legs="Perdition Slops",
+        feet="Skaoi Boots",
+        neck="Bathy Choker +1",
+        waist="Carrier's Sash",
+        left_ear="Eabani Earring",
+        right_ear="Odnowa Earring +1",
+        left_ring="K'ayres Ring",
+        right_ring="Etana Ring",
+        back="Moonbeam Cape",
 	}
 	
 	sets.enh_protect = {ring1="Sheltered Ring"}
@@ -352,7 +354,7 @@ function init_gear_sets()
 		right_ear="Enchntr. Earring +1",
 		left_ring="Stikini Ring",
 		right_ring="Weather. Ring",
-		back={ name="Bookworm's Cape", augments={'INT+1','MND+1','Helix eff. dur. +20','"Regen" potency+8',}},
+		back="Moonbeam Cape",
 	}
     sets.midcast['Enhancing Magic'] = {
 	    --main="Oranyan",
@@ -408,13 +410,13 @@ function init_gear_sets()
 		right_ear="Hearty Earring",
 		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
 		right_ring="Defending Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 	}
 	sets.Idle.PDT = {
 		main="Terra's Staff",
 		sub="Alber Strap",
 		ammo="Homiliary",
-		head={ name="Merlinic Hood", augments={'Attack+1','Magic dmg. taken -4%','Mag. Acc.+9',}},
+		head="Volte Cap",
 		body={ name="Gende. Bilaut +1", augments={'Phys. dmg. taken -4%','Magic dmg. taken -4%','"Cure" potency +4%',}},
 		hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}},
 		legs={ name="Hagondes Pants +1", augments={'Phys. dmg. taken -3%','Magic dmg. taken -3%','"Avatar perpetuation cost" -5',}},
@@ -425,7 +427,7 @@ function init_gear_sets()
 		right_ear="Handler's Earring +1",
 		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
 		right_ring="Defending Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 	}
 	sets.Idle.NoSubl = sets.Idle.Main
 	sets.Idle.Subl = set_combine(sets.Idle.NoSubl, {
@@ -753,8 +755,9 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	end
 	if state.IdleMode.value == "PDT" then
 	   sets.Idle.Current = sets.Idle.PDT
-	elseif state.IdleMode.value == "OncaSuit" then
+	--[[elseif state.IdleMode.value == "OncaSuit" then
 	   sets.Idle.Current = set_combine(sets.meva,{main=idle_pdt_main,body="Onca Suit",ear1="Dominance Earring",back="Tantalic Cape",hands="",legs="",feet=""})     
+       ]]
 	elseif state.IdleMode.value == "MEVA" then
 		sets.Idle.Current = sets.meva
 	elseif state.IdleMode.value == "MaxHP" then

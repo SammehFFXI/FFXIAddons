@@ -259,7 +259,7 @@ function init_gear_sets()
 		waist="Regal Belt",
 		left_ear="Gelos Earring",
 		right_ear="Lugalbanda Earring",
-		left_ring="Varar Ring",
+		left_ring="Varar Ring +1",
 		right_ring="Varar Ring",
 		back="Campestres's Cape",
 	}
@@ -287,7 +287,7 @@ function init_gear_sets()
 		waist="Regal Belt",
 		left_ear="Gelos Earring",
 		right_ear="Lugalbanda Earring",
-		left_ring="Varar Ring",
+		left_ring="Varar Ring +1",
 		right_ring="Varar Ring",
 		back="Campestres's Cape",
 	}
@@ -305,7 +305,7 @@ function init_gear_sets()
 		waist="Regal Belt",
 		left_ear="Gelos Earring",
 		right_ear="Lugalbanda Earring",
-		left_ring="Varar Ring",
+		left_ring="Varar Ring +1",
 		right_ring="Varar Ring",
 		back="Campestres's Cape",
 	}
@@ -379,7 +379,7 @@ function init_gear_sets()
         body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Shadow Ring",ring2="Inyanga Ring",
         back="Solemnity Cape",waist="Lieutenant's Sash",legs="Inyanga Shalwar +1",feet="Inyanga Crackows +1"}
 
-    sets.defense.MEva = set_combine(sets.defense.MDT, {ammo="Staunch Tathlum",
+    sets.defense.MEva = set_combine(sets.defense.MDT, {ammo="Staunch Tathlum +1",
         head=MEva_head,
         neck="Warder's Charm +1",ear1="Hearty Earring",ear2="Eabani Earring",
         body=MEva_body,

@@ -15,7 +15,7 @@ function user_setup()
 	
     state.IdleMode:options('Normal','PDT')
 	state.TPMode = M{['description']='TP Mode', 'Normal','RACC'}
-	state.RngMode = M{['description']='Ranger Mode', 'Fail-Not','Yoichinoyumi','Fomalhaut','Armageddon','XBow'}
+	state.RngMode = M{['description']='Ranger Mode', 'Fomalhaut','Armageddon'}
 	state.AreaRolls = M{['description']='Area of Rolls','Large','Small'}
 	state.AutoRA = M{['description']='Auto RA','false','true'}
 	state.AutoWSMode = M{['description']='Auto WS Mode','false','true'}
@@ -114,8 +114,9 @@ function init_gear_sets()
 	    range=RNGWeapon,
 		ammo=TP_Ammo,
 		--body="Nisroch Jerkin",
-		body="Oshosi Vest",
+		body="Oshosi Vest +1",
 		hands="Carmine Fin. Ga. +1",  -- 8 --
+        head="Oshosi Mask +1",
 		legs={ name="Adhemar Kecks", augments={'AGI+10','"Rapid Shot"+10','Enmity-5',}},
 		--feet="Adhemar Gamashes", -- 8 -- 
 		feet="Meg. Jam. +2", -- 10 -- 
@@ -134,6 +135,7 @@ function init_gear_sets()
 	    range=RNGWeapon,
 		ammo=TP_Ammo,
 		-- head="Arcadian Beret +2",
+        head="Oshosi Mask +1",
 		body="Nisroch Jerkin",
 		hands=TP_Hands,
 		legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
@@ -149,13 +151,13 @@ function init_gear_sets()
 	sets.midcast.TP.DoubleShotArmageddon = {
 	    --head={ name="Arcadian Beret +2", augments={'Enhances "Recycle" effect',}},
 		--head="Meghanada Visor +2",
-		head="Oshosi Mask",
+		head="Oshosi Mask +1",
 		-- body={ name="Arc. Jerkin +3", augments={'Enhances "Snapshot" effect',}},
 		
 		--hands="Mummu Wrists +2",
-		hands="Oshosi Gloves",
+		hands="Oshosi Gloves +1",
 		legs="Mummu Kecks +2",
-		feet="Oshosi Leggings",
+		feet="Oshosi Leggings +1",
 		neck="Iskur Gorget",
 		--waist="Yemaya Belt",
 		waist="K. Kachina Belt +1",
@@ -167,13 +169,13 @@ function init_gear_sets()
 	}
 	sets.midcast.TP.ArmageddonAftermath = {
 	    --head="Meghanada Visor +2",
-		head="Oshosi Mask",
+		head="Oshosi Mask +1",
 		body="Nisroch Jerkin",
 		--hands="Mummu Wrists +2",
-		hands="Oshosi Gloves",
+		hands="Oshosi Gloves +1",
 		legs="Mummu Kecks +2",
 		-- feet="Thereoid Greaves",
-		feet="Oshosi Leggings",
+		feet="Oshosi Leggings +1",
 		neck="Iskur Gorget",
 		--waist="Yemaya Belt",
 		waist="K. Kachina Belt +1",
@@ -204,9 +206,9 @@ function init_gear_sets()
 	--Job Abilities
 	sets.precast.JA = {}
     sets.precast.JA['Phantom Roll'] = {head="Lanun Tricorne",ring2="Luzaf's Ring",hands="Chasseur\'s Gants",back="Camulus\'s Mantle",neck="Regal Necklace"}
-	sets.precast.JA['Random Deal'] = {body="Lanun Frac"}
+	sets.precast.JA['Random Deal'] = {body="Lanun Frac +1"}
 	sets.precast.JA['Snake Eye'] = {legs="Lanun Culottes"}
-    sets.precast.JA.Wildcard = {feet="Lanun Bottes"}
+    sets.precast.JA.Wildcard = {feet="Lanun Bottes +2"}
 	
 	
 	-- WS Sets
@@ -247,18 +249,18 @@ function init_gear_sets()
 	    head={ name="Herculean Helm", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','Enmity-5','VIT+6','Mag. Acc.+13','"Mag.Atk.Bns."+13',}},
 		body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+26','"Dbl.Atk."+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
 		hands="Carmine Fin. Ga. +1",
-		legs="Gyve Trousers",
+		legs={ name="Herculean Trousers", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','"Dbl.Atk."+1','STR+7','Mag. Acc.+13','"Mag.Atk.Bns."+10',}},
 		-- feet={ name="Adhemar Gamashes", augments={'HP+50','"Store TP"+6','"Snapshot"+8',}},
-		feet={ name="Herculean Boots", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','"Fast Cast"+1','MND+10','Mag. Acc.+6','"Mag.Atk.Bns."+11',}},
+		feet="Lanun Bottes +2",
 		--neck="Fotia Gorget",
 		--waist="Fotia Belt",
 		neck="Sanctity necklace",
 		waist="Eschan Stone",
 		left_ear="Crematio Earring",
 		right_ear="Moonshade Earring",
-		left_ring="Dingir Ring",
-		right_ring="Weather. Ring",
-	--	back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},
+		right_ring="Dingir Ring",
+		left_ring="Ilabrat Ring",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},
 	}
     sets.precast.WS['Wildfire'] = sets.precast.WS['Trueflight']
 	sets.precast.WS['Leaden Salute'] = sets.precast.WS['Trueflight']

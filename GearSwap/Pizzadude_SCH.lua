@@ -81,7 +81,7 @@ function init_gear_sets()
     sets.enh.Rapture = {head="Arbatel Bonnet +1"}
     sets.enh.Ebullience = {head="Arbatel Bonnet +1"}
 	sets.enh.Klimaform = {feet="Arbatel Loafers +1"}
-    sets.enh.Perpetuance = {hands="Arbatel Bracers +1"}
+    sets.enh.Perpetuance = {hands="Savant's Bracers +2"}
 
 	
 	
@@ -129,9 +129,9 @@ function init_gear_sets()
 		main="Hvergelmir", -- FC 50
 		sub="Clerisy Strap +1", -- FC 3
 		ammo="Incantor Stone", -- FC 2
-		head={ name="Merlinic Hood", augments={'"Fast Cast"+6',}}, -- FC 14
-		body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+16','"Fast Cast"+6','INT+4',}}, -- FC 12
-		hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}}, -- FC 7
+		head="Welkin Crown",
+        body="Shango Robe",
+        hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}}, -- FC 7
 		legs={ name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}}, -- FC 7
 		feet="Regal Pumps +1", -- FC 4 (+3 if Unity rank #1)
 		neck="Voltsurge Torque", -- FC 4
@@ -184,8 +184,7 @@ function init_gear_sets()
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
-		--neck="Sanctity Necklace",
-        neck="Argute Stole +2",
+		neck="Sanctity Necklace",
 		waist="Refoccilation Stone",
 		left_ear="Regal Earring",
 		right_ear="Barkaro. Earring",
@@ -202,13 +201,12 @@ function init_gear_sets()
 		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		feet="Acad. Loafers +3",
-		--neck="Incanter's Torque",
-        neck="Argute Stole +2",
+		neck="Incanter's Torque",
 		waist="Refoccilation Stone",
 		left_ear="Regal Earring",
 		right_ear="Barkaro. Earring",
-		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring",
+		left_ring="Stikini Ring",
+		right_ring="Weather. Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 	}
 	
@@ -240,8 +238,7 @@ function init_gear_sets()
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
-		--neck="Mizu. Kubikazari",
-        neck="Argute Stole +2",
+		neck="Mizu. Kubikazari",
 		waist="Refoccilation Stone",
 		left_ear="Regal Earring",
 		right_ear="Static Earring",
@@ -318,8 +315,8 @@ function init_gear_sets()
 		waist="Luminary Sash",
 		left_ear="Digni. Earring",
 		right_ear="Regal Earring",
-		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring",
+		left_ring="Etana Ring",
+		right_ring="Weather. Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 	}
 	
@@ -348,38 +345,32 @@ function init_gear_sets()
 		ammo="Incantor Stone",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},  -- Cure Pot 10
 		body={ name="Chironic Doublet", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+9','Mag. Acc.+6','"Mag.Atk.Bns."+14',}}, -- Cure Pot 13
-		--hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}}, -- Cure Pot 10
-        hands={ name="Peda. Bracers +3", augments={'Enh. "Tranquility" and "Equanimity"',}},
+		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}}, -- Cure Pot 10
 		legs="Gyve Trousers", -- Cure Pot +10
 		feet={ name="Vanya Clogs", augments={'"Cure" potency +5%','"Cure" spellcasting time -15%','"Conserve MP"+6',}},  -- Cure Pot 10
 		neck="Incanter's Torque",
 		waist="Witful Belt",
 		left_ear="Loquac. Earring",
 		right_ear="Enchntr. Earring +1",
-		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring",
+		left_ring="Stikini Ring",
+		right_ring="Weather. Ring",
 		back="Moonbeam Cape",
 	}
     sets.midcast['Enhancing Magic'] = {
-	    main="Musa",
-		sub="Clerisy Strap +1",
-		--sub="Enki Strap",
-		--main={ name="Gada", augments={'Enh. Mag. eff. dur. +5','VIT+8','"Mag.Atk.Bns."+2',}},
-		--sub="Ammurapi Shield",
-		ammo="Staunch Tathlum +1",
-		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
-		-- body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
-		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
-		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
-		legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
-		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
-		neck="Incanter's Torque",
-		waist="Rumination Sash",
-		left_ear="Loquac. Earring",
-		right_ear="Enchntr. Earring +1",
-		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring",
-		back="Perimede Cape",
+	    main="Oranyan",
+        sub="Enki Strap",
+        head={ name="Telchine Cap", augments={'Enh. Mag. eff. dur. +9',}},
+        body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +8',}},
+        hands={ name="Telchine Gloves", augments={'Enh. Mag. eff. dur. +10',}},
+        legs={ name="Telchine Braconi", augments={'Enh. Mag. eff. dur. +10',}},
+        feet={ name="Telchine Pigaches", augments={'Enh. Mag. eff. dur. +10',}},
+        neck="Incanter's Torque",
+        waist="Witful Belt",
+        left_ear="Hermetic Earring",
+        right_ear="Genmei Earring",
+        left_ring="Stikini Ring",
+        right_ring="Kishar Ring",
+        back="Twilight Cape",
 	}
 	sets.midcast['Ninjutsu'] = sets.precast.FastCast
     sets.midcast.Embrava = sets.midcast['Enhancing Magic']
@@ -389,8 +380,7 @@ function init_gear_sets()
 		back={ name="Lugh's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10',}},
 	})
 	sets.midcast.RegenPotency = set_combine(sets.midcast['Enhancing Magic'], {
-        body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +10',}},
-		--main="Bolelabunga",
+		main="Bolelabunga",
 		head="Arbatel Bonnet +1",
 		back={ name="Bookworm's Cape", augments={'INT+1','MND+1','Helix eff. dur. +20','"Regen" potency+8',}},
 	})
@@ -404,35 +394,35 @@ function init_gear_sets()
 		main={ name="Akademos", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
 		sub="Irenic Strap +1",
 		ammo="Homiliary",
-		head="Befouled Crown",
-		body="Jhakri Robe +2",
-		hands={ name="Chironic Gloves", augments={'"Blood Pact" ability delay -7','Accuracy+6','"Refresh"+1','Accuracy+15 Attack+15',}},
-		legs="Assid. Pants +1",
-		feet="Herald's Gaiters",
-		neck="Loricate Torque +1",
-		waist="Fucho-no-Obi",
-		left_ear="Genmei Earring",
-		right_ear="Hearty Earring",
-		left_ring="Stikini Ring +1",
-		right_ring="Defending Ring",
-		back="Moonbeam Cape",
+        head="Befouled Crown",
+        body={ name="Witching Robe", augments={'MP+50','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Refresh"+1',}},
+        hands={ name="Telchine Gloves", augments={'Enh. Mag. eff. dur. +10',}},
+        legs={ name="Lengo Pants", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Refresh"+1',}},
+        feet={ name="Telchine Pigaches", augments={'Enh. Mag. eff. dur. +10',}},
+        neck="Bathy Choker +1",
+        waist="Gishdubar Sash",
+        left_ear="Hermetic Earring",
+        right_ear="Genmei Earring",
+        left_ring="Vocane Ring",
+        right_ring="Defending Ring",
+        back="Solemnity Cape",
 	}
 	sets.Idle.PDT = {
 		main="Terra's Staff",
 		sub="Alber Strap",
 		ammo="Homiliary",
-		head="Volte Cap",
-		body={ name="Gende. Bilaut +1", augments={'Phys. dmg. taken -4%','Magic dmg. taken -4%','"Cure" potency +4%',}},
-		hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}},
-		legs={ name="Hagondes Pants +1", augments={'Phys. dmg. taken -3%','Magic dmg. taken -3%','"Avatar perpetuation cost" -5',}},
-		feet="Herald's Gaiters",
-		neck="Loricate Torque +1",
-		waist="Slipor Sash",
-		left_ear="Genmei Earring",
-		right_ear="Handler's Earring +1",
-		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
-		right_ring="Defending Ring",
-		back="Moonbeam Cape",
+		head="Befouled Crown",
+        body={ name="Witching Robe", augments={'MP+50','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Refresh"+1',}},
+        hands={ name="Telchine Gloves", augments={'Enh. Mag. eff. dur. +10',}},
+        legs={ name="Lengo Pants", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Refresh"+1',}},
+        feet={ name="Telchine Pigaches", augments={'Enh. Mag. eff. dur. +10',}},
+        neck="Bathy Choker +1",
+        waist="Gishdubar Sash",
+        left_ear="Hermetic Earring",
+        right_ear="Genmei Earring",
+        left_ring="Vocane Ring",
+        right_ring="Defending Ring",
+        back="Solemnity Cape",
 	}
 	sets.Idle.NoSubl = sets.Idle.Main
 	sets.Idle.Subl = set_combine(sets.Idle.NoSubl, {
@@ -743,13 +733,11 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)    	
 	
 	disable_specialgear()
-    --[[
 	if player.equipment.neck == "Arciela's Grace +1" then
         disable('neck')
     else
         enable('neck')
     end
-    ]]
 	sets.Idle.Current = sets.Idle.NoSubl
 	if buffactive["Sublimation: Activated"] then
         sets.Idle.Current = sets.Idle.Subl
@@ -786,7 +774,7 @@ end
 
 
 function select_default_macro_book()
-    set_macro_page(3, 2)
+    set_macro_page(4, 1)
 end
 
 

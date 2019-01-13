@@ -13,6 +13,7 @@ function user_setup()
 	
 	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy','ShieldBlock','MEVA'}
 	state.BerserkMode = M{['description']='Berserk Mode', 'Normal','Auto'}
+    state.WeaponskillMode:options('Normal','ACC')
     select_default_macro_book()
 	
 	-- Set Common Aliases --
@@ -30,7 +31,8 @@ function user_setup()
 	send_command("alias idle gs equip sets.Idle.Current")
 	send_command("alias shieldblock gs equip sets.engaged.ShieldBlock")
 	--send_command('@wait 5;input /lockstyleset 15')
-	send_command('@wait 5;input /lockstyleset 27')
+	--send_command('@wait 5;input /lockstyleset 27')
+    send_command('@wait 5;input /lockstyleset 43')
 	send_command("alias g11_m2g11 input /ja Defender <me>")
 	send_command("alias g11_m2g12 input /ja Restraint <me>")
 	send_command("alias g11_m2g13 input /ja Berserk <me>")
@@ -110,12 +112,12 @@ function init_gear_sets()
 	
 	
 	sets.meva = {
-		ammo="Staunch Tathlum",
+		ammo="Staunch Tathlum +1",
 		head="Volte Cap",
 		body="Pumm. Lorica +3",
 		hands="Volte Bracers",
 		legs="Volte Brayettes",
-		feet="Volte Boots",
+		feet="Volte Sollerets",
 		neck="Warder's Charm +1",
 		waist="Engraved Belt",
 		left_ear="Eabani Earring",
@@ -125,9 +127,9 @@ function init_gear_sets()
 		back={ name="Cichol's Mantle", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Mag. Evasion+15',}},
 	}
 	sets.dt = {
-		ammo="Staunch Tathlum", --dt2
+		ammo="Staunch Tathlum +1", --dt3
 	    head="Sulevia's Mask +2", --dt6 
-		body="Sulevia's Plate. +2", --dt9
+		body="Tartarus Platemail", --dt10
 		hands="Sulev. Gauntlets +2", --dt4
 		legs="Sulev. Cuisses +2", --dt7
 		feet="Pumm. Calligae +3", 
@@ -140,7 +142,7 @@ function init_gear_sets()
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	} -- pdt 48 mdt -- 48 (Shell will easily make up diff)
 	sets.dtenmity = {
-	    ammo="Staunch Tathlum",
+	    ammo="Staunch Tathlum +1",
 		head="Pummeler's Mask +3",
 		body={ name="Souveran Cuirass", augments={'HP+80','Enmity+7','Potency of "Cure" effect received +10%',}},
 		hands="Pumm. Mufflers +3",
@@ -157,7 +159,7 @@ function init_gear_sets()
 	sets.dtaftermath = {
 		ammo="Ginsen",
 	    head="Flamma Zucchetto +2",
-		body="Sulevia's Plate. +2", --dt9
+		body="Tartarus Platemail", --dt9
 		hands="Sulev. Gauntlets +2", --dt5
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
 		feet="Sulev. Leggings +2", --dt4
@@ -177,7 +179,8 @@ function init_gear_sets()
 		hands="Sulev. Gauntlets +2",
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
 		feet="Pumm. Calligae +3",
-		neck="Combatant's Torque",
+		--neck="Combatant's Torque",
+        neck="Warrior's Beads",
 		waist="Ioskeha Belt +1",
 		right_ear="Telos Earring",
 		left_ear="Cessance Earring",
@@ -209,7 +212,7 @@ function init_gear_sets()
 		hands="Pumm. Mufflers +3",
 		legs="Pumm. Cuisses +3",
 		feet="Pumm. Calligae +3",
-		neck="Combatant's Torque",
+        neck="Warrior's Beads",
 		waist="Ioskeha Belt +1",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
@@ -224,7 +227,7 @@ function init_gear_sets()
 		hands="Sulev. Gauntlets +2",
 		legs="Pumm. Cuisses +3",
 		feet="Pumm. Calligae +3",
-		neck="Combatant's Torque",
+		neck="Warrior's Beads",
 		waist="Ioskeha Belt +1",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
@@ -233,10 +236,10 @@ function init_gear_sets()
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
 	sets.engaged.ShieldBlock = {  
-		ammo="Staunch Tathlum",  --2
+		ammo="Staunch Tathlum +1",  --2
     		-- head="Sulevia's Mask +2", -- 6
 			head={ name="Valorous Mask", augments={'Mag. Acc.+22','MND+8','Chance of successful block +10','Accuracy+13 Attack+13','Mag. Acc.+12 "Mag.Atk.Bns."+12',}},
-    		body="Sulevia's Plate. +2", -- 9 
+    		body="Tartarus Platemail", -- 9 
     		hands="Agoge Mufflers +3", -- pdt 6
     		legs="Arjuna Breeches", -- pdt 4
     		feet={ name="Souveran Schuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}, -- pdt 5
@@ -272,6 +275,7 @@ function init_gear_sets()
         --head="Sulevia's Mask +2",
 		body="Pumm. Lorica +3",
 		right_ring="Regal Ring",
+        hands={ name="Odyssean Gauntlets", augments={'Accuracy+18 Attack+18','Weapon skill damage +4%','STR+15',}},
 		legs="Sulev. Cuisses +2",
 		feet="Pumm. Calligae +3",
 		back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
@@ -303,7 +307,8 @@ function init_gear_sets()
 	    ammo="Knobkierrie",
 		head="Agoge mask +3",
 		body="Pumm. Lorica +3",
-		hands={ name="Argosy Mufflers +1", augments={'STR+20','"Dbl.Atk."+3','Haste+3%',}},
+		--hands={ name="Argosy Mufflers +1", augments={'STR+20','"Dbl.Atk."+3','Haste+3%',}},
+        hands={ name="Odyssean Gauntlets", augments={'Accuracy+18 Attack+18','Weapon skill damage +4%','STR+15',}},
 		legs={ name="Argosy Breeches +1", augments={'STR+12','DEX+12','Attack+20',}},
 		feet="Sulev. Leggings +2",
 		neck="Fotia Gorget",
@@ -318,19 +323,34 @@ function init_gear_sets()
 	sets.ws["King\'s Justice"] = sets.ws.strbased
 	sets.ws["Fell Cleve"] = sets.ws.strbased
 	sets.ws["Scourge"] = sets.ws.wsd
-	--sets.ws["Resolution"] = sets.ws.strbased
-    sets.ws["Resolution"] = sets.ws.wsd
+	sets.ws["Resolution"] = sets.ws.strbased
+    --sets.ws["Resolution"] = sets.ws.wsd
     
 	sets.ws["Decimation"] = sets.ws.strbased
 	sets.ws["Rampage"] = sets.ws.wsd
-	sets.ws["Mistral Axe"] = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt"})
-	sets.ws.savageblade = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt",hands="Agoge Mufflers +3",legs="Sulev. Cuisses +2",})
-	sets.ws["Savage Blade"] = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt",hands="Agoge Mufflers +3",legs="Sulev. Cuisses +2",})
+	sets.ws["Mistral Axe"] = set_combine(sets.ws.wsd, {neck="Warrior's Beads",waist="Engraved Belt"})
+	sets.ws.savageblade = set_combine(sets.ws.wsd, {neck="Warrior's Beads",waist="Engraved Belt",legs="Sulev. Cuisses +2",})
+	sets.ws["Savage Blade"] = set_combine(sets.ws.wsd, {neck="Warrior's Beads",waist="Engraved Belt",legs="Sulev. Cuisses +2",})
 	sets.ws["Judgment"] = sets.ws.savageblade
 	sets.ws["True Strike"] = sets.ws.wsd
 	sets.ws["Black Halo"] = sets.ws.savageblade
 	sets.ws["Metatron Torment"] = sets.ws.wsd
 	sets.ws["Upheaval"] = sets.ws.vitbased
+    sets.ws["Upheaval"].ACC = {
+        ammo="Knobkierrie",
+        head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
+        body="Pumm. Lorica +3",
+        hands="Sulev. Gauntlets +2",
+        legs="Pumm. Cuisses +3",
+        feet="Pumm. Calligae +3",
+        neck="Fotia Gorget",
+        waist="Fotia Belt",
+        left_ear="Cessance Earring",
+        right_ear="Telos Earring",
+        left_ring="Niqmaddu Ring",
+        right_ring="Regal Ring",
+        back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
+    }
 	sets.ws["Cloudsplitter"] = sets.ws.magic
 	sets.ws["Freezebite"] = sets.ws.magic
 	sets.ws["Aeolian Edge"] = sets.ws.magic
@@ -384,12 +404,12 @@ function init_gear_sets()
     
     ---  AFTERCAST SETS  ---
     sets.Idle = {
-		ammo="Staunch Tathlum",
+		ammo="Staunch Tathlum +1",
 		head="Volte Salade",
-		body="Sulevia's Plate. +2",
+        body="Tartarus Platemail",
 		hands="Sulev. Gauntlets +2",
 		legs="Volte Brayettes",
-		feet="Hermes' Sandals",
+		feet="Volte Sollerets",
 		neck="Bathy Choker +1",
 		waist="Flume Belt +1",
 		left_ear="Genmei Earring",

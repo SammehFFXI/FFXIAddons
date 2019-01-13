@@ -103,7 +103,7 @@ function init_gear_sets()
 	sets.meva = {
 		main="Reikikon",
 		sub="Irenic Strap +1",
-		ammo="Staunch Tathlum",
+		ammo="Staunch Tathlum +1",
 		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
 		--body="Ea Houppe. +1",
 		body="Ea Houppelande",
@@ -252,7 +252,24 @@ function init_gear_sets()
 		left_ring="Archon Ring",
 		back={ name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',},priority=15}
 	}
-	sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {right_ear="Digni. Earring"})    
+	--sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {right_ear="Digni. Earring"})    
+    sets.midcast.Stun = {
+        main="Hvergelmir",
+        sub="Clerisy Strap +1",
+        ammo="Pemphredo Tathlum",
+        head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
+        body={ name="Merlinic Jubbah", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Drain" and "Aspir" potency +3','MND+5','Mag. Acc.+10','"Mag.Atk.Bns."+13',}},
+        hands="Jhakri Cuffs +2",
+        legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
+        feet="Spae. Sabots +3",
+        neck="Sanctity Necklace",
+        waist="Hachirin-no-Obi",
+        left_ear="Barkaro. Earring",
+        right_ear="Regal Earring",
+        left_ring="Archon Ring",
+        right_ring="Evanescence Ring",
+        back={ name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},
+    }
 	-- commenting out and making it match DeathMagicBurst because if it didn't burst it sucks anyway.
     --sets.midcast['Dark Magic'].Death = set_combine(sets.midcast['Elemental Magic'].Main,{head={ name="Pixie Hairpin +1",priority=14},back={ name="Bane Cape",ring1="Evanescence Ring",ring2="Archon Ring",feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},})
 	sets.midcast['Dark Magic'].DeathMagicBurst = {
@@ -314,7 +331,7 @@ function init_gear_sets()
 		sub="Enki Strap",
 		ammo="Savant's Treatise",
 		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
+		body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +10',}},
 		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
@@ -330,7 +347,7 @@ function init_gear_sets()
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {main="Bolelabunga"})
 	sets.midcast.Cure = sets.midcast['Healing Magic']
 	sets.midcast.CurePotencyRecieved = set_combine(sets.midcast.Cure, {waist="Siegel Sash"})
-    sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash",neck="Nodens Gorget"})
+    sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash",neck="Nodens Gorget",legs="Shedir Seraweels"})
     
     ---  AFTERCAST SETS  ---
     sets.Idle = {}

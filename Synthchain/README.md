@@ -10,7 +10,6 @@ Usage:
 * //synthchain stop -- stops chain
 * //synthchain log -- turns on/off logging.  By default there's a pretty deep debug log that will print out. 
 
-
 Once you've loaded the Addon.  Simply stand next to the synthesis focuser.   You can //synthchain inv  and it will just poke it and return your inv then leave, If you want to start just //synthchain start .   It will continue and loop through your current chain until you run out of Crystals, Spheres, or Catalysts. Please note there is a hard coded sleep of 10 seconds between each chain.  Making this shorter seems to force breaks on Squares side.  The 10 seconds was timing for synth animation + skillchain animation.  (note I didn't measure it, just finger-in-air, may get away with a couple seconds less, but your mileage may vary).
 
 A few notes:

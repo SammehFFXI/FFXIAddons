@@ -68,7 +68,7 @@ end
 function init_gear_sets()
 	
 	sets.meva = {
-		ammo="Staunch Tathlum",
+		ammo="Staunch Tathlum +1",
 		head="Volte Cap",
 		body="Ken. Samue +1",
 		hands="Volte Bracers",
@@ -187,7 +187,7 @@ function init_gear_sets()
 		right_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
 		left_ring="Defending Ring",
 		back="Moonbeam Cape",
-		ammo="Staunch Tathlum"
+		ammo="Staunch Tathlum +1"
 	}
 	sets.engaged.DT = sets.dt
 	sets.precast.WS = {
@@ -201,7 +201,8 @@ function init_gear_sets()
 		waist="Fotia Belt",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
-		left_ring="Niqmaddu Ring",
+		--left_ring="Niqmaddu Ring",
+        left_ring="Epaminondas's Ring",
 		right_ring="Regal Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
 	}
@@ -217,7 +218,7 @@ function init_gear_sets()
 		waist="Fotia Belt",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
-		left_ring="Niqmaddu Ring",
+		left_ring="Epaminondas's Ring",
 		right_ring="Regal Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
 	}
@@ -232,8 +233,9 @@ function init_gear_sets()
 		waist="Fotia Belt",
 		left_ear="Cessance Earring",
 		right_ear="Ishvara Earring",
-		left_ring="Niqmaddu Ring",
-		right_ring="Regal Ring",
+		left_ring="Epaminondas's Ring",
+		--right_ring="Regal Ring",
+        right_ring="Karieyh Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
 	}
 	sets.precast.WS.AccMDB = {
@@ -289,6 +291,22 @@ function init_gear_sets()
 	}
 
 	-- WS Sets
+    sets.precast.WS['Tachi: Ageha'] = {
+        ammo="Pemphredo Tathlum",
+        head="Flam. Zucchetto +2",
+        body="Flamma Korazin +2",
+        hands="Flam. Manopolas +2",
+        legs="Flamma Dirs +2",
+        feet="Flam. Gambieras +2",
+        neck="Sanctity Necklace",
+        waist="Eschan Stone",
+        left_ear="Enchntr. Earring +1",
+        right_ear="Digni. Earring",
+        left_ring="Niqmaddu Ring",
+        right_ring="Regal Ring",
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Magic dmg. taken-10%',}},
+    }
+    
 	sets.precast.WS['Namas Arrow'] = set_combine(sets.ranged, {
 		body={ name="Sakonji Domaru +3", augments={'Enhances "Overwhelm" effect',}},
 		legs="Wakido Haidate +3",
@@ -308,7 +326,7 @@ function init_gear_sets()
 	sets.precast.JA['Sekkanoki'] = set_combine(sets.precast.JA, {})
 	sets.precast.JA['Konzen-ittai'] = set_combine(sets.precast.JA, {})
 	sets.precast.JA['Blade Bash'] = set_combine(sets.precast.JA, {hands="Sakonji Kote +3"})
-	sets.precast.JA['Meikyo Shisui'] = set_combine(sets.precast.JA, {})
+	sets.precast.JA['Meikyo Shisui'] = set_combine(sets.precast.JA, {feet="Sakonji Sune-Ate +3"})
 	sets.precast.JA['Hasso'] = set_combine(sets.precast.JA, {})
 	sets.precast.JA['Sengikori'] = set_combine(sets.precast.JA, {})
 	
@@ -335,7 +353,7 @@ function init_gear_sets()
 		right_ring="Sheltered Ring",
 		left_ring="Defending Ring",
 		back="Moonbeam Cape",
-		ammo="Staunch Tathlum"
+		ammo="Staunch Tathlum +1"
 	}
 	sets.Idle.Current = sets.Idle
     sets.Resting = sets.Idle
@@ -375,9 +393,12 @@ function job_post_precast(spell)
 	elseif player.tp < 2750 and spell.type == 'WeaponSkill' then
 		windower.add_to_chat(10,"Adding in Moonshade Earring for more TP:"..player.tp)
 		equip({left_ear="Moonshade Earring"})
-    elseif player.tp > 2750 and spell.type == 'WeaponSkill' and (world.time >= (17*60) or world.time < (7*60)) then
+    elseif player.tp >= 2750 and spell.type == 'WeaponSkill' and (world.time >= (17*60) or world.time < (7*60)) then
         equip({left_ear="Lugra Earring +1"})
 	end
+    if spell.type == 'WeaponSkill' and buffactive['Meikyo Shisui'] then
+        equip({feet="Sakonji Sune-Ate +3"})
+    end
 end
 
 function job_post_midcast(spell)

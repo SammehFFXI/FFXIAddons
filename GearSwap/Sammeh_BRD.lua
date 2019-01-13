@@ -114,7 +114,7 @@ function init_gear_sets()
     -- Fast cast sets for spells
     sets.precast.FastCast = {head="Vanya Hood",
 		neck="Voltsurge Torque",ear1="Loquacious earring",ear2="Enchntr. Earring +1",
-		body="Shango Robe",hands="Gende. Gages +1",ring1="Kishar Ring",ring2="Weather. Ring",
+		body="Inyanga Jubbah +2",hands="Gende. Gages +1",ring1="Kishar Ring",ring2="Weather. Ring",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",}
 
     sets.precast.FastCast.Cure = set_combine(sets.precast.FastCast, {back="Pahtli Cape",legs="Doyen Pants"})
@@ -126,14 +126,14 @@ function init_gear_sets()
     sets.precast.FastCast.BardSong = {
     	main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		sub="Ammurapi Shield",range="Gjallarhorn",body="Brioso Justau. +3",
-        head="Fili Calot +1",neck="Aoidos' Matinee",ear1="Aoidos' Earring",ear2="Loquac. Earring",
+        head="Fili Calot +1",neck="Aoidos' Matinee",ear2="Aoidos' Earring",ear1="Loquac. Earring",
         hands="Gendewitha Gages +1",ring1="Kishar Ring",ring2="Weather. Ring",
         back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Doyen Pants",feet="Bihu Slippers",}
 
     sets.precast.FastCast.BardSong = {
     	main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		sub="Ammurapi Shield",range="Gjallarhorn",body="Brioso Justau. +3",
-        head="Fili Calot +1",neck="Aoidos' Matinee",ear1="Aoidos' Earring",ear2="Loquac. Earring",
+        head="Fili Calot +1",neck="Aoidos' Matinee",ear2="Aoidos' Earring",ear1="Loquac. Earring",
         hands="Gendewitha Gages +1",ring1="Kishar Ring",--ring2="Weather. Ring",
         back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Doyen Pants",feet="Bihu Slippers",}
 
@@ -271,9 +271,9 @@ function init_gear_sets()
     
 	sets.midcast['Enhancing Magic'] = {
 		sub="Ammurapi Shield",
-		ammo="Staunch Tathlum",
+		ammo="Staunch Tathlum +1",
 		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
+		body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +10',}},
 		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
@@ -285,7 +285,7 @@ function init_gear_sets()
 		right_ring="Evanescence Ring",
 		back="Perimede Cape",
 	}
-	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
+	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash",legs="Shedir Seraweels"})
     
 	sets.midcast.RefreshRecieved = set_combine(sets.midcast['Enhancing Magic'], {back="Grapevine Cape",waist="Gishdubar Sash"})
 	
@@ -373,9 +373,9 @@ function init_gear_sets()
 	sets.meva = {
 		main="Terra's Staff",
         sub="Irenic Strap +1",
-        ammo="Staunch Tathlum",
+        ammo="Staunch Tathlum +1",
         head="Volte Cap",
-        body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +8',}},
+        body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +10',}},
         hands="Volte Bracers",
         legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
         feet="Volte Boots",
@@ -424,7 +424,7 @@ checkblocking(spell)
 end
 
 function job_precast(spell, action, spellMap, eventArgs)
-windower.add_to_chat(2,'Party Buffs in range?')
+--windower.add_to_chat(2,'Party Buffs in range?')
 checkblocking(spell)
 --[[
 	for i,v in pairs(buff) do

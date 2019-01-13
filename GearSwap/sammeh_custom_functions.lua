@@ -1,6 +1,11 @@
 state.SpellDebug = M{['description']='Debug Spells', 'Off', 'On'}
 send_command('alias spelldebug gs c cycle spelldebug')
 
+include('Mote-TreasureHunter')
+send_command('bind !` gs c cycle TreasureMode')
+sets.TreasureHunter = {head="Volte Cap",hands="Volte Bracers",Feet="Volte Boots",waist="Chaac Belt"}
+sets.CursnaReceived = {neck="Nicander's Necklace",waist="Gishdubar Sash",left_ring="Eshmun's Ring",right_ring="Eshmun's Ring",}
+
 -- require 'strings'
 -- require 'actions'
 -- require 'pack'
@@ -16,7 +21,7 @@ sets.craftgear = {body="Carpenter\'s Apron",ring1="Craftmaster\'s Ring",ring2="C
 
 follow = 0
 autorun = 0
-
+send_command('alias showstatus gs c cycle ShowStatus')
 send_command('alias craftgear gs equip sets.craftgear; lua unload gearswap')
 send_command('alias uncraft lua load gearswap; gs c update')
 send_command('alias revit input /item "Super Revitalizer" <me>')
@@ -41,9 +46,34 @@ send_command('alias echodrop input /item "Echo Drops" <me>')
 send_command('alias remedy input /item "Remedy" <me>')
 send_command('alias holywater input /item "Holy Water" <me>')
 send_command('alias warpring input /equip ring1 "Warp Ring"')
-send_command('alias adrink input /item "Assassin\'s Drink"')
+send_command('alias adrink input /item "Assassin\'s Drink" <me>')
 
 sets.frenzysallet = {head="Frenzy Sallet"}
+
+state.ShowStatus = M{['description']='Visible Status Box', 'False', 'True'}
+ShowStatus_txt = {}
+ShowStatus_txt.pos = {}
+ShowStatus_txt.pos.x = 1000
+--ShowStatus_txt.pos.y = 715
+ShowStatus_txt.pos.y = 875
+ShowStatus_txt.text = {}
+ShowStatus_txt.text.font = 'Arial'
+ShowStatus_txt.text.size = 8
+--ShowStatus_txt.flags = {}
+--ShowStatus_txt.flags.right = true
+ShowStatus_box = texts.new('${value}', ShowStatus_txt)
+
+windower.raw_register_event('prerender',function()
+    if state.ShowStatus.value == 'True' then
+        ShowStatus_box.value = "Offense Mode: "..state.OffenseMode.value.."\nIdle Mode: "..state.IdleMode.value
+        ShowStatus_box:visible(true)
+    else
+        ShowStatus_box:visible(false)
+    end
+    
+end)
+
+
 
 function check_temp_items()
  local tempitems = windower.ffxi.get_items(3)
@@ -101,8 +131,6 @@ function has_charges(--[[name of item]]item)
 	end
 	return false
 end
-
-
 
 function disable_specialgear()
 --[[
@@ -334,8 +362,8 @@ end
 function checkblocking(spell)
 	if type(windower.ffxi.get_player().autorun) == 'table' and (spell.action_type == 'Magic' or spell.name == 'Ranged') then 
 		windower.add_to_chat(3,'Currently auto-running - stopping to cast spell')
-		windower.ffxi.run(false)
-		windower.ffxi.follow()  -- disabling Follow - turning back autorun automatically turns back on follow.
+		windower.ffxi.run(false) -- Need to add a check for if autorun == 1 in aftercast to turn windower.ffxi.run back on.
+		windower.ffxi.follow()  -- disabling Follow - turning back autorun automatically turns back on follow.  
 		autorun = 1
 		cast_delay(.4)
 		return
@@ -506,8 +534,6 @@ function checkblocking(spell)
 	end
 end
 
-
-
 --[[
 Just not worth it
 
@@ -573,3 +599,9 @@ end)
 
 ]]
 
+--[[
+windower.raw_register_event('keyboard',function(dik, pressed, flags, blocked)
+print(dik,pressed,flags,blocked)
+end)
+
+]]

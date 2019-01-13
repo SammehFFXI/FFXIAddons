@@ -10,7 +10,7 @@ function user_setup()
 	send_command('bind f10 gs c cycle IdleMode')
 	send_command('bind f12 gs c wslist')
 	
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MEVA'}
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','STP','Reraise','DT','MEVA'}
     select_default_macro_book()
 	
 	-- Set Common Aliases --
@@ -18,6 +18,7 @@ function user_setup()
 	send_command("alias strwsset gs equip sets.ws.strbased")
 	send_command("alias vitwsset gs equip sets.ws.vitbased")
 	send_command("alias eng gs equip sets.engaged.Normal")
+    send_command("alias stp gs equip sets.engaged.STP")
 	send_command("alias meva gs equip sets.meva")
 	send_command("alias idle gs equip sets.Idle.Current")
 	send_command('@wait 5;input /lockstyleset 27')
@@ -59,9 +60,10 @@ end
 	
 function init_gear_sets()
 	sets.dt = {
-		ammo="Staunch Tathlum",
+		ammo="Staunch Tathlum +1",
 	    head="Sulevia's Mask +2",
-		body="Sulevia's Plate. +2",
+		--body="Sulevia's Plate. +2",
+        body="Tartarus Platemail",
 		hands="Sulev. Gauntlets +2",
 		legs="Sulev. Cuisses +2",
 		feet="Sulev. Leggings +2",
@@ -69,7 +71,7 @@ function init_gear_sets()
 		waist="Flume Belt +1",
 		left_ear="Eabani Earring",
 		right_ear="Flashward Earring",
-		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+		left_ring="Moonlight Ring",
 		right_ring="Defending Ring",
 		back="Solemnity Cape",
 	}
@@ -78,20 +80,37 @@ function init_gear_sets()
 		head="Flam. Zucchetto +2",
 		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
 		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
+        --hands={ name="Acro Gauntlets", augments={'Accuracy+20 Attack+20','"Store TP"+6','DEX+10',}},
 		legs="Sulev. Cuisses +2",
 		feet="Flam. Gambieras +2",
-		neck="Shulmanu Collar",
+		--neck="Shulmanu Collar",
+        neck="Anu Torque",
 		waist="Ioskeha Belt +1",
-		left_ear="Cessance Earring",
+		left_ear="Telos Earring",
 		right_ear="Sherida Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Petrov Ring",
 		back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
+    sets.engaged.STP = {
+        ammo="Ginsen",
+        head="Flam. Zucchetto +2",
+        body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
+        hands={ name="Acro Gauntlets", augments={'Accuracy+20 Attack+20','"Store TP"+6','DEX+10',}},
+        legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
+        feet="Flam. Gambieras +2",
+        neck="Anu Torque",
+        waist="Ioskeha Belt +1",
+        left_ear="Telos Earring",
+        right_ear="Sherida Earring",
+        left_ring="Flamma Ring",
+        right_ring="Petrov Ring",
+        back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10',}},
+    }
 	sets.meva = {
-		ammo="Staunch Tathlum",
+		ammo="Staunch Tathlum +1",
 		head="Volte Cap",
-		body={ name="Jumalik Mail", augments={'HP+50','Attack+15','Enmity+9','"Refresh"+2',}},
+		body="Tartarus Platemail",
 		hands="Volte Bracers",
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
 		feet="Volte Boots",
@@ -106,6 +125,7 @@ function init_gear_sets()
 	sets.engaged.MEVA = sets.meva
 	
 	sets.engaged.Reraise = set_combine(sets.engaged.Normal,{body="Twilight Mail",head="Twilight Helm"})
+    
 	sets.engaged.DT = sets.dt
 	sets.ws = {
 		-- ammo="Seeth. Bomblet +1",
@@ -118,18 +138,48 @@ function init_gear_sets()
 		feet="Sulev. Leggings +2",
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
-		left_ear="Sherida Earring",
-		right_ear="Telos Earring",
+		right_ear="Sherida Earring",
+		left_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Regal Ring",
 		back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
+    sets.ws['Leg Sweep'] = {
+        ammo="Pemphredo Tathlum",
+        head="Flam. Zucchetto +2",
+        body="Flamma Korazin +2",
+        hands="Flam. Manopolas +2",
+        legs="Flamma Dirs +2",
+        feet="Flam. Gambieras +2",
+        neck="Sanctity Necklace",
+        waist="Eschan Stone",
+        left_ear="Enchntr. Earring +1",
+        right_ear="Digni. Earring",
+        left_ring="Niqmaddu Ring",
+        right_ring="Regal Ring",
+        back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
+    }
 	sets.ws.Stardiver = set_combine(sets.ws, {
 		feet="Flam. Gambieras +2",
 	})
-	sets.ws['Camlann\'s Torment'] = set_combine(sets.ws, {
-	    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
-	})
+    sets.ws.WSD = {
+        ammo="Knobkierrie",
+        head={ name="Valorous Mask", augments={'"Mag.Atk.Bns."+4','Mag. Acc.+24','Weapon skill damage +9%',}},
+        body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},
+        --hands={ name="Valorous Mitts", augments={'Attack+16','Weapon skill damage +3%','STR+10','Accuracy+7',}},
+        hands="Ptero. Fin. G. +2",
+        legs="Vishap Brais +3",
+        feet="Sulev. Leggings +2",
+        neck="Fotia Gorget",
+        waist="Fotia Belt",
+        left_ear="Ishvara Earring",
+        right_ear="Sherida Earring",
+        left_ring="Epaminondas's Ring",
+        right_ring="Karieyh Ring",
+        back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
+    }
+	sets.ws['Camlann\'s Torment'] = sets.ws.WSD
+    sets.ws['Sonic Thrust'] = sets.ws.WSD
 	
 	sets.ws.magic = {
 	    ammo="Pemphredo Tathlum",
@@ -143,7 +193,7 @@ function init_gear_sets()
 		left_ear="Hermetic Earring",
 		right_ear="Crematio Earring",
 		left_ring="Etana Ring",
-		right_ring="Weather. Ring",
+		--right_ring="Weather. Ring",
 		back="Argocham. Mantle",
 	}
 		
@@ -153,7 +203,14 @@ function init_gear_sets()
 	sets.precast.JA.Berserk = {}
 	sets.precast.JA.Warcry = {}
 	sets.precast.JA.Meditate = {}
-	sets.precast.JA.Angon = {ammo="Angon", hands="Ptero. Fin. G. +1"}
+	sets.precast.JA.Angon = {ammo="Angon", hands="Ptero. Fin. G. +2"}
+    sets.precast.JA['Deep Breathing'] = {head="Ptero. Armet +3"}
+    sets.precast.JA['Spirit Link'] = {head="Ptero. Armet +3"}
+    sets.precast.JA['Call Wyvern'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},}
+    sets.precast.JA['Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},}
+    sets.precast.JA['High Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},}
+    sets.precast.JA['Spirit Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},}
+    sets.precast.JA['Soul Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},}
 	
 	sets.WSDayBonus = {head="Gavialis Helm"}
 
@@ -167,7 +224,8 @@ function init_gear_sets()
     sets.Idle = {
 		ammo="Ginsen",
 		head="Twilight Helm",
-		body="Sulevia's Plate. +2",
+		--body="Sulevia's Plate. +2",
+        body="Tartarus Platemail",
 		hands="Sulev. Gauntlets +2",
 		legs="Carmine Cuisses +1",
 		feet="Sulev. Leggings +2",
@@ -175,7 +233,7 @@ function init_gear_sets()
 		waist="Flume Belt +1",
 		right_ear="Genmei Earring",
 		left_ear="Odnowa Earring +1",
-		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+		left_ring="Moonlight Ring",
 		right_ring="Defending Ring",
 		back="Solemnity Cape",
 	}
@@ -333,5 +391,5 @@ end
 
 
 function select_default_macro_book()
-    set_macro_page(9, 1)
+    set_macro_page(10, 2)
 end

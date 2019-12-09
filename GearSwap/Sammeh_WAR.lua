@@ -6,14 +6,18 @@ function get_sets()
 end
 
 function user_setup()
-	state.IdleMode:options('Normal','Reraise','DT','MEVA')
+	state.IdleMode:options('Normal','Reraise','MEVA')
 	send_command('bind f10 gs c cycle IdleMode')
 	send_command('bind f11 gs c berserkmode')
 	send_command('bind f12 gs c wslist')
 	
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy','ShieldBlock','MEVA'}
-	state.BerserkMode = M{['description']='Berserk Mode', 'Normal','Auto'}
+	--state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy','ShieldBlock','MEVA'}
+    --state.OffenseMode = M{['description']='Engaged Mode', 'Normal','DT','HighAccuracy','DW','DWAcc'}
+    state.OffenseMode = M{['description']='Engaged Mode', 'Normal','DT','HighAccuracy'}
+	state.BerserkMode = M{['description']='Berserk Mode', 'Normal','Auto','Auto:Swap','Auto:NoSwap'}
+    state.EnmityMode = M{['description']='Enmity Mode','Off','On'}
     state.WeaponskillMode:options('Normal','ACC')
+    --state.WeaponskillMode:options('Normal','ACC','Iroha')
     select_default_macro_book()
 	
 	-- Set Common Aliases --
@@ -57,7 +61,7 @@ function user_setup()
 		},
 		["Axe"] = {
 			["1"] = "Mistral Axe",
-			["2"] = "Calamity",
+			["2"] = "Decimation",
 			["3"] = "Cloudsplitter"
 		},
 		["Sword"] = {
@@ -102,7 +106,8 @@ function init_gear_sets()
 		sub="Utu Grip"
 	}
 	sets.sword = {
-		main="Reikiko",
+		--main="Reikiko",
+        main="Naegling",
 		sub="Blurred Shield +1"
 	}
 	sets.axe = {
@@ -173,21 +178,21 @@ function init_gear_sets()
 	} --pdt 31 --mdt 31 (+20% aftermath DT) 
 	sets.engaged = {}
 	sets.engaged.Normal = {
-		ammo="Ginsen",
-		head="Flamma Zucchetto +2",
-		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
-		hands="Sulev. Gauntlets +2",
-		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
-		feet="Pumm. Calligae +3",
-		--neck="Combatant's Torque",
-        neck="Warrior's Beads",
-		waist="Ioskeha Belt +1",
-		right_ear="Telos Earring",
-		left_ear="Cessance Earring",
-		left_ring="Niqmaddu Ring",
-		right_ring="Petrov Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
+        ammo="Ginsen",
+        head="Flam. Zucchetto +2",
+        body="Hjarrandi Breast.",
+        hands="Sulev. Gauntlets +2",
+        legs="Pumm. Cuisses +3",
+        feet="Pumm. Calligae +3",
+        neck="War. Beads +2",
+        waist="Ioskeha Belt +1",
+        left_ear="Cessance Earring",
+        right_ear="Telos Earring",
+        left_ring="Niqmaddu Ring",
+        right_ring="Petrov Ring",
+        back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
 	}
+    sets.engaged.DW = set_combine(sets.engaged.Normal, {ear1="Suppanomimi",back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Damage taken-5%',}},})
 	
 	sets.enmity = {
 	    ammo="Aqreqaq Bomblet", -- 2
@@ -212,13 +217,31 @@ function init_gear_sets()
 		hands="Pumm. Mufflers +3",
 		legs="Pumm. Cuisses +3",
 		feet="Pumm. Calligae +3",
-        neck="Warrior's Beads",
+        neck="War. Beads +2",
 		waist="Ioskeha Belt +1",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Regal Ring",
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
+	}
+    sets.engaged.DWAcc = set_combine(sets.engaged.HighAccuracy, {ear1="Suppanomimi",back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Damage taken-5%',}},})
+    sets.engaged.Iroha = {
+	    ammo="Ginsen",
+        --head="Volte Salade",
+        head="Flamma Zucchetto +2",
+        body="Tartarus Platemail",
+        hands="Sulev. Gauntlets +2",
+        --legs={ name="Agoge Cuisses +3", augments={'Enhances "Warrior\'s Charge" effect',}},
+        legs="Pumm. Cuisses +3",
+        feet="Pumm. Calligae +3",
+        neck="War. Beads +2",
+        waist="Ioskeha Belt +1",
+        left_ear="Cessance Earring",
+        right_ear="Telos Earring",
+        left_ring="Moonlight Ring",
+        right_ring="Moonlight Ring",
+        back={ name="Cichol's Mantle", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Mag. Evasion+15',}},
 	}
 	sets.engaged.MedAccuracy = {
 	    ammo="Ginsen",
@@ -227,7 +250,7 @@ function init_gear_sets()
 		hands="Sulev. Gauntlets +2",
 		legs="Pumm. Cuisses +3",
 		feet="Pumm. Calligae +3",
-		neck="Warrior's Beads",
+		neck="War. Beads +2",
 		waist="Ioskeha Belt +1",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
@@ -275,7 +298,8 @@ function init_gear_sets()
         --head="Sulevia's Mask +2",
 		body="Pumm. Lorica +3",
 		right_ring="Regal Ring",
-        hands={ name="Odyssean Gauntlets", augments={'Accuracy+18 Attack+18','Weapon skill damage +4%','STR+15',}},
+        --hands={ name="Odyssean Gauntlets", augments={'Accuracy+18 Attack+18','Weapon skill damage +4%','STR+15',}},
+        hands="Agoge Mufflers +3",
 		legs="Sulev. Cuisses +2",
 		feet="Pumm. Calligae +3",
 		back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
@@ -315,12 +339,32 @@ function init_gear_sets()
 		waist="Fotia Belt",
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
-		left_ring="Niqmaddu Ring",
-		right_ring="Regal Ring",
+		--left_ring="Niqmaddu Ring",
+        left_ring="Karieyh Ring",
+        right_ring="Epaminondas's Ring",
+		--right_ring="Regal Ring",
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
 	}
 	
-	sets.ws["King\'s Justice"] = sets.ws.strbased
+	sets.ws["King\'s Justice"] = {}
+    --sets.ws["King\'s Justice"].Normal = sets.ws.strbased
+    
+    sets.ws["King\'s Justice"].Iroha = {
+        ammo="Knobkierrie",
+        head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
+        body="Tartarus Platemail",
+        hands="Sulev. Gauntlets +2",
+        --legs={ name="Agoge Cuisses +3", augments={'Enhances "Warrior\'s Charge" effect',}},
+        legs="Pumm. Cuisses +3",
+        feet="Pumm. Calligae +3",
+        neck="Fotia Gorget",
+        waist="Fotia Belt",
+        left_ear="Cessance Earring",
+        right_ear="Telos Earring",
+        left_ring="Moonlight Ring",
+        right_ring="Moonlight Ring",
+        back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
+    }
 	sets.ws["Fell Cleve"] = sets.ws.strbased
 	sets.ws["Scourge"] = sets.ws.wsd
 	sets.ws["Resolution"] = sets.ws.strbased
@@ -328,14 +372,15 @@ function init_gear_sets()
     
 	sets.ws["Decimation"] = sets.ws.strbased
 	sets.ws["Rampage"] = sets.ws.wsd
-	sets.ws["Mistral Axe"] = set_combine(sets.ws.wsd, {neck="Warrior's Beads",waist="Engraved Belt"})
-	sets.ws.savageblade = set_combine(sets.ws.wsd, {neck="Warrior's Beads",waist="Engraved Belt",legs="Sulev. Cuisses +2",})
-	sets.ws["Savage Blade"] = set_combine(sets.ws.wsd, {neck="Warrior's Beads",waist="Engraved Belt",legs="Sulev. Cuisses +2",})
+	sets.ws["Mistral Axe"] = set_combine(sets.ws.wsd, {neck="War. Beads +2",waist="Engraved Belt"})
+	sets.ws.savageblade = set_combine(sets.ws.wsd, {neck="War. Beads +2",waist="Engraved Belt",legs="Sulev. Cuisses +2",})
+	sets.ws["Savage Blade"] = set_combine(sets.ws.wsd, {neck="War. Beads +2",waist="Engraved Belt",legs="Sulev. Cuisses +2",})
 	sets.ws["Judgment"] = sets.ws.savageblade
 	sets.ws["True Strike"] = sets.ws.wsd
 	sets.ws["Black Halo"] = sets.ws.savageblade
 	sets.ws["Metatron Torment"] = sets.ws.wsd
-	sets.ws["Upheaval"] = sets.ws.vitbased
+	sets.ws["Upheaval"] = {}
+    sets.ws["Upheaval"].Normal = sets.ws.vitbased
     sets.ws["Upheaval"].ACC = {
         ammo="Knobkierrie",
         head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
@@ -351,6 +396,22 @@ function init_gear_sets()
         right_ring="Regal Ring",
         back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
     }
+    sets.ws["Upheaval"].Iroha = {
+        ammo="Knobkierrie",
+        head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
+        body="Tartarus Platemail",
+        hands="Sulev. Gauntlets +2",
+        --legs={ name="Agoge Cuisses +3", augments={'Enhances "Warrior\'s Charge" effect',}},
+        legs="Pumm. Cuisses +3",
+        feet="Pumm. Calligae +3",
+        neck="Fotia Gorget",
+        waist="Fotia Belt",
+        left_ear="Cessance Earring",
+        right_ear="Telos Earring",
+        left_ring="Moonlight Ring",
+        right_ring="Moonlight Ring",
+        back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','"Dbl.Atk."+10',}},
+    }
 	sets.ws["Cloudsplitter"] = sets.ws.magic
 	sets.ws["Freezebite"] = sets.ws.magic
 	sets.ws["Aeolian Edge"] = sets.ws.magic
@@ -361,7 +422,8 @@ function init_gear_sets()
 	
     ---  PRECAST SETS  ---
 	sets.precast = {}
-    sets.precast.JA = set_combine(sets.enmity, {})
+    -- sets.precast.JA = set_combine(sets.enmity, {})
+    sets.precast.JA = {}
 	sets.precast.JA.Berserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +3"})
 	sets.MaxBerserk = set_combine(sets.precast.JA, {back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},body="Pumm. Lorica +3",feet="Agoge Calligae +3",main="Firangi"})
 	sets.precast.JA.Warcry = set_combine(sets.precast.JA, {head="Agoge mask +3"})
@@ -398,25 +460,32 @@ function init_gear_sets()
 		right_ring="Defending Ring",
 		back="Moonbeam Cape",
 	}
-
+    sets.sird = {
+	    ammo="Staunch Tathlum +1",
+		head={ name="Souv. Schaller +1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',},priority=15},
+		legs={ name="Founder's Hose", augments={'MND+10','Mag. Acc.+15','Attack+15','Breath dmg. taken -5%',},priority=2},
+		feet={ name="Odyssean Greaves", augments={'"Mag.Atk.Bns."+15','"Fast Cast"+4','Mag. Acc.+8',},priority=1},
+		neck="Moonbeam Necklace",
+	}
+	
 	
     sets.midcast = {}
     
     ---  AFTERCAST SETS  ---
     sets.Idle = {
 		ammo="Staunch Tathlum +1",
-		head="Volte Salade",
-        body="Tartarus Platemail",
-		hands="Sulev. Gauntlets +2",
-		legs="Volte Brayettes",
-		feet="Volte Sollerets",
-		neck="Bathy Choker +1",
-		waist="Flume Belt +1",
-		left_ear="Genmei Earring",
-		right_ear="Odnowa Earring +1",
-		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
-		right_ring="Defending Ring",
-		back="Solemnity Cape",
+        head="Volte Salade",
+        body="Hjarrandi Breast.",
+        hands="Sulev. Gauntlets +2",
+        legs="Volte Brayettes",
+        feet="Volte Sollerets",
+        neck="Bathy Choker +1",
+        waist="Flume Belt +1",
+        left_ear="Genmei Earring",
+        right_ear="Odnowa Earring +1",
+        left_ring="Karieyh Ring",
+        right_ring="Defending Ring",
+        back="Moonbeam Cape",
 	}
 	
 	sets.Idle.Current = sets.Idle
@@ -467,6 +536,9 @@ function job_post_precast(spell)
     if (world.time >= (17*60) or world.time < (7*60)) and spell.type == 'WeaponSkill' then
         equip({right_ear="Lugra Earring +1"})
     end
+    if state.EnmityMode == 'On' then
+        
+    end
 end
 
 function job_midcast(spell)
@@ -477,7 +549,7 @@ function job_midcast(spell)
 		equip(sets.dtenmity)
 	end
 	if spell.name:contains('Utsusemi') then
-		equip(sets.precast.FastCast)
+		equip(set_combine(sets.precast.FastCast, sets.sird ))
 	end
 end
 
@@ -506,7 +578,7 @@ function job_post_aftercast(spell)
 	   currentMain = player.equipment.main
 	   currentSub = player.equipment.sub
 	   windower.add_to_chat("Current Equipment: "..currentMain.." "..currentSub)
-	   equip(sets.MaxBerserk)
+	   -- equip(sets.MaxBerserk)
 	   send_command("@wait 2.5;input /ja Berserk <me>")
 	end
 	if spell.name == "Berserk" and state.BerserkMode.value == "Auto" and currentMain and currentSub then

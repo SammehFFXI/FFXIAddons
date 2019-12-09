@@ -29,8 +29,8 @@ function user_setup()
 	send_command("alias g11_m2g8 input /ja 'Spirit Jump' <t>")
 	send_command("alias g11_m2g9 input /ja 'Soul Jump' <t>")
 	send_command("alias g11_m2g10 input /pet 'Steady Wing' <me>")
-	send_command("alias g11_m2g11 input /ja Defender <me>")
-	send_command("alias g11_m2g12 input /ja Restraint <me>")
+	send_command("alias g11_m2g11 input /ja 'Jump' <t> ")
+	send_command("alias g11_m2g12 input /ja 'High Jump' <t>")
 	send_command("alias g11_m2g13 input /ja Berserk <me>")
 	send_command("alias g11_m2g14 input /ja Warcry <me>")
 	send_command("alias g11_m2g15 input /ja Aggressor <me>")
@@ -160,14 +160,25 @@ function init_gear_sets()
         back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
     }
 	sets.ws.Stardiver = set_combine(sets.ws, {
-		feet="Flam. Gambieras +2",
+		head={ name="Ptero. Armet +3", augments={'Enhances "Deep Breathing" effect',}},
+        body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},
+        hands="Sulev. Gauntlets +2",
+        legs="Sulev. Cuisses +2",
+        feet="Sulev. Leggings +2",
+        neck="Fotia Gorget",
+        waist="Fotia Belt",
+        left_ear="Telos Earring",
+        right_ear="Sherida Earring",
+        left_ring="Niqmaddu Ring",
+        right_ring="Regal Ring",
+        back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	})
     sets.ws.WSD = {
         ammo="Knobkierrie",
         head={ name="Valorous Mask", augments={'"Mag.Atk.Bns."+4','Mag. Acc.+24','Weapon skill damage +9%',}},
         body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},
         --hands={ name="Valorous Mitts", augments={'Attack+16','Weapon skill damage +3%','STR+10','Accuracy+7',}},
-        hands="Ptero. Fin. G. +2",
+        hands="Ptero. Fin. G. +3",
         legs="Vishap Brais +3",
         feet="Sulev. Leggings +2",
         neck="Fotia Gorget",
@@ -203,14 +214,14 @@ function init_gear_sets()
 	sets.precast.JA.Berserk = {}
 	sets.precast.JA.Warcry = {}
 	sets.precast.JA.Meditate = {}
-	sets.precast.JA.Angon = {ammo="Angon", hands="Ptero. Fin. G. +2"}
+	sets.precast.JA.Angon = {ammo="Angon", hands="Ptero. Fin. G. +3"}
     sets.precast.JA['Deep Breathing'] = {head="Ptero. Armet +3"}
     sets.precast.JA['Spirit Link'] = {head="Ptero. Armet +3"}
     sets.precast.JA['Call Wyvern'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},}
-    sets.precast.JA['Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},}
-    sets.precast.JA['High Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},}
-    sets.precast.JA['Spirit Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},}
-    sets.precast.JA['Soul Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},}
+    sets.precast.JA['Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},feet="Ostro Greaves"}
+    sets.precast.JA['High Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},feet="Ostro Greaves"}
+    sets.precast.JA['Spirit Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},feet="Ostro Greaves"}
+    sets.precast.JA['Soul Jump'] = {body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},feet="Ostro Greaves"}
 	
 	sets.WSDayBonus = {head="Gavialis Helm"}
 

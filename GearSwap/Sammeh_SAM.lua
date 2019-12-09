@@ -11,7 +11,7 @@ function user_setup()
 	send_command('bind f12 gs c wslist')
 	
 	--state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Zanshin','Reraise','DT','MedAccuracy','HighAccuracy','HighACCMDB','MEVA'}
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','DT','HighAccuracy','MEVA','Reraise'}
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','DT','HighAccuracy','MEVA','Reraise','TH'}
 	-- f9 =  offense mode
 	state.WeaponskillMode:options('Normal','Acc','WSD','AccMDB')
 	-- win+f9 = ws mode
@@ -71,8 +71,9 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head="Volte Cap",
 		body="Ken. Samue +1",
-		hands="Volte Bracers",
-		--legs="Ken. Hakama +1",
+		--hands="Volte Bracers",
+        hands="Ken. Tekko +1",
+		legs="Ken. Hakama +1",
 		feet="Ken. Sune-Ate",
 		neck="Warder's Charm +1",
 		waist="Carrier's Sash",
@@ -123,7 +124,8 @@ function init_gear_sets()
 	--sets.engaged["Aftermath: Lv.3"] = set_combine(sets.engaged, {legs="Ken. Hakama +1"})
 	--sets.engaged.Zanshin["Aftermath: Lv.3"] = set_combine(sets.engaged, {legs="Ken. Hakama +1"})
 	
-	sets.engaged.Reraise = set_combine(sets.engaged,{body="Twilight Mail",head="Twilight Helm"})
+	sets.engaged.Reraise = set_combine(sets.engaged.Normal,{body="Twilight Mail",head="Twilight Helm"})
+    sets.engaged.TH = set_combine(sets.engaged.Normal,{head="Volte Cap",hands="Volte Bracers",Feet="Volte Boots",waist="Chaac Belt"})
 	sets.engaged.MEVA = sets.meva
 	sets.engaged.HighACCMDB = {
 	    ammo="Ginsen",
@@ -190,6 +192,22 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1"
 	}
 	sets.engaged.DT = sets.dt
+    sets.engaged.DT = {
+        sub="Khonsu",
+        ammo="Ginsen",
+        head="Flam. Zucchetto +2",
+        body="Wakido Domaru +3",
+        hands="Wakido Kote +3",
+        legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
+        feet="Flam. Gambieras +2",
+        neck="Sam. Nodowa +2",
+        waist="Ioskeha Belt +1",
+        left_ear="Cessance Earring",
+        right_ear="Telos Earring",
+        left_ring="Niqmaddu Ring",
+        right_ring="Defending Ring",
+        back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},
+    }
 	sets.precast.WS = {
 		ammo="Knobkierrie",
 		head="Flam. Zucchetto +2",
@@ -277,7 +295,7 @@ function init_gear_sets()
 	sets.ranged = {
 		head="Sakonji Kabuto +3",
 		body="Ken. Samue +1",
-		hands="Ken. Tekko",
+		hands="Ken. Tekko +1",
         legs="Wakido Haidate +3",
 		--legs="Ken. Hakama +1",
 		feet="Ken. Sune-Ate",
@@ -490,13 +508,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	elseif state.IdleMode.value == "MEVA" then 
 		sets.Idle.Current = sets.meva
 	elseif state.IdleMode.value == "DT" or state.OffenseMode.value == "DT" then
-		if buffactive['Aftermath'] then
-			sets.Idle.Current = sets.dtaftermath
-			sets.engaged.DT = sets.dtaftermath
-		else
-			sets.Idle.Current = sets.dt
-			sets.engaged.DT = sets.dt
-		end
+		sets.Idle.Current = sets.dt
 	else
 	   sets.Idle.Current = sets.Idle
 	end

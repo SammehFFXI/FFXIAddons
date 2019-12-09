@@ -136,7 +136,7 @@ function init_gear_sets()
 		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','Weapon skill damage +10%',}},
 	}
 	sets.precast.WS['Leaden Salute'] = {
-	    head={ name="Herculean Helm", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Weapon skill damage +2%','INT+8','Mag. Acc.+15',}},
+        head={ name="Herculean Helm", augments={'"Avatar perpetuation cost" -1','Pet: Accuracy+30 Pet: Rng. Acc.+30','Weapon skill damage +5%','Accuracy+17 Attack+17','Mag. Acc.+17 "Mag.Atk.Bns."+17',}},
 		--head="Pixie Hairpin +1",
 		body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
 		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
@@ -154,8 +154,8 @@ function init_gear_sets()
 	}
     sets.precast.WS['Wildfire'] = sets.precast.WS['Leaden Salute']
 	sets.precast.CorsairShot = {
-	    head={ name="Herculean Helm", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Weapon skill damage +2%','INT+8','Mag. Acc.+15',}},
-		body="Oshosi Vest",
+	    head={ name="Herculean Helm", augments={'"Avatar perpetuation cost" -1','Pet: Accuracy+30 Pet: Rng. Acc.+30','Weapon skill damage +5%','Accuracy+17 Attack+17','Mag. Acc.+17 "Mag.Atk.Bns."+17',}},
+        body="Oshosi Vest",
 		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
 		legs={ name="Herculean Trousers", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic burst dmg.+3%','MND+3','Mag. Acc.+9','"Mag.Atk.Bns."+5',}},
 		--feet={ name="Herculean Boots", augments={'Accuracy+29','INT+7','"Refresh"+2','Mag. Acc.+16 "Mag.Atk.Bns."+16',}},

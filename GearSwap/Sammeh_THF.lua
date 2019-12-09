@@ -26,8 +26,9 @@ function init_gear_sets()
 	-- Idle Sets
 	
 	sets.engaged = {
-	    head={ name="Dampening Tam", augments={'DEX+1','Quadruple Attack +2',}},
-		body={ name="Adhemar Jacket", augments={'DEX+10','AGI+10','Accuracy+15',}},
+	    --head={ name="Dampening Tam", augments={'DEX+1','Quadruple Attack +2',}},
+        head="Malignance Chapeau",
+		body="Adhemar Jacket +1",
 		hands={ name="Herculean Gloves", augments={'Attack+4','"Triple Atk."+4','DEX+1','Accuracy+14',}},
 		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
 		feet={ name="Herculean Boots", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','STR+11','Quadruple Attack +2','Accuracy+18 Attack+18',}},
@@ -35,7 +36,7 @@ function init_gear_sets()
 		waist="Reiki Yotai",
 		left_ear="Sherida Earring",
 		right_ear="Brutal Earring",
-		left_ring="Hetairoi Ring",
+		left_ring="Gere Ring",
 		right_ring="Epona's Ring",
 		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
 	}
@@ -49,7 +50,7 @@ function init_gear_sets()
 		waist="Fotia Belt",
 		left_ear="Sherida Earring",
 		right_ear="Moonshade Earring",
-		left_ring="Hetairoi Ring",
+		left_ring="Gere Ring",
 		right_ring="Epona's Ring",
 		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
 	}
@@ -63,7 +64,7 @@ function init_gear_sets()
     waist="Eschan Stone",
     left_ear="Crematio Earring",
     right_ear="Hermetic Earring",
-    left_ring="Hetairoi Ring",
+    left_ring="Gere Ring",
     right_ring="Epona's Ring",
 	}
 	

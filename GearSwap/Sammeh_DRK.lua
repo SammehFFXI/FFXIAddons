@@ -38,7 +38,7 @@ function init_gear_sets()
 	sets.dt = {
 		ammo="Staunch Tathlum",
 	    head="Sulevia's Mask +2",
-		body="Sulevia's Plate. +2",
+		body="Hjarrandi Breastplate",
 		hands="Sulev. Gauntlets +2",
 		legs="Sulev. Cuisses +2",
 		feet="Sulev. Leggings +2",
@@ -48,36 +48,37 @@ function init_gear_sets()
 		right_ear="Flashward Earring",
 		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
 		right_ring="Defending Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 	}
 	sets.engaged = {
 		ammo="Ginsen",
 		head="Flamma Zucchetto +2",
-		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
+		body="Hjarrandi Breastplate",
 		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
 		feet="Flamma gambieras +2",
-		neck="Combatant's Torque",
-		waist="Ioskeha Belt",
+		neck="Abyssal Beads +1",
+		waist="Ioskeha Belt +1",
 		right_ear="Telos Earring",
 		left_ear="Cessance Earring",
 		left_ring="Niqmaddu Ring",
-		right_ring="Petrov Ring",
+		right_ring="Moonlight Ring",
 		back={ name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
 	sets.engaged.Normal = {
 		ammo="Ginsen",
 		head="Flamma Zucchetto +2",
-		body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
+		--body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
+        body="Hjarrandi Breastplate",
 		hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
 		legs={ name="Odyssean Cuisses", augments={'Accuracy+22 Attack+22','"Store TP"+6','STR+8',}},
 		feet="Flamma gambieras +2",
-		neck="Combatant's Torque",
-		waist="Ioskeha Belt",
+		neck="Abyssal Beads +1",
+		waist="Ioskeha Belt +1",
 		right_ear="Telos Earring",
 		left_ear="Cessance Earring",
 		left_ring="Niqmaddu Ring",
-		right_ring="Petrov Ring",
+		right_ring="Moonlight Ring",
 		back={ name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
 	}
 	sets.engaged.Reraise = set_combine(sets.engaged,{body="Twilight Mail",head="Twilight Helm"})
@@ -133,7 +134,7 @@ function init_gear_sets()
 		legs="Carmine Cuisses +1",
 		feet={ name="Odyssean Greaves", augments={'"Mag.Atk.Bns."+15','"Fast Cast"+4','Mag. Acc.+8',}},
 		neck="Voltsurge Torque",
-		waist="Ioskeha Belt",
+		waist="Ioskeha Belt +1",
 		left_ear="Enchntr. Earring +1",
 		right_ear="Loquac. Earring",
 		left_ring="Kishar Ring",
@@ -149,7 +150,7 @@ function init_gear_sets()
     sets.Idle = {
 		ammo="Ginsen",
 		head="Twilight Helm",
-		body="Sulevia's Plate. +2",
+		body="Hjarrandi Breastplate",
 		hands="Sulev. Gauntlets +2",
 		legs="Carmine Cuisses +1",
 		feet="Sulev. Leggings +2",
@@ -159,7 +160,7 @@ function init_gear_sets()
 		left_ear="Cessance Earring",
 		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
 		right_ring="Defending Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 	}
 	
 	sets.Idle.Current = sets.Idle

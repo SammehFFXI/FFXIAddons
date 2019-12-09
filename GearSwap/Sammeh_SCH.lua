@@ -9,7 +9,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'MACC', 'MagicBurst','StoreTP')
     state.IdleMode:options('Normal','PDT','MEVA','MaxHP')
 	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock'}
-	state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
+	state.RegenMode = M{['description']='Regen Mode','Potency','Duration'}
 	send_command('alias tp gs c cycle tpmode')
 	send_command('alias regenmode gs c cycle regenmode')
     send_command('bind f10 gs c cycle idlemode')
@@ -52,7 +52,7 @@ function init_gear_sets()
 	-- weaponlock_main="Akademos"
 	weaponlock_main="Khatvanga"
 	--weaponlock_sub="Clerisy Strap +1"
-	weaponlock_sub="Enki Strap"
+	weaponlock_sub="Khonsu"
 	
 	-- array for specific elemental magic - Ex: as sets.ele.Wind = {back="Back Armor with +wind"}
 	sets.ele = {}
@@ -106,8 +106,8 @@ function init_gear_sets()
 	}
 	
 	sets.MaxHP = {
-	    main="Raetic Staff +1",
-        sub="Irenic Strap +1",
+	    main="Musa",
+        sub="Khonsu",
         ammo="Homiliary",
         head="Acad. Mortar. +3",
         body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
@@ -142,6 +142,7 @@ function init_gear_sets()
 		right_ring="Weather. Ring", -- FC 5, QC 3
 		back="Perimede Cape", -- QC 4
 	}  -- FC +70, QC +10
+    sets.precast.Dispelga = set_combine(sets.precast.FastCast,{main="Daybreak",sub="Ammurapi Shield"})
     sets.precast.EnhancingMagic = set_combine(sets.precast.FastCast,{waist="Siegel Sash"})
     sets.precast.Stoneskin = set_combine(sets.precast.EnhancingMagic,{head="Umuthi Hat",legs="Doyen Pants"})
 	sets.precast.Cure = set_combine(sets.precast.FastCast,{
@@ -157,45 +158,47 @@ function init_gear_sets()
 	
 	-- Max MP set
     sets.precast.WS['Myrkr'] = {
-		ammo="Incantor Stone",
-		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
-		body={ name="Amalric Doublet", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
-		hands={ name="Amalric Gages", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
-		legs={ name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},
-		feet="Volte Boots",
-		neck="Sanctity Necklace",
-		waist="Luminary Sash",
-		left_ear="Loquac. Earring",
-		right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +250',}},
-		left_ring="Mephitas's Ring +1",
-		right_ring="Etana Ring",
-		back="Pahtli Cape",
-	} 
+	    ammo="Incantor Stone",
+        head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
+        body={ name="Amalric Doublet", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
+        hands={ name="Amalric Gages", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
+        legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+        feet={ name="Amalric Nails +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+        neck="Sanctity Necklace",
+        waist="Luminary Sash",
+        left_ear="Loquac. Earring",
+        right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +250',}},
+        left_ring="Mephitas's Ring +1",
+        right_ring="Etana Ring",
+        back="Pahtli Cape",
+    } 
 	
 	
     ---  MIDCAST SETS  ---
     sets.midcast = {}
 	sets.midcast['Elemental Magic'] = {
 		main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
-		sub="Enki Strap",
+		sub="Khonsu",
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
 		body={ name="Merlinic Jubbah", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Drain" and "Aspir" potency +3','MND+5','Mag. Acc.+10','"Mag.Atk.Bns."+13',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
-		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
+		--legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
+        legs="Amalric Slops +1",
+		--feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
+        feet="Amalric Nails +1",
 		--neck="Sanctity Necklace",
         neck="Argute Stole +2",
 		waist="Refoccilation Stone",
 		left_ear="Regal Earring",
-		right_ear="Barkaro. Earring",
+		right_ear="Malignance Earring",
 		left_ring="Resonance Ring",
-		right_ring="Weather. Ring",
+		right_ring="Shiva Ring +1",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 	}
 	sets.midcast['Elemental Magic'].MACC = {
 	    main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
-		sub="Enki Strap",
+		sub="Khonsu",
 		ammo="Pemphredo Tathlum",
 		head="Acad. Mortar. +3",
 		body="Acad. Gown +3",
@@ -206,7 +209,7 @@ function init_gear_sets()
         neck="Argute Stole +2",
 		waist="Refoccilation Stone",
 		left_ear="Regal Earring",
-		right_ear="Barkaro. Earring",
+		right_ear="Malignance Earring",
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
@@ -214,7 +217,7 @@ function init_gear_sets()
 	
 	sets.midcast['Elemental Magic'].StoreTP = {
 	    main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},
-		sub="Enki Strap",
+		sub="Khonsu",
 		ammo="Seraphic Ampulla",
 		head={ name="Helios Band", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','"Occult Acumen"+7','Mag. crit. hit dmg. +10%',}},
 		body="Seidr Cotehardie",
@@ -232,14 +235,16 @@ function init_gear_sets()
 	
 	sets.midcast['Elemental Magic'].MagicBurst = {
 	    main={ name="Akademos", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
-		sub="Enki Strap",
+		sub="Khonsu",
 		ammo="Pemphredo Tathlum",
 		--head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
 		head="Peda. M.Board +3",
 		body={ name="Merlinic Jubbah", augments={'Mag. Acc.+25 "Mag.Atk.Bns."+25','Magic burst dmg.+10%','"Mag.Atk.Bns."+7',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
-		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
+		--legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
+        legs="Amalric Slops +1",
+		--feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
+        feet="Amalric Nails +1",
 		--neck="Mizu. Kubikazari",
         neck="Argute Stole +2",
 		waist="Refoccilation Stone",
@@ -250,7 +255,7 @@ function init_gear_sets()
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 	}
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'].StoreTP, {head=empty,body="Twilight Cloak",neck="Combatant's Torque"})
-	
+    
 	sets.midcast.Helix = set_combine(sets.midcast['Elemental Magic'], {
 		main="Raetic Staff +1",
 	})
@@ -273,17 +278,16 @@ function init_gear_sets()
 		neck="Erra Pendant",
 		waist="Fucho-no-Obi",
 		left_ear="Regal Earring",
-		right_ear="Barkaro. Earring",
+		right_ear="Malignance Earring",
 		left_ring="Evanescence Ring",
 		right_ring="Archon Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 	}
 	sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
-	    sub="Chanter's Shield",
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
 		waist="Luminary Sash",
 		left_ear="Digni. Earring",
-		right_ear="Barkaro. Earring",
+		right_ear="Malignance Earring",
 	})    
     --[[ sets.midcast['Enfeebling Magic'] = {
 	    main={ name="Gada", augments={'"Conserve MP"+3','INT+5','Mag. Acc.+24','"Mag.Atk.Bns."+25','DMG:+13',}},
@@ -314,7 +318,7 @@ function init_gear_sets()
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		--feet="Skaoi Boots",
 		feet="Acad. Loafers +3",
-		neck="Erra Pendant",
+		neck="Argute Stole +2",
 		waist="Luminary Sash",
 		left_ear="Digni. Earring",
 		right_ear="Regal Earring",
@@ -323,6 +327,7 @@ function init_gear_sets()
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 	}
 	
+	sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'],{main="Daybreak",sub="Ammurapi Shield"})
 	sets.midcast['Enfeebling Magic'].MACC = {
 	    main={ name="Gada", augments={'"Conserve MP"+3','INT+5','Mag. Acc.+24','"Mag.Atk.Bns."+25','DMG:+13',}},
 		sub="Ammurapi Shield",
@@ -337,7 +342,7 @@ function init_gear_sets()
 		left_ear="Digni. Earring",
 		right_ear="Regal Earring",
 		left_ring="Etana Ring",
-		right_ring="Weather. Ring",
+		right_ring="Stikini Ring +1",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 	}
     sets.midcast['Healing Magic'] = {
@@ -402,13 +407,14 @@ function init_gear_sets()
     sets.Idle = {}
 	sets.Idle.Main = {
 		main={ name="Akademos", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
-		sub="Irenic Strap +1",
+		--sub="Irenic Strap +1",
+        sub="Khonsu",
 		ammo="Homiliary",
 		head="Befouled Crown",
 		body="Jhakri Robe +2",
 		hands={ name="Chironic Gloves", augments={'"Blood Pact" ability delay -7','Accuracy+6','"Refresh"+1','Accuracy+15 Attack+15',}},
 		legs="Assid. Pants +1",
-		feet="Herald's Gaiters",
+		feet="Crier's Gaiters",
 		neck="Loricate Torque +1",
 		waist="Fucho-no-Obi",
 		left_ear="Genmei Earring",
@@ -418,21 +424,22 @@ function init_gear_sets()
 		back="Moonbeam Cape",
 	}
 	sets.Idle.PDT = {
-		main="Terra's Staff",
-		sub="Alber Strap",
-		ammo="Homiliary",
-		head="Volte Cap",
-		body={ name="Gende. Bilaut +1", augments={'Phys. dmg. taken -4%','Magic dmg. taken -4%','"Cure" potency +4%',}},
-		hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}},
-		legs={ name="Hagondes Pants +1", augments={'Phys. dmg. taken -3%','Magic dmg. taken -3%','"Avatar perpetuation cost" -5',}},
-		feet="Herald's Gaiters",
+		main="Malignance Pole",
+		sub="Khonsu",
+        ammo="Homiliary",
+		head="Befouled Crown",
+		body="Jhakri Robe +2",
+		hands={ name="Chironic Gloves", augments={'"Blood Pact" ability delay -7','Accuracy+6','"Refresh"+1','Accuracy+15 Attack+15',}},
+		legs="Assid. Pants +1",
+		feet="Crier's Gaiters",
 		neck="Loricate Torque +1",
-		waist="Slipor Sash",
+		waist="Fucho-no-Obi",
 		left_ear="Genmei Earring",
-		right_ear="Handler's Earring +1",
-		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+		right_ear="Hearty Earring",
+		left_ring="Stikini Ring +1",
 		right_ring="Defending Ring",
 		back="Moonbeam Cape",
+		
 	}
 	sets.Idle.NoSubl = sets.Idle.Main
 	sets.Idle.Subl = set_combine(sets.Idle.NoSubl, {
@@ -491,6 +498,8 @@ function job_precast(spell)
 	
     if spell.name == 'Impact' then
         equip({head=empty,body="Twilight Cloak"})
+    elseif spell.name == 'Dispelga' then
+        equip({main="Daybreak",sub="Ammurapi Shield"})
     elseif spell.name == 'Stun' then
         if not buffactive.thunderstorm then
             add_to_chat(8,'--------- Thunderstorm is down ---------')
@@ -524,9 +533,10 @@ function job_post_midcast(spell)
 			 end
 			else 
             equip(sets.midcast['Elemental Magic'])
+            equip({main="Daybreak",sub="Ammurapi Shield"})
 		end
-		equip{ring1="Mujin Band"}
-		equip{ring2="Weatherspoon Ring"}
+		--equip{ring1="Mujin Band"}
+		--equip{ring2="Weatherspoon Ring"}
 		weathercheck(spell.element)
     elseif spell.skill=="Elemental Magic" or spell.name == "Kaustra" then
         if string.find(spell.english,'helix') or spell.name == 'Kaustra' then
@@ -545,6 +555,9 @@ function job_post_midcast(spell)
 			else 
 	          equip(sets.midcast.Helix)
 			end
+            if string.find(spell.english,'Luminohelix') then
+              equip({main="Daybreak",sub="Ammurapi Shield"})
+            end
 			if sets.ele[spell.element] then equip(sets.ele[spell.element]) end
         else
 		    if state.CastingMode.value == "MACC" then
@@ -627,7 +640,10 @@ function job_post_midcast(spell)
 		else
         equip(sets.midcast['Enfeebling Magic'])
 		end
-		weathercheck(spell.element)
+        if spell.english == 'Dispelga' then
+			  equip(sets.midcast.Dispelga)
+		end
+        weathercheck(spell.element)
         if spell.type == 'WhiteMagic' and buffactive.altruism then equip(sets.enh.Altruism) end
         if spell.type == 'BlackMagic' and buffactive.focalization then equip(sets.enh.Focalization) end
     else
@@ -795,10 +811,13 @@ windower.raw_register_event('time change',function()
    if precast_start == nil then 
       precast_start = CurrentTime
    end
-   if SublimationStartTimer and CurrentTime - SublimationStartTimer > 80 then 
+   
+   if SublimationStartTimer and CurrentTime - SublimationStartTimer > 180 then 
 	  job_handle_equipping_gear(player.status)
 	  send_command("gs equip sets.Idle.Current")
    end
+   
+   
    if buffactive["Sublimation: Complete"] then
 		SublimationStartTimer = nil
    end
@@ -807,6 +826,7 @@ windower.raw_register_event('time change',function()
       and not CurrentInfo.mog_house and not buffactive['weakness'] and not buffactive['Refresh'] and player.hpp > 75 then
 	  if (areas.Cities:contains(world.zone) or (CurrentTime - precast_start) > 1800) and not buffactive['Regen'] then   -- Basically if AFK for > 30 min or in a City, use Regen V after casting. 
 		send_command("input /ja sublimation; wait 1; input /ma Regen V <me>")
+        --send_command("input /ja sublimation")
 	  else 
 	    send_command("input /ja sublimation")
 	  end

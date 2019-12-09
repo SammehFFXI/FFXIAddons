@@ -48,9 +48,9 @@ function init_gear_sets()
 	}
 	
 	sets.sird = {
-	    ammo="Staunch Tathlum",
+	    ammo="Staunch Tathlum +1",
 		head={ name="Souv. Schaller +1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',},priority=15},
-		body={ name="Rev. Surcoat +2",priority=14},
+		body={ name="Rev. Surcoat +3",priority=14},
 		hands={ name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',},priority=13},
 		legs={ name="Founder's Hose", augments={'MND+10','Mag. Acc.+15','Attack+15','Breath dmg. taken -5%',},priority=2},
 		feet={ name="Odyssean Greaves", augments={'"Mag.Atk.Bns."+15','"Fast Cast"+4','Mag. Acc.+8',},priority=1},
@@ -91,7 +91,7 @@ function init_gear_sets()
     sets.precast.JA = set_combine(sets.midcast.enmity, {})
     sets.precast.JA.Enlightenment = set_combine(sets.midcast.enmity, {body=enlightenment_body})
 	sets.precast.FastCastHighHP = {
-		body={ name="Rev. Surcoat +2",priority=15},
+		body={ name="Rev. Surcoat +3",priority=15},
 		back={ name="Rudianos's Mantle", augments={'HP+60','Mag. Acc+20 /Mag. Dmg.+20','HP+20','"Fast Cast"+10','Phys. dmg. taken-10%',},priority=14},
 		ammo="Incantor Stone",
 		neck="Voltsurge Torque",
@@ -111,7 +111,7 @@ function init_gear_sets()
 		right_ear="Loquac. Earring",
 		left_ring="Kishar Ring",
 		right_ring="Weather. Ring",
-		body={ name="Rev. Surcoat +2",priority=15},
+		body={ name="Rev. Surcoat +3",priority=15},
 		back={ name="Rudianos's Mantle", augments={'HP+60','Mag. Acc+20 /Mag. Dmg.+20','HP+20','"Fast Cast"+10','Phys. dmg. taken-10%',},priority=14},
 	}
     sets.precast.EnhancingMagic = {}
@@ -124,7 +124,7 @@ function init_gear_sets()
 	
     sets.midcast = set_combine(sets.sird, {})
     sets.midcast['Healing Magic'] = {
-		ammo="Staunch Tathlum",
+		ammo="Staunch Tathlum +1",
 		head={ name="Souv. Schaller +1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',}},
 		body={ name="Souv. Cuirass +1", augments={'VIT+12','Attack+25','"Refresh"+3',}},
 		hands={ name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
@@ -146,7 +146,7 @@ function init_gear_sets()
 	sets.midcast['Healing Magic'] = sets.sird
     sets.midcast['Enhancing Magic'] = set_combine(sets.sird, {})
 	sets.midcast['Divine Magic'] = {
-		ammo="Staunch Tathlum",
+		ammo="Staunch Tathlum +1",
 		head={ name="Souv. Schaller +1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',}},
 		body={ name="Souv. Cuirass +1", augments={'VIT+12','Attack+25','"Refresh"+3',}},
 		hands={ name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},

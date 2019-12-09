@@ -4,6 +4,7 @@ send_command('alias spelldebug gs c cycle spelldebug')
 include('Mote-TreasureHunter')
 send_command('bind !` gs c cycle TreasureMode')
 sets.TreasureHunter = {head="Volte Cap",hands="Volte Bracers",Feet="Volte Boots",waist="Chaac Belt"}
+send_command('alias th4 gs equip sets.TreasureHunter')
 sets.CursnaReceived = {neck="Nicander's Necklace",waist="Gishdubar Sash",left_ring="Eshmun's Ring",right_ring="Eshmun's Ring",}
 
 -- require 'strings'
@@ -155,7 +156,7 @@ function disable_specialgear()
         enable('ring2')
     end
 ]]
-	local lockables = T{'Mecisto. Mantle', 'Shobuhouou Kabuto', 'Aptitude Mantle', 'Nexus Cape', 'Aptitude Mantle +1', 'Warp Ring', 'Vocation Ring', 'Reraise Earring', 'Capacity Ring', 'Trizek Ring', 'Echad Ring', 'Facility Ring', 'Dim. Ring (Holla)', 'Dim. Ring (Dem)', 'Dim. Ring (Mea)'}
+	local lockables = T{'Mecisto. Mantle', 'Shobuhouou Kabuto', 'Aptitude Mantle', 'Nexus Cape', 'Aptitude Mantle +1', 'Warp Ring', 'Vocation Ring', 'Reraise Earring', 'Capacity Ring', 'Trizek Ring', 'Echad Ring', 'Facility Ring', 'Dim. Ring (Holla)', 'Dim. Ring (Dem)', 'Dim. Ring (Mea)',}
 	local watch_slots = T{'ear1','ear2','ring1','ring2','back','head'}
 
 	for _,v in pairs(watch_slots) do

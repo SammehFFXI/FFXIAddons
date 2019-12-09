@@ -134,22 +134,23 @@ function init_gear_sets()
 	sets.midcast.TP.normal = {
 	    range=RNGWeapon,
 		ammo=TP_Ammo,
-		-- head="Arcadian Beret +2",
-        head="Oshosi Mask +1",
-		body="Nisroch Jerkin",
-		hands=TP_Hands,
-		legs={ name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}},
-		feet="Adhemar Gamashes",
-		neck="Iskur Gorget",
-		waist="Yemaya Belt",
-		left_ear="Telos Earring",
-		right_ear="Enervating Earring",
-		right_ring="Dingir Ring",
-		left_ring="Ilabrat Ring",
-		-- back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
+		head="Malignance Chapeau",
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
+        legs="Malignance Tights",
+        feet="Malignance Boots",
+        neck="Iskur Gorget",
+        waist="Yemaya Belt",
+        left_ear="Telos Earring",
+        right_ear="Enervating Earring",
+        left_ring="Ilabrat Ring",
+        right_ring="Dingir Ring",
+        back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},
 	}
 	sets.midcast.TP.DoubleShotArmageddon = {
-	    --head={ name="Arcadian Beret +2", augments={'Enhances "Recycle" effect',}},
+	    range=RNGWeapon,
+		ammo=TP_Ammo,
+		--head={ name="Arcadian Beret +2", augments={'Enhances "Recycle" effect',}},
 		--head="Meghanada Visor +2",
 		head="Oshosi Mask +1",
 		-- body={ name="Arc. Jerkin +3", augments={'Enhances "Snapshot" effect',}},
@@ -168,12 +169,14 @@ function init_gear_sets()
 		-- back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10',}},
 	}
 	sets.midcast.TP.ArmageddonAftermath = {
-	    --head="Meghanada Visor +2",
+	    range=RNGWeapon,
+		ammo=TP_Ammo,
+		--head="Meghanada Visor +2",
 		head="Oshosi Mask +1",
 		body="Nisroch Jerkin",
 		--hands="Mummu Wrists +2",
 		hands="Oshosi Gloves +1",
-		legs="Mummu Kecks +2",
+		legs="Oshosi Trousers +1",
 		-- feet="Thereoid Greaves",
 		feet="Oshosi Leggings +1",
 		neck="Iskur Gorget",
@@ -206,9 +209,9 @@ function init_gear_sets()
 	--Job Abilities
 	sets.precast.JA = {}
     sets.precast.JA['Phantom Roll'] = {head="Lanun Tricorne",ring2="Luzaf's Ring",hands="Chasseur\'s Gants",back="Camulus\'s Mantle",neck="Regal Necklace"}
-	sets.precast.JA['Random Deal'] = {body="Lanun Frac +1"}
+	sets.precast.JA['Random Deal'] = {body="Lanun Frac +3"}
 	sets.precast.JA['Snake Eye'] = {legs="Lanun Culottes"}
-    sets.precast.JA.Wildcard = {feet="Lanun Bottes +2"}
+    sets.precast.JA.Wildcard = {feet="Lanun Bottes +3"}
 	
 	
 	-- WS Sets
@@ -247,11 +250,12 @@ function init_gear_sets()
 		-- head="Orion Beret +3"
 		ammo="Devastating Bullet",
 	    head={ name="Herculean Helm", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','Enmity-5','VIT+6','Mag. Acc.+13','"Mag.Atk.Bns."+13',}},
-		body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+26','"Dbl.Atk."+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
+		--body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+26','"Dbl.Atk."+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
+        body="Lanun Frac +3",
 		hands="Carmine Fin. Ga. +1",
 		legs={ name="Herculean Trousers", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','"Dbl.Atk."+1','STR+7','Mag. Acc.+13','"Mag.Atk.Bns."+10',}},
 		-- feet={ name="Adhemar Gamashes", augments={'HP+50','"Store TP"+6','"Snapshot"+8',}},
-		feet="Lanun Bottes +2",
+		feet="Lanun Bottes +3",
 		--neck="Fotia Gorget",
 		--waist="Fotia Belt",
 		neck="Sanctity necklace",
@@ -266,7 +270,23 @@ function init_gear_sets()
 	sets.precast.WS['Leaden Salute'] = sets.precast.WS['Trueflight']
 	
     ---  AFTERCAST SETS  ---
-    sets.idle = set_combine(sets.precast.PreShot, {feet="Skadi's Jambeaux +1"})
+    sets.idle = {
+        range=RNGWeapon,
+		ammo=TP_Ammo,
+		head="Malignance Chapeau",
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
+        legs="Malignance Tights",
+        feet="Skd. Jambeaux +1",
+        neck="Loricate Torque +1",
+        waist="Flume Belt +1",
+        left_ear="Genmei Earring",
+        right_ear="Odnowa Earring +1",
+        left_ring="Ilabrat Ring",
+        right_ring="Defending Ring",
+        back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},
+    }
+    
 	sets.Idle = sets.idle
 	sets.Idle.Current = sets.Idle
 

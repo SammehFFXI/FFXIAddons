@@ -1,0 +1,17 @@
+sets.exported={
+    main={ name="Heishi Shorinken", augments={'Path: A',}},
+    sub={ name="Shigi", augments={'Accuracy+50','Rng.Acc.+50','Damage Taken -5%',}},
+    ammo="Togakushi Shuriken",
+    head="Malignance Chapeau",
+    body="Hiza. Haramaki +2",
+    hands="Malignance Gloves",
+    legs="Malignance Tights",
+    feet="Danzo Sune-Ate",
+    neck="Loricate Torque +1",
+    waist="Flume Belt +1",
+    left_ear="Odnowa Earring +1",
+    right_ear="Genmei Earring",
+    left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+    right_ring="Defending Ring",
+    back="Solemnity Cape",
+}

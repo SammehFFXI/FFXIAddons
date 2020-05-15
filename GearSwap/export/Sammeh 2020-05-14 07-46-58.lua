@@ -1,0 +1,17 @@
+sets.exported={
+    main="Sangoma",
+    sub="Genmei Shield",
+    range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
+    head="Aya. Zucchetto +2",
+    body="Ashera Harness",
+    hands="Aya. Manopolas +2",
+    legs={ name="Chironic Hose", augments={'Attack+22','Pet: "Dbl. Atk."+4','Quadruple Attack +3','Mag. Acc.+15 "Mag.Atk.Bns."+15',}},
+    feet={ name="Chironic Slippers", augments={'Accuracy+17','MND+9','Quadruple Attack +3','Accuracy+7 Attack+7',}},
+    neck={ name="Bard's Charm +2", augments={'Path: A',}},
+    waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+    left_ear="Telos Earring",
+    right_ear="Cessance Earring",
+    left_ring="Ilabrat Ring",
+    right_ring="Hetairoi Ring",
+    back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
+}

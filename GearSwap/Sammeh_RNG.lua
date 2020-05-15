@@ -15,7 +15,7 @@ function user_setup()
 	
     state.IdleMode:options('Normal','PDT')
 	state.TPMode = M{['description']='TP Mode', 'Normal','RACC'}
-	state.RngMode = M{['description']='Ranger Mode', 'Fail-Not','Yoichinoyumi','Fomalhaut','Armageddon','XBow'}
+	state.RngMode = M{['description']='Ranger Mode', 'Fail-Not','Yoichinoyumi','Fomalhaut','Armageddon','XBow','Sparrowhawk'}
 	state.Bolt = M{['description']='Bolt Mode','Normal','DefDown','Holy Bolt','Bloody Bolt'}
 	state.AutoRA = M{['description']='Auto RA','false','true'}
 	state.AutoWSMode = M{['description']='Auto WS Mode','false','true'}
@@ -64,6 +64,10 @@ function user_setup()
 		state.AutoWS = M{['description']='Auto WS',"Jishnu's Radiance","Namas Arrow"}
 	elseif player.equipment.range == "Fail-Not" then
 		send_command("gs c set RngMode Fail-Not")
+		send_command("dp bow") 
+		state.AutoWS = M{['description']='Auto WS',"Jishnu's Radiance","Apex Arrow"}
+	elseif player.equipment.range == "Sparrowhawk +2" then
+		send_command("gs c set RngMode Sparrowhawk")
 		send_command("dp bow") 
 		state.AutoWS = M{['description']='Auto WS',"Jishnu's Radiance","Apex Arrow"}
 	elseif player.equipment.range == "Fomalhaut" then
@@ -118,6 +122,16 @@ function init_gear_sets()
 	  --WS_Ammo = "Yoichi's Arrow"
 	  TP_Ammo = "Chrono Arrow"
 	  WS_Ammo = "Chrono Arrow"
+	  send_command("alias rngws1 input /ws 'Jishnu\'s Radiance' <t>")
+	  send_command("alias rngws2 input /ws 'Namas Arrow' <t>")
+	  send_command("alias rngws3 input /ws 'Apex Arrow' <t>")
+	  
+	elseif state.RngMode.value == 'Sparrowhawk' then
+	  RNGWeapon = "Sparrowhawk +2"
+	  TP_Ammo = "Yoichi's Arrow"
+	  WS_Ammo = "Yoichi's Arrow"
+	  --TP_Ammo = "Chrono Arrow"
+	  --WS_Ammo = "Chrono Arrow"
 	  send_command("alias rngws1 input /ws 'Jishnu\'s Radiance' <t>")
 	  send_command("alias rngws2 input /ws 'Namas Arrow' <t>")
 	  send_command("alias rngws3 input /ws 'Apex Arrow' <t>")
@@ -320,6 +334,21 @@ function init_gear_sets()
 		right_ring="Dingir Ring",
 		back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},
 	}
+    sets.precast.WS['Savage Blade'] = {
+        ammo="Hauksbok Arrow",
+        head="Orion Beret +3",
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
+        legs={ name="Arc. Braccae +3", augments={'Enhances "Eagle Eye Shot" effect',}},
+        feet="Oshosi leggings +1",
+        neck={ name="Scout's Gorget +2", augments={'Path: A',}},
+        waist="Grunfeld Rope",
+        left_ear="Brutal Earring",
+        right_ear="Sherida Earring",
+        left_ring="Karieyh Ring",
+        right_ring="Epaminondas's Ring",
+        back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},
+    }
 	sets.precast.WS['Last Stand'] = {
 	    head="Orion Beret +3",
 		body="Nisroch Jerkin",
@@ -394,6 +423,21 @@ function init_gear_sets()
         left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
         right_ring="Defending Ring",
         back={ name="Belenus's Cape", augments={'"Snapshot"+10',}},
+    }
+    sets.engaged = {
+        ammo=TP_Ammo,
+        head={ name="Adhemar Bonnet", augments={'DEX+10','AGI+10','Accuracy+15',}},
+        body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
+        hands="Malignance Gloves",
+        legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
+        feet={ name="Herculean Boots", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','STR+11','Quadruple Attack +2','Accuracy+18 Attack+18',}},
+        neck={ name="Scout's Gorget +2", augments={'Path: A',}},
+        waist="Grunfeld Rope",
+        left_ear="Brutal Earring",
+        right_ear="Suppanomimi",
+        left_ring="Epona's Ring",
+        right_ring="Hetairoi Ring",
+        back={ name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}},
     }
 	sets.Idle = sets.idle
 	sets.Idle.Current = sets.Idle

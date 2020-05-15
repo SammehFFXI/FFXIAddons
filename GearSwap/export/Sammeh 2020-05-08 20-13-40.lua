@@ -1,0 +1,17 @@
+sets.exported={
+    main={ name="Heishi Shorinken", augments={'Path: A',}},
+    sub={ name="Shigi", augments={'Accuracy+50','Rng.Acc.+50','Damage Taken -5%',}},
+    ammo="Staunch Tathlum +1",
+    head="Malignance Chapeau",
+    body="Malignance Tabard",
+    hands="Malignance Gloves",
+    legs="Malignance Tights",
+    feet="Malignance Boots",
+    neck="Warder's Charm +1",
+    waist="Engraved Belt",
+    left_ear="Eabani Earring",
+    right_ear="Flashward Earring",
+    left_ring="Purity Ring",
+    right_ring="Vengeful Ring",
+    back="Solemnity Cape",
+}

@@ -162,7 +162,7 @@ function init_gear_sets()
 		back="Philidor Mantle",
 	}
 	sets.dtaftermath = {
-		ammo="Ginsen",
+		ammo="Aurgelmir Orb +1",
 	    head="Flamma Zucchetto +2",
 		body="Tartarus Platemail", --dt9
 		hands="Sulev. Gauntlets +2", --dt5
@@ -178,7 +178,7 @@ function init_gear_sets()
 	} --pdt 31 --mdt 31 (+20% aftermath DT) 
 	sets.engaged = {}
 	sets.engaged.Normal = {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head="Flam. Zucchetto +2",
         body="Hjarrandi Breast.",
         hands="Sulev. Gauntlets +2",
@@ -211,7 +211,7 @@ function init_gear_sets()
 	} -- Enmity = 98-106
 	sets.engaged.Reraise = set_combine(sets.engaged,{body="Twilight Mail",head="Twilight Helm"})
 	sets.engaged.HighAccuracy = {
-	    ammo="Ginsen",
+	    ammo="Aurgelmir Orb +1",
 		head="Pummeler's Mask +3",
 		body="Pumm. Lorica +3",
 		hands="Pumm. Mufflers +3",
@@ -227,7 +227,7 @@ function init_gear_sets()
 	}
     sets.engaged.DWAcc = set_combine(sets.engaged.HighAccuracy, {ear1="Suppanomimi",back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Damage taken-5%',}},})
     sets.engaged.Iroha = {
-	    ammo="Ginsen",
+	    ammo="Aurgelmir Orb +1",
         --head="Volte Salade",
         head="Flamma Zucchetto +2",
         body="Tartarus Platemail",
@@ -244,7 +244,7 @@ function init_gear_sets()
         back={ name="Cichol's Mantle", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Mag. Evasion+15',}},
 	}
 	sets.engaged.MedAccuracy = {
-	    ammo="Ginsen",
+	    ammo="Aurgelmir Orb +1",
 		head="Flamma Zucchetto +2",
 		body="Pumm. Lorica +3",
 		hands="Sulev. Gauntlets +2",

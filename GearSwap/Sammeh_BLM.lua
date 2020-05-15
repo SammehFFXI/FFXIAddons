@@ -12,11 +12,12 @@ function user_setup()
 
     state.CastingMode:options('Normal', 'MACC','MagicBurst','StoreTP','TH')
     state.IdleMode:options('Normal','PDT','Death')
-	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock'}
+	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock', 'WeaponLockDT','WeaponLockClub'}
 	state.ManaWallMode = M{['description']='ManaWall Mode', 'DT', 'Normal'}
 	state.SuperTank = M{['description']='Super Tank Mode','Off','On'}
 	send_command('alias tank gs c cycle SuperTank')
 	send_command('alias tp gs c cycle tpmode')
+    send_command('bind f9 gs c cycle tpmode')
 	send_command('bind f10 gs c cycle idlemode')
 	send_command('bind ^f10 gs c cycle ManaWallMode')
 	send_command('bind f12 gs c update CastingMode')
@@ -45,12 +46,16 @@ end
 function init_gear_sets()
 
 	-- Weapon Locks used for TP Mode.  When WeaponLock is set - it locks in the following Main and SUB. 
-	--weaponlock_main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}}
-	--weaponlock_main="Khatvanga"
 	weaponlock_sub="Khonsu"
 	weaponlock_main="Hvergelmir"
-	--weaponlock_sub="Clerisy Strap +1"
-
+	
+    weaponlock_subdt="Khonsu"
+	weaponlock_maindt="Malignance Pole"
+    
+    weaponlock_subclub="Ammurapi Shield"
+	weaponlock_mainclub="Daybreak"
+	
+	
     sets.ele = {}
     
     sets.enh = {}
@@ -62,7 +67,7 @@ function init_gear_sets()
 	    --main="Terra's Staff",
 		--sub="Khonsu",
 		ammo="Staunch Tathlum +1",
-		head={ name="Merlinic Hood", augments={'Attack+1','Magic dmg. taken -4%','Mag. Acc.+9',}},
+		--head={ name="Merlinic Hood", augments={'Attack+1','Magic dmg. taken -4%','Mag. Acc.+9',}},
 		body={ name="Hagondes Coat +1", augments={'Phys. dmg. taken -3%','Magic dmg. taken -4%','Pet: Accuracy+21 Pet: Rng. Acc.+21',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Hagondes Pants +1", augments={'Phys. dmg. taken -3%','Magic dmg. taken -3%','"Avatar perpetuation cost" -5',}},
@@ -70,7 +75,7 @@ function init_gear_sets()
 		neck="Loricate Torque +1",
 		waist="Slipor Sash",
 		left_ear="Genmei Earring",
-		right_ear="Handler's Earring +1",
+		--right_ear="Handler's Earring +1",
 		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
 		right_ring="Defending Ring",
 		back={ name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},
@@ -163,7 +168,7 @@ function init_gear_sets()
         hands={ name="Amalric Gages", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
         legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
         feet={ name="Amalric Nails +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-        neck="Sanctity Necklace",
+        neck="Src. Stole +2",
         waist="Luminary Sash",
         left_ear="Loquac. Earring",
         right_ear="Barkaro. Earring",
@@ -179,13 +184,16 @@ function init_gear_sets()
 	sets.midcast['Elemental Magic'].Main = {
 	    main={ name="Lathi", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
 		sub="Khonsu",
+        --main="Daybreak",
+        --sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
-        head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
+        --head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
+        head="Ea Hat +1",
         body={ name="Merlinic Jubbah", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Drain" and "Aspir" potency +3','MND+5','Mag. Acc.+10','"Mag.Atk.Bns."+13',}},
         hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
         legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
         feet={ name="Amalric Nails +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-        neck="Sanctity Necklace",
+        neck="Src. Stole +2",
         waist="Refoccilation Stone",
         left_ear="Barkaro. Earring",
         right_ear="Malignance Earring",
@@ -216,15 +224,14 @@ function init_gear_sets()
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'].Main, {head=empty,body="Twilight Cloak",ring1="K'ayres Ring",ring2="Rajas Ring",neck="Combatant's Torque"})
 	sets.midcast['Elemental Magic'].MagicBurst = set_combine(sets.midcast['Elemental Magic'].Main, {
 		main={ name="Grioavolr", augments={'Magic burst dmg.+6%','INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+21','Magic Damage +5',}},   -- 6
-		-- hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},  -- 5(over cap)
+        -- hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},  -- 5(over cap)
 		--hands="Ea Cuffs",
         hands="Amalric Gages +1",
 		--body={ name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','Magic burst dmg.+11%','VIT+8','Mag. Acc.+14',}}, -- 11
-		--body="Ea Houppe. +1",
-		--legs="Ea Slops +1",
-		body="Ea Houppelande",
-		legs="Ea Slops",
-		neck="Mizu. Kubikazari", -- 10
+		body="Ea Houppe. +1",
+		legs="Ea Slops +1",
+		--neck="Mizu. Kubikazari", -- 10
+        neck="Src. Stole +2",
 		left_ring="Locus Ring", -- 5 
 		right_ring="Mujin Band", -- 5 (over cap)
 		right_ear="Static Earring",  -- 5 
@@ -236,14 +243,11 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
-		--body="Shango Robe",
-		body={ name="Amalric Doublet", augments={'MP+60','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
-		-- hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		hands="Ea Cuffs",
-		--legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
-		legs="Ea Slops",
+		body="Ea Houppe. +1",
+		hands="Ea Cuffs +1",
+		legs="Ea Slops +1",
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Enmity-2','INT+5','Mag. Acc.+11','"Mag.Atk.Bns."+8',}},
-		neck="Sanctity Necklace",
+		neck="Src. Stole +2",
 		waist="Fucho-no-Obi",
 		left_ear="Barkaro. Earring",
 		right_ear="Regal Earring",
@@ -261,7 +265,7 @@ function init_gear_sets()
         hands="Jhakri Cuffs +2",
         legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','CHR+8','Mag. Acc.+12','"Mag.Atk.Bns."+15',}},
         feet="Spae. Sabots +3",
-        neck="Sanctity Necklace",
+        neck="Src. Stole +2",
         waist="Hachirin-no-Obi",
         left_ear="Barkaro. Earring",
         right_ear="Regal Earring",
@@ -273,17 +277,14 @@ function init_gear_sets()
     --sets.midcast['Dark Magic'].Death = set_combine(sets.midcast['Elemental Magic'].Main,{head={ name="Pixie Hairpin +1",priority=14},back={ name="Bane Cape",ring1="Evanescence Ring",ring2="Archon Ring",feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},})
 	sets.midcast['Dark Magic'].DeathMagicBurst = {
 	    ammo="Pemphredo Tathlum",
-		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
-		--head="Ea Hat +1",
-		body={ name="Ea Houppelande",priority=12},
-		--body={ name="Ea Houppe. +1",priority=12},
-		hands="Ea Cuffs",
-		--legs="Ea Slops",
-        legs="Amalric Slops +1",
+		head="Ea Hat +1",
+		body={ name="Ea Houppe. +1",priority=12},
+		--hands="Ea Cuffs",
+        hands="Amalric Gages +1",
+		legs="Amalric Slops +1",
 		--legs="Ea Slops +1",
-		--feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+7%','Mag. Acc.+13','"Mag.Atk.Bns."+3',}},
 		feet="Spae. Sabots +3",
-		neck={ name="Sanctity Necklace",priority=14},
+		neck={ name="Src. Stole +2",priority=14},
 		waist="Refoccilation Stone",
 		left_ear="Barkaro. Earring",
 		right_ear={ name="Regal Earring",priority=13},
@@ -338,7 +339,7 @@ function init_gear_sets()
 		legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
 		neck="Incanter's Torque",
-		waist="Rumination Sash",
+		waist="Embla Sash",
 		left_ear="Loquac. Earring",
 		right_ear="Enchntr. Earring +1",
 		left_ring="Stikini Ring",
@@ -485,7 +486,7 @@ function job_post_midcast(spell)
 		 equip(sets.midcast.RefreshRecieved)
 		end	
     elseif spell.skill == 'Enhancing Magic' then
-        equip(sets.midcast.EnhancingMagic)
+        equip(sets.midcast['Enhancing Magic'])
         if string.find(spell.english,'Regen') then
                 equip(sets.midcast.Regen)
         end
@@ -533,6 +534,7 @@ function job_aftercast(spell)
 	if spell.action_type ~= 'Magic' then
 		aftercast_start = nil
 	end
+    check_run_status()
 end
 
 function status_change(new,tab)
@@ -562,12 +564,19 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	  enable("ranged","ammo","head","neck","ear1","ear2","body","hands","waist","legs","feet")
 	  disable_specialgear()
 	  if state.TPMode.value == "WeaponLock" then
+       enable("main","sub")
 	   equip({main=weaponlock_main,sub=weaponlock_sub})
-	   disable("main")
-	   disable("sub")
+	   disable("main","sub")
+      elseif state.TPMode.value == "WeaponLockClub" then
+       enable("main","sub")
+       equip({main=weaponlock_mainclub,sub=weaponlock_subclub})
+	   disable("main","sub")
+      elseif state.TPMode.value == "WeaponLockDT" then
+       enable("main","sub")
+       equip({main=weaponlock_maindt,sub=weaponlock_subdt})
+	   disable("main","sub")
 	  else
-	    enable("main")
-	    enable("sub")
+	   enable("main","sub")
 	  end	
 	  if state.IdleMode.value == "PDT" then
    	   sets.Idle.Current = sets.Idle.PDT

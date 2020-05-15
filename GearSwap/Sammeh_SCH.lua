@@ -8,10 +8,11 @@ end
 function user_setup()
     state.CastingMode:options('Normal', 'MACC', 'MagicBurst','StoreTP')
     state.IdleMode:options('Normal','PDT','MEVA','MaxHP')
-	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock'}
-	state.RegenMode = M{['description']='Regen Mode','Potency','Duration'}
+	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock', 'WeaponLockDT','WeaponLockClub'}
+    state.RegenMode = M{['description']='Regen Mode','Potency','Duration'}
 	send_command('alias tp gs c cycle tpmode')
 	send_command('alias regenmode gs c cycle regenmode')
+    send_command('bind f9 gs c cycle tpmode')
     send_command('bind f10 gs c cycle idlemode')
 	send_command('bind f12 gs c update caster')
 	select_default_macro_book()
@@ -49,10 +50,15 @@ function init_gear_sets()
     -- Setting up Gear As Variables --
 	
 	-- Weapon Locks used for TP Mode.  When WeaponLock is set - it locks in the following Main and SUB. 
-	-- weaponlock_main="Akademos"
-	weaponlock_main="Khatvanga"
-	--weaponlock_sub="Clerisy Strap +1"
-	weaponlock_sub="Khonsu"
+    weaponlock_sub="Khonsu"
+	weaponlock_main="Hvergelmir"
+	
+    weaponlock_subdt="Khonsu"
+	weaponlock_maindt="Malignance Pole"
+    
+    weaponlock_subclub="Ammurapi Shield"
+	weaponlock_mainclub="Daybreak"
+	
 	
 	-- array for specific elemental magic - Ex: as sets.ele.Wind = {back="Back Armor with +wind"}
 	sets.ele = {}
@@ -379,7 +385,8 @@ function init_gear_sets()
 		legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
 		neck="Incanter's Torque",
-		waist="Rumination Sash",
+		--waist="Rumination Sash",
+        waist="Embla Sash",
 		left_ear="Loquac. Earring",
 		right_ear="Enchntr. Earring +1",
 		left_ring="Stikini Ring +1",
@@ -446,6 +453,7 @@ function init_gear_sets()
 		head="Acad. Mortar. +3",
 		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		right_ear="Savant's Earring",
+        waist="Embla Sash",
 	})	
 	
 	sets.Idle.Current = sets.Idle.NoSubl
@@ -788,12 +796,19 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	end
 	
 	if state.TPMode.value == "WeaponLock" then
-	  equip({main=weaponlock_main,sub=weaponlock_sub})
-	  disable("main")
-	  disable("sub")
+       enable("main","sub")
+	   equip({main=weaponlock_main,sub=weaponlock_sub})
+	   disable("main","sub")
+    elseif state.TPMode.value == "WeaponLockClub" then
+       enable("main","sub")
+       equip({main=weaponlock_mainclub,sub=weaponlock_subclub})
+	   disable("main","sub")
+    elseif state.TPMode.value == "WeaponLockDT" then
+       enable("main","sub")
+       equip({main=weaponlock_maindt,sub=weaponlock_subdt})
+	   disable("main","sub")
 	else
-	  enable("main")
-	  enable("sub")
+	  enable("main","sub")
 	end
 end
 
@@ -824,8 +839,8 @@ windower.raw_register_event('time change',function()
    CurrentInfo = windower.ffxi.get_info()
    if not buffactive["Sublimation: Complete"] and not buffactive["Sublimation: Activated"] and windower.ffxi.get_ability_recasts()[234] == 0 
       and not CurrentInfo.mog_house and not buffactive['weakness'] and not buffactive['Refresh'] and player.hpp > 75 then
-	  if (areas.Cities:contains(world.zone) or (CurrentTime - precast_start) > 1800) and not buffactive['Regen'] then   -- Basically if AFK for > 30 min or in a City, use Regen V after casting. 
-		send_command("input /ja sublimation; wait 1; input /ma Regen V <me>")
+	  if (areas.Cities:contains(world.zone) or (CurrentTime - precast_start) > 1800) and not buffactive['Refresh'] then   -- Basically if AFK for > 30 min or in a City, use Regen V after casting. 
+		send_command("input /ja sublimation; wait 2; input /ma Regen V <me>")
         --send_command("input /ja sublimation")
 	  else 
 	    send_command("input /ja sublimation")

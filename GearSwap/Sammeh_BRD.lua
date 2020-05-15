@@ -160,7 +160,7 @@ function init_gear_sets()
 		legs="Jokushu Haidate",
 		feet="Aya. Gambieras +2",
 		--neck="Caro Necklace",
-        neck="Bard's Charm",
+        neck="Bard's Charm +2",
 		waist="Grunfeld Rope",
 		left_ear="Ishvara Earring",
 		right_ear="Moonshade Earring",
@@ -230,7 +230,7 @@ function init_gear_sets()
 		waist="Luminary Sash",
 		left_ear="Regal Earring",
 		right_ear="Enchntr. Earring +1",
-		left_ring="Stikini Ring",
+		left_ring="Stikini Ring +1",
 		right_ring="Weather. Ring",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},
 	}
@@ -258,7 +258,7 @@ function init_gear_sets()
     sets.midcast.Cure = {
         head="Vanya Hood",
 		--neck="Loricate Torque +1",
-        neck="Bard's Charm",
+        neck="Incanter's Torque",
         ear1="Loquacious earring",ear2="Enchntr. Earring +1",
 		body="Chironic Doublet",hands="Telchine Gloves",ring1="Dark Ring",ring2="Defending ring",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Fucho-no-obi",legs="Gyve Trousers",feet="Vanya Clogs"}
@@ -278,7 +278,7 @@ function init_gear_sets()
 		legs={ name="Telchine Braconi", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +9',}},
 		feet={ name="Telchine Pigaches", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +10',}},
 		neck="Incanter's Torque",
-		waist="Rumination Sash",
+		waist="Embla Sash",
 		left_ear="Loquacious Earring",
 		right_ear="Enchntr. Earring +1",
 		left_ring="Stikini Ring",
@@ -313,15 +313,18 @@ function init_gear_sets()
 		feet="Fili Cothurnes +1"
 		}
 	sets.Idle.PDT = {
-		main="Mafic Cudgel",
-		sub="Genmei Shield",
-		head="Gende. Caubeen +1",
-		neck="Loricate Torque +1",
-        neck="Bard's Charm",
-        ear1="Odnowa Earring +1",ear2="Genmei Earring",
-		body={ name="Gende. Bilaut +1", augments={'Phys. dmg. taken -4%','Magic dmg. taken -4%','"Cure" potency +4%',}},
-		hands="Gende. Gages +1",ring1="Dark Ring",ring2="Defending ring",
-		back="Solemnity Cape",waist="Flume Belt +1",legs="Assiduity Pants +1",feet="Fili Cothurnes +1"
+		head="Aya. Zucchetto +2",
+        body="Ashera Harness",
+        hands="Aya. Manopolas +2",
+        legs="Brioso Cannions +3",
+        feet="Fili Cothurnes +1",
+        neck="Loricate Torque +1",
+        waist="Flume Belt +1",
+        left_ear="Odnowa Earring +1",
+        right_ear="Genmei Earring",
+        left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
+        right_ring="Defending Ring",
+        back="Solemnity Cape",
 	}
 	sets.Idle.Current = sets.Idle.Main
     
@@ -341,11 +344,12 @@ function init_gear_sets()
 		head="Aya. Zucchetto +2",
 		body="Ashera Harness",
 		hands="Aya. Manopolas +2",
-		legs={ name="Chironic Hose", augments={'"Triple Atk."+2','"Mag.Atk.Bns."+21','Accuracy+20 Attack+20',}},
+		--legs={ name="Chironic Hose", augments={'"Triple Atk."+2','"Mag.Atk.Bns."+21','Accuracy+20 Attack+20',}},
+        legs={ name="Chironic Hose", augments={'Attack+22','Pet: "Dbl. Atk."+4','Quadruple Attack +3','Mag. Acc.+15 "Mag.Atk.Bns."+15',}},
 		feet={ name="Chironic Slippers", augments={'Accuracy+17','MND+9','Quadruple Attack +3','Accuracy+7 Attack+7',}},
 		--neck="Combatant's Torque",
-        neck="Bard's Charm",
-		waist="Dynamic Belt +1",
+        neck="Bard's Charm +2",
+		waist="Sailfi Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Cessance Earring",
 		left_ring="Ilabrat Ring",
@@ -360,7 +364,7 @@ function init_gear_sets()
         hands="Aya. Manopolas +2",
         legs="Jokushu Haidate",
         feet={ name="Chironic Slippers", augments={'Accuracy+17','MND+9','Quadruple Attack +3','Accuracy+7 Attack+7',}},
-        neck="Bard's Charm",
+        neck="Bard's Charm +2",
         waist="Reiki Yotai",
         left_ear="Telos Earring",
         right_ear="Suppanomimi",
@@ -502,9 +506,14 @@ function job_midcast(spell, action, spellMap, eventArgs)
                 equip(sets.midcast[generalClass])
             end
         end
+        
     end
 	-- Auto use Extra Song Instrument for Buffs if less than max # of songs
-	
+	--print(spell.skill)
+    if spell.skill == 'Enhancing Magic' then
+            equip(sets.midcast['Enhancing Magic'])
+    end
+        
 	if spell.english == 'Refresh' and spell.target.type == 'SELF' then
 	  equip(sets.midcast.RefreshRecieved)
 	end

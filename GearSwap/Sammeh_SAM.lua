@@ -70,11 +70,12 @@ function init_gear_sets()
 	sets.meva = {
 		ammo="Staunch Tathlum +1",
 		head="Volte Cap",
+        head="",
 		body="Ken. Samue +1",
 		--hands="Volte Bracers",
         hands="Ken. Tekko +1",
 		legs="Ken. Hakama +1",
-		feet="Ken. Sune-Ate",
+		feet="Ken. Sune-Ate +1",
 		neck="Warder's Charm +1",
 		waist="Carrier's Sash",
 		left_ear="Hearty Earring",
@@ -87,13 +88,15 @@ function init_gear_sets()
 	
 	sets.engaged = {}
 	sets.engaged.Normal = {
-		ammo="Ginsen",
+        sub="Utu Grip",
+		ammo="Aurgelmir Orb +1",
 		head="Flam. Zucchetto +2",
 		--body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
 		body="Kendatsuba Samue +1",
 		--hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
 		hands="Wakido Kote +3",
-		legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
+		--legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
+        legs={ name="Ryuo Hakama +1", augments={'Accuracy+25','"Store TP"+5','Phys. dmg. taken -4',}},
 		feet="Flamma gambieras +2",
 		neck="Sam. Nodowa +2",
 		waist="Ioskeha Belt +1",
@@ -106,12 +109,13 @@ function init_gear_sets()
 	}
 	
 	sets.engaged.Zanshin = {
-		ammo="Ginsen",
+        sub="Utu Grip",
+		ammo="Aurgelmir Orb +1",
 		head="Flam. Zucchetto +2",
 		--body="Kendatsuba Samue +1",
 		body="Kasuga Domaru +1",
 		hands="Wakido Kote +3",
-		legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
+        legs={ name="Ryuo Hakama +1", augments={'Accuracy+25','"Store TP"+5','Phys. dmg. taken -4',}},
 		feet="Flamma gambieras +2",
 		neck="Sam. Nodowa +2",
 		waist="Ioskeha Belt +1",
@@ -126,9 +130,24 @@ function init_gear_sets()
 	
 	sets.engaged.Reraise = set_combine(sets.engaged.Normal,{body="Twilight Mail",head="Twilight Helm"})
     sets.engaged.TH = set_combine(sets.engaged.Normal,{head="Volte Cap",hands="Volte Bracers",Feet="Volte Boots",waist="Chaac Belt"})
-	sets.engaged.MEVA = sets.meva
+	sets.engaged.MEVA = {
+        ammo="Aurgelmir Orb +1",
+        head="Ken. Jinpachi +1",
+        body="Ken. Samue +1",
+        hands="Ken. Tekko +1",
+        legs="Ken. Hakama +1",
+        feet="Ken. Sune-Ate +1",
+        neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+        waist="Ioskeha Belt +1",
+        left_ear="Cessance Earring",
+        right_ear="Telos Earring",
+        left_ring="Niqmaddu Ring",
+        right_ring="Flamma Ring",
+        back={ name="Takaha Mantle", augments={'STR+4','"Zanshin"+3','"Store TP"+3','Meditate eff. dur. +7',}},
+    }
 	sets.engaged.HighACCMDB = {
-	    ammo="Ginsen",
+        sub="Khonsu",
+	    ammo="Aurgelmir Orb +1",
 		head="Flam. Zucchetto +2",
 		body="Ken. Samue +1",
 		hands="Wakido Kote +3",
@@ -143,7 +162,8 @@ function init_gear_sets()
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},
 	}
 	sets.engaged.HighAccuracy = {
-	    ammo="Ginsen",
+        sub="Utu Grip",
+	    ammo="Aurgelmir Orb +1",
 		head="Wakido Kabuto +3",
 		body="Ken. Samue +1",
 		hands="Wakido Kote +3",
@@ -158,7 +178,8 @@ function init_gear_sets()
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},
 	}
 	sets.engaged.MedAccuracy = {
-	    ammo="Ginsen",
+        sub="Utu Grip",
+	    ammo="Aurgelmir Orb +1",
 		head="Flam. Zucchetto +2",
 		body="Ken. Samue +1",
 		-- hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
@@ -194,11 +215,11 @@ function init_gear_sets()
 	sets.engaged.DT = sets.dt
     sets.engaged.DT = {
         sub="Khonsu",
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head="Flam. Zucchetto +2",
         body="Wakido Domaru +3",
         hands="Wakido Kote +3",
-        legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
+        legs={ name="Ryuo Hakama +1", augments={'Accuracy+25','"Store TP"+5','Phys. dmg. taken -4',}},
         feet="Flam. Gambieras +2",
         neck="Sam. Nodowa +2",
         waist="Ioskeha Belt +1",
@@ -217,8 +238,8 @@ function init_gear_sets()
 		feet={ name="Valorous Greaves", augments={'Mag. Acc.+17','"Store TP"+4','Weapon skill damage +8%','Accuracy+5 Attack+5','Mag. Acc.+10 "Mag.Atk.Bns."+10',}},
 		neck="Sam. Nodowa +2",
 		waist="Fotia Belt",
-		left_ear="Cessance Earring",
-		right_ear="Telos Earring",
+		left_ear="Ishvara Earring",
+		right_ear="Thrud Earring",
 		--left_ring="Niqmaddu Ring",
         left_ring="Epaminondas's Ring",
 		right_ring="Regal Ring",
@@ -249,8 +270,8 @@ function init_gear_sets()
 		feet={ name="Valorous Greaves", augments={'Mag. Acc.+17','"Store TP"+4','Weapon skill damage +8%','Accuracy+5 Attack+5','Mag. Acc.+10 "Mag.Atk.Bns."+10',}},
 		neck="Sam. Nodowa +2",
 		waist="Fotia Belt",
-		left_ear="Cessance Earring",
-		right_ear="Ishvara Earring",
+		left_ear="Ishvara Earring",
+		right_ear="Thrud Earring",
 		left_ring="Epaminondas's Ring",
 		--right_ring="Regal Ring",
         right_ring="Karieyh Ring",
@@ -291,14 +312,15 @@ function init_gear_sets()
 		--back="Argocham. Mantle",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
 	}
-			
+    
+    		
 	sets.ranged = {
 		head="Sakonji Kabuto +3",
 		body="Ken. Samue +1",
 		hands="Ken. Tekko +1",
         legs="Wakido Haidate +3",
 		--legs="Ken. Hakama +1",
-		feet="Ken. Sune-Ate",
+		feet="Ken. Sune-Ate +1",
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",
 		left_ear="Cessance Earring",
@@ -307,7 +329,9 @@ function init_gear_sets()
 		right_ring="Cacoethic Ring +1",
 		back={ name="Smertrios's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+10','"Store TP"+10',}},
 	}
-
+    -- Should put in precast a cape, mustela brais, and volte feet to add in +17(ish)
+    sets.precast.ranged = sets.ranged
+	
 	-- WS Sets
     sets.precast.WS['Tachi: Ageha'] = {
         ammo="Pemphredo Tathlum",
@@ -400,7 +424,7 @@ function job_precast(spell)
         equip(sets.precast.JA[spell.name])
     end
 	if spell.name == 'Ranged' then
-		equip(sets.ranged)
+		equip(sets.precast.ranged)
 	end	
 end
 
@@ -426,7 +450,9 @@ function job_post_midcast(spell)
 	if spell.type == "WeaponSkill" then
 	  tpspent = spell.tp_cost
 	end
-
+	if spell.name == 'Ranged' then
+		equip(sets.ranged)
+	end	
 end        
 
 function job_aftercast(spell)

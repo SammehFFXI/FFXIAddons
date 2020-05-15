@@ -18,7 +18,7 @@ extdata = require('extdata')
 --lastspell = require('last_spell.lua')   -- this was just a test - don't ask
 --lastspell_file = files.new('data\\last_spell.lua')
 
-sets.craftgear = {body="Carpenter\'s Apron",ring1="Craftmaster\'s Ring",ring2="Craftkeeper\'s Ring",neck="Carver\'s Torque",hands="Carpenter\'s Gloves",sub="Joiner's shield"}
+sets.craftgear = {body="Carpenter\'s Apron",ring1="Craftmaster\'s Ring",ring2="Craftkeeper\'s Ring",neck="Carver\'s Torque",hands="Carpenter\'s Gloves",sub="Joiner's shield",waist="Carpenter\'s Belt"}
 
 follow = 0
 autorun = 0

@@ -71,14 +71,14 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     
     -- Adjust this if using the Terpander (new +song instrument)
-    info.ExtraSongInstrument = 'Daurdabla'
+    info.ExtraSongInstrument = 'Terpander'
     -- How many extra songs we can keep from Daurdabla/Terpander
     
-	info.MaxSongs = 4
+	info.MaxSongs = 3
 	
 	-- If Max Job Points - adds alot of timers to the custom timers
-	MaxJobPoints = 1
-    
+	MaxJobPoints = 0
+   
     -- Set this to false if you don't want to use custom timers.
     state.UseCustomv = M(false, 'Use Custom Timers')
     
@@ -126,14 +126,14 @@ function init_gear_sets()
     sets.precast.FastCast.BardSong = {
     	main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		sub="Ammurapi Shield",range="Gjallarhorn",body="Brioso Justau. +3",
-        head="Fili Calot +1",neck="Aoidos' Matinee",ear2="Aoidos' Earring",ear1="Loquac. Earring",
+        head="Fili Calot",neck="Aoidos' Matinee",ear2="Aoidos' Earring",ear1="Loquac. Earring",
         hands="Gendewitha Gages +1",ring1="Kishar Ring",ring2="Weather. Ring",
         back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Doyen Pants",feet="Bihu Slippers",}
 
     sets.precast.FastCast.BardSong = {
     	main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		sub="Ammurapi Shield",range="Gjallarhorn",body="Brioso Justau. +3",
-        head="Fili Calot +1",neck="Aoidos' Matinee",ear2="Aoidos' Earring",ear1="Loquac. Earring",
+        head="Fili Calot",neck="Aoidos' Matinee",ear2="Aoidos' Earring",ear1="Loquac. Earring",
         hands="Gendewitha Gages +1",ring1="Kishar Ring",--ring2="Weather. Ring",
         back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Doyen Pants",feet="Bihu Slippers",}
 
@@ -187,34 +187,34 @@ function init_gear_sets()
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",}
         
     -- Gear to enhance certain classes of songs. 
-    sets.midcast.Ballad = {legs="Fili Rhingrave +1"}
-    sets.midcast.Lullaby = {hands="Brioso Cuffs +3"}
-    sets.midcast.Madrigal = {head="Fili Calot +1",back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},}
+    sets.midcast.Ballad = {legs="Fili Rhingrave"}
+    sets.midcast.Lullaby = {hands="Brioso Cuffs +1"}
+    sets.midcast.Madrigal = {head="Fili Calot",back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},}
 	sets.midcast.Prelude = {back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}}}
-    sets.midcast.March = {hands="Fili Manchettes +1"}
-	sets.midcast.HonorMarch = {hands="Fili Manchettes +1",range="Marsyas"}
-    sets.midcast.Minuet = {body="Fili Hongreline +1"}
+    sets.midcast.March = {hands="Fili Manchettes"}
+	sets.midcast.HonorMarch = {hands="Fili Manchettes",range="Marsyas"}
+    sets.midcast.Minuet = {body="Fili Hongreline"}
     sets.midcast.Minne = {}
-    sets.midcast.Paeon = {head="Brioso Roundlet +3"}
+    sets.midcast.Paeon = {head="Brioso Roundlet +1"}
     sets.midcast.Carol = {hands="Mousai Gages"}
-    sets.midcast["Sentinel's Scherzo"] = {feet="Fili Cothurnes +1"}
-    sets.midcast['Magic Finale'] = {neck="Sanctity Necklace",waist="Luminary Sash",legs="Fili Rhingrave +1"}
+    sets.midcast["Sentinel's Scherzo"] = {feet="Fili Cothurnes"}
+    sets.midcast['Magic Finale'] = {neck="Sanctity Necklace",waist="Luminary Sash",legs="Fili Rhingrave"}
 
     sets.midcast.Mazurka = {}
     
 
     -- For song buffs (duration and AF3 set bonus)
     sets.midcast.SongEffect = {main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Fili Calot +1",body="Fili Hongreline +1",neck="Mnbw. Whistle +1",ear1="Aoidos' Earring",ear2="Loquac. Earring",
-        hands="Fili Manchettes +1",ring1="Stikini Ring",ring2="Weather. Ring",
-        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Inyanga Shalwar +2",feet="Brioso Slippers +3",}
+        head="Fili Calot",body="Fili Hongreline",neck="Mnbw. Whistle +1",ear1="Aoidos' Earring",ear2="Loquac. Earring",
+        hands="Fili Manchettes",ring1="Stikini Ring",ring2="Weather. Ring",
+        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Witful Belt",legs="Inyanga Shalwar +2",feet="Brioso Slippers +1",}
 
     -- For song defbuffs (duration primary, accuracy secondary)
     sets.midcast.SongDebuff = {
 	    main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},Sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Brioso Roundlet +3",neck="Mnbw. Whistle +1",ear1="Regal Earring",ear2="Enchntr. Earring +1",
-        body="Fili Hongreline +1",hands="Fili Manchettes +1",ring1="Stikini Ring +1",ring2="Weather. Ring",
-        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Inyanga Shalwar +2",feet="Brioso Slippers +3"}
+        head="Brioso Roundlet +1",neck="Mnbw. Whistle +1",ear1="Regal Earring",ear2="Enchntr. Earring +1",
+        body="Fili Hongreline",hands="Fili Manchettes",ring1="Stikini Ring",ring2="Weather. Ring",
+        back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},waist="Luminary Sash",legs="Inyanga Shalwar +2",feet="Brioso Slippers +1"}
 
     -- For song defbuffs (accuracy primary, duration secondary)
     sets.midcast.ResistantSongDebuff = {
@@ -316,8 +316,8 @@ function init_gear_sets()
 		head="Aya. Zucchetto +2",
         body="Ashera Harness",
         hands="Aya. Manopolas +2",
-        legs="Brioso Cannions +3",
-        feet="Fili Cothurnes +1",
+        legs="Brioso Cannions +1",
+        feet="Fili Cothurnes",
         neck="Loricate Torque +1",
         waist="Flume Belt +1",
         left_ear="Odnowa Earring +1",
@@ -334,7 +334,7 @@ function init_gear_sets()
 
     sets.defense.MDT = {}
 
-    sets.Kiting = {feet="Fili Cothurnes +1"}
+    sets.Kiting = {feet="Fili Cothurnes"}
 
     sets.latent_refresh = {waist="Fucho-no-obi"}
 
@@ -360,8 +360,8 @@ function init_gear_sets()
     sets.engaged.DualWield = {
         range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
         head="Aya. Zucchetto +2",
-        body="Ashera Harness",
-        hands="Aya. Manopolas +2",
+        body="Aya. Corazza +1",
+        hands="Aya. Manopolas +1",
         legs="Jokushu Haidate",
         feet={ name="Chironic Slippers", augments={'Accuracy+17','MND+9','Quadruple Attack +3','Accuracy+7 Attack+7',}},
         neck="Bard's Charm +2",

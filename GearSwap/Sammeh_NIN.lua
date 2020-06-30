@@ -48,7 +48,7 @@ end
 function user_setup()
 	windower.register_event('time change', time_change)	
 	-- Options: Override default values
-	state.OffenseMode:options ('Normal', 'Acc', 'Acc2', 'Acc3')
+	state.OffenseMode:options ('Normal', 'Acc')
 	state.WeaponskillMode:options('Normal', 'Acc', 'Mod')
 	state.CastingMode:options('Normal', 'Resistant')
 	state.IdleMode:options('Normal')
@@ -80,10 +80,10 @@ function init_gear_sets()
     back="Agema Cape",
 	}
 	-- Precast sets to enhance JAs
-	-- sets.precast.JA['Mijin Gakure'] = {legs="Mochizuki Hakama +1"}
+	sets.precast.JA['Mijin Gakure'] = {legs="Mochi. Hakama +3"}
 	--sets.precast.JA['Futae'] = {legs="Iga Tekko +2"}
 	sets.precast.JA = {}
-	sets.precast.JA['Sange'] = {ammo=gear.AccAmmo,legs="Mochizuki Chainmail +1"}
+	sets.precast.JA['Sange'] = {ammo=gear.AccAmmo,legs="Mochi. Chainmail +3"}
 	sets.precast.JA['Provoke'] = sets.Enmity
 	sets.precast.JA['Warcry'] = sets.Enmity
 	
@@ -106,7 +106,7 @@ function init_gear_sets()
 	head="Herculean Helm",neck="Voltsurge Torque",ear1="Enchntr. Earring +1",ear2="Loquacious Earring",
 	body="Taeon Tabard",hands="Leyline Gloves",ring1="Kishar Ring",ring2="Weatherspoon Ring",feet={ name="Herculean Boots", augments={'Accuracy+28','"Fast Cast"+2','Accuracy+20 Attack+20',}}}
 	
-	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {back="Andartia's Mantle",body="Mochizuki Chainmail +1",feet="Hattori Kyahan"})
+	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {back="Andartia's Mantle",body="Mochi. Chainmail +3",feet="Hattori Kyahan"})
 
 	-- Snapshot for ranged
 	sets.precast.RA = {}
@@ -138,12 +138,13 @@ function init_gear_sets()
 	sets.precast.WS['Blade: Hi'] = set_combine(sets.precast.WS, {})
 	sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS, {
 		ammo="Aurgelmir Orb +1",
-        head={ name="Herculean Helm", augments={'Accuracy+27','Weapon skill damage +3%','STR+10',}},
+        --head={ name="Herculean Helm", augments={'Accuracy+27','Weapon skill damage +3%','STR+10',}},
+        head="Hachiya Hatsu. +3",
         body={ name="Herculean Vest", augments={'Accuracy+22 Attack+22','Weapon skill damage +3%','STR+12','Accuracy+10','Attack+12',}},
-        hands="Ken. Tekko +1",
-        legs="Ken. Hakama +1",
+        hands={ name="Herculean Gloves", augments={'Accuracy+7 Attack+7','Weapon skill damage +3%','STR+10','Accuracy+9','Attack+8',}},
+        legs="Mochi. Hakama +3",
         feet={ name="Herculean Boots", augments={'Attack+18','Weapon skill damage +4%','STR+7','Accuracy+14',}},
-        neck="Fotia Gorget",
+        neck="Ninja Nodowa +2",
         waist={ name="Sailfi Belt +1", augments={'Path: A',}},
         left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
         right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +250',}},
@@ -154,7 +155,21 @@ function init_gear_sets()
 	--sets.precast.WS['Blade: Ku'] = set_combine(sets.precast.WS, {ammo="Jukukik Feather"})
 	--sets.precast.WS['Blade: Jin'] = set_combine(sets.precast.WS, {ammo="Jukukik Feather"})
 	sets.precast.WS['Blade: Kamu'] = set_combine(sets.precast.WS, {})
-	sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS, {})
+	sets.precast.WS['Blade: Shun'] = {
+        ammo="C. Palug Stone",
+        head="Ken. Jinpachi +1",
+        body="Ken. Samue +1",
+        hands="Ken. Tekko +1",
+        legs="Jokushu Haidate",
+        feet="Ken. Sune-Ate +1",
+        neck="Ninja Nodowa +2",
+        waist="Fotia Belt",
+        left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
+        right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +250',}},
+        left_ring="Gere Ring",
+        right_ring="Regal Ring",
+        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
+    }
 	--sets.precast.WS['Blade: Yu'] = {}
 	--sets.precast.WS['Aeolian Edge'] = {}
 
@@ -176,15 +191,16 @@ function init_gear_sets()
       right_ring="Weatherspoon Ring",
       back={ name="Andartia's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},
 	}
-		
-	sets.midcast.Utsusemi = set_combine(sets.midcast.SelfNinjutsu, {feet="Hattori Kyahan",back="Andartia's Mantle"})
+	sets.midcast.SelfNinjutsu = {hands="Mochizuki Tekko +2"}
+	sets.midcast.Utsusemi = {feet="Hattori Kyahan",back="Andartia's Mantle", hands="Mochizuki Tekko +2",body="Mochi. Chainmail +3" }
 
 	sets.midcast.ElementalNinjutsu = {
     ammo="Pemphredo Tathlum",  -- 8macc
     --head={ name="Herculean Helm", augments={'Magic burst dmg.+7%','Mag. Acc.+11','"Mag.Atk.Bns."+9',}}, --mb7  --11 macc
     head="Mochi. Hatsuburi +3",
     body={ name="Samnuha Coat", augments={'Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+5','"Dual Wield"+5',}}, --mb8 (2)  -- 28 macc
-    hands={ name="Herculean Gloves", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic burst dmg.+5%','INT+5','Mag. Acc.+15',}}, --mb5 --35 macc
+    --hands={ name="Herculean Gloves", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic burst dmg.+5%','INT+5','Mag. Acc.+15',}}, --mb5 --35 macc
+    hands="Mochizuki Tekko +2",
     legs={ name="Herculean Trousers", augments={'Mag. Acc.+23','Magic burst dmg.+6%','MND+3','"Mag.Atk.Bns."+15',}}, --mb6  --23 macc
     feet={ name="Herculean Boots", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','"Fast Cast"+1','MND+10','Mag. Acc.+6','"Mag.Atk.Bns."+11',}}, -- 36macc
     neck="Sanctity Necklace", -- 10macc
@@ -293,15 +309,15 @@ function init_gear_sets()
 	-- EG: sets.engaged.Dagger.Accuracy.Evasion
 	
 	-- Normal melee group
-	-- Acc 972 (Kikoku/Ochu) :: Acc 999 (Ochu/Shigi) :: Acc 1006 (Ochu/Ochu) :: Acc ??? (Kanaria/Ochu)
 	sets.engaged = {
         ammo=gear.AccAmmo,
         head={ name="Ryuo Somen", augments={'HP+50','Accuracy+15','Attack+15',}},
         body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
         hands="Ken. Tekko +1",
-        legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
+        --legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
+        legs="Mochi. Hakama +3",
         feet={ name="Herculean Boots", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','STR+11','Quadruple Attack +2','Accuracy+18 Attack+18',}},
-        neck="Sanctity Necklace",
+        neck="Ninja Nodowa +2",
         waist="Reiki Yotai",
         left_ear="Telos Earring",
         right_ear="Suppanomimi",
@@ -309,51 +325,18 @@ function init_gear_sets()
         right_ring="Gere Ring",
         back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
 	}
-	--[[
-	sets.engaged = {
-		ammo=gear.AccAmmo,
-	    head="Ken. Jinpachi",
-		body="Ken. Samue +1",
-		hands="Ken. Tekko",
-		legs="Ken. Hakama",
-		feet="Ken. Sune-Ate",
-		neck="Moonlight Nodowa",
-		waist="Reiki Yotai",
-		left_ear="Telos Earring",
-		right_ear="Suppanomimi",
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
-	}
-		]]
-	-- Acc 1043 (Kikoku/Ochu) :: Acc 1070 (Ochu/Shigi) :: Acc 1077 (Ochu/Ochu)
-	sets.engaged.Acc = set_combine(sets.engaged, {feet={ name="Herculean Boots", augments={'Accuracy+28','"Fast Cast"+2','Accuracy+20 Attack+20',}},})
+    
+    sets.engaged.DW = set_combine(sets.engaged, {legs="Mochi. Hakama +3"})
 	
-	-- Acc 1072 (Kikoku/Ochu) :: Acc 1099 (Ochu/Shigi) :: Acc 1107 (Ochu/Ochu)
-	sets.engaged.Acc2 = sets.engaged.Acc
-	
-	-- Acc 1139 (Kikoku/Ochu) :: Acc 1168 (Ochu/Shigi) :: Acc 1175 (Ochu/Ochu)
-	sets.engaged.Acc3 = sets.engaged.Acc
-
-
 	-- Custom melee group: High Haste (~20% DW)
-	sets.engaged.HighHaste = sets.engaged
-	sets.engaged.Acc.HighHaste = sets.engaged.Acc
-	sets.engaged.Acc2.HighHaste = sets.engaged.Acc
-	sets.engaged.Acc3.HighHaste = sets.engaged.Acc
-
+	sets.engaged.HighHaste = sets.engaged.DW
+	
 	-- Custom melee group: Embrava Haste (7% DW)
 	sets.engaged.EmbravaHaste = sets.engaged
-	sets.engaged.Acc.EmbravaHaste = sets.engaged.Acc
-	sets.engaged.Acc2.EmbravaHaste = sets.engaged.Acc
-	sets.engaged.Acc3.EmbravaHaste = sets.engaged.Acc
-
+	
 	-- Custom melee group: Max Haste (0% DW)
 	sets.engaged.MaxHaste = sets.engaged
-	sets.engaged.Acc.MaxHaste = sets.engaged.Acc
-	sets.engaged.Acc2.MaxHaste = sets.engaged.Acc
-	sets.engaged.Acc3.MaxHaste = sets.engaged.Acc
-
+	
 	--------------------------------------
 	-- Custom buff sets
 	--------------------------------------

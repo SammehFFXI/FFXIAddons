@@ -274,7 +274,7 @@ function init_gear_sets()
 		right_ear="Thrud Earring",
 		left_ring="Epaminondas's Ring",
 		--right_ring="Regal Ring",
-        right_ring="Karieyh Ring",
+        right_ring="Karieyh Ring +1",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
 	}
 	sets.precast.WS.AccMDB = {

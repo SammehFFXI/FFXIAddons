@@ -271,7 +271,7 @@ function calculate_duration_raw(spell_id)
 	if subweapon.en == "Kali" then mult = mult + 0.05 end
 	if neck.en == "Aoidos' Matinee" then mult = mult + 0.1 end
 	if neck.en == "Moonbow Whistle" then mult = mult + 0.2 end 
-	if neck.en == "Mnbw. Whistle +1" then mult = mult + 0.2 end 
+	if neck.en == "Mnbw. Whistle +1" then mult = mult + 0.3 end 
     if body.en == "Fili Hongreline +1" then mult = mult + 0.12 end
 	if body.en == "Aoidos' Hngrln. +2" then mult = mult + 0.1 end
 	if body.en == "Aoidos' Hngrln. +1" then mult = mult + 0.05 end

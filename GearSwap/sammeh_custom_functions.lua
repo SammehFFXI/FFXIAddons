@@ -75,7 +75,6 @@ windower.raw_register_event('prerender',function()
 end)
 
 
-
 function check_temp_items()
  local tempitems = windower.ffxi.get_items(3)
   for id,item in pairs(tempitems) do

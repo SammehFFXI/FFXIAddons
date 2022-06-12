@@ -69,7 +69,7 @@ function init_gear_sets()
 	--------------------------------------
 	sets.Enmity = {
 	hands="Macabre Gauntlets",
-    body="Emet Harness",
+    body="Emet Harness +1",
     feet="Ahosi Leggings",
     neck="Unmoving Collar +1",
     waist="Flume Belt +1",
@@ -136,22 +136,21 @@ function init_gear_sets()
 
 	-- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 	sets.precast.WS['Blade: Hi'] = set_combine(sets.precast.WS, {})
-	sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS, {
-		ammo="Aurgelmir Orb +1",
-        --head={ name="Herculean Helm", augments={'Accuracy+27','Weapon skill damage +3%','STR+10',}},
-        head="Hachiya Hatsu. +3",
-        body={ name="Herculean Vest", augments={'Accuracy+22 Attack+22','Weapon skill damage +3%','STR+12','Accuracy+10','Attack+12',}},
-        hands={ name="Herculean Gloves", augments={'Accuracy+7 Attack+7','Weapon skill damage +3%','STR+10','Accuracy+9','Attack+8',}},
-        legs="Mochi. Hakama +3",
-        feet={ name="Herculean Boots", augments={'Attack+18','Weapon skill damage +4%','STR+7','Accuracy+14',}},
-        neck="Ninja Nodowa +2",
-        waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-        left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-        right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +250',}},
-        left_ring="Karieyh Ring",
-        right_ring="Epaminondas's Ring",
-        back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
-	})
+	sets.precast.WS['Blade: Ten'] = {
+		    ammo="Aurgelmir Orb +1",
+    head="Hachiya Hatsu. +3",
+    body={ name="Herculean Vest", augments={'Accuracy+22 Attack+22','Weapon skill damage +3%','STR+12','Accuracy+10','Attack+12',}},
+    hands={ name="Herculean Gloves", augments={'Accuracy+7 Attack+7','Weapon skill damage +3%','STR+10','Accuracy+9','Attack+8',}},
+    legs={ name="Mochi. Hakama +3", augments={'Enhances "Mijin Gakure" effect',}},
+    feet={ name="Herculean Boots", augments={'Attack+18','Weapon skill damage +4%','STR+7','Accuracy+14',}},
+    neck="Ninja Nodowa +2",
+    waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+    left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
+    right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +250',}},
+    left_ring="Karieyh Ring +1",
+    right_ring="Epaminondas's Ring",
+    back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
+	}
 	--sets.precast.WS['Blade: Ku'] = set_combine(sets.precast.WS, {ammo="Jukukik Feather"})
 	--sets.precast.WS['Blade: Jin'] = set_combine(sets.precast.WS, {ammo="Jukukik Feather"})
 	sets.precast.WS['Blade: Kamu'] = set_combine(sets.precast.WS, {})
@@ -170,7 +169,21 @@ function init_gear_sets()
         right_ring="Regal Ring",
         back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
     }
-	--sets.precast.WS['Blade: Yu'] = {}
+	sets.precast.WS['Blade: Yu'] = {
+    ammo="Pemphredo Tathlum",
+    head={ name="Mochi. Hatsuburi +3", augments={'Enhances "Yonin" and "Innin" effect',}},
+    body={ name="Samnuha Coat", augments={'Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+5','"Dual Wield"+5',}},
+    hands={ name="Leyline Gloves", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
+    legs={ name="Herculean Trousers", augments={'"Cure" potency +1%','INT+3','Weapon skill damage +9%','Mag. Acc.+14 "Mag.Atk.Bns."+14',}},
+    feet={ name="Herculean Boots", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','"Fast Cast"+1','MND+10','Mag. Acc.+6','"Mag.Atk.Bns."+11',}},
+    neck="Sanctity Necklace",
+    waist="Eschan Stone",
+    left_ear="Ishvara Earring",
+    right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +250',}},
+    left_ring="Karieyh Ring +1",
+    right_ring="Shiva Ring +1",
+    back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
+    }
 	--sets.precast.WS['Aeolian Edge'] = {}
 
 	--------------------------------------
@@ -191,8 +204,8 @@ function init_gear_sets()
       right_ring="Weatherspoon Ring",
       back={ name="Andartia's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},
 	}
-	sets.midcast.SelfNinjutsu = {hands="Mochizuki Tekko +2"}
-	sets.midcast.Utsusemi = {feet="Hattori Kyahan",back="Andartia's Mantle", hands="Mochizuki Tekko +2",body="Mochi. Chainmail +3" }
+	sets.midcast.SelfNinjutsu = {hands="Mochizuki Tekko +3"}
+	sets.midcast.Utsusemi = {feet="Hattori Kyahan",back="Andartia's Mantle", hands="Mochizuki Tekko +3",body="Mochi. Chainmail +3" }
 
 	sets.midcast.ElementalNinjutsu = {
     ammo="Pemphredo Tathlum",  -- 8macc
@@ -200,8 +213,9 @@ function init_gear_sets()
     head="Mochi. Hatsuburi +3",
     body={ name="Samnuha Coat", augments={'Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+5','"Dual Wield"+5',}}, --mb8 (2)  -- 28 macc
     --hands={ name="Herculean Gloves", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic burst dmg.+5%','INT+5','Mag. Acc.+15',}}, --mb5 --35 macc
-    hands="Mochizuki Tekko +2",
-    legs={ name="Herculean Trousers", augments={'Mag. Acc.+23','Magic burst dmg.+6%','MND+3','"Mag.Atk.Bns."+15',}}, --mb6  --23 macc
+    hands="Mochizuki Tekko +3",
+    --legs={ name="Herculean Trousers", augments={'Mag. Acc.+23','Magic burst dmg.+6%','MND+3','"Mag.Atk.Bns."+15',}}, --mb6  --23 macc
+    legs="Gyve Trousers",
     feet={ name="Herculean Boots", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','"Fast Cast"+1','MND+10','Mag. Acc.+6','"Mag.Atk.Bns."+11',}}, -- 36macc
     neck="Sanctity Necklace", -- 10macc
     waist="Eschan Stone", --15macc 
@@ -253,7 +267,7 @@ function init_gear_sets()
 	sets.Idle.Current = sets.idle
 	
 	sets.dt = {
-	    head={ name="Herculean Helm", augments={'Mag. Acc.+15 "Mag.Atk.Bns."+15','Damage taken-3%','Mag. Acc.+8',}},
+	    head="Malignance Chapeau",
 		body="Ashera Harness",
 		hands={ name="Herculean Gloves", augments={'Attack+4','"Triple Atk."+4','DEX+1','Accuracy+14',}},
 		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
@@ -357,6 +371,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 	if string.find(spell.name,'Utsusemi') then
 	  equip(sets.precast.FC.Utsusemi)
 	end
+    if spell.name == "Holy Water" then
+       equip(sets.HolyWater)
+    end
 end
 
 

@@ -635,8 +635,6 @@ function customize_melee_set(meleeSet)
     return meleeSet
 end
 
-function job_post_precast(spell, action, spellMap, eventArgs)
-end
 
 function job_midcast(spell, action, spellMap, eventArgs)
     if state.StaffMode.value == 'PetOnly' then

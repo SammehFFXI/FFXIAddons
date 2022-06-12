@@ -73,7 +73,7 @@ function init_gear_sets()
 		right_ear="Flashward Earring",
 		left_ring="Moonlight Ring",
 		right_ring="Defending Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 	}
 	sets.engaged = {}
 	sets.engaged.Normal = {ammo="Ginsen",
@@ -84,7 +84,7 @@ function init_gear_sets()
 		legs="Sulev. Cuisses +2",
 		feet="Flam. Gambieras +2",
 		--neck="Shulmanu Collar",
-        neck="Anu Torque",
+        neck="Dgn. Collar +2",
 		waist="Ioskeha Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Sherida Earring",
@@ -99,7 +99,7 @@ function init_gear_sets()
         hands={ name="Acro Gauntlets", augments={'Accuracy+20 Attack+20','"Store TP"+6','DEX+10',}},
         legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
         feet="Flam. Gambieras +2",
-        neck="Anu Torque",
+        neck="Dgn. Collar +2", -- Anu Torque
         waist="Ioskeha Belt +1",
         left_ear="Telos Earring",
         right_ear="Sherida Earring",
@@ -120,7 +120,7 @@ function init_gear_sets()
 		right_ear="Flashward Earring",
 		left_ring="Purity Ring",
 		right_ring="Vengeful Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 	}
 	sets.engaged.MEVA = sets.meva
 	
@@ -132,11 +132,13 @@ function init_gear_sets()
 		ammo="Knobkierrie",
 		--head={ name="Valorous Mask", augments={'Weapon skill damage +5%','AGI+7','Accuracy+15','Attack+10',}},
 		head="Flamma Zucchetto +2",
-		body={ name="Valorous Mail", augments={'Attack+21','"Dbl.Atk."+4','STR+10','Accuracy+12',}},
+		--body={ name="Valorous Mail", augments={'Attack+21','"Dbl.Atk."+4','STR+10','Accuracy+12',}},
+        body="Hjarrandi Breast.",
 		hands="Sulev. Gauntlets +2",
 		legs={ name="Valor. Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
 		feet="Sulev. Leggings +2",
-		neck="Fotia Gorget",
+		--neck="Fotia Gorget",
+        neck="Dgn. Collar +2",
 		waist="Fotia Belt",
 		right_ear="Sherida Earring",
 		left_ear="Telos Earring",
@@ -165,7 +167,8 @@ function init_gear_sets()
         hands="Sulev. Gauntlets +2",
         legs="Sulev. Cuisses +2",
         feet="Sulev. Leggings +2",
-        neck="Fotia Gorget",
+        --neck="Fotia Gorget",
+        neck="Dgn. Collar +2",
         waist="Fotia Belt",
         left_ear="Telos Earring",
         right_ear="Sherida Earring",
@@ -175,7 +178,8 @@ function init_gear_sets()
 	})
     sets.ws.WSD = {
         ammo="Knobkierrie",
-        head={ name="Valorous Mask", augments={'"Mag.Atk.Bns."+4','Mag. Acc.+24','Weapon skill damage +9%',}},
+        --head={ name="Valorous Mask", augments={'"Mag.Atk.Bns."+4','Mag. Acc.+24','Weapon skill damage +9%',}},
+        head="Stinger Helm +1",
         body={ name="Ptero. Mail +3", augments={'Enhances "Spirit Surge" effect',}},
         --hands={ name="Valorous Mitts", augments={'Attack+16','Weapon skill damage +3%','STR+10','Accuracy+7',}},
         hands="Ptero. Fin. G. +3",
@@ -186,7 +190,7 @@ function init_gear_sets()
         left_ear="Ishvara Earring",
         right_ear="Sherida Earring",
         left_ring="Epaminondas's Ring",
-        right_ring="Karieyh Ring",
+        right_ring="Karieyh Ring +1",
         back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
     }
 	sets.ws['Camlann\'s Torment'] = sets.ws.WSD
@@ -246,7 +250,7 @@ function init_gear_sets()
 		left_ear="Odnowa Earring +1",
 		left_ring="Moonlight Ring",
 		right_ring="Defending Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 	}
 	
 	sets.Idle.Current = sets.Idle
@@ -299,6 +303,9 @@ function job_post_precast(spell)
 	 windower.add_to_chat(8,"Adding in Helm for WS")
 	 equip(sets.WSDayBonus)
 	end
+    if spell.name == "Holy Water" then
+       equip(sets.HolyWater)
+    end
 end
 
 function job_post_midcast(spell)

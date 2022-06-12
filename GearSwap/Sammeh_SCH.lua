@@ -117,10 +117,10 @@ function init_gear_sets()
         ammo="Homiliary",
         head="Acad. Mortar. +3",
         body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
-        hands={ name="Gende. Gages +1", augments={'Phys. dmg. taken -3%','Song spellcasting time -4%',}},
+        hands="Volte Bracers",
         legs="Perdition Slops",
         feet="Skaoi Boots",
-        neck="Bathy Choker +1",
+        neck="Unmoving Collar +1",
         waist="Carrier's Sash",
         left_ear="Eabani Earring",
         right_ear="Odnowa Earring +1",
@@ -208,7 +208,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Acad. Mortar. +3",
 		body="Acad. Gown +3",
-		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
+        hands={ name="Peda. Bracers +3", augments={'Enh. "Tranquility" and "Equanimity"',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		feet="Acad. Loafers +3",
 		--neck="Incanter's Torque",
@@ -278,7 +278,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +10','Mag. Acc.+11','"Mag.Atk.Bns."+14',}},
 		body="Shango Robe",
-		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
+		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		feet={ name="Chironic Slippers", augments={'Mag. Acc.+29','"Drain" and "Aspir" potency +10','"Mag.Atk.Bns."+10',}},
 		neck="Erra Pendant",
@@ -320,7 +320,7 @@ function init_gear_sets()
 		ammo="Savant's Treatise",
 		head="Acad. Mortar. +3",
 		body="Acad. Gown +3",
-		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
+		hands={ name="Peda. Bracers +3", augments={'Enh. "Tranquility" and "Equanimity"',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		--feet="Skaoi Boots",
 		feet="Acad. Loafers +3",
@@ -340,7 +340,7 @@ function init_gear_sets()
 		ammo="Savant's Treatise",
 		head="Acad. Mortar. +3",
 		body="Acad. Gown +3",
-		hands={ name="Chironic Gloves", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','MND+13','Mag. Acc.+10','"Mag.Atk.Bns."+4',}},
+        hands={ name="Peda. Bracers +3", augments={'Enh. "Tranquility" and "Equanimity"',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Haste+1','INT+4','Mag. Acc.+14','"Mag.Atk.Bns."+15',}},
 		feet="Skaoi Boots",
 		neck="Erra Pendant",
@@ -419,7 +419,7 @@ function init_gear_sets()
 		ammo="Homiliary",
 		head="Befouled Crown",
 		body="Jhakri Robe +2",
-		hands={ name="Chironic Gloves", augments={'"Blood Pact" ability delay -7','Accuracy+6','"Refresh"+1','Accuracy+15 Attack+15',}},
+        hands={ name="Chironic Gloves", augments={'Chance of successful block +2','Attack+30','"Refresh"+1','Accuracy+5 Attack+5',}},
 		legs="Assid. Pants +1",
 		feet="Crier's Gaiters",
 		neck="Loricate Torque +1",
@@ -436,7 +436,7 @@ function init_gear_sets()
         ammo="Homiliary",
 		head="Befouled Crown",
 		body="Jhakri Robe +2",
-		hands={ name="Chironic Gloves", augments={'"Blood Pact" ability delay -7','Accuracy+6','"Refresh"+1','Accuracy+15 Attack+15',}},
+		hands={ name="Chironic Gloves", augments={'Chance of successful block +2','Attack+30','"Refresh"+1','Accuracy+5 Attack+5',}},
 		legs="Assid. Pants +1",
 		feet="Crier's Gaiters",
 		neck="Loricate Torque +1",
@@ -612,7 +612,7 @@ function job_post_midcast(spell)
 			end
 		end
 		if spell.english == 'Aquaveil' then
-			equip({head={ name="Chironic Hat", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Cure" spellcasting time -3%','INT+1','Mag. Acc.+14',}},hands={ name="Chironic Gloves", augments={'"Blood Pact" ability delay -7','Accuracy+6','"Refresh"+1','Accuracy+15 Attack+15',}},legs="Shedir Seraweels"})
+			equip({head={ name="Chironic Hat", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Cure" spellcasting time -3%','INT+1','Mag. Acc.+14',}},hands={ name="Chironic Gloves", augments={'Chance of successful block +2','Attack+30','"Refresh"+1','Accuracy+5 Attack+5',}},legs="Shedir Seraweels"})
 		end
         if spell.english == 'Embrava' then
             equip(sets.midcast.Embrava)
@@ -777,7 +777,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	sets.Idle.Current = sets.Idle.NoSubl
 	if buffactive["Sublimation: Activated"] then
         sets.Idle.Current = sets.Idle.Subl
-		if SublimationStartTimer and CurrentTime - SublimationStartTimer > 85 then
+		if SublimationStartTimer and CurrentTime - SublimationStartTimer > 60 then
 		   sets.Idle.Current = sets.MaxHP
 		end
     end
@@ -827,7 +827,7 @@ windower.raw_register_event('time change',function()
       precast_start = CurrentTime
    end
    
-   if SublimationStartTimer and CurrentTime - SublimationStartTimer > 180 then 
+   if SublimationStartTimer and CurrentTime - SublimationStartTimer > 150 then 
 	  job_handle_equipping_gear(player.status)
 	  send_command("gs equip sets.Idle.Current")
    end

@@ -132,20 +132,20 @@ function init_gear_sets()
 		back={ name="Cichol's Mantle", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Mag. Evasion+15',}},
 	}
 	sets.dt = {
-		ammo="Staunch Tathlum +1", --dt3
+		ammo="Aurgelmir Orb +1",
 	    head="Sulevia's Mask +2", --dt6 
-		body="Tartarus Platemail", --dt10
-		hands="Sulev. Gauntlets +2", --dt4
+		body="Hjarrandi Breastplate", --dt12
+		hands="Sulev. Gauntlets +2", --dt5
 		legs="Sulev. Cuisses +2", --dt7
 		feet="Pumm. Calligae +3", 
-		neck="Loricate Torque +1", --dt6 
+		neck="War. Beads +2", 
 		waist="Ioskeha Belt +1",
 		right_ear="Telos Earring",
 		left_ear="Cessance Earring",
-		left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}}, --pdt6, mdt3
+		left_ring="Niqmaddu Ring",
 		right_ring="Defending Ring", -- dt10
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},
-	} -- pdt 48 mdt -- 48 (Shell will easily make up diff)
+		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}}, --10
+	} -- pdt 50 
 	sets.dtenmity = {
 	    ammo="Staunch Tathlum +1",
 		head="Pummeler's Mask +3",
@@ -340,7 +340,7 @@ function init_gear_sets()
 		left_ear="Cessance Earring",
 		right_ear="Telos Earring",
 		--left_ring="Niqmaddu Ring",
-        left_ring="Karieyh Ring",
+        left_ring="Karieyh Ring +1",
         right_ring="Epaminondas's Ring",
 		--right_ring="Regal Ring",
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
@@ -483,7 +483,7 @@ function init_gear_sets()
         waist="Flume Belt +1",
         left_ear="Genmei Earring",
         right_ear="Odnowa Earring +1",
-        left_ring="Karieyh Ring",
+        left_ring="Karieyh Ring +1",
         right_ring="Defending Ring",
         back="Moonbeam Cape",
 	}
@@ -538,6 +538,9 @@ function job_post_precast(spell)
     end
     if state.EnmityMode == 'On' then
         
+    end
+    if spell.name == "Holy Water" then
+       equip(sets.HolyWater)
     end
 end
 

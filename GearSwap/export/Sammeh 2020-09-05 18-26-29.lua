@@ -1,0 +1,17 @@
+sets.exported={
+    main={ name="Heishi Shorinken", augments={'Path: A',}},
+    sub={ name="Ochu", augments={'STR+10','DEX+10','Ninjutsu skill +10','DMG:+15',}},
+    ammo="Aurgelmir Orb +1",
+    head="Hachiya Hatsu. +3",
+    body={ name="Herculean Vest", augments={'Accuracy+22 Attack+22','Weapon skill damage +3%','STR+12','Accuracy+10','Attack+12',}},
+    hands={ name="Herculean Gloves", augments={'Accuracy+7 Attack+7','Weapon skill damage +3%','STR+10','Accuracy+9','Attack+8',}},
+    legs={ name="Mochi. Hakama +3", augments={'Enhances "Mijin Gakure" effect',}},
+    feet={ name="Herculean Boots", augments={'Attack+18','Weapon skill damage +4%','STR+7','Accuracy+14',}},
+    neck="Ninja Nodowa +2",
+    waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+    left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
+    right_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +250',}},
+    left_ring="Karieyh Ring +1",
+    right_ring="Epaminondas's Ring",
+    back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
+}

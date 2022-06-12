@@ -10,8 +10,8 @@ function user_setup()
 	send_command('bind f10 gs c cycle IdleMode')
 	send_command('bind f12 gs c wslist')
 	
-	--state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Zanshin','Reraise','DT','MedAccuracy','HighAccuracy','HighACCMDB','MEVA'}
-	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','DT','HighAccuracy','MEVA','Reraise','TH'}
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Zanshin','Reraise','DT','MedAccuracy','HighAccuracy','HighACCMDB','MEVA'}
+	--state.OffenseMode = M{['description']='Engaged Mode', 'Normal','ACC','DT','Hybrid','MEVA','Reraise'}
 	-- f9 =  offense mode
 	state.WeaponskillMode:options('Normal','Acc','WSD','AccMDB')
 	-- win+f9 = ws mode
@@ -70,7 +70,7 @@ function init_gear_sets()
 	sets.meva = {
 		ammo="Staunch Tathlum +1",
 		head="Volte Cap",
-        head="",
+        head="Ken. Jinpachi +1",
 		body="Ken. Samue +1",
 		--hands="Volte Bracers",
         hands="Ken. Tekko +1",
@@ -92,7 +92,8 @@ function init_gear_sets()
 		ammo="Aurgelmir Orb +1",
 		head="Flam. Zucchetto +2",
 		--body={ name="Valorous Mail", augments={'Accuracy+20 Attack+20','"Store TP"+7','Attack+9',}},
-		body="Kendatsuba Samue +1",
+		--body="Kendatsuba Samue +1",
+        body="Tatena. Harama. +1",
 		--hands={ name="Valorous Mitts", augments={'Accuracy+13 Attack+13','CHR+5','Quadruple Attack +3','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
 		hands="Wakido Kote +3",
 		--legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
@@ -144,6 +145,21 @@ function init_gear_sets()
         left_ring="Niqmaddu Ring",
         right_ring="Flamma Ring",
         back={ name="Takaha Mantle", augments={'STR+4','"Zanshin"+3','"Store TP"+3','Meditate eff. dur. +7',}},
+    }
+    sets.engaged.Hybrid = {
+        ammo="Aurgelmir Orb +1",
+        head="Ken. Jinpachi +1",
+        body="Wakido Domaru +3",
+        hands="Ken. Tekko +1",
+        legs="Ken. Hakama +1",
+        feet="Ken. Sune-Ate +1",
+        neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+        waist="Ioskeha Belt +1",
+        left_ear="Odnowa Earring +1",
+        right_ear="Telos Earring",
+        left_ring="Niqmaddu Ring",
+        right_ring="Defending Ring",
+        back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},
     }
 	sets.engaged.HighACCMDB = {
         sub="Khonsu",
@@ -231,7 +247,8 @@ function init_gear_sets()
     }
 	sets.precast.WS = {
 		ammo="Knobkierrie",
-		head="Flam. Zucchetto +2",
+		--head="Flam. Zucchetto +2",
+        head="Stinger Helm +1",
 		body={ name="Sakonji Domaru +3", augments={'Enhances "Overwhelm" effect',}},
 		hands={ name="Valorous Mitts", augments={'Attack+16','Weapon skill damage +3%','STR+10','Accuracy+7',}},
 		legs="Wakido Haidate +3",
@@ -263,7 +280,8 @@ function init_gear_sets()
 	}
 	sets.precast.WS.WSD = {
 		ammo="Knobkierrie",
-	    head={ name="Valorous Mask", augments={'"Mag.Atk.Bns."+4','Mag. Acc.+24','Weapon skill damage +9%',}},
+	    --head={ name="Valorous Mask", augments={'"Mag.Atk.Bns."+4','Mag. Acc.+24','Weapon skill damage +9%',}},
+        head="Stinger Helm +1",
 		body={ name="Sakonji Domaru +3", augments={'Enhances "Overwhelm" effect',}},
 		hands={ name="Valorous Mitts", augments={'Attack+16','Weapon skill damage +3%','STR+10','Accuracy+7',}},
 		legs="Wakido Haidate +3",
@@ -381,18 +399,21 @@ function init_gear_sets()
     
     ---  AFTERCAST SETS  ---
     sets.Idle = {
-	    head="Ynglinga Sallet",
+	    --head="Ynglinga Sallet",
+        head="Wakido Kabuto +3",
 		--body="Chozor. Coselete",
-        body="Wakido Domaru +3",
+        --body="Wakido Domaru +3",
+        body="Tartarus Platemail",
 		hands="Sakonji Kote +3",
 		--legs={ name="Valor. Hose", augments={'Accuracy+30','"Store TP"+8','CHR+7',}},
 		legs="Sakonji Haidate +3",
 		feet="Danzo Sune-Ate",
-		neck="Loricate Torque +1",
+		-- neck="Loricate Torque +1",
+        neck="Elite Royal Collar",
 		waist="Flume Belt +1",
-		left_ear="Cessance Earring",
-		right_ear="Telos Earring",
-		right_ring="Sheltered Ring",
+		left_ear="Genmei Earring",
+		right_ear="Odnowa Earring +1",
+		right_ring="Karieyh Ring +1",
 		left_ring="Defending Ring",
 		back="Moonbeam Cape",
 		ammo="Staunch Tathlum +1"
@@ -440,6 +461,9 @@ function job_post_precast(spell)
 	end
     if spell.type == 'WeaponSkill' and buffactive['Meikyo Shisui'] then
         equip({feet="Sakonji Sune-Ate +3"})
+    end
+    if spell.name == "Holy Water" then
+       equip(sets.HolyWater)
     end
 end
 

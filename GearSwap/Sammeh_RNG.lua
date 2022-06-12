@@ -493,6 +493,9 @@ function job_post_precast(spell)
 		end
   end
 	weathercheck(spell.element)
+    if spell.name == "Holy Water" then
+       equip(sets.HolyWater)
+    end
 end
 
 function job_post_midcast(spell)

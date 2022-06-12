@@ -6,6 +6,7 @@ send_command('bind !` gs c cycle TreasureMode')
 sets.TreasureHunter = {head="Volte Cap",hands="Volte Bracers",Feet="Volte Boots",waist="Chaac Belt"}
 send_command('alias th4 gs equip sets.TreasureHunter')
 sets.CursnaReceived = {neck="Nicander's Necklace",waist="Gishdubar Sash",left_ring="Eshmun's Ring",right_ring="Eshmun's Ring",}
+sets.HolyWater = {neck="Nicander's Necklace",left_ring="Purity Ring"}
 
 -- require 'strings'
 -- require 'actions'
@@ -13,6 +14,7 @@ sets.CursnaReceived = {neck="Nicander's Necklace",waist="Gishdubar Sash",left_ri
 require 'tables'
 files = require 'files'
 res = require 'resources'
+packets = require('packets')
 extdata = require('extdata')
 
 --lastspell = require('last_spell.lua')   -- this was just a test - don't ask
@@ -276,6 +278,27 @@ function weathercheck(spell_element)
     end
 end
 
+
+
+windower.raw_register_event('outgoing chunk',function(id,data)
+	if id == 0x037 then
+		local packet = packets.parse('outgoing', data)
+        item_used = res.items[windower.ffxi.get_items(packet.Bag, packet.Slot).id].en
+        if item_used == 'Holy Water' then  
+          if player.equipment.left_ring == "Purity Ring" and player.equipment.neck == "Nicander's Necklace" then
+            -- nothing
+          else
+            windower.add_to_chat(2,"Equipping gear and adding delay")
+            windower.send_command("gs equip sets.HolyWater")
+            send_command('@wait 0.5; input /item "Holy Water" <me>')
+            return true
+          end
+        end
+	end
+end)
+
+
+
 -- Called whenever you gain or lose a buff.
 function job_buff_change(status,gain_or_loss)
    if (gain_or_loss) then  
@@ -360,7 +383,7 @@ function GetSkillIDBySkill(skill)
 end
 
 function checkblocking(spell)
-	if type(windower.ffxi.get_player().autorun) == 'table' and (spell.action_type == 'Magic' or spell.name == 'Ranged') then 
+    if type(windower.ffxi.get_player().autorun) == 'table' and (spell.action_type == 'Magic' or spell.name == 'Ranged') then 
 		windower.add_to_chat(3,'Currently auto-running - stopping to cast spell')
 		windower.ffxi.run(false) -- Need to add a check for if autorun == 1 in aftercast to turn windower.ffxi.run back on.
 		windower.ffxi.follow()  -- disabling Follow - turning back autorun automatically turns back on follow.  
@@ -532,7 +555,9 @@ function checkblocking(spell)
 			end
 		end
 	end
+
 end
+
 
 --[[
 Just not worth it

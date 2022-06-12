@@ -232,6 +232,9 @@ function job_post_precast(spell)
 		windower.add_to_chat(10,"Adding in Moonshade Earring for more TP:"..player.tp)
 		equip({left_ear="Moonshade Earring"})
 	end
+    if spell.name == "Holy Water" then
+       equip(sets.HolyWater)
+    end
 end
 
 function job_pretarget(spell)
@@ -293,18 +296,6 @@ function job_buff_change(status,gain_or_loss)
  function job_self_command(command)
 
 end
-
-
-windower.raw_register_event('outgoing chunk',function(id,data)
-	if id == 0x037 then
-		local packet = packets.parse('outgoing', data)
-        item_used = res.items[windower.ffxi.get_items(packet.Bag, packet.Slot).id].en
-        if item_used == 'Holy Water' then
-          windower.send_command("gs equip sets.cursnareceived")
-        end
-	end
-end)
-
 
 
 function job_state_change(stateField, newValue, oldValue)

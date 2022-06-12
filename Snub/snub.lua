@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'Snub'
 _addon.author = 'Sammeh'
-_addon.version = '1.8'
+_addon.version = '1.9'
 _addon.command = 'snub'
 
 require 'tables'
@@ -59,7 +59,7 @@ debugmode = 0
 -- 1.6 Changed snub import.  //snub import passlist  (Pass list)  or //snub import droplist
 -- 1.7 Bug fixes (Error on startup when no character loaded, and snub list since adding ROE/EXP snubs)
 -- 1.8 Apparently negelected to realize I put ROE/EXP snub as a local variable on startup and not global so it wasn't saving in later functions.. Fixed.
-
+-- 1.9 Added Exemplar (part of Exp block)
 
 -- Create config file
 if windower.ffxi.get_player() then 
@@ -90,9 +90,16 @@ end
 
 -- Watch for Items to Snub
 windower.register_event('incoming text', function(original, modified, original_mode, modified_mode, blocked)
-	-- print(original,original_mode)
     if blocked or text == '' then
         return
+    end
+    if (original_mode == 121 and (original:match("exemplar points") or original:match("Master chain"))) then
+        if expblock then
+            if debugmode == 1 then 
+                windower.add_to_chat(10,"Snub: EXP/CP Message:"..original)
+            end
+            return true
+        end
     end
 	if (original_mode == 121 or original_mode == 127) and original:match(string.char(0x1e, 0x02)) then
 		local itemraw = original:split(string.char(0x1e, 0x02))
@@ -188,7 +195,7 @@ windower.register_event('addon command', function(...)
 		windower.add_to_chat(10,"//snub remove \"Item\"           -- Removes an item to ignore list")
 		windower.add_to_chat(10,"//snub print (or) list           -- Prints ignore list")
 		windower.add_to_chat(10,"//snub roe                       -- Turns on/off ROE Filter")
-		windower.add_to_chat(10,"//snub exp                       -- Turns on/off EXP Filter")
+		windower.add_to_chat(10,"//snub exp                       -- Turns on/off EXP/CP/Exemplar Filter")
 		windower.add_to_chat(10,"//snub import passlist|droplist  -- Imports Treasury Addon List - Caution freezes a moment")
 		windower.add_to_chat(10,"//snub debug                     -- Debugs an ignore")
 	elseif cmd == "import" then
@@ -213,10 +220,10 @@ windower.register_event('addon command', function(...)
 		custom_snub_file:write('return ' .. T(custom_snubs):tovstring())
 	elseif cmd == "expblock" or cmd == "exp" then
 	    if expblock then
-			windower.add_to_chat(10,"Snub: Turning OFF EXP/CP Filter")
+			windower.add_to_chat(10,"Snub: Turning OFF EXP/CP/Exemplar Filter")
 			custom_snubs["expblock"] = nil
 		else
-			windower.add_to_chat(10,"Snub: Turning ON EXP/CP Filter")
+			windower.add_to_chat(10,"Snub: Turning ON EXP/CP/Exemplar Filter")
 			custom_snubs["expblock"] = "1"
 		end
 		expblock = custom_snubs["expblock"]

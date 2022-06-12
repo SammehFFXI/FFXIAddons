@@ -9,6 +9,6 @@ Usage:
 * //snub print -- Prints current Ignore list.
 * //snub import paslist|droplist -- Imports Treasury Drop List
 * //snub roe  -- Removes messages about ROE Quests
-* //snub exp  -- Removes messages about EXP/CP
+* //snub exp  -- Removes messages about EXP/CP/Exemplar
 * //snub debug -- Debugs
 	

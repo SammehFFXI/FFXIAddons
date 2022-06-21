@@ -9,12 +9,14 @@ function user_setup()
 	state.IdleMode:options('Normal','Reraise','MEVA')
 	send_command('bind f10 gs c cycle IdleMode')
 	send_command('bind f11 gs c berserkmode')
+    send_command('bind ^f11 gs c retaliationmode')
 	send_command('bind f12 gs c wslist')
 	
 	--state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Reraise','DT','MedAccuracy','HighAccuracy','ShieldBlock','MEVA'}
     --state.OffenseMode = M{['description']='Engaged Mode', 'Normal','DT','HighAccuracy','DW','DWAcc'}
     state.OffenseMode = M{['description']='Engaged Mode', 'Normal','DT','HighAccuracy'}
 	state.BerserkMode = M{['description']='Berserk Mode', 'Normal','Auto','Auto:Swap','Auto:NoSwap'}
+    state.RetaliationMode = M{['description']='Retaliation Mode', 'Normal','Auto'}
     state.EnmityMode = M{['description']='Enmity Mode','Off','On'}
     state.WeaponskillMode:options('Normal','ACC')
     --state.WeaponskillMode:options('Normal','ACC','Iroha')
@@ -587,6 +589,11 @@ function job_post_aftercast(spell)
 	if spell.name == "Berserk" and state.BerserkMode.value == "Auto" and currentMain and currentSub then
 		equip({main=currentMain,sub=currentSub})
 	end
+    if not buffactive.Retaliation and state.RetaliationMode.value == "Auto" and windower.ffxi.get_ability_recasts()[8] == 0 then 
+	   send_command("@wait 2.5;input /ja Retaliation <me>")
+	end
+	
+    
 end
 
 function status_change(new,tab)
@@ -642,6 +649,9 @@ function job_buff_change(status,gain_or_loss)
 	   currentMain = player.equipment.main
 	   currentSub = player.equipment.sub
 	   send_command('gs c cycle BerserkMode')
+	end
+    if command[1]:lower() == "retaliationmode" then
+	   send_command('gs c cycle RetaliationMode')
 	end
 end
 

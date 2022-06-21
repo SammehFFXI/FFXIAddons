@@ -9,7 +9,7 @@ function user_setup()
 	state.IdleMode:options('Normal','FastPants')
     state.ShieldMode = M{['description']='Shield Mode', 'Srivatsa','Aegis', 'Ochain'} -- ,'Priwen' }
 	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock'}
-	state.OffenseMode = M{['description']='Engaged Mode', 'Turtle','DD'}
+	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Turtle','DD'}
 	send_command('bind f11 gs c cycle ShieldMode')
     send_command('bind f10 gs c cycle IdleMode')
 	select_default_macro_book()
@@ -58,8 +58,8 @@ function init_gear_sets()
 		waist="Rumination Sash",
 		left_ear={ name="Odnowa Earring +1",priority=11},
 		right_ear="Trux Earring",
-		left_ring="Apeile Ring",
-		right_ring="Apeile Ring +1",
+		left_ring="Stikini Ring",
+		right_ring="Stikini Ring +1",
 		back={ name="Rudianos's Mantle", augments={'HP+60','Mag. Acc+20 /Mag. Dmg.+20','HP+20','"Fast Cast"+10','Phys. dmg. taken-10%',},priority=12},
 	}
 	
@@ -120,9 +120,46 @@ function init_gear_sets()
     sets.Idle = sets.dt
 	sets.Idle.Current = sets.Idle
     sets.Resting = sets.Idle
+	sets.ws = {}
+	sets.ws.wsd = {
+	    head="Flam. Zucchetto +2",
+		body={ name="Valorous Mail", augments={'Attack+21','"Dbl.Atk."+4','STR+10','Accuracy+12',}},
+		hands={ name="Valorous Mitts", augments={'Attack+16','Weapon skill damage +3%','STR+10','Accuracy+7',}},
+		legs={ name="Valor. Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
+		feet="Sulev. Leggings +2",
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear="Odnowa Earring +1",
+		right_ear="Thureous Earring",
+		left_ring="Regal Ring",
+		right_ring="Defending Ring",
+		back={ name="Rudianos's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
+	}
+    sets.ws.magic = {
+        ammo="Pemphredo Tathlum",
+        head={ name="Valorous Mask", augments={'Mag. Acc.+22','MND+8','Chance of successful block +10','Accuracy+13 Attack+13','Mag. Acc.+12 "Mag.Atk.Bns."+12',}},
+        body={ name="Found. Breastplate", augments={'Accuracy+15','Mag. Acc.+15','Attack+15','"Mag.Atk.Bns."+15',}},
+        hands={ name="Leyline Gloves", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
+        legs="Flamma Dirs +2",
+        feet={ name="Valorous Greaves", augments={'"Snapshot"+4','"Mag.Atk.Bns."+27','"Fast Cast"+1','Accuracy+8 Attack+8','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
+        neck="Sibyl Scarf",
+        waist="Eschan Stone",
+        left_ear={ name="Moonshade Earring", augments={'MP+25','TP Bonus +250',}},
+        right_ear="Crematio Earring",
+        left_ring="Shiva Ring +1",
+        right_ring="Shiva Ring +1",
+        back="Argocham. Mantle"
+    }
 	
+    sets.ws.savageblade = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt",hands="Agoge Mufflers +3",legs="Sulev. Cuisses +2",})
+    sets.ws["Savage Blade"] = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt",hands="Agoge Mufflers +3",legs="Sulev. Cuisses +2",})
+    sets.ws["Aeolian Edge"] = sets.ws.magic
+	sets.precast.WS = sets.ws
+
 	
-    sets.midcast = set_combine(sets.sird, {})
+    sets.midcast = {}
+    -- set_combine(sets.sird, {})
+    sets.midcast.WS = sets.precast.WS
     sets.midcast['Healing Magic'] = {
 		ammo="Staunch Tathlum +1",
 		head={ name="Souv. Schaller +1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',}},
@@ -145,6 +182,10 @@ function init_gear_sets()
 	}
 	sets.midcast['Healing Magic'] = sets.sird
     sets.midcast['Enhancing Magic'] = set_combine(sets.sird, {})
+    sets.midcast['Phalanx'] = set_combine(sets.sird, {
+        hands={ name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        feet={ name="Souveran Schuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+    })
 	sets.midcast['Divine Magic'] = {
 		ammo="Staunch Tathlum +1",
 		head={ name="Souv. Schaller +1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',}},
@@ -161,27 +202,7 @@ function init_gear_sets()
 		back={ name="Moonbeam Cape",priority=15},
 	}
 	sets.midcast['Blue Magic'] = set_combine(sets.sird, {})
-    sets.ws = {}
-	sets.ws.wsd = {
-	    head="Flam. Zucchetto +2",
-		body={ name="Valorous Mail", augments={'Attack+21','"Dbl.Atk."+4','STR+10','Accuracy+12',}},
-		hands={ name="Valorous Mitts", augments={'Attack+16','Weapon skill damage +3%','STR+10','Accuracy+7',}},
-		legs={ name="Valor. Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
-		feet="Sulev. Leggings +2",
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear="Odnowa Earring +1",
-		right_ear="Thureous Earring",
-		left_ring="Regal Ring",
-		right_ring="Defending Ring",
-		back={ name="Rudianos's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
-	}
-	
-    sets.ws.savageblade = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt",hands="Agoge Mufflers +3",legs="Sulev. Cuisses +2",})
-    sets.ws["Savage Blade"] = set_combine(sets.ws.wsd, {neck="Caro Necklace",waist="Engraved Belt",hands="Agoge Mufflers +3",legs="Sulev. Cuisses +2",})
     
-	sets.precast.WS = sets.ws
-
 end
 
 

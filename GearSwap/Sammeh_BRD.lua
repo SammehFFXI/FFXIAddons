@@ -52,6 +52,7 @@ function job_setup()
 	send_command("alias enh gs equip sets.midcast['Enhancing Magic']")
 	send_command("alias eng gs equip sets.engaged")
 	send_command("alias wsset gs equip sets.precast.WS")
+    send_command("alias mwsset gs equip sets.precast.magicWS")
 	    -- For tracking current recast timers via the Timers plugin.
     custom_timers = {}
 	
@@ -168,7 +169,22 @@ function init_gear_sets()
     right_ring="Epaminondas's Ring",
     back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},
 	}
+    sets.precast.magicWS = {
+        ammo="Pemphredo Tathlum",
+        head="Nyame Helm",
+        body="Nyame Mail",
+        hands="Nyame Gauntlets",
+        legs="Nyame Flanchard",
+        feet="Nyame Sollerets",
+        neck="Sibyl Scarf",
+        waist="Eschan Stone",
+        left_ear="Moonshade Earring",
+        right_ear="Crematio Earring",
+        left_ring="Karieyh Ring +1",
+        right_ring="Epaminondas's Ring",
+        back="Argocham. Mantle",
 
+    }
 		
     
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
@@ -176,6 +192,7 @@ function init_gear_sets()
     sets.precast.WS['Rudras Storm'] = set_combine(sets.precast.WS)
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {neck="Fotia Gorget", waist="Fotia Belt"})
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS)
+    sets.precast.WS['Aeolian Edge'] = sets.precast.magicWS
     
     
     -- Midcast Sets
@@ -271,7 +288,7 @@ function init_gear_sets()
     
 	sets.midcast['Enhancing Magic'] = {
 		sub="Ammurapi Shield",
-		ammo="Staunch Tathlum +1",
+		--ammo="Staunch Tathlum +1",
 		head={ name="Telchine Cap", augments={'Mag. Evasion+21','Enemy crit. hit rate -3','Enh. Mag. eff. dur. +10',}},
 		body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +10',}},
 		hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Subtle Blow"+6','Enh. Mag. eff. dur. +9',}},
@@ -301,20 +318,20 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		head="Aya. Zucchetto +2",
 		body={ name="Gende. Bliaut +1", augments={'Phys. dmg. taken -4%','Magic dmg. taken -4%','"Cure" potency +4%',}},
-        hands={ name="Chironic Gloves", augments={'DEX+7','Magic dmg. taken -3%','"Refresh"+1','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
-		--neck="Loricate Torque +1",
-        neck="Bard's Charm +2",
+        hands={ name="Chironic Gloves", augments={'Chance of successful block +2','Attack+30','"Refresh"+1','Accuracy+5 Attack+5',}},
+		neck="Loricate Torque +1",
+        --neck="Bard's Charm +2",
 		ear1="Odnowa Earring +1",
 		ear2="Genmei Earring",
 		ring1="Dark Ring",
 		ring2="Defending ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 		waist="Flume Belt +1",
 		legs="Assiduity Pants +1",
 		feet="Fili Cothurnes +1"
 		}
 	sets.Idle.PDT = {
-		head="Aya. Zucchetto +2",
+		head="Nyame helm",
         body="Ashera Harness",
         hands="Aya. Manopolas +2",
         legs="Brioso Cannions +3",
@@ -325,7 +342,7 @@ function init_gear_sets()
         right_ear="Genmei Earring",
         left_ring={ name="Dark Ring", augments={'Magic dmg. taken -3%','Phys. dmg. taken -6%',}},
         right_ring="Defending Ring",
-        back="Solemnity Cape",
+        back="Moonbeam Cape",
 	}
 	sets.Idle.Current = sets.Idle.Main
     
@@ -381,7 +398,7 @@ function init_gear_sets()
 	sets.meva = {
 		main="Terra's Staff",
         sub="Irenic Strap +1",
-        ammo="Staunch Tathlum +1",
+        --ammo="Staunch Tathlum +1",
         head="Volte Cap",
         body={ name="Telchine Chas.", augments={'Mag. Evasion+24','Enemy crit. hit rate -4','Enh. Mag. eff. dur. +10',}},
         hands="Volte Bracers",
@@ -393,7 +410,7 @@ function init_gear_sets()
         right_ear="Flashward Earring",
         left_ring="Purity Ring",
         right_ring="Vengeful Ring",
-        back="Solemnity Cape",
+        back="Moonbeam Cape",
 	}
 	
 	

@@ -430,7 +430,24 @@ function init_gear_sets()
 		right_ring="Defending Ring",
 		back="Moonbeam Cape",
 	}
-	sets.Idle.PDT = {
+    sets.Idle.PDT = {
+        main="Malignance Pole",
+        sub="Khonsu",
+        ammo="Homiliary",
+        head="Nyame Helm",
+        body="Nyame Mail",
+        hands="Nyame Gauntlets",
+        legs="Nyame Flanchard",
+        feet="Nyame Sollerets",
+        neck={ name="Loricate Torque +1", augments={'Path: A',}},
+        waist="Fucho-no-Obi",
+        left_ear="Genmei Earring",
+        right_ear="Hearty Earring",
+        left_ring="Etana Ring",
+        right_ring="Defending Ring",
+        back="Moonbeam Cape",
+    }
+	sets.Idle.PDTold = {
 		main="Malignance Pole",
 		sub="Khonsu",
         ammo="Homiliary",

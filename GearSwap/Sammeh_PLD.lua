@@ -6,8 +6,8 @@ function get_sets()
 end
 
 function user_setup()
-	state.IdleMode:options('Normal','FastPants')
-    state.ShieldMode = M{['description']='Shield Mode', 'Srivatsa','Aegis', 'Ochain'} -- ,'Priwen' }
+	state.IdleMode:options('Normal','FastPants','PullDefense','Reraise')
+    state.ShieldMode = M{['description']='Shield Mode', 'Srivatsa','Aegis', 'Ochain','Priwen' }
 	state.TPMode = M{['description']='TP Mode', 'Normal', 'WeaponLock'}
 	state.OffenseMode = M{['description']='Engaged Mode', 'Normal','Turtle','DD'}
 	send_command('bind f11 gs c cycle ShieldMode')
@@ -20,7 +20,7 @@ function user_setup()
 	send_command("alias fchp gs equip sets.precast.FastCastHighHP")
 	send_command("alias enh gs equip sets.midcast['Enhancing Magic']")
 	send_command("alias enm gs equip sets.enmity")
-	send_command("alias cureset gs equip sets.midcast.Cure")
+	send_command("alias cureset gs equip sets.midcast['Healing Magic']")
 	send_command("alias wsset gs equip sets.ws")
 	send_command("alias eng gs equip sets.engaged")
 	waittime = 2.6	
@@ -30,7 +30,36 @@ end
 	
 function init_gear_sets()
     -- Setting up Gear As Variables --
-
+    sets.reraise = {
+            ammo="Homiliary",
+        head="Twilight Helm",
+        body="Twilight Mail",
+        hands={ name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        legs={ name="Souv. Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        feet={ name="Souveran Schuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        neck={ name="Loricate Torque +1", augments={'Path: A',}},
+        waist="Flume Belt +1",
+        left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+        right_ear="Thureous Earring",
+        left_ring="Regal Ring",
+        right_ring="Defending Ring",
+        back="Moonbeam Cape",
+    }
+    sets.pulling = {
+        ammo="Homiliary",
+        head="Sakpata's Helm",
+        body="Sakpata's Plate",
+        hands="Sakpata's Gauntlets",
+        legs="Sakpata's Cuisses",
+        feet="Sakpata's Leggings",
+        neck={ name="Unmoving Collar +1", augments={'Path: A',}},
+        waist="Audumbla Sash",
+        left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+        right_ear={ name="Thureous Earring", priority=3},
+        left_ring={ name="Regal Ring",priority=2},
+        right_ring={ name="Moonlight Ring",priority=1},
+        back="Moonbeam Cape",
+    }
 	-- Idle Sets
 	sets.dt = {
 	    ammo="Homiliary",
@@ -57,7 +86,7 @@ function init_gear_sets()
 		legs={ name="Founder's Hose", augments={'MND+10','Mag. Acc.+15','Attack+15','Breath dmg. taken -5%',},priority=2}, --30
 		feet={ name="Odyssean Greaves", augments={'"Mag.Atk.Bns."+15','"Fast Cast"+4','Mag. Acc.+8',},priority=1}, --20
 		neck="Moonbeam Necklace", --10
-		waist="Rumination Sash", -- 10
+		waist="Audumbla Sash", -- 10
 		left_ear={ name="Odnowa Earring +1",priority=11},
 		right_ear="Trux Earring",
 		left_ring="Stikini Ring",
@@ -172,7 +201,7 @@ function init_gear_sets()
 		legs={ name="Souv. Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
 		feet={ name="Souveran Schuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
 		neck="Unmoving Collar +1",
-		waist="Rumination Sash",
+		waist="Audumbla Sash",
 		left_ear="Odnowa Earring +1",
 		right_ear="Trux Earring",
 		left_ring="Apeile Ring",
@@ -189,11 +218,13 @@ function init_gear_sets()
     sets.midcast['Phalanx'] = set_combine(sets.sird, {
         hands={ name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
         -- legs="Sakpata's Cuisses",
+        body={ name="Valorous Mail", augments={'"Dbl.Atk."+1','STR+3','Phalanx +3',}},
         feet={ name="Souveran Schuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
     })
     sets.midcast.MaxPhalanx = set_combine(sets.sird, {
         hands={ name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
-        --legs="Sakpata's Cuisses",
+        legs="Sakpata's Cuisses",
+        body={ name="Valorous Mail", augments={'"Dbl.Atk."+1','STR+3','Phalanx +3',}},
         feet={ name="Souveran Schuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
     })
 	sets.midcast['Divine Magic'] = {
@@ -323,6 +354,10 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 	end	
 	if state.IdleMode.value == "FastPants" then
 	   sets.Idle.Current = set_combine(sets.Idle,{legs="Carmine Cuisses +1"})   
+    elseif state.IdleMode.value == "PullDefense" then
+        sets.Idle.Current = sets.pulling
+    elseif state.IdleMode.value == "Reraise" then
+        sets.Idle.Current = sets.reraise
 	else 
 	   sets.Idle.Current = set_combine(sets.Idle)
 	end

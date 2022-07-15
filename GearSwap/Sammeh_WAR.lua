@@ -277,7 +277,7 @@ function init_gear_sets()
 		head="Agoge mask +3",
 		body="Pumm. Lorica +3",
 		hands="Sulev. Gauntlets +2",
-		legs={ name="Valor. Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
+		legs={ name="Valorous Hose", augments={'Accuracy+29','"Dbl.Atk."+3','STR+15',}},
 		feet="Sulev. Leggings +2",
 		right_ear="Telos Earring",
 		left_ear="Cessance Earring",
@@ -474,6 +474,7 @@ function init_gear_sets()
 		legs={ name="Founder's Hose", augments={'MND+10','Mag. Acc.+15','Attack+15','Breath dmg. taken -5%',},priority=2},
 		feet={ name="Odyssean Greaves", augments={'"Mag.Atk.Bns."+15','"Fast Cast"+4','Mag. Acc.+8',},priority=1},
 		neck="Moonbeam Necklace",
+        waist="Audumbla sash"
 	}
 	
 	
@@ -572,7 +573,7 @@ function job_midcast(spell)
 		equip(set_combine(sets.precast.FastCast, sets.sird ))
 	end
     if spell.name:contains('Phalanx') then
-       equip(set_combine(sets.dt, sets.sird,{feet="Souveran Schuhs +1",legs="Sakpata's Cuisses",hands="Souv. Handsch. +1",}))
+       equip(set_combine(sets.dt, sets.sird,{feet="Souveran Schuhs +1",hands="Souv. Handsch. +1",}))
     end
 end
 
